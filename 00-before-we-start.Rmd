@@ -5,7 +5,7 @@ author: Data Carpentry contributors
 minutes: 15
 ---
 
-```{r, echo=FALSE, purl=FALSE}
+```{r, echo=FALSE}
 knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 ```
 
@@ -73,7 +73,7 @@ use this when teaching but not otherwise.
 
 Let's start by subtracting a couple of numbers.
 
-```{r add, results="markup"}
+```{r add, results='show'}
 2016 - 1969
 ```
 
@@ -235,13 +235,13 @@ code does within the code itself, so comment liberally in your R scripts.
 
 If you need help with a specific function, let's say `barplot()`, you can type:
 
-```{r, eval=FALSE, purl=FALSE}
+```{r, eval=FALSE}
 ?barplot
 ```
 
 If you just need to remind yourself of the names of the arguments, you can use:
 
-```{r, eval=FALSE, purl=FALSE}
+```{r, eval=FALSE}
 args(lm)
 ```
 
@@ -252,7 +252,7 @@ If you are looking for a function to do a particular task, you can use
 However, this only looks through the installed packages for help pages with a
 match to your search request
 
-```{r, eval=FALSE, purl=FALSE}
+```{r, eval=FALSE}
 ??kruskal
 ```
 
@@ -301,7 +301,7 @@ To share an object with someone else, if it's relatively small, you can use the
 function `dput()`. It will output R code that can be used to recreate the exact
 same object as the one in memory:
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 dput(head(iris)) # iris is an example data.frame that comes with R
 ```
 
@@ -310,7 +310,7 @@ your script up to the point of the error (and after removing everything that is
 not relevant to your issue). Alternatively, in particular if your questions is
 not related to a `data.frame`, you can save any R object to a file:
 
-```{r, eval=FALSE, purl=FALSE}
+```{r, eval=FALSE}
 saveRDS(iris, file="/tmp/iris.rds")
 ```
 
@@ -318,7 +318,7 @@ The content of this file is however not human readable and cannot be posted
 directly on stackoverflow. It can however be sent to someone by email who can
 read it with this command:
 
-```{r, eval=FALSE, purl=FALSE}
+```{r, eval=FALSE}
 some_data <- readRDS(file="~/Downloads/iris.rds")
 ```
 
@@ -327,7 +327,7 @@ as it provides critical information about your platform, the versions of R and
 the packages that you are using, and other information that can be very helpful
 to understand your problem.
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 sessionInfo()
 ```
 
