@@ -1,7 +1,6 @@
 ---
 layout: topic
-title: R Markdown
-subtitle: Reproducible reports
+title: Reproducible reports with R Markdown
 minutes: 60
 ---
 
