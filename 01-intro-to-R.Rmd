@@ -88,7 +88,7 @@ guides are [Hadley Wickham's](http://adv-r.had.co.nz/Style.html) and
 
 What is the value of `y` after doing the following?
 
-```{r, purl=FALSE}
+```{r, eval=FALSE}
 x <- 55
 y <- x * 2.2
 x <- 100
@@ -189,7 +189,7 @@ factors (`factor`).
 What happens to vectors with mixed types?
 (Hint: use `class()`)
 
-```{r, echo=TRUE, eval=FALSE, purl=TRUE}
+```{r, echo=TRUE, eval=FALSE}
 x <- c(1, 2, 3, 'a')
 
 y <- c(1, 2, 3, TRUE)
@@ -269,16 +269,16 @@ animals %in% c("rat", "cat", "dog", "duck")
 animals[animals %in% c("rat", "cat", "dog", "duck")]
 ```
 
-### Challenge {.challenge}
+### Challenge
 
 Consider the following two vectors.
 
-```{r, purl=TRUE}
+```{r, eval=FALSE}
 animals <- c("mouse", "rat", "cat", "dog")
 weights <- c(30, 180, 4000, 8000)
 ```
 
-Subset `animals` for which `weights < 200`.
+Subset `animals` with `weights < 200`.
 
 <!-- end challenge -->
 
@@ -329,7 +329,7 @@ heights[complete.cases(heights)]
 
 Why does the following give an error?
 
-```{r mean_na}
+```{r mean_na, eval=FALSE}
 v <- c(2, 4, 4, "NA", 6)
 mean(v, na.rm=TRUE)
 ```

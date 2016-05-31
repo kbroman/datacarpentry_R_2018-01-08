@@ -298,12 +298,12 @@ animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)]</code></pre></div>
 <pre><code>#&gt; [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
 </div>
-<div id="challenge-2" class="section level3 challenge">
+<div id="challenge-2" class="section level3">
 <h3>Challenge</h3>
 <p>Consider the following two vectors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
 weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">180</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
-<p>Subset <code>animals</code> for which <code>weights &lt; 200</code>.</p>
+<p>Subset <code>animals</code> with <code>weights &lt; 200</code>.</p>
 <!-- end challenge -->
 </div>
 </div>
@@ -332,8 +332,6 @@ heights[<span class="kw">complete.cases</span>(heights)]</code></pre></div>
 <p>Why does the following give an error?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)
 <span class="kw">mean</span>(v, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>#&gt; Warning in mean.default(v, na.rm = TRUE): argument is not numeric or
-#&gt; logical: returning NA</code></pre>
 <p>Why does the error message say the data are not numeric?</p>
 <!-- end challenge -->
 </div>
