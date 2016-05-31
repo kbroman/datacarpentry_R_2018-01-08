@@ -58,6 +58,7 @@ for each level and a very brief introduction to plotting.
 5. [Lesson 04 Aggregating and analyzing data with dplyr](04-dplyr.html)
 6. [Lesson 05 Data visualization with ggplot2](05-visualization-ggplot2.html)
 7. [Lesson 06 Reproducible reports with R Markdown](06-rmarkdown.html)
+8. [Capstone project](capstone.html)
 
 ## Data
 

@@ -1,5 +1,6 @@
 ---
-output: slidy_presentation
+layout: topic
+minutes: 60
 ---
 
 # Capstone project

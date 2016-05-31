@@ -2,7 +2,7 @@
 # grab the challenges from the .Rmd files and make slides
 
 files = ["01-intro-to-R.Rmd"]
-capfile = "capstone_slide.Rmd"
+capfile = "capstone.Rmd"
 ofile = "challenge_slides.Rmd"
 
 output = []
@@ -42,7 +42,7 @@ end
 
 # paste the capstone slide at the end
 ifp = File.open(capfile)
-1.upto(3) { |i| ifp.readline() } # skip 3 lines
+1.upto(4) { |i| ifp.readline() } # skip 4 lines
 ifp.each do |line|
     ofp.write(line)
 end
