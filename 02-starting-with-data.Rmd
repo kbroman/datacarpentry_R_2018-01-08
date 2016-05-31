@@ -5,7 +5,7 @@ author: Data Carpentry contributors
 minutes: 20
 ---
 
-```{r, echo=FALSE, purl=FALSE, message = FALSE}
+```{r, echo=FALSE, message = FALSE}
 source("setup.R")
 ```
 
@@ -54,7 +54,7 @@ download.file("http://kbroman.org/datacarp/portal_data_joined.csv",
 
 We then use `read.csv()` to load the data into R:
 
-```{r, eval=TRUE, purl=FALSE}
+```{r, eval=TRUE}
 surveys <- read.csv('data/portal_data_joined.csv')
 ```
 
@@ -128,7 +128,7 @@ R will assign `1` to the level `"female"` and `2` to the level `"male"` (because
 `"male"`). You can check this by using the function `levels()`, and check the
 number of levels using `nlevels()`:
 
-```{r, purl=FALSE}
+```{r}
 levels(sex)
 nlevels(sex)
 ```
@@ -178,7 +178,7 @@ of first?
 <!-- end challenge -->
 
 <!---
-```{r correct-order, purl=FALSE}
+```{r correct-order}
 ## Answers
 ##
 ## * The treatments are listed in alphabetical order because they are factors.
