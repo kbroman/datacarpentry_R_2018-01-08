@@ -246,7 +246,7 @@ animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 <p>Vectors are one of the many <strong>data structures</strong> that R uses. Other important ones are lists (<code>list</code>), matrices (<code>matrix</code>), data frames (<code>data.frame</code>) and factors (<code>factor</code>).</p>
 <div id="challenge-1" class="section level3">
 <h3>Challenge</h3>
-<p>What happens to vectors with mixed types? (Hint: use <code>class()</code>)</p>
+<p>What happens to vectors with mixed types?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;a&#39;</span>)
 
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)
@@ -254,6 +254,7 @@ y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</sp
 z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)
 
 tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)</code></pre></div>
+<p>Hint: use <code>class()</code></p>
 <!-- end challenge -->
 <p>Vectors must all be of one type, and so R converts them.</p>
 <p><code>logical</code> → <code>numeric</code> → <code>character</code></p>

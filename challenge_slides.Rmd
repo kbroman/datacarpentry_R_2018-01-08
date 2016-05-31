@@ -20,7 +20,6 @@ x <- 100
 
 
 What happens to vectors with mixed types?
-(Hint: use `class()`)
 
 ```{r, echo=TRUE, eval=FALSE}
 x <- c(1, 2, 3, 'a')
@@ -31,6 +30,8 @@ z <- c('a', 'b', 'c', TRUE)
 
 tricky <- c(1, 2, 3, '4')
 ```
+
+Hint: use `class()`
 
 
 ---
