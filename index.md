@@ -60,10 +60,11 @@ for each level and a very brief introduction to plotting.
 
 ## Data
 
-Data files for the lesson are available here:
-[{{page.dataurl %}}]({{page.dataurl %}})
+The data for this lesson is available as a single CSV file,
+<http://kbroman.org/datacarp/portal_data_joined.csv>.
 
-Please download the *\*.csv* (Comma Separated Value) files: *species.csv*, *plots.csv*, *surveys.csv*, and *combined.csv*.
+We'll download the file during the course of the lesson.
+
 
 ### Requirements
 
