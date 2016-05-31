@@ -150,15 +150,17 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#before-we-get-started">Before we get started</a><ul>
+<li><a href="#basics-of-r">Basics of R</a></li>
+<li><a href="#presentation-of-rstudio">Presentation of RStudio</a></li>
+<li><a href="#r-as-a-calculator">R as a calculator</a></li>
+<li><a href="#getting-help">Getting help</a></li>
+<li><a href="#need-for-scripts">Need for Scripts</a></li>
+<li><a href="#creating-an-r-project">Creating an R Project</a><ul>
 <li><a href="#organizing-your-working-directory">Organizing your working directory</a></li>
 </ul></li>
-<li><a href="#presentation-of-rstudio">Presentation of RStudio</a></li>
-<li><a href="#interacting-with-r">Interacting with R</a></li>
-<li><a href="#basics-of-r">Basics of R</a><ul>
+<li><a href="#interacting-with-r">Interacting with R</a><ul>
 <li><a href="#commenting">Commenting</a></li>
 <li><a href="#assignment-operator">Assignment operator</a></li>
-<li><a href="#functions-and-their-arguments">Functions and their arguments</a></li>
 <li><a href="#seeking-help">Seeking help</a><ul>
 <li><a href="#i-know-the-name-of-the-function-i-want-to-use-but-im-not-sure-how-to-use-it">I know the name of the function I want to use, but I’m not sure how to use it</a></li>
 <li><a href="#i-want-to-use-a-function-that-does-x-there-must-be-a-function-for-it-but-i-dont-know-which-one">I want to use a function that does X, there must be a function for it but I don’t know which one…</a></li>
@@ -186,8 +188,56 @@ $(document).ready(function () {
 </ul>
 </blockquote>
 <hr />
-<div id="before-we-get-started" class="section level1">
-<h1>Before we get started</h1>
+<div id="basics-of-r" class="section level1">
+<h1>Basics of R</h1>
+<p>R is a versatile, open source programming/scripting language that’s useful both for statistics but also data science. Inspired by the programming language S.</p>
+<ul>
+<li>Free/Libre/Open Source Software under the GPL.</li>
+<li>Superior (if not just comparable) to commercial alternatives. R has over 7,000 user contributed packages at this time. It’s widely used both in academia and industry.</li>
+<li>Available on all platforms.</li>
+<li>Not just for statistics, but also general purpose programming.</li>
+<li>For people who have experience in programmming: R is both an object-oriented and a so-called <a href="http://adv-r.had.co.nz/Functional-programming.html">functional language</a>.</li>
+<li>Large and growing community of peers.</li>
+</ul>
+</div>
+<div id="presentation-of-rstudio" class="section level1">
+<h1>Presentation of RStudio</h1>
+<p>Let’s start by learning about RStudio, the Integrated Development Environment (IDE) that we will use to write code, navigate the files found on our computer, inspect the variables we are going to create, and visualize the plots we will generate. RStudio can also be used for other things (e.g., version control, developing packages) that we will not cover during the workshop.</p>
+<p>RStudio is divided into 4 “Panes”: the editor for your scripts and documents (top-left), the R console (bottom-left), your environment/history (top-right), and your files/plots/packages/help/viewer (bottom-right). The placement of these panes and their content can be customized.</p>
+</div>
+<div id="r-as-a-calculator" class="section level1">
+<h1>R as a calculator</h1>
+<p>The lower-left pane (the R “console”) is where you can interact with R directly. The <code>&gt;</code> sign is the R “prompt”. It indicates that R is waiting for you to type something.</p>
+<p>You can type <kbd><code>Ctrl</code></kbd> + <kbd><code>Shift</code></kbd> + <kbd><code>2</code></kbd> to focus just on the R console pane. Use <kbd><code>Ctrl</code></kbd> + <kbd><code>Shift</code></kbd> + <kbd><code>0</code></kbd> to get back to the four panes. I use this when teaching but not otherwise.</p>
+<p>Let’s start by subtracting a couple of numbers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2016</span> -<span class="st"> </span><span class="dv">1969</span></code></pre></div>
+<pre><code>## [1] 47</code></pre>
+<p>R does the calculation and prints the result, and then you get the <code>&gt;</code> prompt again. We won’t discuss what that number might mean. (The <code>[1]</code> in the results is a bit weird; you can ignore that for now.)</p>
+<p>You can use R as a calculator in this way.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span>*<span class="dv">6</span>
+<span class="dv">4</span>/<span class="dv">6</span>
+<span class="dv">4</span>^<span class="dv">6</span>
+<span class="kw">log</span>(<span class="dv">4</span>)
+<span class="kw">log10</span>(<span class="dv">4</span>)
+<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">10</span>)
+<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">6</span>)</code></pre></div>
+<p>Here <code>log</code> is a <em>function</em> that gives you the natural logarithm. Much of your calculations in R will be through functions. The value in the parentheses is called the function “argument”. <code>log10</code> is another function, that calculates the log base 10. There can be more than one argument, and some of them may have default values. <code>log</code> has a second argument <code>base</code> whose default (the value if left unspecified) is <em>e</em>.</p>
+</div>
+<div id="getting-help" class="section level1">
+<h1>Getting help</h1>
+<p>If you type <code>log</code> and pause for a moment, you’ll get a pop-up with information about the function.</p>
+<p>Alternatively, you could type</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?log</code></pre></div>
+<p>and the documentation for the function will show up in the lower-right pane. These are often a bit <em>too</em> detailed, and so they take some practice to read. I generally focus on Usage and Arguments, and then on Examples at the bottom. We’ll talk more about getting help later.</p>
+</div>
+<div id="need-for-scripts" class="section level1">
+<h1>Need for Scripts</h1>
+<p>We can go along, typing directly into the R console. But there won’t be an easy way to keep track of what we’ve done.</p>
+<p>It’s best to write R “scripts” (files with R code), and work from them. And when we start creating scripts, we need to worry about how we organize the scripts and data for a project.</p>
+<p>And so let’s pause for a moment and talk about file organization.</p>
+</div>
+<div id="creating-an-r-project" class="section level1">
+<h1>Creating an R Project</h1>
 <p>It is good practice to keep a set of related data, analyses, and text self-contained in a single folder, called the <strong>working directory</strong>. All of the scripts within this folder can then use <em>relative paths</em> to files that indicate where inside the project a file is located (as opposed to absolute paths, which point to where a file is on a specific computer). Working this way makes it a lot easier to move your project around on your computer and share it with others without worrying about whether or not the underlying scripts will still work.</p>
 <p>RStudio provides a helpful set of tools to do this through its “Projects” interface, which not only creates a working directory for you but also remembers its location (allowing you to quickly navigate to it) and optonally preserves custom settings and open files to make it easier to resume work after a break. Below, we will go through the steps for creating an RProject for this tutorial.</p>
 <ul>
@@ -218,65 +268,34 @@ $(document).ready(function () {
 </div>
 </div>
 </div>
-<div id="presentation-of-rstudio" class="section level1">
-<h1>Presentation of RStudio</h1>
-<p>Let’s start by learning about RStudio, the Integrated Development Environment (IDE) that we will use to write code, navigate the files found on our computer, inspect the variables we are going to create, and visualize the plots we will generate. RStudio can also be used for other things (e.g., version control, developing packages) that we will not cover during the workshop.</p>
-<p>RStudio is divided into 4 “Panes”: the editor for your scripts and documents (top-left), the R console (bottom-left), your environment/history (top-right), and your files/plots/packages/help/viewer (bottom-right). The placement of these panes and their content can be customized. One of the advantages of using RStudio is that</p>
-</div>
 <div id="interacting-with-r" class="section level1">
 <h1>Interacting with R</h1>
-<p>The basis of programming is that we write down instructions for the computer to follow, and then we tell the computer to follow those instructions. We write, or <em>code</em>, instructions in R because it is a common language that both the computer and we can understand. We call the instructions <em>commands</em> and we tell the computer to follow the instructions by <em>executing</em> (also called <em>running</em>) those commands.</p>
-<p>There are two main ways of interacting with R: using the console or by using script files (plain text files that contain your code). We want our code and workflow to be reproducible. In other words, we want to write code in a way that anyone can easily replicate, such they can obtain the same results from our code on their computer.</p>
-<p>The console window (in RStudio, the bottom left panel) is the place where R is waiting for you to tell it what to do, and where it will show the results of a command that has been executed. You can type commands directly into the console and press <code>Enter</code> to execute those commands, but they will be forgotten when you close the session. It is better to enter the commands in the script editor, and save the script. This way, you have a complete record of what you did, you can easily show others how you did it and you can do it again later on if needed. RStudio allows you to execute commands directly from the script editor by using the <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd> shortcut. The command on the current line in the script or all of the commands in the currently selected text will be sent to the console and executed when you press <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd>.</p>
-<p>At some point in your analysis you may want to check the content of variable or the structure of an object, without necessarily keep a record of it in your script. You can type these commands and execute them directly in the console. RStudio provides the <kbd><code>Ctrl</code></kbd> + <kbd><code>1</code></kbd> and <kbd><code>Ctrl</code></kbd> + <kbd><code>2</code></kbd> shortcuts allow you to jump between the script and the console windows.</p>
-<p>If R is ready to accept commands, the R console shows a <code>&gt;</code> prompt. If it receives a command (by typing, copy-pasting or sent from the script editor using <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd>), R will try to execute it, and when ready, show the results and come back with a new <code>&gt;</code>-prompt to wait for new commands.</p>
-<p>If R is still waiting for you to enter more data because it isn’t complete yet, the console will show a <code>+</code> prompt. It means that you haven’t finished entering a complete command. This is because you have not ‘closed’ a parenthesis or quotation, i.e. you don’t have the same number of left-parentheses as right-parentheses, or the same number of opening and closing quotation marks. If you’re in RStudio and this happens, click inside the console window and press <code>Esc</code>; this will cancel the incomplete command and return you to the <code>&gt;</code> prompt.</p>
-</div>
-<div id="basics-of-r" class="section level1">
-<h1>Basics of R</h1>
-<p>R is a versatile, open source programming/scripting language that’s useful both for statistics but also data science. Inspired by the programming language S.</p>
-<ul>
-<li>Free/Libre/Open Source Software under the GPL.</li>
-<li>Superior (if not just comparable) to commercial alternatives. R has over 7,000 user contributed packages at this time. It’s widely used both in academia and industry.</li>
-<li>Available on all platforms.</li>
-<li>Not just for statistics, but also general purpose programming.</li>
-<li>For people who have experience in programmming: R is both an object-oriented and a so-called <a href="http://adv-r.had.co.nz/Functional-programming.html">functional language</a>.</li>
-<li>Large and growing community of peers.</li>
-</ul>
+<p>While you can type R commands directly at the <code>&gt;</code> prompt in the R console, I recommend typing your commands into a script, which you’ll save for later reference, and then executing the commands from there.</p>
+<p>Start by typing the following into the R script in the top-left pane.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># R intro</span>
+
+<span class="dv">2016</span> -<span class="st"> </span><span class="dv">1969</span></code></pre></div>
+<p>Save the file clicking the computer disk icon, or by typing <kbd><code>Ctrl</code></kbd> + <kbd><code>S</code></kbd>.</p>
+<p>Now place the cursor on the line with <code>2016 - 1969</code> and type <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd>. The command will be copied to the R console and executed, and then the cursor will move to the next line.</p>
+<p>You can also highlight a bunch of code and execute the block all at once with <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd>.</p>
 <div id="commenting" class="section level2">
 <h2>Commenting</h2>
 <p>Use <code>#</code> signs to comment. Anything to the right of a <code>#</code> is ignored by R, meaning it won’t be executed. Comments are a great way to describe what your code does within the code itself, so comment liberally in your R scripts.</p>
 </div>
 <div id="assignment-operator" class="section level2">
 <h2>Assignment operator</h2>
-<p><code>&lt;-</code> is the assignment operator. It assigns values on the right to objects on the left. So, after executing <code>x &lt;- 3</code>, the value of <code>x</code> is <code>3</code>. The arrow can be read as 3 <strong>goes into</strong> <code>x</code>. For historical reasons, you can also use <code>=</code> for assignments, but not in every context. Because of the <a href="http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html">slight</a> <a href="https://web.archive.org/web/20130610005305/https://stat.ethz.ch/pipermail/r-help/2009-March/191462.html">differences</a> in syntax, it is good practice to use always <code>&lt;-</code> for assignments, except when specifying the values of arguments in functions, when only <code>=</code> should be used, see below.</p>
-<p>In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> (push <kbd>Alt</kbd> at the same time as the <kbd>-</kbd> key) will write <code>&lt;-</code> in a single keystroke.</p>
-</div>
-<div id="functions-and-their-arguments" class="section level2">
-<h2>Functions and their arguments</h2>
-<p>Functions are “canned scripts” that automate something complicated or convenient or both. Many functions are predefined, or can be made available by importing R <em>packages</em> (more on that later). A function usually gets one or more inputs called <em>arguments</em>. Functions often (but not always) return a <em>value</em>. A typical example would be the function <code>sqrt()</code>. The input (the argument) must be a number, and the return value (in fact, the output) is the square root of that number. Executing a function (‘running it’) is called <em>calling</em> the function. An example of a function call is:</p>
-<p><code>b &lt;- sqrt(a)</code></p>
-<p>Here, the value of <code>a</code> is given to the <code>sqrt()</code> function, the <code>sqrt()</code> function calculates the square root, and returns the value which is then assigned to variable <code>b</code>. This function is very simple, because it takes just one argument.</p>
-<p>The return ‘value’ of a function need not be numerical (like that of <code>sqrt()</code>), and it also does not need to be a single item: it can be a set of things, or even a data set. We’ll see that when we read data files in to R.</p>
-<p>Arguments can be anything, not only numbers or filenames, but also other objects. Exactly what each argument means differs per function, and must be looked up in the documentation (see below). Some functions take arguments which may either be specified by the user, or if left out, take on a <em>default</em> value: these are called <em>options</em>. Options are typically used to alter the way the function operates, such as whether it ignores ‘bad values’, or what symbol to use in a plot. However, if you want something specific, you can specify a value of your choice which will be used instead of the default.</p>
-<p>Let’s try a function that can take multiple arguments: <code>round()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.14159</span>)</code></pre></div>
-<pre><code>## [1] 3</code></pre>
-<p>Here, we’ve called <code>round()</code> with just one argument, <code>3.14159</code>, and it has returned the value <code>3</code>. That’s because the default is to round to the nearest whole number. If we want more digits we can see how to do that by getting information about the <code>round</code> function. We can use <code>args(round)</code> or look at the help for this function using <code>?round</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">args</span>(round)</code></pre></div>
-<pre><code>## function (x, digits = 0) 
-## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?round</code></pre></div>
-<p>We see that if we want a different number of digits, we can type <code>digits=2</code> or however many we want.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.14159</span>, <span class="dt">digits=</span><span class="dv">2</span>)</code></pre></div>
-<pre><code>## [1] 3.14</code></pre>
-<p>If you provide the arguments in the exact same order as they are defined you don’t have to name them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="fl">3.14159</span>, <span class="dv">2</span>)</code></pre></div>
-<pre><code>## [1] 3.14</code></pre>
-<p>And if you do name the arguments, you can switch their order:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="dt">digits=</span><span class="dv">2</span>, <span class="dt">x=</span><span class="fl">3.14159</span>)</code></pre></div>
-<pre><code>## [1] 3.14</code></pre>
-<p>It’s good practice to put the non-optional arguments (like the number you’re rounding) first in your function call, and to specify the names of all optional arguments. If you don’t, someone reading your code might have to look up definition of a function with unfamiliar arguments to understand what you’re doing.</p>
+<p>We can assign names to numbers and other objects with the assignment operator, <code>&lt;-</code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="dv">2016-1969</span></code></pre></div>
+<p>Type that into your script, and use <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd> to paste it to the console.</p>
+<p>You can also use <code>=</code> as assignment, but that symbol can have other meanings, and so I recommend sticking with the <code>&lt;-</code> combination.</p>
+<p>In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write <code>&lt;-</code> in a single keystroke.</p>
+<p>If you’ve assigned a number to an object, you can then use it in further calculations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(age)</code></pre></div>
+<pre><code>## [1] 6.855655</code></pre>
+<p>You can assigned <em>that</em> to something, and then use it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sqrt_age &lt;-<span class="st"> </span><span class="kw">sqrt</span>(age)
+<span class="kw">round</span>(sqrt_age)
+<span class="kw">round</span>(sqrt_age, <span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="seeking-help" class="section level2">
 <h2>Seeking help</h2>
@@ -321,28 +340,24 @@ $(document).ready(function () {
 <p>Last, but certainly not least, <strong>always include the output of <code>sessionInfo()</code></strong> as it provides critical information about your platform, the versions of R and the packages that you are using, and other information that can be very helpful to understand your problem.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
 <pre><code>## R version 3.3.0 (2016-05-03)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.04 LTS
+## Platform: x86_64-apple-darwin13.4.0 (64-bit)
+## Running under: OS X 10.11.5 (El Capitan)
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8      LC_NUMERIC=C             
-##  [3] LC_TIME=en_US.utf8        LC_COLLATE=en_US.UTF-8   
-##  [5] LC_MONETARY=en_US.utf8    LC_MESSAGES=en_US.UTF-8  
-##  [7] LC_PAPER=en_US.utf8       LC_NAME=C                
-##  [9] LC_ADDRESS=C              LC_TELEPHONE=C           
-## [11] LC_MEASUREMENT=en_US.utf8 LC_IDENTIFICATION=C      
+## [1] en_US.UTF-8/UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  base     
 ## 
 ## other attached packages:
-## [1] BiocInstaller_1.22.2
+## [1] broman_0.63-3     qtlcharts_0.7-5   RPushbullet_0.2.0 qtl_1.39-5       
+## [5] magrittr_1.5     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] magrittr_1.5    formatR_1.4     tools_3.3.0     htmltools_0.3.5
-##  [5] yaml_2.1.13     Rcpp_0.12.5     stringi_1.1.1   rmarkdown_0.9.6
-##  [9] knitr_1.13      methods_3.3.0   stringr_1.0.0   digest_0.6.9   
-## [13] evaluate_0.9</code></pre>
+##  [1] Rcpp_0.12.5     digest_0.6.9    assertthat_0.1  formatR_1.4    
+##  [5] evaluate_0.9    stringi_1.1.1   rmarkdown_0.9.6 RJSONIO_1.3-0  
+##  [9] tools_3.3.0     stringr_1.0.0   yaml_2.1.13     parallel_3.3.0 
+## [13] htmltools_0.3.5 knitr_1.13      methods_3.3.0</code></pre>
 </div>
 <div id="where-to-ask-for-help" class="section level3">
 <h3>Where to ask for help?</h3>
