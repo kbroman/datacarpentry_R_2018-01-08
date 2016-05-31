@@ -12,7 +12,7 @@
 <meta name="author" content="Data Carpentry contributors" />
 
 
-<title>Starting with data</title>
+<title>Starting with data (notes)</title>
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -143,110 +143,34 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Starting with data</h1>
+<h1 class="title toc-ignore">Starting with data (notes)</h1>
 <h4 class="author"><em>Data Carpentry contributors</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#presentation-of-the-survey-data">Presentation of the Survey Data</a><ul>
+<li><a href="#load-the-data">Load the data</a><ul>
 <li><a href="#challenge">Challenge</a></li>
 </ul></li>
 <li><a href="#factors">Factors</a><ul>
-<li><a href="#converting-factors">Converting factors</a></li>
 <li><a href="#challenge-1">Challenge</a></li>
 </ul></li>
 </ul>
 </div>
 
-<hr />
-<blockquote>
-<h2 id="learning-objectives">Learning Objectives</h2>
-<ul>
-<li>load external data (CSV files) in memory using the survey table (<code>surveys.csv</code>) as an example</li>
-<li>explore the structure and the content of a data frame in R</li>
-<li>understand what factors are and how to manipulate them</li>
-</ul>
-</blockquote>
-<hr />
-<div id="presentation-of-the-survey-data" class="section level2">
-<h2>Presentation of the Survey Data</h2>
-<p>We will continue to look at the species and weight of animals caught in plots in a study area in Arizona over time. The dataset is stored as a CSV file: each row holds information for a single animal, and the columns represent:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Column</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">record_id</td>
-<td align="left">Unique id for the observation</td>
-</tr>
-<tr class="even">
-<td align="left">month</td>
-<td align="left">month of observation</td>
-</tr>
-<tr class="odd">
-<td align="left">day</td>
-<td align="left">day of observation</td>
-</tr>
-<tr class="even">
-<td align="left">year</td>
-<td align="left">year of observation</td>
-</tr>
-<tr class="odd">
-<td align="left">plot_id</td>
-<td align="left">ID of a particular plot</td>
-</tr>
-<tr class="even">
-<td align="left">species_id</td>
-<td align="left">2-letter code</td>
-</tr>
-<tr class="odd">
-<td align="left">sex</td>
-<td align="left">sex of animal (“M”, “F”)</td>
-</tr>
-<tr class="even">
-<td align="left">hindfoot_length</td>
-<td align="left">length of the hindfoot in mm</td>
-</tr>
-<tr class="odd">
-<td align="left">weight</td>
-<td align="left">weight of the animal in grams</td>
-</tr>
-<tr class="even">
-<td align="left">genus</td>
-<td align="left">genus of animal</td>
-</tr>
-<tr class="odd">
-<td align="left">species</td>
-<td align="left">species of animal</td>
-</tr>
-<tr class="even">
-<td align="left">taxa</td>
-<td align="left">e.g. Rodent, Reptile, Bird, Rabbit</td>
-</tr>
-<tr class="odd">
-<td align="left">plot_type</td>
-<td align="left">type of plot</td>
-</tr>
-</tbody>
-</table>
-<p>The data are available at <a href="http://kbroman.org/datacarp/portal_data_joined.csv" class="uri">http://kbroman.org/datacarp/portal_data_joined.csv</a>.</p>
-<p>We first use <code>download_file()</code> to download the data into the <code>data/</code> subdirectory:</p>
+<div id="load-the-data" class="section level2">
+<h2>Load the data</h2>
+<p>We first download the file:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>,
               <span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</code></pre></div>
-<p>We then use <code>read.csv()</code> to load the data into R:</p>
+<p>We then load them into R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/portal_data_joined.csv&#39;</span>)</code></pre></div>
-<p>We can actually use <code>read.csv</code> to grab the data directly from the web, but it’s probably best to download a copy first.</p>
+<p>Can also do:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>)</code></pre></div>
-<p>The data are stored in what’s called a “data frame”. It’s a big rectangle, with rows being observations and columns being variables. The different columns can be different types (numeric, character, etc.), but they’re all the same length.</p>
 <p>Use <code>head()</code> to view the first few rows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(surveys)</code></pre></div>
-<p>Use <code>tail()</code> to view the first few rows.</p>
+<p>Use <code>tail()</code> to view the last few rows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(surveys)</code></pre></div>
 <p>Use <code>str()</code> to look at the structure of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys)</code></pre></div>
@@ -258,57 +182,37 @@ $(document).ready(function () {
 <li>How many rows and how many columns are in this object?</li>
 <li>How many species have been recorded during these surveys?</li>
 </ul>
-<!-- end challenge -->
-<p>As you can see, many of the columns consist of integers, however, the columns <code>species</code> and <code>sex</code> are of a special class called a <code>factor</code>. Before we learn more about the <code>data.frame</code> class, let’s talk about factors. They are very useful but not necessarily intuitive, and therefore require some attention.</p>
 </div>
 </div>
 <div id="factors" class="section level2">
 <h2>Factors</h2>
-<p>Factors are used to represent categorical data. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting.</p>
-<p>Factors are stored as integers, and have labels associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
-<p>Once created, factors can only contain a pre-defined set of values, known as <em>levels</em>. By default, R always sorts <em>levels</em> in alphabetical order. For instance, if you use <code>factor()</code> to create a factor with 2 levels:</p>
+<p>Factors are categorical variables. They look like a vector of character strings, but they’re stored as integers with character string labels for the distinct values, called <em>levels</em>.</p>
+<p>Use <code>factor()</code> to create a vector that is a factor.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</code></pre></div>
-<p>R will assign <code>1</code> to the level <code>&quot;female&quot;</code> and <code>2</code> to the level <code>&quot;male&quot;</code> (because <code>f</code> comes before <code>m</code>, even though the first element in this vector is <code>&quot;male&quot;</code>). You can check this by using the function <code>levels()</code>, and check the number of levels using <code>nlevels()</code>:</p>
+<p>Use <code>levels()</code> and <code>nlevels()</code> to see the levels and their number.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(sex)
 <span class="kw">nlevels</span>(sex)</code></pre></div>
-<p>Sometimes, the order of the factors does not matter, other times you might want to specify a particular order.</p>
+<p>If you provide the <code>levels</code> argument to <code>factor()</code>, you’ll get the levels in a particular order.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">food &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
 <span class="kw">levels</span>(food)
 food &lt;-<span class="st"> </span><span class="kw">factor</span>(food, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
 <span class="kw">levels</span>(food)</code></pre></div>
-<div id="converting-factors" class="section level3">
-<h3>Converting factors</h3>
-<p>If you need to convert a factor to a character vector, you use <code>as.character(x)</code>.</p>
-<p>Converting factors where the levels appear as numbers (such as concentration levels) to a numeric vector is a little trickier. One method is to convert factors to characters and then numbers. function. Compare:</p>
+<p>Converting factors to numeric.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>))
 <span class="kw">as.numeric</span>(f)               ## wrong! and there is no warning...
 <span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) ## works...</code></pre></div>
-</div>
 <div id="challenge-1" class="section level3">
 <h3>Challenge</h3>
 <p>The function <code>table()</code> tabulates observations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat3&quot;</span>, <span class="st">&quot;treat1&quot;</span>,
-          <span class="st">&quot;control&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat3&quot;</span>)
-expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
-<span class="kw">table</span>(expt)</code></pre></div>
+<pre><code>expt &lt;- c(&quot;treat1&quot;, &quot;treat2&quot;, &quot;treat1&quot;, &quot;treat3&quot;, &quot;treat1&quot;, &quot;control&quot;,
+          &quot;treat1&quot;, &quot;treat2&quot;, &quot;treat3&quot;)
+expt &lt;- factor(expt)
+table(expt)</code></pre>
 <ul>
 <li>In which order are the treatments listed?</li>
-<li>How can you recreate this table with “<code>control</code>” listed last instead of first?</li>
+<li>How can you recreate this table with “control” listed last instead of first?</li>
 </ul>
-<!-- end challenge -->
-<!---
-
-```r
-## Answers
-##
-## * The treatments are listed in alphabetical order because they are factors.
-## * By redefining the order of the levels
-expt <- c("treat1", "treat2", "treat1", "treat3", "treat1",
-          "control", "treat1", "treat2", "treat3")
-expt <- factor(expt, levels=c("treat1", "treat2", "treat3", "control"))
-table(expt)
-```
---->
+<p><br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/></p>
 </div>
 </div>
 

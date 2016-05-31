@@ -87,6 +87,27 @@ weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv"
 <span class="kw">mean</span>(v, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
 <p>Why does the error message say the data are not numeric?</p>
 </div>
+<div id="challenge-6" class="slide section level1">
+<h1>Challenge 6</h1>
+<p>Based on the output of <code>str(surveys)</code>, can you answer the following questions?</p>
+<ul>
+<li>What is the class of the object <code>surveys</code>?</li>
+<li>How many rows and how many columns are in this object?</li>
+<li>How many species have been recorded during these surveys?</li>
+</ul>
+</div>
+<div id="challenge-7" class="slide section level1">
+<h1>Challenge 7</h1>
+<p>The function <code>table()</code> tabulates observations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat3&quot;</span>, <span class="st">&quot;treat1&quot;</span>,
+          <span class="st">&quot;control&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat3&quot;</span>)
+expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
+<span class="kw">table</span>(expt)</code></pre></div>
+<ul>
+<li>In which order are the treatments listed?</li>
+<li>How can you recreate this table with “<code>control</code>” listed last instead of first?</li>
+</ul>
+</div>
 <div id="capstone-project" class="slide section level1">
 <h1>Capstone project</h1>
 <p>Create and compile an R Markdown report:</p>

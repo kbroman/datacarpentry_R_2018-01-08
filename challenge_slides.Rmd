@@ -78,6 +78,37 @@ mean(v, na.rm=TRUE)
 Why does the error message say the data are not numeric?
 
 
+---
+
+# Challenge 6
+
+
+Based on the output of `str(surveys)`, can you answer the following questions?
+
+* What is the class of the object `surveys`?
+* How many rows and how many columns are in this object?
+* How many species have been recorded during these surveys?
+
+
+---
+
+# Challenge 7
+
+
+The function `table()` tabulates observations.
+
+```{r table, eval=FALSE}
+expt <- c("treat1", "treat2", "treat1", "treat3", "treat1",
+          "control", "treat1", "treat2", "treat3")
+expt <- factor(expt)
+table(expt)
+```
+
+* In which order are the treatments listed?
+* How can you recreate this table with "`control`" listed last instead
+of first?
+
+
 
 # Capstone project
 
