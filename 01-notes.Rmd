@@ -5,7 +5,7 @@ author: Data Carpentry contributors
 minutes: 15
 ---
 
-```{r, echo=FALSE, purl=FALSE}
+```{r, echo=FALSE}
 knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 ```
 
@@ -43,7 +43,7 @@ round(sqrt_age, 2)
 
 What is the value of `y` after doing the following?
 
-```{r, purl=FALSE}
+```{r}
 x <- 55
 y <- x * 2.2
 x <- 100
@@ -77,7 +77,7 @@ str(animals)
 
 ### Add to a vector
 
-```{r, purl=FALSE}
+```{r}
 animals <- c(animals, "dog") # adding at the end of the vector
 animals <- c("mouse", animals) # adding at the beginning of the vector
 ```
@@ -88,7 +88,7 @@ animals <- c("mouse", animals) # adding at the beginning of the vector
 What happens to vectors with mixed types?
 (Hint: use `class()`)
 
-```{r, echo=TRUE, eval=FALSE, purl=TRUE}
+```{r, echo=TRUE, eval=FALSE}
 x <- c(1, 2, 3, 'a')
 
 y <- c(1, 2, 3, TRUE)
@@ -106,7 +106,7 @@ animals[2]
 animals[c(1, 4)]
 ```
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 more_animals <- animals[c(1, 2, 3, 2, 1, 4)]
 ```
 
@@ -125,14 +125,14 @@ Subset to get the 2nd and 3rd values.
 
 Subsetting with a logical vector.
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 weights <- c(21, 54, 39, 17, 55)
 weights[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
 ```
 
 Creating a logical vector.
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 weights > 50    # will return logicals with TRUE for the indices that meet the condition
 ## so we can use this to select only the values above 50
 weights[weights > 50]
@@ -140,14 +140,14 @@ weights[weights > 50]
 
 Using `&` and `|`.
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 weights[weights < 30 | weights > 50]
 weights[weights > 30 & weights < 50]
 ```
 
 Using `%in%` with character strings.
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 animals <- c("mouse", "rat", "dog", "cat")
 animals[animals == "cat" | animals == "rat"] # returns both rat and cat
 animals %in% c("rat", "cat", "dog", "duck")
@@ -168,18 +168,18 @@ Subset `animals` with `weights < 200`.
 
 ## Missing data
 
-```{r, purl=FALSE}
+```{r}
 heights <- c(2, 4, 4, NA, 6)
 ```
 
-```{r, purl=FALSE}
+```{r}
 mean(heights)
 max(heights)
 mean(heights, na.rm = TRUE)
 max(heights, na.rm = TRUE)
 ```
 
-```{r, purl=FALSE}
+```{r}
 ## Extract those elements which are not missing values.
 heights[!is.na(heights)]
 ## shortcut to that
