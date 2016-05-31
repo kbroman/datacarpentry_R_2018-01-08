@@ -72,38 +72,16 @@ tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">
 <p>Consider the <code>animals</code> vector.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
 <p>Subset to get the 2nd and 3rd values.</p>
-<h3 id="conditional-subsetting">Conditional subsetting</h3>
-<p>Another common way of subsetting is by using a logical vector: <code>TRUE</code> will select the element with the same index, while <code>FALSE</code> will not:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">54</span>, <span class="dv">39</span>, <span class="dv">17</span>, <span class="dv">55</span>)
-weights[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</code></pre></div>
-<pre><code>## [1] 54 55</code></pre>
-<p>Typically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 50:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
-<pre><code>## [1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## so we can use this to select only the values above 50
-weights[weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 54 55</code></pre>
-<p>You can combine multiple tests using <code>&amp;</code> (both conditions are true, AND) or <code>|</code> (at least one of the conditions is true, OR):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 21 54 17 55</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &gt;<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>weights &lt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 39</code></pre>
-<p>When working with vectors of characters, if you are trying to combine many conditions it can become tedious to type. The function <code>%in%</code> allows you to test if a value if found in a vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
-animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </span>animals ==<span class="st"> &quot;rat&quot;</span>] <span class="co"># returns both rat and cat</span></code></pre></div>
-<pre><code>## [1] &quot;rat&quot; &quot;cat&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)</code></pre></div>
-<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)]</code></pre></div>
-<pre><code>## [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
-<h3 id="challenge">Challenge</h3>
+</div>
+<div id="challenge-4" class="slide section level1">
+<h1>Challenge 4</h1>
 <p>Consider the following two vectors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
 weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">180</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
 <p>Subset <code>animals</code> with <code>weights &lt; 200</code>.</p>
 </div>
-<div id="challenge-4" class="slide section level1">
-<h1>Challenge 4</h1>
+<div id="challenge-5" class="slide section level1">
+<h1>Challenge 5</h1>
 <p>Why does the following give an error?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)
 <span class="kw">mean</span>(v, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>

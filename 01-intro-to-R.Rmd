@@ -239,6 +239,7 @@ animals <- c("mouse", "rat", "dog", "cat")
 
 Subset to get the 2nd and 3rd values.
 
+<!-- end challenge -->
 
 ### Conditional subsetting
 
