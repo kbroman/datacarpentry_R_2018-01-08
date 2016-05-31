@@ -160,7 +160,6 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#interacting-with-r">Interacting with R</a><ul>
 <li><a href="#commenting">Commenting</a></li>
-<li><a href="#assignment-operator">Assignment operator</a></li>
 <li><a href="#seeking-help">Seeking help</a><ul>
 <li><a href="#i-know-the-name-of-the-function-i-want-to-use-but-im-not-sure-how-to-use-it">I know the name of the function I want to use, but I’m not sure how to use it</a></li>
 <li><a href="#i-want-to-use-a-function-that-does-x-there-must-be-a-function-for-it-but-i-dont-know-which-one">I want to use a function that does X, there must be a function for it but I don’t know which one…</a></li>
@@ -281,21 +280,6 @@ $(document).ready(function () {
 <div id="commenting" class="section level2">
 <h2>Commenting</h2>
 <p>Use <code>#</code> signs to comment. Anything to the right of a <code>#</code> is ignored by R, meaning it won’t be executed. Comments are a great way to describe what your code does within the code itself, so comment liberally in your R scripts.</p>
-</div>
-<div id="assignment-operator" class="section level2">
-<h2>Assignment operator</h2>
-<p>We can assign names to numbers and other objects with the assignment operator, <code>&lt;-</code>. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="dv">2016-1969</span></code></pre></div>
-<p>Type that into your script, and use <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd> to paste it to the console.</p>
-<p>You can also use <code>=</code> as assignment, but that symbol can have other meanings, and so I recommend sticking with the <code>&lt;-</code> combination.</p>
-<p>In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write <code>&lt;-</code> in a single keystroke.</p>
-<p>If you’ve assigned a number to an object, you can then use it in further calculations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(age)</code></pre></div>
-<pre><code>## [1] 6.855655</code></pre>
-<p>You can assigned <em>that</em> to something, and then use it.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sqrt_age &lt;-<span class="st"> </span><span class="kw">sqrt</span>(age)
-<span class="kw">round</span>(sqrt_age)
-<span class="kw">round</span>(sqrt_age, <span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="seeking-help" class="section level2">
 <h2>Seeking help</h2>

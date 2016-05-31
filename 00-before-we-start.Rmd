@@ -228,42 +228,6 @@ meaning it won't be executed. Comments are a great way to describe what your
 code does within the code itself, so comment liberally in your R scripts.
 
 
-## Assignment operator
-
-We can assign names to numbers and other objects with the assignment
-operator, `<-`. For example:
-
-```{r assign}
-age <- 2016-1969
-```
-
-Type that into your script, and use <kbd>`Ctrl`</kbd> +
-<kbd>`Enter`</kbd> to paste it to the console.
-
-You can also use `=` as assignment, but that symbol can have other
-meanings, and so I recommend sticking with the `<-` combination.
-
-In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write ` <- ` in
-a single keystroke.
-
-If you've assigned a number to an object, you can then use it in
-further calculations:
-
-```{r sqrt, results="markup"}
-sqrt(age)
-```
-
-You can assigned _that_ to something, and then use it.
-
-```{r round_sqrt_age}
-sqrt_age <- sqrt(age)
-round(sqrt_age)
-round(sqrt_age, 2)
-```
-
-
-
-
 
 ## Seeking help
 

@@ -9,21 +9,23 @@ minutes: 15
 knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 ```
 
-# R
+## R and RStudio
+
+### R
 
 - Free and open source general statistical programming language
 - Broad statistical and graphics functions
 - Huge community of add-on packages
 - Not just for statistics, but also general purpose programming.
 
-# RStudio
+### RStudio
 
 - Integrated Development Environment (IDE) for R
 - Separate program, developed by a company but also free and open
   source.
 - By far the best thing to use when learning R.
 
-# RStudio orientation
+### RStudio orientation
 
 Four panes (can be re-organized, but always these four panes)
 
@@ -32,7 +34,7 @@ Four panes (can be re-organized, but always these four panes)
 - Environment/history (top-right)
 - Files/plots/help/etc (bottom-right)
 
-# R as a calculator
+## R as a calculator
 
 - `Ctrl-Shift-2` to focus only on the R console.
 - `Ctrl-Shift-0` to get back.
@@ -55,29 +57,29 @@ log(4, 6)
 
 - Explain that `log` is a function with two arguments.
 
-# Getting help
+## Getting help
 
 - Pause for a moment after typing `log`
 - Type `?log`
 
-# Need for scripts
+## Need for scripts
 
 - Want to save what we're doing
 - Really want to organize the scripts and data for a project
 
-# Create a new R project
+### Create a new R project
 
 - File → New Project → New directory → Empty project
 - Give it a name, like `~/data-carpentry`
 - Under files tab on the bottom right, click "New Folder" and create a
   folder named `data`
 
-# Create an R script
+### Create an R script
 
 - File → New File → R script
 - Save it in the current working directory, `data-carpentry-script.R`
 
-# Typing into the script and pasting to console
+## Typing into the script and pasting to console
 
 - Type some stuff into the script
 
@@ -91,24 +93,4 @@ log(4, 6)
 
 - Explain comment sign, `#`
 
-# Assigment operator
-
-```{r assign}
-age <- 2016 - 1969
-```
-
-- Paste into console.
-- Can also use `=`, but recommend `<-`.
-- Can use <kbd>Alt</kbd> + <kbd>-</kbd>
-
-# Using the stuff you assigned
-
-```{r sqrt}
-sqrt(age)
-```
-
-```{r more_assign}
-sqrt_age <- sqrt(age)
-round(sqrt_age)
-round(sqrt_age, 2)
-```
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
