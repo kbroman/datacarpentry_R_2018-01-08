@@ -1,0 +1,14 @@
+---
+layout: topic
+title: R Markdown
+subtitle: Reproducible reports
+minutes: 60
+---
+
+```{r, echo=FALSE, purl=FALSE}
+knitr::opts_chunk$set(fig.keep='last')
+```
+
+```{r setup, echo=FALSE, purl=FALSE}
+source("setup.R")
+```

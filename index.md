@@ -11,6 +11,13 @@ dataurl: http://dx.doi.org/10.6084/m9.figshare.1314459
 status: Teaching
 ---
 
+# Note
+
+This particular set of lessons has revisions by
+[Karl Broman](http://kbroman.org) for a
+[Data Carpentry workshop](http://uw-madison-aci.github.io/2016-06-01-uwmadison/)
+at UW-Madison on 1-2 June 2016.
+
 # Data Carpentry {{ page.topic }} for {{ page.domain }}
 
 
@@ -49,8 +56,7 @@ for each level and a very brief introduction to plotting.
 4. [Lesson 03 Introducing `data.frame`](03-data-frames.html)
 5. [Lesson 04 Aggregating and analyzing data with dplyr](04-dplyr.html)
 6. [Lesson 05 Data visualization with ggplot2](05-visualization-ggplot2.html)
-7. [Lesson 06 R and SQL](06-r-and-sql.html)
-
+7. [Lesson 06 Reproducible reports with R Markdown](06-rmarkdown.html)
 
 ## Data
 

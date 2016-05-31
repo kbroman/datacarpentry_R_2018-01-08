@@ -11,6 +11,11 @@ import CSV files, the structure of data.frame, how to deal with factors, how to
 add/remove rows and columns, and finish with how to calculate summary statistics
 for each level and a very brief introduction to plotting.
 
+(This particular set of lessons has revisions by
+[Karl Broman](http://kbroman.org) for a
+[Data Carpentry workshop](http://uw-madison-aci.github.io/2016-06-01-uwmadison/)
+at UW-Madison on 1-2 June 2016.)
+
 > ## Prerequisites
 >
 > * Having RStudio installed
