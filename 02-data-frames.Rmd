@@ -375,7 +375,7 @@ surveys[2:4, 6:7] # rows 2-4, columns 6-7
    `surveys_by_10` that includes every 10th row of the survey data frame
    starting at row 10 (10, 20, 30, ...)
 
-1. Create a `data.frame` containing only the observations from 1999 of the
-   `surveys` dataset.
+1. Create a `data.frame` containing only the observations from the
+   year 1999 of the `surveys` dataset.
 
 <!-- end challenge -->
