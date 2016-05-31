@@ -1,0 +1,218 @@
+---
+layout: topic
+title: Aggregating and analyzing data with dplyr (notes)
+author: Data Carpentry contributors
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
+surveys <- read.csv("data/portal_data_joined.csv")
+```
+
+## Key idea
+
+All that bracket-based selecting can be a bit cumbersome.
+Add-on package dplyr greatly simplifies the process; inspired by SQL.
+
+`select`, `filter`, `mutate`, `group_by`, `summarize`
+
+(also `tally` and `arrange`)
+
+
+## Install and load the library
+
+```{r eval=FALSE}
+install.packages("dplyr")
+```
+
+```{r}
+library(dplyr)
+```
+
+
+## Select and filter
+
+Select to grab columns.
+
+```r
+selectedcol <- select(surveys, species_id, plot_type, weight)
+head(selectedcol)
+```
+
+
+Filter to grab rows.
+
+```{r filter}
+surveys2002 <- filter(surveys, year==2002)
+head(surveys2002)
+```
+
+## Pipe
+
+Output of one function becomes the input to the next.
+
+```{r}
+surveys %>%
+  filter(weight < 5) %>%
+  select(species_id, sex, weight)
+```
+
+<kbd>`Ctrl`</kbd> + <kbd>`Shift`</kbd> + <kbd>`M`</kbd> to insert `%>%`
+
+Could assign this to something:
+
+```{r}
+surveys_sml <- surveys %>%
+  filter(weight < 5) %>%
+  select(species_id, sex, weight)
+```
+
+
+### Challenge
+
+Using pipes, subset the data to include individuals collected before 1995,
+and retain the columns `year`, `sex`, and `weight.`
+
+
+## Mutate
+
+`mutate()` to derive a new column.
+
+```{r}
+surveys %>%
+  mutate(weight_kg = weight / 1000)
+```
+
+To just look at the top:
+
+```{r}
+surveys %>%
+  mutate(weight_kg = weight / 1000) %>%
+  head
+```
+
+Filter out `NA`s:
+
+```{r}
+surveys %>%
+  filter(!is.na(weight)) %>%
+  mutate(weight_kg = weight / 1000) %>%
+  head
+```
+
+### Challenge
+
+Create a new dataframe from the survey data that meets the following
+criteria: contains only the `species_id` column and a column that contains
+values that are half the `hindfoot_length` values (e.g. a new column
+`hindfoot_half`). In this `hindfoot_half` column, there are no NA values
+and all values are < 30.
+
+Hint: think about how the commands should be ordered to produce this data frame!
+
+<!-- end challenge -->
+
+### split-apply-combine data analyses (group-by and summarize)
+
+Many analyses fit a split-apply-combine pattern: split the data into
+groups, apply some analysis to each group, and then combine the
+results.
+
+With dplyr, we use `group_by()` for the splitting and `tally` or
+`summarize()` for the rest.
+
+Count individuals by sex:
+
+```{r}
+surveys %>%
+  group_by(sex) %>%
+  tally()
+```
+
+Average weight by sex:
+
+```{r}
+surveys %>%
+  group_by(sex) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE))
+```
+
+Can group by multiple columns:
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE))
+```
+
+Maybe filter those `NA`s
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+  filter(!is.na(mean_weight))
+```
+
+Another thing we might do here is sort rows by `mean_weight`, using
+`arrange()`.
+
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+    filter(!is.na(mean_weight)) %>%
+    arrange(mean_weight)
+```
+
+If you want them sorted from highest to lowest, use `desc()`.
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+    filter(!is.na(mean_weight)) %>%
+    arrange(desc(mean_weight))
+```
+
+Also note that you can include multiple summaries.
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE),
+            min_weight = min(weight, na.rm = TRUE)) %>%
+    filter(!is.na(mean_weight)) %>%
+    arrange(desc(mean_weight))
+```
+
+### Challenge
+
+How many times was each `plot_type` surveyed?
+
+<!-- end challenge -->
+
+
+### Challenge
+
+Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
+length for each species.
+
+<!-- end challenge -->
+
+### Challenge
+
+What was the heaviest animal measured in each year? Return the columns `year`,
+`genus`, `species`, and `weight`.
+
+<!-- end challenge -->
+
+
+
+
+
+
+
+
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>

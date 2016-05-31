@@ -4,7 +4,7 @@ title: Aggregating and analyzing data with dplyr
 author: Data Carpentry contributors
 ---
 
-```{r, echo=FALSE, purl=FALSE, message = FALSE}
+```{r, echo=FALSE, message = FALSE}
 source("setup.R")
 surveys <- read.csv("data/portal_data_joined.csv")
 ```
@@ -23,7 +23,7 @@ come built into R; packages give you access to more of them. Before you use a
 package for the first time you need to install it on your machine, and then you
 should to import it in every subsequent R session when you'll need it.
 
-```{r, eval = FALSE, purl = FALSE}
+```{r, eval = FALSE}
 install.packages("dplyr")
 ```
 
@@ -31,7 +31,7 @@ You might get asked to choose a CRAN mirror -- this is basically asking you to
 choose a site to download the package from. The choice doesn't matter too much;
 we recommend the RStudio mirror.
 
-```{r, message = FALSE, purl = FALSE}
+```{r, message = FALSE}
 library("dplyr")    ## load the package
 ```
 
@@ -59,35 +59,32 @@ We're going to learn some of the most common `dplyr` functions: `select()`,
 data frame, use `select()`. The first argument to this function is the data
 frame (`surveys`), and the subsequent arguments are the columns to keep.
 
-```{r, results = 'hide', purl = FALSE}
-select(surveys, plot_id, species_id, weight)
+```{r, results = 'hide'}
+selected_col <- select(surveys, plot_id, species_id, weight)
+head(selected_col)
 ```
 
 To choose rows, use `filter()`:
 
-```{r, purl = FALSE}
-filter(surveys, year == 1995)
+```{r}
+surveys1995 <- filter(surveys, year == 1995)
+head(surveys1995)
 ```
 
 ### Pipes
 
-But what if you wanted to select and filter at the same time? There are three
-ways to do this: use intermediate steps, nested functions, or pipes. With the
-intermediate steps, you essentially create a temporary data frame and use that
-as input to the next function. This can clutter up your workspace with lots of
-objects. You can also nest functions (i.e. one function inside of another).
-This is handy, but can be difficult to read if too many functions are nested as
-the process from inside out. The last option, pipes, are a fairly recent
-addition to R. Pipes let you take the output of one function and send it
-directly to the next, which is useful when you need to many things to the same
-data set.  Pipes in R look like `%>%` and are made available via the `magrittr`
-package installed as part of `dplyr`.
+The _pipe_ operator (`%>%`) from the magrittr package makes it easy to
+chain these actions together: the output of one function becomes the
+input of the next.
 
-```{r, purl = FALSE}
+```{r}
 surveys %>%
   filter(weight < 5) %>%
   select(species_id, sex, weight)
 ```
+
+Another cumbersome bit of typing. In RStudio, type <kbd>`Ctrl`</kbd> +
+<kbd>`Shift`</kbd> + <kbd>`M`</kbd> and the `%>%` operator will be inserted.
 
 In the above we use the pipe to send the `surveys` data set first through
 `filter`, to keep rows where `wgt` was less than 5, and then through `select` to
@@ -98,29 +95,20 @@ as an argument to these functions anymore.
 If we wanted to create a new object with this smaller version of the data we
 could do so by assigning it a new name:
 
-```{r, purl = FALSE}
+```{r}
 surveys_sml <- surveys %>%
   filter(weight < 5) %>%
   select(species_id, sex, weight)
-
-surveys_sml
 ```
 
 Note that the final data frame is the leftmost part of this expression.
 
-> ### Challenge {.challenge}
->
->  Using pipes, subset the data to include individuals collected before 1995,
->  and retain the columns `year`, `sex`, and `weight.`
+### Challenge
 
-<!---
-```{r, eval=FALSE, purl=FALSE}
-## Answer
-surveys %>%
-    filter(year < 1995) %>%
-    select(year, sex, weight)
-```
---->
+Using pipes, subset the data to include individuals collected before 1995,
+and retain the columns `year`, `sex`, and `weight.`
+
+<!-- end challenge -->
 
 
 ### Mutate
@@ -131,7 +119,7 @@ columns. For this we'll use `mutate()`.
 
 To create a new column of weight in kg:
 
-```{r, purl = FALSE}
+```{r}
 surveys %>%
   mutate(weight_kg = weight / 1000)
 ```
@@ -140,7 +128,7 @@ If this runs off your screen and you just want to see the first few rows, you
 can use a pipe to view the `head()` of the data (pipes work with non-dplyr
 functions too, as long as the `dplyr` or `magrittr` packages are loaded).
 
-```{r, purl = FALSE}
+```{r}
 surveys %>%
   mutate(weight_kg = weight / 1000) %>%
   head
@@ -149,7 +137,7 @@ surveys %>%
 The first few rows are full of NAs, so if we wanted to remove those we could
 insert a `filter()` in this chain:
 
-```{r, purl = FALSE}
+```{r}
 surveys %>%
   filter(!is.na(weight)) %>%
   mutate(weight_kg = weight / 1000) %>%
@@ -159,26 +147,18 @@ surveys %>%
 `is.na()` is a function that determines whether something is or is not an `NA`.
 The `!` symbol negates it, so we're asking for everything that is not an `NA`.
 
-> ### Challenge {.challenge}
->
->  Create a new dataframe from the survey data that meets the following
->  criteria: contains only the `species_id` column and a column that contains 
->  values that are half the `hindfoot_length` values (e.g. a new column
->  `hindfoot_half`). In this `hindfoot_half` column, there are no NA values
->  and all values are < 30.
->
->  **Hint**: think about how the commands should be ordered to produce this data frame!
+### Challenge
 
-<!---
-```{r, eval=FALSE, purl=FALSE}
-## Answer
-surveys_hindfoot_half %>%
-    filter(!is.na(hindfoot_length)) %>%
-    mutate(hindfoot_half = hindfoot_length / 2) %>%
-    filter(hindfoot_half < 30) %>%
-    select(species_id, hindfoot_half)
-```
---->
+Create a new dataframe from the survey data that meets the following
+criteria: contains only the `species_id` column and a column that contains
+values that are half the `hindfoot_length` values (e.g. a new column
+`hindfoot_half`). In this `hindfoot_half` column, there are no NA values
+and all values are < 30.
+
+Hint: think about how the commands should be ordered to produce this data frame!
+
+<!-- end challenge -->
+
 
 ### Split-apply-combine data analysis and the summarize() function
 
@@ -189,7 +169,7 @@ then combine the results. `dplyr` makes this very easy through the use of the
 operations can be run. For example, if we wanted to group by sex and find the
 number of rows of data for each sex, we would do:
 
-```{r, purl = FALSE}
+```{r}
 surveys %>%
   group_by(sex) %>%
   tally()
@@ -198,7 +178,7 @@ surveys %>%
 Here, `tally()` is the action applied to the groups created to `group_by()` and counts the total number of records for each category. `group_by()` is often used together with `summarize()` which collapses each
 group into a single-row summary of that group. So to view mean `weight` by sex:
 
-```{r, purl = FALSE}
+```{r}
 surveys %>%
   group_by(sex) %>%
   summarize(mean_weight = mean(weight, na.rm = TRUE))
@@ -206,85 +186,75 @@ surveys %>%
 
 You can group by multiple columns too:
 
-```{r, purl = FALSE}
+```{r}
 surveys %>%
   group_by(sex, species_id) %>%
   summarize(mean_weight = mean(weight, na.rm = TRUE))
 ```
 
 It looks like most of these species were never weighed. We could then discard
-rows where `mean_weight` is `NaN` (`NaN` refers to "Not a Number") using
+rows where `mean_weight` is `NA` with
 `filter()`:
 
-```{r, purl = FALSE}
+```{r}
 surveys %>%
   group_by(sex, species_id) %>%
   summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
-  filter(!is.nan(mean_weight))
+  filter(!is.na(mean_weight))
 ```
 
-All of a sudden this isn't running off the screen anymore. That's because `dplyr`
-has changed our `data.frame` to a `tbl_df`. This is a data structure that's very
-similar to a data frame; for our purposes the only difference is that it won't
-automatically show tons of data going off the screen.
+Another thing we might do here is sort rows by `mean_weight`, using
+`arrange()`.
 
-You can also summarize multiple variables at the same time:
 
-```{r, purl = FALSE}
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+    filter(!is.na(mean_weight)) %>%
+    arrange(mean_weight)
+```
+
+If you want them sorted from highest to lowest, use `desc()`.
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+    filter(!is.na(mean_weight)) %>%
+    arrange(desc(mean_weight))
+```
+
+Also note that you can include multiple summaries.
+
+```{r}
 surveys %>%
   group_by(sex, species_id) %>%
   summarize(mean_weight = mean(weight, na.rm = TRUE),
             min_weight = min(weight, na.rm = TRUE)) %>%
-  filter(!is.nan(mean_weight))
+    filter(!is.na(mean_weight)) %>%
+    arrange(desc(mean_weight))
 ```
 
-> ### Challenge {.challenge}
->
-> How many times was each `plot_type` surveyed?
+### Challenge
 
-<!---
-```{r, echo=FALSE, purl=FALSE}
-## Answer
-surveys %>%
-    group_by(plot_type) %>%
-    tally
-```
---->
+How many times was each `plot_type` surveyed?
 
-> ### Challenge {.challenge}
->
-> Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
-> length for each species.
+<!-- end challenge -->
 
-<!---
-```{r, echo=FALSE, purl=FALSE}
-## Answer
-surveys %>%
-    filter(!is.na(hindfoot_length)) %>%
-    group_by(species_id) %>%
-    summarize(
-        mean_hindfoot_length = mean(hindfoot_length),
-        min_hindfoot_length = min(hindfoot_length),
-        max_hindfoot_length = max(hindfoot_length)
-    )
-```
---->
 
-> ### Challenge {.challenge}
->
-> What was the heaviest animal measured in each year? Return the columns `year`,
-> `genus`, `species`, and `weight`.
+### Challenge
 
-<!---
-## Answer
-```{r, echo=FALSE, purl=FALSE}
-res <- surveys %>%
-    filter(!is.na(weight)) %>%
-    group_by(year) %>%
-    filter(weight == max(weight)) %>%
-    select(year, genus, species, weight) %>%
-    arrange(year)
-```
---->
+Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
+length for each species.
+
+<!-- end challenge -->
+
+### Challenge
+
+What was the heaviest animal measured in each year? Return the columns `year`,
+`genus`, `species`, and `weight`.
+
+<!-- end challenge -->
 
 [Handy dplyr cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)

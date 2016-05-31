@@ -1,4 +1,4 @@
-all: pages challenge_slides.html
+all: pages challenge_slides.html capstone_soln/capstone_soln.html
 
 %.html: %.Rmd
 	Rscript -e "rmarkdown::render('$<', output_format=rmarkdown::html_document(toc=TRUE, highlight='tango', self_contained=FALSE, lib_dir='libs'))"
@@ -6,7 +6,7 @@ all: pages challenge_slides.html
 motivation.html: motivation.md
 	pandoc -o $@ $^
 
-pages: motivation.html 01-intro-to-R.html 02-data-frames.html 03-dplyr.html 04-ggplot2.html 05-rmarkdown.html capstone.html 01-notes.html 02-notes.html
+pages: motivation.html 01-intro-to-R.html 02-data-frames.html 03-dplyr.html 04-ggplot2.html 05-rmarkdown.html capstone.html 01-notes.html 02-notes.html 03-notes.html 04-notes.html
 
 challenge_slides.Rmd: ruby/make_challenge_slides.rb 01-intro-to-R.Rmd 02-data-frames.Rmd 03-dplyr.Rmd 04-ggplot2.Rmd capstone.Rmd
 	$<
@@ -16,3 +16,6 @@ challenge_slides.html: challenge_slides.Rmd
 
 capstone.html: capstone.Rmd
 	Rscript -e "rmarkdown::render('$<', output_format=rmarkdown::html_document(highlight='tango', self_contained=FALSE, lib_dir='libs'))"
+
+capstone_soln/capstone_soln.html: capstone_soln/capstone_soln.Rmd
+	R -e "rmarkdown::render('$<')"

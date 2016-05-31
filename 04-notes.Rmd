@@ -1,0 +1,13 @@
+---
+layout: topic
+title: Data visualization with ggplot2 (notes)
+author: Data Carpentry contributors
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
+surveys <- read.csv("data/portal_data_joined.csv")
+```
+
+
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>

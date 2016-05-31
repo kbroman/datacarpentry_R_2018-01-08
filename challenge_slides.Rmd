@@ -143,6 +143,55 @@ author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
 # Challenge 10
 
 
+Using pipes, subset the data to include individuals collected before 1995,
+and retain the columns `year`, `sex`, and `weight.`
+
+
+---
+
+# Challenge 11
+
+
+Create a new dataframe from the survey data that meets the following
+criteria: contains only the `species_id` column and a column that contains
+values that are half the `hindfoot_length` values (e.g. a new column
+`hindfoot_half`). In this `hindfoot_half` column, there are no NA values
+and all values are < 30.
+
+Hint: think about how the commands should be ordered to produce this data frame!
+
+
+---
+
+# Challenge 12
+
+
+How many times was each `plot_type` surveyed?
+
+
+---
+
+# Challenge 13
+
+
+Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
+length for each species.
+
+
+---
+
+# Challenge 14
+
+
+What was the heaviest animal measured in each year? Return the columns `year`,
+`genus`, `species`, and `weight`.
+
+
+---
+
+# Challenge 15
+
+
 - Create a new R Markdown document.
 - Delete all of the R code chunks and write a bit of Markdown (some sections, some italicized
 text, and an itemized list).
@@ -151,7 +200,7 @@ text, and an itemized list).
 
 ---
 
-# Challenge 11
+# Challenge 16
 
 
 Add code chunks to
@@ -163,7 +212,7 @@ Add code chunks to
 
 ---
 
-# Challenge 12
+# Challenge 17
 
 
 Use chunk options to control the size of a figure and to hide the
@@ -172,7 +221,7 @@ code.
 
 ---
 
-# Challenge 13
+# Challenge 18
 
 
 Try out a bit of in-line R code.
