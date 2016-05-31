@@ -30,7 +30,7 @@ knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 
 ------------
 
-# Basics of R
+## Basics of R
 
 R is a versatile, open source programming/scripting language that's useful both
 for statistics but also data science. Inspired by the programming language S.
@@ -46,7 +46,7 @@ for statistics but also data science. Inspired by the programming language S.
 * Large and growing community of peers.
 
 
-# Presentation of RStudio
+## Presentation of RStudio
 
 Let's start by learning about RStudio, the Integrated Development Environment
 (IDE) that we will use to write code, navigate the files found on our computer,
@@ -60,7 +60,7 @@ and your files/plots/packages/help/viewer (bottom-right). The placement of these
 panes and their content can be customized.
 
 
-# R as a calculator
+## R as a calculator
 
 The lower-left pane (the R "console") is where you can interact with R
 directly. The `>` sign is the R "prompt". It indicates that R is
@@ -101,7 +101,7 @@ one argument, and some of them may have default values. `log` has a
 second argument `base` whose default (the value if left unspecified)
 is _e_.
 
-# Getting help
+### Getting help
 
 If you type `log` and pause for a moment, you'll get a pop-up with
 information about the function.
@@ -117,7 +117,7 @@ pane. These are often a bit _too_ detailed, and so they take some
 practice to read. I generally focus on Usage and Arguments, and then
 on Examples at the bottom. We'll talk more about getting help later.
 
-# Need for Scripts
+## Need for Scripts
 
 We can go along, typing directly into the R console. But there won't
 be an easy way to keep track of what we've done.
@@ -129,7 +129,7 @@ organize the scripts and data for a project.
 And so let's pause for a moment and talk about file organization.
 
 
-# Creating an R Project
+## Creating an R Project
 
 It is good practice to keep a set of related data, analyses, and text
 self-contained in a single folder, called the **working directory**. All of the
@@ -163,7 +163,7 @@ Your working directory should now look like this:
 
 ![How it should look like at the beginning of this lesson](img/r_starting_how_it_should_like.png)
 
-## Organizing your working directory
+### Organizing your working directory
 
 Using a consistent folder structure across your projects will
 help keep things organized, and will also make it easy find/file things in the
@@ -195,7 +195,7 @@ workshop, you only need a `data/` folder.
 
 
 
-# Interacting with R
+## Interacting with R
 
 While you can type R commands directly at the `>` prompt in the R
 console, I recommend typing your commands into a script, which you'll
@@ -221,7 +221,7 @@ You can also highlight a bunch of code and execute the block all at
 once with <kbd>`Ctrl`</kbd> + <kbd>`Enter`</kbd>.
 
 
-## Commenting
+### Commenting
 
 Use `#` signs to comment. Anything to the right of a `#` is ignored by R,
 meaning it won't be executed. Comments are a great way to describe what your

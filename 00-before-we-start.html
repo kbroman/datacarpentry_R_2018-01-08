@@ -152,14 +152,16 @@ $(document).ready(function () {
 <ul>
 <li><a href="#basics-of-r">Basics of R</a></li>
 <li><a href="#presentation-of-rstudio">Presentation of RStudio</a></li>
-<li><a href="#r-as-a-calculator">R as a calculator</a></li>
+<li><a href="#r-as-a-calculator">R as a calculator</a><ul>
 <li><a href="#getting-help">Getting help</a></li>
+</ul></li>
 <li><a href="#need-for-scripts">Need for Scripts</a></li>
 <li><a href="#creating-an-r-project">Creating an R Project</a><ul>
 <li><a href="#organizing-your-working-directory">Organizing your working directory</a></li>
 </ul></li>
 <li><a href="#interacting-with-r">Interacting with R</a><ul>
 <li><a href="#commenting">Commenting</a></li>
+</ul></li>
 <li><a href="#seeking-help">Seeking help</a><ul>
 <li><a href="#i-know-the-name-of-the-function-i-want-to-use-but-im-not-sure-how-to-use-it">I know the name of the function I want to use, but I’m not sure how to use it</a></li>
 <li><a href="#i-want-to-use-a-function-that-does-x-there-must-be-a-function-for-it-but-i-dont-know-which-one">I want to use a function that does X, there must be a function for it but I don’t know which one…</a></li>
@@ -167,7 +169,6 @@ $(document).ready(function () {
 <li><a href="#asking-for-help">Asking for help</a></li>
 <li><a href="#where-to-ask-for-help">Where to ask for help?</a></li>
 <li><a href="#more-resources">More resources</a></li>
-</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -187,8 +188,8 @@ $(document).ready(function () {
 </ul>
 </blockquote>
 <hr />
-<div id="basics-of-r" class="section level1">
-<h1>Basics of R</h1>
+<div id="basics-of-r" class="section level2">
+<h2>Basics of R</h2>
 <p>R is a versatile, open source programming/scripting language that’s useful both for statistics but also data science. Inspired by the programming language S.</p>
 <ul>
 <li>Free/Libre/Open Source Software under the GPL.</li>
@@ -199,13 +200,13 @@ $(document).ready(function () {
 <li>Large and growing community of peers.</li>
 </ul>
 </div>
-<div id="presentation-of-rstudio" class="section level1">
-<h1>Presentation of RStudio</h1>
+<div id="presentation-of-rstudio" class="section level2">
+<h2>Presentation of RStudio</h2>
 <p>Let’s start by learning about RStudio, the Integrated Development Environment (IDE) that we will use to write code, navigate the files found on our computer, inspect the variables we are going to create, and visualize the plots we will generate. RStudio can also be used for other things (e.g., version control, developing packages) that we will not cover during the workshop.</p>
 <p>RStudio is divided into 4 “Panes”: the editor for your scripts and documents (top-left), the R console (bottom-left), your environment/history (top-right), and your files/plots/packages/help/viewer (bottom-right). The placement of these panes and their content can be customized.</p>
 </div>
-<div id="r-as-a-calculator" class="section level1">
-<h1>R as a calculator</h1>
+<div id="r-as-a-calculator" class="section level2">
+<h2>R as a calculator</h2>
 <p>The lower-left pane (the R “console”) is where you can interact with R directly. The <code>&gt;</code> sign is the R “prompt”. It indicates that R is waiting for you to type something.</p>
 <p>You can type <kbd><code>Ctrl</code></kbd> + <kbd><code>Shift</code></kbd> + <kbd><code>2</code></kbd> to focus just on the R console pane. Use <kbd><code>Ctrl</code></kbd> + <kbd><code>Shift</code></kbd> + <kbd><code>0</code></kbd> to get back to the four panes. I use this when teaching but not otherwise.</p>
 <p>Let’s start by subtracting a couple of numbers.</p>
@@ -221,22 +222,22 @@ $(document).ready(function () {
 <span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">10</span>)
 <span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">6</span>)</code></pre></div>
 <p>Here <code>log</code> is a <em>function</em> that gives you the natural logarithm. Much of your calculations in R will be through functions. The value in the parentheses is called the function “argument”. <code>log10</code> is another function, that calculates the log base 10. There can be more than one argument, and some of them may have default values. <code>log</code> has a second argument <code>base</code> whose default (the value if left unspecified) is <em>e</em>.</p>
-</div>
-<div id="getting-help" class="section level1">
-<h1>Getting help</h1>
+<div id="getting-help" class="section level3">
+<h3>Getting help</h3>
 <p>If you type <code>log</code> and pause for a moment, you’ll get a pop-up with information about the function.</p>
 <p>Alternatively, you could type</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?log</code></pre></div>
 <p>and the documentation for the function will show up in the lower-right pane. These are often a bit <em>too</em> detailed, and so they take some practice to read. I generally focus on Usage and Arguments, and then on Examples at the bottom. We’ll talk more about getting help later.</p>
 </div>
-<div id="need-for-scripts" class="section level1">
-<h1>Need for Scripts</h1>
+</div>
+<div id="need-for-scripts" class="section level2">
+<h2>Need for Scripts</h2>
 <p>We can go along, typing directly into the R console. But there won’t be an easy way to keep track of what we’ve done.</p>
 <p>It’s best to write R “scripts” (files with R code), and work from them. And when we start creating scripts, we need to worry about how we organize the scripts and data for a project.</p>
 <p>And so let’s pause for a moment and talk about file organization.</p>
 </div>
-<div id="creating-an-r-project" class="section level1">
-<h1>Creating an R Project</h1>
+<div id="creating-an-r-project" class="section level2">
+<h2>Creating an R Project</h2>
 <p>It is good practice to keep a set of related data, analyses, and text self-contained in a single folder, called the <strong>working directory</strong>. All of the scripts within this folder can then use <em>relative paths</em> to files that indicate where inside the project a file is located (as opposed to absolute paths, which point to where a file is on a specific computer). Working this way makes it a lot easier to move your project around on your computer and share it with others without worrying about whether or not the underlying scripts will still work.</p>
 <p>RStudio provides a helpful set of tools to do this through its “Projects” interface, which not only creates a working directory for you but also remembers its location (allowing you to quickly navigate to it) and optonally preserves custom settings and open files to make it easier to resume work after a break. Below, we will go through the steps for creating an RProject for this tutorial.</p>
 <ul>
@@ -252,8 +253,8 @@ $(document).ready(function () {
 <img src="img/r_starting_how_it_should_like.png" alt="How it should look like at the beginning of this lesson" />
 <p class="caption">How it should look like at the beginning of this lesson</p>
 </div>
-<div id="organizing-your-working-directory" class="section level2">
-<h2>Organizing your working directory</h2>
+<div id="organizing-your-working-directory" class="section level3">
+<h3>Organizing your working directory</h3>
 <p>Using a consistent folder structure across your projects will help keep things organized, and will also make it easy find/file things in the future. This can be especially helpful when you have multiple projects. In general, you may create directories (folders) for <strong>scripts</strong>, <strong>data</strong>, and <strong>documents</strong>.</p>
 <ul>
 <li><strong><code>data/</code></strong> Use this folder to store your raw data and intermediate datasets you may create for the need of a particular analysis. For the sake of transparency and <a href="https://en.wikipedia.org/wiki/Provenance">provenance</a>, you should <em>always</em> keep a copy of your raw data accessible and do as much of your data cleanup and preprocessing programmatically (i.e. with scripts, rather than manually) as possible. Separating raw data from processed data is also a good idea. For example, you could have files <code>data/raw/tree_survey.plot1.txt</code> and <code>...plot2.txt</code> kept separate from a <code>data/processed/tree.survey.csv</code> file generated by the <code>scripts/01.preprocess.tree_survey.R</code> script.</li>
@@ -267,8 +268,8 @@ $(document).ready(function () {
 </div>
 </div>
 </div>
-<div id="interacting-with-r" class="section level1">
-<h1>Interacting with R</h1>
+<div id="interacting-with-r" class="section level2">
+<h2>Interacting with R</h2>
 <p>While you can type R commands directly at the <code>&gt;</code> prompt in the R console, I recommend typing your commands into a script, which you’ll save for later reference, and then executing the commands from there.</p>
 <p>Start by typing the following into the R script in the top-left pane.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># R intro</span>
@@ -277,9 +278,10 @@ $(document).ready(function () {
 <p>Save the file clicking the computer disk icon, or by typing <kbd><code>Ctrl</code></kbd> + <kbd><code>S</code></kbd>.</p>
 <p>Now place the cursor on the line with <code>2016 - 1969</code> and type <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd>. The command will be copied to the R console and executed, and then the cursor will move to the next line.</p>
 <p>You can also highlight a bunch of code and execute the block all at once with <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd>.</p>
-<div id="commenting" class="section level2">
-<h2>Commenting</h2>
+<div id="commenting" class="section level3">
+<h3>Commenting</h3>
 <p>Use <code>#</code> signs to comment. Anything to the right of a <code>#</code> is ignored by R, meaning it won’t be executed. Comments are a great way to describe what your code does within the code itself, so comment liberally in your R scripts.</p>
+</div>
 </div>
 <div id="seeking-help" class="section level2">
 <h2>Seeking help</h2>
@@ -360,7 +362,6 @@ $(document).ready(function () {
 <li><a href="http://blog.revolutionanalytics.com/2014/01/how-to-ask-for-r-help.html">How to ask for R help</a> useful guidelines</li>
 <li><a href="http://codeblog.jonskeet.uk/2010/08/29/writing-the-perfect-question/">This blog post by Jon Skeet</a> has quite comprehensive advice on how to ask programming questions.</li>
 </ul>
-</div>
 </div>
 </div>
 
