@@ -23,6 +23,7 @@ Add-on package dplyr greatly simplifies the process; inspired by SQL.
 
 ```{r eval=FALSE}
 install.packages("dplyr")
+install.packages("ggplot2")
 ```
 
 ```{r}

@@ -27,12 +27,20 @@ should to import it in every subsequent R session when you'll need it.
 install.packages("dplyr")
 ```
 
+While we're installing stuff, let's also install the ggplot2 package,
+which we'll use next.
+
+```{r, eval = FALSE}
+install.packages("ggplot2")
+```
+
+
 You might get asked to choose a CRAN mirror -- this is basically asking you to
 choose a site to download the package from. The choice doesn't matter too much;
 we recommend the RStudio mirror.
 
 ```{r, message = FALSE}
-library("dplyr")    ## load the package
+library(dplyr)    ## load the package
 ```
 
 ## What is `dplyr`?
@@ -256,5 +264,39 @@ What was the heaviest animal measured in each year? Return the columns `year`,
 `genus`, `species`, and `weight`.
 
 <!-- end challenge -->
+
+### A bit of data cleaning
+
+In preparations for the plotting, let's do a bit of data cleaning:
+remove rows with missing `species_id`, `weight`, `hindfoot_length`, or
+`sex`.
+
+```{r clean_data_1}
+surveys_complete <- surveys %>%
+    filter(species_id != "", !is.na(weight)) %>%
+    filter(!is.na(hindfoot_length), sex != "")
+```
+
+There are a lot of species with low counts. Let's remove the species
+with less than 10 counts.
+
+```{r}
+# count records per species
+species_counts <- surveys_complete %>%
+    group_by(species_id) %>%
+    tally
+
+head(species_counts)
+
+# get names of the species with counts >= 10
+frequent_species <-  species_counts %>%
+    filter(n >= 10) %>%
+    select(species_id)
+
+# filter out the less-frequent species
+surveys_complete <- surveys_complete %>%
+    filter(species_id %in% frequent_species$species$id)
+```
+
 
 [Handy dplyr cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
