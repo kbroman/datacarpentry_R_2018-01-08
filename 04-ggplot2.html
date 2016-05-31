@@ -148,7 +148,6 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#data-cleaning-and-preparing-for-plotting">Data cleaning and preparing for plotting</a></li>
 <li><a href="#plotting-with-ggplot2">Plotting with ggplot2</a></li>
 <li><a href="#modifying-plots">Modifying plots</a></li>
 <li><a href="#boxplot">Boxplot</a></li>
@@ -168,12 +167,8 @@ $(document).ready(function () {
 <li>Building step by step complex plots with the ggplot2 package</li>
 </ul>
 </blockquote>
-<p>Load required packages</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plotting package</span>
-<span class="kw">library</span>(ggplot2)
-<span class="co"># piping / chaining</span>
-<span class="kw">library</span>(magrittr)
-<span class="co"># modern dataframe manipulations</span>
+<p>Load the dplyr and ggplot2 packages</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(dplyr)</code></pre></div>
 <pre><code>#&gt; 
 #&gt; Attaching package: &#39;dplyr&#39;</code></pre>
@@ -183,41 +178,6 @@ $(document).ready(function () {
 <pre><code>#&gt; The following objects are masked from &#39;package:base&#39;:
 #&gt; 
 #&gt;     intersect, setdiff, setequal, union</code></pre>
-<p>Load data directly from figshare.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_raw &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://ndownloader.figshare.com/files/2292172&quot;</span>)</code></pre></div>
-<p><code>surveys.csv</code> data contains some measurements of the animals caught in plots.</p>
-</div>
-<div id="data-cleaning-and-preparing-for-plotting" class="section level2">
-<h2>Data cleaning and preparing for plotting</h2>
-<p>Let’s look at the summary</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(surveys_raw)</code></pre></div>
-<p>There are few things we need to clean in the dataset.</p>
-<p>There are missing values for species_id in some records. Let’s remove those.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_complete &lt;-<span class="st"> </span>surveys_raw %&gt;%
-<span class="st">                    </span><span class="kw">filter</span>(species_id !=<span class="st"> &quot;&quot;</span>)</code></pre></div>
-<p>We saw in summary, there were NA’s in weight and hindfoot_length. Let’s remove rows with missing values in weight and hindfoot_length. In fact, let’s combine this with removing empty species_id, so we have one command and don’t make lots of intermediate variable names. This is where piping becomes really handy!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_complete &lt;-<span class="st"> </span>surveys_raw %&gt;%
-<span class="st">                    </span><span class="kw">filter</span>(species_id !=<span class="st"> &quot;&quot;</span>) %&gt;%<span class="st">        </span><span class="co"># remove missing species_id</span>
-<span class="st">                    </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(weight)) %&gt;%<span class="st">          </span><span class="co"># remove missing weight</span>
-<span class="st">                    </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(hindfoot_length))     <span class="co"># remove missing hindfoot_length</span></code></pre></div>
-<p>There are a lot of species with low counts, let’s remove the species with less than 10 counts.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># count records per species</span>
-species_counts &lt;-<span class="st"> </span>surveys_complete %&gt;%
-<span class="st">                  </span><span class="kw">group_by</span>(species_id) %&gt;%
-<span class="st">                  </span>tally
-
-<span class="kw">head</span>(species_counts)
-
-<span class="co"># get names of those frequent species</span>
-frequent_species &lt;-<span class="st"> </span>species_counts %&gt;%
-<span class="st">                    </span><span class="kw">filter</span>(n &gt;=<span class="st"> </span><span class="dv">10</span>) %&gt;%
-<span class="st">                    </span><span class="kw">select</span>(species_id)
-
-surveys_complete &lt;-<span class="st"> </span>surveys_complete %&gt;%
-<span class="st">           </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span>frequent_species$species_id)</code></pre></div>
-<p>Make simple scatter plot of <code>hindfoot_length</code> (in millimeters) as a function of <code>weight</code> (in grams), using basic R plotting capabilities.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dt">x =</span> surveys_complete$weight, <span class="dt">y =</span> surveys_complete$hindfoot_length)</code></pre></div>
-<p><img src="img/R-ecology-base-plot-1.png" width="672" /></p>
 </div>
 <div id="plotting-with-ggplot2" class="section level2">
 <h2>Plotting with ggplot2</h2>

@@ -46,7 +46,7 @@ frequent_species <-  species_counts %>%
     filter(n >= 10) %>%
     select(species_id)
 surveys_complete <- surveys_complete %>%
-    filter(species_id %in% frequent_species$species$id)
+    filter(species_id %in% frequent_species$species_id)
 ```
 
 ## Plotting with ggplot2

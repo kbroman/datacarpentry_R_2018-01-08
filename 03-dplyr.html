@@ -161,6 +161,7 @@ $(document).ready(function () {
 <li><a href="#challenge-2">Challenge</a></li>
 <li><a href="#challenge-3">Challenge</a></li>
 <li><a href="#challenge-4">Challenge</a></li>
+<li><a href="#a-bit-of-data-cleaning">A bit of data cleaning</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -284,6 +285,29 @@ $(document).ready(function () {
 <h3>Challenge</h3>
 <p>What was the heaviest animal measured in each year? Return the columns <code>year</code>, <code>genus</code>, <code>species</code>, and <code>weight</code>.</p>
 <!-- end challenge -->
+</div>
+<div id="a-bit-of-data-cleaning" class="section level3">
+<h3>A bit of data cleaning</h3>
+<p>In preparations for the plotting, let’s do a bit of data cleaning: remove rows with missing <code>species_id</code>, <code>weight</code>, <code>hindfoot_length</code>, or <code>sex</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_complete &lt;-<span class="st"> </span>surveys %&gt;%
+<span class="st">    </span><span class="kw">filter</span>(species_id !=<span class="st"> &quot;&quot;</span>, !<span class="kw">is.na</span>(weight)) %&gt;%
+<span class="st">    </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(hindfoot_length), sex !=<span class="st"> &quot;&quot;</span>)</code></pre></div>
+<p>There are a lot of species with low counts. Let’s remove the species with less than 10 counts.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># count records per species</span>
+species_counts &lt;-<span class="st"> </span>surveys_complete %&gt;%
+<span class="st">    </span><span class="kw">group_by</span>(species_id) %&gt;%
+<span class="st">    </span>tally
+
+<span class="kw">head</span>(species_counts)
+
+<span class="co"># get names of the species with counts &gt;= 10</span>
+frequent_species &lt;-<span class="st">  </span>species_counts %&gt;%
+<span class="st">    </span><span class="kw">filter</span>(n &gt;=<span class="st"> </span><span class="dv">10</span>) %&gt;%
+<span class="st">    </span><span class="kw">select</span>(species_id)
+
+<span class="co"># filter out the less-frequent species</span>
+surveys_complete &lt;-<span class="st"> </span>surveys_complete %&gt;%
+<span class="st">    </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span>frequent_species$species_id)</code></pre></div>
 <p><a href="http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Handy dplyr cheatsheet</a></p>
 </div>
 </div>

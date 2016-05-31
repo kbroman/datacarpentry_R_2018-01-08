@@ -295,7 +295,7 @@ frequent_species <-  species_counts %>%
 
 # filter out the less-frequent species
 surveys_complete <- surveys_complete %>%
-    filter(species_id %in% frequent_species$species$id)
+    filter(species_id %in% frequent_species$species_id)
 ```
 
 
