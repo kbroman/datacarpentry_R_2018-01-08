@@ -26,9 +26,9 @@ x <- c(1, 2, 3, 'a')
 
 y <- c(1, 2, 3, TRUE)
 
-z <- c('a', 'b', 'c', TRUE)
+z <- c('a', TRUE, 'b', 'c')
 
-tricky <- c(1, 2, 3, '4')
+tricky <- c(1, '2', 3, 4)
 ```
 
 Hint: use `class()`
@@ -38,6 +38,56 @@ Hint: use `class()`
 
 # Challenge 3
 
+
+Consider the `animals` vector.
+
+```{r eval=FALSE}
+animals <- c("mouse", "rat", "dog", "cat")
+```
+
+Subset to get the 2nd and 3rd values.
+
+
+### Conditional subsetting
+
+Another common way of subsetting is by using a logical vector: `TRUE` will
+select the element with the same index, while `FALSE` will not:
+
+```{r, results='show', purl=FALSE}
+weights <- c(21, 54, 39, 17, 55)
+weights[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
+```
+
+Typically, these logical vectors are not typed by hand, but are the output of
+other functions or logical tests. For instance, if you wanted to select only the
+values above 50:
+
+```{r, results='show', purl=FALSE}
+weights > 50    # will return logicals with TRUE for the indices that meet the condition
+## so we can use this to select only the values above 50
+weights[weights > 50]
+```
+
+You can combine multiple tests using `&` (both conditions are true, AND) or `|`
+(at least one of the conditions is true, OR):
+
+```{r, results='show', purl=FALSE}
+weights[weights < 30 | weights > 50]
+weights[weights > 30 & weights < 50]
+```
+
+When working with vectors of characters, if you are trying to combine many
+conditions it can become tedious to type. The function `%in%` allows you to test
+if a value if found in a vector:
+
+```{r, results='show', purl=FALSE}
+animals <- c("mouse", "rat", "dog", "cat")
+animals[animals == "cat" | animals == "rat"] # returns both rat and cat
+animals %in% c("rat", "cat", "dog", "duck")
+animals[animals %in% c("rat", "cat", "dog", "duck")]
+```
+
+### Challenge
 
 Consider the following two vectors.
 

@@ -161,6 +161,14 @@ $(document).ready(function () {
 <li><a href="#add-to-a-vector">Add to a vector</a></li>
 <li><a href="#challenge-1">Challenge</a></li>
 </ul></li>
+<li><a href="#subsetting-vectors">Subsetting vectors</a><ul>
+<li><a href="#challenge-2">Challenge</a></li>
+<li><a href="#conditional-subsetting">Conditional subsetting</a></li>
+<li><a href="#challenge-3">Challenge</a></li>
+</ul></li>
+<li><a href="#missing-data">Missing data</a><ul>
+<li><a href="#challenge-4">Challenge</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -232,6 +240,71 @@ y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</sp
 z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)
 
 tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)</code></pre></div>
+</div>
+</div>
+<div id="subsetting-vectors" class="section level2">
+<h2>Subsetting vectors</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
+animals[<span class="dv">2</span>]
+animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">more_animals &lt;-<span class="st"> </span>animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
+<div id="challenge-2" class="section level3">
+<h3>Challenge</h3>
+<p>Consider the <code>animals</code> vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
+<p>Subset to get the 2nd and 3rd values.</p>
+</div>
+<div id="conditional-subsetting" class="section level3">
+<h3>Conditional subsetting</h3>
+<p>Subsetting with a logical vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">54</span>, <span class="dv">39</span>, <span class="dv">17</span>, <span class="dv">55</span>)
+weights[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</code></pre></div>
+<pre><code>## [1] 54 55</code></pre>
+<p>Creating a logical vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## so we can use this to select only the values above 50
+weights[weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+<pre><code>## [1] 54 55</code></pre>
+<p>Using <code>&amp;</code> and <code>|</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+<pre><code>## [1] 21 54 17 55</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &gt;<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>weights &lt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+<pre><code>## [1] 39</code></pre>
+<p>Using <code>%in%</code> with character strings.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
+animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </span>animals ==<span class="st"> &quot;rat&quot;</span>] <span class="co"># returns both rat and cat</span></code></pre></div>
+<pre><code>## [1] &quot;rat&quot; &quot;cat&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)</code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)]</code></pre></div>
+<pre><code>## [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
+</div>
+<div id="challenge-3" class="section level3">
+<h3>Challenge</h3>
+<p>Consider the following two vectors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
+weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">180</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
+<p>Subset <code>animals</code> with <code>weights &lt; 200</code>.</p>
+</div>
+</div>
+<div id="missing-data" class="section level2">
+<h2>Missing data</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">6</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(heights)
+<span class="kw">max</span>(heights)
+<span class="kw">mean</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+<span class="kw">max</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Extract those elements which are not missing values.
+heights[!<span class="kw">is.na</span>(heights)]
+## shortcut to that
+<span class="kw">na.omit</span>(heights)</code></pre></div>
+<div id="challenge-4" class="section level3">
+<h3>Challenge</h3>
+<p>Why does the following give an error?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)
+<span class="kw">mean</span>(v, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>Why does the error message say the data are not numeric?</p>
 <p><br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/></p>
 </div>
 </div>

@@ -159,11 +159,12 @@ $(document).ready(function () {
 <li><a href="#challenge-1">Challenge</a></li>
 </ul></li>
 <li><a href="#subsetting-vectors">Subsetting vectors</a><ul>
-<li><a href="#conditional-subsetting">Conditional subsetting</a></li>
 <li><a href="#challenge-2">Challenge</a></li>
+<li><a href="#conditional-subsetting">Conditional subsetting</a></li>
+<li><a href="#challenge-3">Challenge</a></li>
 </ul></li>
 <li><a href="#missing-data">Missing data</a><ul>
-<li><a href="#challenge-3">Challenge</a></li>
+<li><a href="#challenge-4">Challenge</a></li>
 </ul></li>
 </ul>
 </div>
@@ -240,7 +241,7 @@ animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 <ul>
 <li><code>&quot;logical&quot;</code> for <code>TRUE</code> and <code>FALSE</code> (the boolean data type)</li>
 <li><code>&quot;integer&quot;</code> for integer numbers (e.g., <code>2L</code>, the <code>L</code> indicates to R that it’s an integer)</li>
-<li><code>&quot;complex&quot;</code> to represent complex numbers with real and imaginary parts (e.g., <code>1+4i</code>) and that’s all we’re going to say about them</li>
+<li><code>&quot;complex&quot;</code> to represent complex numbers (e.g. <code>1+4i</code>)</li>
 <li><code>&quot;raw&quot;</code> that we won’t discuss further</li>
 </ul>
 <p>Vectors are one of the many <strong>data structures</strong> that R uses. Other important ones are lists (<code>list</code>), matrices (<code>matrix</code>), data frames (<code>data.frame</code>) and factors (<code>factor</code>).</p>
@@ -251,9 +252,9 @@ animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)
 
-z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)
+z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="ot">TRUE</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>)
 
-tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)</code></pre></div>
+tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="st">&#39;2&#39;</span>, <span class="dv">3</span>, <span class="dv">4</span>)</code></pre></div>
 <p>Hint: use <code>class()</code></p>
 <!-- end challenge -->
 <p>Vectors must all be of one type, and so R converts them.</p>
@@ -266,30 +267,34 @@ tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
 animals[<span class="dv">2</span>]</code></pre></div>
 <pre><code>#&gt; [1] &quot;rat&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)]</code></pre></div>
-<pre><code>#&gt; [1] &quot;dog&quot; &quot;rat&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
+<pre><code>#&gt; [1] &quot;mouse&quot; &quot;cat&quot;</code></pre>
 <p>We can also repeat the indices to create an object with more elements than the original one:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">more_animals &lt;-<span class="st"> </span>animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)]
-more_animals</code></pre></div>
-<pre><code>#&gt; [1] &quot;mouse&quot; &quot;rat&quot;   &quot;dog&quot;   &quot;rat&quot;   &quot;mouse&quot; &quot;cat&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">more_animals &lt;-<span class="st"> </span>animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
 <p>R indexes start at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, because that’s what human beings typically do. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that’s simpler for computers to do.</p>
+<div id="challenge-2" class="section level3">
+<h3>Challenge</h3>
+<p>Consider the <code>animals</code> vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
+<p>Subset to get the 2nd and 3rd values.</p>
+</div>
 <div id="conditional-subsetting" class="section level3">
 <h3>Conditional subsetting</h3>
 <p>Another common way of subsetting is by using a logical vector: <code>TRUE</code> will select the element with the same index, while <code>FALSE</code> will not:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">39</span>, <span class="dv">54</span>, <span class="dv">55</span>)
-weights[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</code></pre></div>
-<pre><code>#&gt; [1] 21 39 54</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">54</span>, <span class="dv">39</span>, <span class="dv">17</span>, <span class="dv">55</span>)
+weights[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</code></pre></div>
+<pre><code>#&gt; [1] 54 55</code></pre>
 <p>Typically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 50:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
-<pre><code>#&gt; [1] FALSE FALSE FALSE  TRUE  TRUE</code></pre>
+<pre><code>#&gt; [1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## so we can use this to select only the values above 50
 weights[weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
 <pre><code>#&gt; [1] 54 55</code></pre>
 <p>You can combine multiple tests using <code>&amp;</code> (both conditions are true, AND) or <code>|</code> (at least one of the conditions is true, OR):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>#&gt; [1] 21 54 55</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &gt;=<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>weights ==<span class="st"> </span><span class="dv">21</span>]</code></pre></div>
-<pre><code>#&gt; numeric(0)</code></pre>
+<pre><code>#&gt; [1] 21 54 17 55</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &gt;<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>weights &lt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+<pre><code>#&gt; [1] 39</code></pre>
 <p>When working with vectors of characters, if you are trying to combine many conditions it can become tedious to type. The function <code>%in%</code> allows you to test if a value if found in a vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
 animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </span>animals ==<span class="st"> &quot;rat&quot;</span>] <span class="co"># returns both rat and cat</span></code></pre></div>
@@ -299,7 +304,7 @@ animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)]</code></pre></div>
 <pre><code>#&gt; [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
 </div>
-<div id="challenge-2" class="section level3">
+<div id="challenge-3" class="section level3">
 <h3>Challenge</h3>
 <p>Consider the following two vectors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
@@ -311,24 +316,18 @@ weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv"
 <div id="missing-data" class="section level2">
 <h2>Missing data</h2>
 <p>As R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as <code>NA</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">planets &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mercury&quot;</span>, <span class="st">&quot;Venus&quot;</span>, <span class="st">&quot;Earth&quot;</span>, <span class="st">&quot;Mars&quot;</span>, <span class="st">&quot;Jupiter&quot;</span>, <span class="st">&quot;Saturn&quot;</span>, <span class="st">&quot;Uranus&quot;</span>,
-             <span class="st">&quot;Neptune&quot;</span>, <span class="ot">NA</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">6</span>)</code></pre></div>
 <p>When doing operations on numbers, most functions will return <code>NA</code> if the data you are working with include missing values. It is a safer behavior as otherwise you may overlook that you are dealing with missing data. You can add the argument <code>na.rm=TRUE</code> to calculate the result while ignoring the missing values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">6</span>)
-<span class="kw">mean</span>(heights)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(heights)
 <span class="kw">max</span>(heights)
 <span class="kw">mean</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
 <span class="kw">max</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>If your data include missing values, you may want to become familiar with the functions <code>is.na()</code>, <code>na.omit()</code>, and <code>complete.cases()</code>. See below for examples.</p>
+<p>If your data include missing values, you may want to become familiar with the functions <code>is.na()</code> and <code>na.omit()</code>. examples.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Extract those elements which are not missing values.
 heights[!<span class="kw">is.na</span>(heights)]
-
-## Returns the object with incomplete cases removed. The returned object is atomic.
-<span class="kw">na.omit</span>(heights)
-
-## Extract those elements which are complete cases.
-heights[<span class="kw">complete.cases</span>(heights)]</code></pre></div>
-<div id="challenge-3" class="section level3">
+## shortcut to that
+<span class="kw">na.omit</span>(heights)</code></pre></div>
+<div id="challenge-4" class="section level3">
 <h3>Challenge</h3>
 <p>Why does the following give an error?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)

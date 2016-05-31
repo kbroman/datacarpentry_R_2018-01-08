@@ -175,8 +175,7 @@ from. The other 4 are:
 
 * `"logical"` for `TRUE` and `FALSE` (the boolean data type)
 * `"integer"` for integer numbers (e.g., `2L`, the `L` indicates to R that it's an integer)
-* `"complex"` to represent complex numbers with real and imaginary parts (e.g.,
-  `1+4i`) and that's all we're going to say about them
+* `"complex"` to represent complex numbers (e.g. `1+4i`)
 * `"raw"` that we won't discuss further
 
 Vectors are one of the many **data structures** that R uses. Other important
@@ -193,9 +192,9 @@ x <- c(1, 2, 3, 'a')
 
 y <- c(1, 2, 3, TRUE)
 
-z <- c('a', 'b', 'c', TRUE)
+z <- c('a', TRUE, 'b', 'c')
 
-tricky <- c(1, 2, 3, '4')
+tricky <- c(1, '2', 3, 4)
 ```
 
 Hint: use `class()`
@@ -215,7 +214,7 @@ or several indices in square brackets. For instance:
 ```{r, results='show', purl=FALSE}
 animals <- c("mouse", "rat", "dog", "cat")
 animals[2]
-animals[c(3, 2)]
+animals[c(1, 4)]
 ```
 
 We can also repeat the indices to create an object with more elements than the
@@ -223,7 +222,6 @@ original one:
 
 ```{r, results='show', purl=FALSE}
 more_animals <- animals[c(1, 2, 3, 2, 1, 4)]
-more_animals
 ```
 
 R indexes start at 1. Programming languages like Fortran, MATLAB, and R start
@@ -231,14 +229,25 @@ counting at 1, because that's what human beings typically do. Languages in the C
 family (including C++, Java, Perl, and Python) count from 0 because that's
 simpler for computers to do.
 
+### Challenge
+
+Consider the `animals` vector.
+
+```{r eval=FALSE}
+animals <- c("mouse", "rat", "dog", "cat")
+```
+
+Subset to get the 2nd and 3rd values.
+
+
 ### Conditional subsetting
 
 Another common way of subsetting is by using a logical vector: `TRUE` will
 select the element with the same index, while `FALSE` will not:
 
 ```{r, results='show', purl=FALSE}
-weights <- c(21, 34, 39, 54, 55)
-weights[c(TRUE, FALSE, TRUE, TRUE, FALSE)]
+weights <- c(21, 54, 39, 17, 55)
+weights[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
 ```
 
 Typically, these logical vectors are not typed by hand, but are the output of
@@ -256,7 +265,7 @@ You can combine multiple tests using `&` (both conditions are true, AND) or `|`
 
 ```{r, results='show', purl=FALSE}
 weights[weights < 30 | weights > 50]
-weights[weights >= 30 & weights == 21]
+weights[weights > 30 & weights < 50]
 ```
 
 When working with vectors of characters, if you are trying to combine many
@@ -292,8 +301,7 @@ As R was designed to analyze datasets, it includes the concept of missing data
 in vectors as `NA`.
 
 ```{r, purl=FALSE}
-planets <- c("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus",
-             "Neptune", NA)
+heights <- c(2, 4, 4, NA, 6)
 ```
 
 When doing operations on numbers, most functions will return `NA` if the data
@@ -302,7 +310,6 @@ you may overlook that you are dealing with missing data. You can add the
 argument `na.rm=TRUE` to calculate the result while ignoring the missing values.
 
 ```{r, purl=FALSE}
-heights <- c(2, 4, 4, NA, 6)
 mean(heights)
 max(heights)
 mean(heights, na.rm = TRUE)
@@ -310,19 +317,15 @@ max(heights, na.rm = TRUE)
 ```
 
 If your data include missing values, you may want to become familiar with the
-functions `is.na()`, `na.omit()`, and `complete.cases()`. See below for
+functions `is.na()` and `na.omit()`.
 examples.
 
 
 ```{r, purl=FALSE}
 ## Extract those elements which are not missing values.
 heights[!is.na(heights)]
-
-## Returns the object with incomplete cases removed. The returned object is atomic.
+## shortcut to that
 na.omit(heights)
-
-## Extract those elements which are complete cases.
-heights[complete.cases(heights)]
 ```
 
 
