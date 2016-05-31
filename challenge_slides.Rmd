@@ -78,3 +78,22 @@ mean(v, na.rm=TRUE)
 Why does the error message say the data are not numeric?
 
 
+
+# Capstone project
+
+Create and compile an R Markdown report:
+
+1. Load the `combined.csv` data.
+
+2. Create boxplots of weight by sex, _omitting individuals with
+missing sex_.
+
+3. Create a histogram of hindfoot lengths.
+
+4. Create a scatterplot of hindfoot length vs weight for the species
+`"DM"`, `"DO"`, and `"DS"`. _Use different colors for the three
+species, and put the three species in different panels._
+
+5. Create a table of counts of `"DM"` by plot type for the year 1977.
+
+6. Create a line plot of the counts of `"DM"` in `"Rodent Exclosure"` plots over time.

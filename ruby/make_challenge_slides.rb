@@ -2,6 +2,7 @@
 # grab the challenges from the .Rmd files and make slides
 
 files = ["01-intro-to-R.Rmd"]
+capfile = "capstone_slide.Rmd"
 ofile = "challenge_slides.Rmd"
 
 output = []
@@ -37,4 +38,11 @@ output.each do |ochunk|
     ofp.write(ochunk)
     ofp.write("\n")
     challenge += 1
+end
+
+# paste the capstone slide at the end
+ifp = File.open(capfile)
+1.upto(3) { |i| ifp.readline() } # skip 3 lines
+ifp.each do |line|
+    ofp.write(line)
 end
