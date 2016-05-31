@@ -156,6 +156,17 @@ $(document).ready(function () {
 <li><a href="#factors">Factors</a><ul>
 <li><a href="#challenge-1">Challenge</a></li>
 </ul></li>
+<li><a href="#section"><br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/></a></li>
+<li><a href="#stringsasfactors">stringsAsFactors</a></li>
+<li><a href="#constructing-data-frames-by-hand">Constructing data frames “by hand”</a><ul>
+<li><a href="#challenge-2">Challenge</a></li>
+</ul></li>
+<li><a href="#inspecting-data-frames">Inspecting data frames</a></li>
+<li><a href="#indexing-sequences-subsetting">Indexing, sequences, subsetting</a><ul>
+<li><a href="#treating-blanks-as-missing">Treating blanks as missing</a></li>
+<li><a href="#slices">Slices</a></li>
+<li><a href="#challenge-3">Challenge</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -212,6 +223,102 @@ table(expt)</code></pre>
 <li>In which order are the treatments listed?</li>
 <li>How can you recreate this table with “control” listed last instead of first?</li>
 </ul>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2><br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/></h2>
+<p>layout: topic title: Data frames (notes) author: Data Carpentry contributors minutes: 30 —</p>
+</div>
+<div id="stringsasfactors" class="section level2">
+<h2>stringsAsFactors</h2>
+<p>Avoid factors with <code>stringsAsFactors=FALSE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_chr &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys_chr)</code></pre></div>
+</div>
+<div id="constructing-data-frames-by-hand" class="section level2">
+<h2>Constructing data frames “by hand”</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
+                  <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
+                  <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>))
+<span class="kw">str</span>(df1)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
+##  $ animal: Factor w/ 4 levels &quot;cat&quot;,&quot;dog&quot;,&quot;sea cucumber&quot;,..: 2 1 3 4
+##  $ feel  : Factor w/ 3 levels &quot;furry&quot;,&quot;spiny&quot;,..: 1 1 3 2
+##  $ weight: num  45 8 1.1 0.8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
+                  <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
+                  <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+<span class="kw">str</span>(df2)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
+##  $ animal: chr  &quot;dog&quot; &quot;cat&quot; &quot;sea cucumber&quot; &quot;sea urchin&quot;
+##  $ feel  : chr  &quot;furry&quot; &quot;furry&quot; &quot;squishy&quot; &quot;spiny&quot;
+##  $ weight: num  45 8 1.1 0.8</code></pre>
+<div id="challenge-2" class="section level3">
+<h3>Challenge</h3>
+<p>There are a few mistakes in this hand crafted <code>data.frame</code>, can you spot and fix them? Don’t hesitate to experiment!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">author_book &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">author_first=</span><span class="kw">c</span>(<span class="st">&quot;Charles&quot;</span>, <span class="st">&quot;Ernst&quot;</span>, <span class="st">&quot;Theodosius&quot;</span>),
+                          <span class="dt">author_last=</span><span class="kw">c</span>(Darwin, Mayr, Dobzhansky),
+                          <span class="dt">year=</span><span class="kw">c</span>(<span class="dv">1942</span>, <span class="dv">1970</span>))</code></pre></div>
+<!-- end challenge -->
+</div>
+</div>
+<div id="inspecting-data-frames" class="section level2">
+<h2>Inspecting data frames</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(surveys)
+<span class="kw">nrow</span>(surveys)
+<span class="kw">ncol</span>(surveys)
+
+<span class="kw">names</span>(surveys)
+<span class="kw">rownames</span>(surveys)
+
+<span class="kw">summary</span>(surveys)</code></pre></div>
+</div>
+<div id="indexing-sequences-subsetting" class="section level2">
+<h2>Indexing, sequences, subsetting</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="dv">1</span>,<span class="dv">1</span>]
+
+surveys[<span class="dv">2</span>,<span class="dv">7</span>]
+
+surveys[<span class="dv">2</span>,]
+
+sex &lt;-<span class="st"> </span>surveys[,<span class="dv">7</span>]</code></pre></div>
+<p>Referring to columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">species_id &lt;-<span class="st"> </span>surveys[, <span class="st">&quot;sex&quot;</span>]
+species_id &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</span>]]
+species_id &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
+<div id="treating-blanks-as-missing" class="section level3">
+<h3>Treating blanks as missing</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</code></pre></div>
+</div>
+<div id="slices" class="section level3">
+<h3>Slices</h3>
+<p>As with vectors, you can also use logical vectors when indexing.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights_males &lt;-<span class="st"> </span>surveys[surveys$sex ==<span class="st"> &#39;M&#39;</span>, <span class="st">&quot;weight&quot;</span>]
+<span class="kw">mean</span>(weights_males, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="kw">mean</span>(surveys[surveys$sex ==<span class="st"> &#39;F&#39;</span>, <span class="st">&quot;weight&quot;</span>], <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>Or you can use numeric vectors. To pull out larger slices, it’s helpful to have ways of creating sequences of numbers.</p>
+<p>First, <code>:</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>:<span class="dv">10</span>
+<span class="dv">10</span>:<span class="dv">1</span>
+<span class="dv">5</span>:<span class="dv">8</span></code></pre></div>
+<p><code>seq</code> is more flexible.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by=</span><span class="dv">2</span>)
+<span class="kw">seq</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dt">length.out=</span><span class="dv">3</span>)
+<span class="kw">seq</span>(<span class="dv">50</span>, <span class="dt">by=</span><span class="dv">5</span>, <span class="dt">length.out=</span><span class="dv">10</span>)
+<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">8</span>, <span class="dt">by=</span><span class="dv">3</span>) <span class="co"># sequence stops to stay below upper limit</span>
+<span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">2</span>, <span class="dt">by=</span>-<span class="dv">2</span>)  <span class="co"># can also go backwards</span></code></pre></div>
+<p>Use these to take slices of the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="dv">1</span>:<span class="dv">3</span>, <span class="dv">7</span>]   <span class="co"># first three elements in the 7th column</span>
+surveys[<span class="dv">1</span>, <span class="dv">1</span>:<span class="dv">3</span>]   <span class="co"># first three columns in the first row</span>
+surveys[<span class="dv">2</span>:<span class="dv">4</span>, <span class="dv">6</span>:<span class="dv">7</span>] <span class="co"># rows 2-4, columns 6-7</span></code></pre></div>
+</div>
+<div id="challenge-3" class="section level3">
+<h3>Challenge</h3>
+<ol style="list-style-type: decimal">
+<li><p>The function <code>nrow()</code> on a <code>data.frame</code> returns the number of rows. Use it, in conjuction with <code>seq()</code> to create a new <code>data.frame</code> called <code>surveys_by_10</code> that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)</p></li>
+<li><p>Create a <code>data.frame</code> containing only the observations from 1999 of the <code>surveys</code> dataset.</p></li>
+</ol>
 <p><br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/></p>
 </div>
 </div>

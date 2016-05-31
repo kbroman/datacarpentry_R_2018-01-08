@@ -12,7 +12,7 @@
 <meta name="author" content="Data Carpentry contributors" />
 
 
-<title>Before we start (notes)</title>
+<title>Intro to R (notes)</title>
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -143,13 +143,25 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Before we start (notes)</h1>
+<h1 class="title toc-ignore">Intro to R (notes)</h1>
 <h4 class="author"><em>Data Carpentry contributors</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
+<li><a href="#r-and-rstudio">R and RStudio</a><ul>
+<li><a href="#r">R</a></li>
+<li><a href="#rstudio">RStudio</a></li>
+<li><a href="#rstudio-orientation">RStudio orientation</a></li>
+</ul></li>
+<li><a href="#r-as-a-calculator">R as a calculator</a></li>
+<li><a href="#getting-help">Getting help</a></li>
+<li><a href="#need-for-scripts">Need for scripts</a><ul>
+<li><a href="#create-a-new-r-project">Create a new R project</a></li>
+<li><a href="#create-an-r-script">Create an R script</a></li>
+</ul></li>
+<li><a href="#typing-into-the-script-and-pasting-to-console">Typing into the script and pasting to console</a></li>
 <li><a href="#assigment-operator">Assigment operator</a><ul>
 <li><a href="#using-the-stuff-you-assigned">Using the stuff you assigned</a></li>
 <li><a href="#object-names">Object names</a></li>
@@ -172,6 +184,98 @@ $(document).ready(function () {
 </ul>
 </div>
 
+<div id="r-and-rstudio" class="section level2">
+<h2>R and RStudio</h2>
+<div id="r" class="section level3">
+<h3>R</h3>
+<ul>
+<li>Free and open source general statistical programming language</li>
+<li>Broad statistical and graphics functions</li>
+<li>Huge community of add-on packages</li>
+<li>Not just for statistics, but also general purpose programming.</li>
+</ul>
+</div>
+<div id="rstudio" class="section level3">
+<h3>RStudio</h3>
+<ul>
+<li>Integrated Development Environment (IDE) for R</li>
+<li>Separate program, developed by a company but also free and open source.</li>
+<li>By far the best thing to use when learning R.</li>
+</ul>
+</div>
+<div id="rstudio-orientation" class="section level3">
+<h3>RStudio orientation</h3>
+<p>Four panes (can be re-organized, but always these four panes)</p>
+<ul>
+<li>Scripts (top-left)</li>
+<li>R console (bottom-left)</li>
+<li>Environment/history (top-right)</li>
+<li>Files/plots/help/etc (bottom-right)</li>
+</ul>
+</div>
+</div>
+<div id="r-as-a-calculator" class="section level2">
+<h2>R as a calculator</h2>
+<ul>
+<li><code>Ctrl-Shift-2</code> to focus only on the R console.</li>
+<li><p><code>Ctrl-Shift-0</code> to get back.</p></li>
+<li><p>Explain <code>&gt;</code> prompt and do some calculations</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2016</span> -<span class="st"> </span><span class="dv">1969</span></code></pre></div>
+<pre><code>## [1] 47</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span>*<span class="dv">6</span>
+<span class="dv">4</span>/<span class="dv">6</span>
+<span class="dv">4</span>^<span class="dv">6</span>
+<span class="kw">log</span>(<span class="dv">4</span>)
+<span class="kw">log10</span>(<span class="dv">4</span>)
+<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">10</span>)
+<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">6</span>)</code></pre></div>
+<ul>
+<li>Explain that <code>log</code> is a function with two arguments.</li>
+</ul>
+</div>
+<div id="getting-help" class="section level2">
+<h2>Getting help</h2>
+<ul>
+<li>Pause for a moment after typing <code>log</code></li>
+<li>Type <code>?log</code></li>
+</ul>
+</div>
+<div id="need-for-scripts" class="section level2">
+<h2>Need for scripts</h2>
+<ul>
+<li>Want to save what we’re doing</li>
+<li>Really want to organize the scripts and data for a project</li>
+</ul>
+<div id="create-a-new-r-project" class="section level3">
+<h3>Create a new R project</h3>
+<ul>
+<li>File → New Project → New directory → Empty project</li>
+<li>Give it a name, like <code>~/data-carpentry</code></li>
+<li>Under files tab on the bottom right, click “New Folder” and create a folder named <code>data</code></li>
+</ul>
+</div>
+<div id="create-an-r-script" class="section level3">
+<h3>Create an R script</h3>
+<ul>
+<li>File → New File → R script</li>
+<li>Save it in the current working directory, <code>data-carpentry-script.R</code></li>
+</ul>
+</div>
+</div>
+<div id="typing-into-the-script-and-pasting-to-console" class="section level2">
+<h2>Typing into the script and pasting to console</h2>
+<ul>
+<li>Type some stuff into the script</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># R intro</span>
+
+<span class="dv">2016</span> -<span class="st"> </span><span class="dv">1969</span></code></pre></div>
+<ul>
+<li><p>Paste to console with <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd></p></li>
+<li><p>Explain comment sign, <code>#</code></p></li>
+</ul>
+</div>
 <div id="assigment-operator" class="section level2">
 <h2>Assigment operator</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="dv">2016</span> -<span class="st"> </span><span class="dv">1969</span></code></pre></div>

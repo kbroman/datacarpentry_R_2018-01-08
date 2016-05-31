@@ -1,8 +1,8 @@
 ---
 layout: topic
-title: Starting with data
+title: Data and data frames
 author: Data Carpentry contributors
-minutes: 20
+minutes: 50
 ---
 
 ```{r, echo=FALSE, message = FALSE}
@@ -17,6 +17,9 @@ source("setup.R")
 >  (`surveys.csv`) as an example
 > * explore the structure and the content of a data frame in R
 > * understand what factors are and how to manipulate them
+> * understand the concept of a `data.frame`
+> * use sequences
+> * know how to access any element of a `data.frame`
 
 ------------
 
@@ -189,3 +192,190 @@ expt <- factor(expt, levels=c("treat1", "treat2", "treat3", "control"))
 table(expt)
 ```
 --->
+
+## stringsAsFactors
+
+The default when reading in data with `read.csv()`, columns with text
+get turned into factors.
+
+You can avoid this with the argument `stringsAsFactors=FALSE`.
+
+```{r}
+surveys_chr <- read.csv("data/portal_data_joined.csv", stringsAsFactors=FALSE)
+```
+
+Then when you look at the result of `str()`, you'll see that the
+previously factor columns are now `chr`.
+
+```{r}
+str(surveys_chr)
+```
+
+## Constructing data frames "by hand"
+
+You can also create a data frame manually with the function `data.frame()`. This
+function can also take the argument `stringsAsFactors`. Compare the output of
+these examples, and compare the difference between when the data are being read
+as `character`, and when they are being read as `factor`.
+
+```{r, results='show'}
+df1 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
+                  feel=c("furry", "furry", "squishy", "spiny"),
+                  weight=c(45, 8, 1.1, 0.8))
+str(df1)
+
+df2 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
+                  feel=c("furry", "furry", "squishy", "spiny"),
+                  weight=c(45, 8, 1.1, 0.8), stringsAsFactors=FALSE)
+str(df2)
+```
+
+### Challenge
+
+There are a few mistakes in this hand crafted `data.frame`, can you spot and
+fix them? Don't hesitate to experiment!
+
+```{r, eval=FALSE}
+author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
+                          author_last=c(Darwin, Mayr, Dobzhansky),
+                          year=c(1942, 1970))
+```
+
+<!-- end challenge -->
+
+## Inspecting data frames
+
+We already saw how the functions `head()` and `str()` can be useful to check the
+content and the structure of a `data.frame`. Here is a non-exhaustive list of
+functions to get a sense of the content/structure of the data.
+
+* Size:
+    * `dim()` - returns a vector with the number of rows in the first element,
+      and the number of columns as the second element (the __dim__ensions of the
+      object)
+    * `nrow()` - returns the number of rows
+    * `ncol()` - returns the number of columns
+
+* Content:
+    * `head()` - shows the first 6 rows
+    * `tail()` - shows the last 6 rows
+
+* Names:
+    * `names()` - returns the column names (synonym of `colnames()` for `data.frame`
+       objects)
+    * `rownames()` - returns the row names
+
+* Summary:
+    * `str()` - structure of the object and information about the class, length and
+       content of  each column
+    * `summary()` - summary statistics for each column
+
+Note: most of these functions are "generic", they can be used on other types of
+objects besides `data.frame`.
+
+## Indexing, Sequences, and Subsetting
+
+We pulled out parts of a vector by indexing with square brackets. We
+can do the same thing with data frames, but we need to provide two
+values: row and column, with a comma between them.
+
+For example, to get the element in the 1st row, 1st column:
+
+```{r}
+surveys[1,1]
+```
+
+To get the element in the 2nd row, 7th column:
+
+```{r}
+surveys[2,7]
+```
+
+To get the entire 2nd row, leave the column part blank:
+
+```{r}
+surveys[2,]
+```
+
+And to get the entire 7th column, leave the row part blank:
+
+```{r}
+sex <- surveys[,7]
+```
+
+You can also refer to columns by name, in multiple ways.
+
+```{r, eval = FALSE}
+species_id <- surveys[, "species_id"]
+species_id <- surveys[["species_id"]]
+species_id <- surveys$species_id
+```
+
+### Treating blanks as missing
+
+Another aside: it's probably best to treat those blanks as missing
+(`NA`). To do that, use the argument `na.strings` when reading the
+data.
+
+```{r}
+surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings=c("", "NA"))
+```
+
+
+### Slices
+
+As with vectors, you can also use logical vectors when indexing.
+
+```{r}
+weights_males <- surveys[surveys$sex == 'M', "weight"]
+mean(weights_males, na.rm=TRUE)
+
+mean(surveys[surveys$sex == 'F', "weight"], na.rm=TRUE)
+```
+
+Or you can use numeric vectors. To pull out larger slices, it's
+helpful to have ways of creating sequences of numbers.
+
+First, the operator `:` gives you a sequence of consecutive values.
+
+
+```{r}
+1:10
+10:1
+5:8
+```
+
+`seq` is more flexible.
+
+```{r}
+seq(1, 10, by=2)
+seq(5, 10, length.out=3)
+seq(50, by=5, length.out=10)
+seq(1, 8, by=3) # sequence stops to stay below upper limit
+seq(10, 2, by=-2)  # can also go backwards
+```
+
+
+
+
+To get slices of our data frame, we can include a vector for the row
+or column indexes (or both)
+
+```{r}
+surveys[1:3, 7]   # first three elements in the 7th column
+surveys[1, 1:3]   # first three columns in the first row
+surveys[2:4, 6:7] # rows 2-4, columns 6-7
+```
+
+
+### Challenge
+
+1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
+   in conjuction with `seq()` to create a new `data.frame` called
+   `surveys_by_10` that includes every 10th row of the survey data frame
+   starting at row 10 (10, 20, 30, ...)
+
+1. Create a `data.frame` containing only the observations from 1999 of the
+   `surveys` dataset.
+
+<!-- end challenge -->

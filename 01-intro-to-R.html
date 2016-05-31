@@ -12,7 +12,7 @@
 <meta name="author" content="Data Carpentry contributors" />
 
 
-<title>Introduction to R</title>
+<title>Intro to R</title>
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -143,13 +143,25 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introduction to R</h1>
+<h1 class="title toc-ignore">Intro to R</h1>
 <h4 class="author"><em>Data Carpentry contributors</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
+<li><a href="#basics-of-r">Basics of R</a></li>
+<li><a href="#presentation-of-rstudio">Presentation of RStudio</a></li>
+<li><a href="#r-as-a-calculator">R as a calculator</a><ul>
+<li><a href="#getting-help">Getting help</a></li>
+</ul></li>
+<li><a href="#need-for-scripts">Need for Scripts</a></li>
+<li><a href="#creating-an-r-project">Creating an R Project</a><ul>
+<li><a href="#organizing-your-working-directory">Organizing your working directory</a></li>
+</ul></li>
+<li><a href="#interacting-with-r">Interacting with R</a><ul>
+<li><a href="#commenting">Commenting</a></li>
+</ul></li>
 <li><a href="#assignment-operator">Assignment operator</a></li>
 <li><a href="#object-names">Object names</a><ul>
 <li><a href="#challenge">Challenge</a></li>
@@ -173,6 +185,8 @@ $(document).ready(function () {
 <blockquote>
 <h2 id="learning-objectives">Learning Objectives</h2>
 <ul>
+<li>Basics of RStudio</li>
+<li>Organize files and directories related to a particular set of analyses in an R Project within RStudio</li>
 <li>Familiarize participants with R syntax</li>
 <li>Understand the concepts of objects and assignment</li>
 <li>Understand the concepts of vector and data types</li>
@@ -180,6 +194,101 @@ $(document).ready(function () {
 </ul>
 </blockquote>
 <hr />
+<div id="basics-of-r" class="section level2">
+<h2>Basics of R</h2>
+<p>R is a versatile, open source programming/scripting language that’s useful both for statistics but also data science. Inspired by the programming language S.</p>
+<ul>
+<li>Free/Libre/Open Source Software under the GPL.</li>
+<li>Superior (if not just comparable) to commercial alternatives. R has over 7,000 user contributed packages at this time. It’s widely used both in academia and industry.</li>
+<li>Available on all platforms.</li>
+<li>Not just for statistics, but also general purpose programming.</li>
+<li>For people who have experience in programmming: R is both an object-oriented and a so-called <a href="http://adv-r.had.co.nz/Functional-programming.html">functional language</a>.</li>
+<li>Large and growing community of peers.</li>
+</ul>
+</div>
+<div id="presentation-of-rstudio" class="section level2">
+<h2>Presentation of RStudio</h2>
+<p>Let’s start by learning about RStudio, the Integrated Development Environment (IDE) that we will use to write code, navigate the files found on our computer, inspect the variables we are going to create, and visualize the plots we will generate. RStudio can also be used for other things (e.g., version control, developing packages) that we will not cover during the workshop.</p>
+<p>RStudio is divided into 4 “Panes”: the editor for your scripts and documents (top-left), the R console (bottom-left), your environment/history (top-right), and your files/plots/packages/help/viewer (bottom-right). The placement of these panes and their content can be customized.</p>
+</div>
+<div id="r-as-a-calculator" class="section level2">
+<h2>R as a calculator</h2>
+<p>The lower-left pane (the R “console”) is where you can interact with R directly. The <code>&gt;</code> sign is the R “prompt”. It indicates that R is waiting for you to type something.</p>
+<p>You can type <kbd><code>Ctrl</code></kbd> + <kbd><code>Shift</code></kbd> + <kbd><code>2</code></kbd> to focus just on the R console pane. Use <kbd><code>Ctrl</code></kbd> + <kbd><code>Shift</code></kbd> + <kbd><code>0</code></kbd> to get back to the four panes. I use this when teaching but not otherwise.</p>
+<p>Let’s start by subtracting a couple of numbers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2016</span> -<span class="st"> </span><span class="dv">1969</span></code></pre></div>
+<pre><code>## [1] 47</code></pre>
+<p>R does the calculation and prints the result, and then you get the <code>&gt;</code> prompt again. We won’t discuss what that number might mean. (The <code>[1]</code> in the results is a bit weird; you can ignore that for now.)</p>
+<p>You can use R as a calculator in this way.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span>*<span class="dv">6</span>
+<span class="dv">4</span>/<span class="dv">6</span>
+<span class="dv">4</span>^<span class="dv">6</span>
+<span class="kw">log</span>(<span class="dv">4</span>)
+<span class="kw">log10</span>(<span class="dv">4</span>)
+<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">10</span>)
+<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">6</span>)</code></pre></div>
+<p>Here <code>log</code> is a <em>function</em> that gives you the natural logarithm. Much of your calculations in R will be through functions. The value in the parentheses is called the function “argument”. <code>log10</code> is another function, that calculates the log base 10. There can be more than one argument, and some of them may have default values. <code>log</code> has a second argument <code>base</code> whose default (the value if left unspecified) is <em>e</em>.</p>
+<div id="getting-help" class="section level3">
+<h3>Getting help</h3>
+<p>If you type <code>log</code> and pause for a moment, you’ll get a pop-up with information about the function.</p>
+<p>Alternatively, you could type</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?log</code></pre></div>
+<p>and the documentation for the function will show up in the lower-right pane. These are often a bit <em>too</em> detailed, and so they take some practice to read. I generally focus on Usage and Arguments, and then on Examples at the bottom. We’ll talk more about getting help later.</p>
+</div>
+</div>
+<div id="need-for-scripts" class="section level2">
+<h2>Need for Scripts</h2>
+<p>We can go along, typing directly into the R console. But there won’t be an easy way to keep track of what we’ve done.</p>
+<p>It’s best to write R “scripts” (files with R code), and work from them. And when we start creating scripts, we need to worry about how we organize the scripts and data for a project.</p>
+<p>And so let’s pause for a moment and talk about file organization.</p>
+</div>
+<div id="creating-an-r-project" class="section level2">
+<h2>Creating an R Project</h2>
+<p>It is good practice to keep a set of related data, analyses, and text self-contained in a single folder, called the <strong>working directory</strong>. All of the scripts within this folder can then use <em>relative paths</em> to files that indicate where inside the project a file is located (as opposed to absolute paths, which point to where a file is on a specific computer). Working this way makes it a lot easier to move your project around on your computer and share it with others without worrying about whether or not the underlying scripts will still work.</p>
+<p>RStudio provides a helpful set of tools to do this through its “Projects” interface, which not only creates a working directory for you but also remembers its location (allowing you to quickly navigate to it) and optonally preserves custom settings and open files to make it easier to resume work after a break. Below, we will go through the steps for creating an RProject for this tutorial.</p>
+<ul>
+<li>Start RStudio (presentation of RStudio -below- should happen here)</li>
+<li>Under the <code>File</code> menu, click on <code>New project</code>, choose <code>New directory</code>, then <code>Empty project</code></li>
+<li>Enter a name for this new folder (or “directory”, in computer science), and choose a convenient location for it. This will be your <strong>working directory</strong> for the rest of the day (e.g., <code>~/data-carpentry</code>)</li>
+<li>Click on “Create project”</li>
+<li>Under the <code>Files</code> tab on the right of the screen, click on <code>New Folder</code> and create a folder named <code>data</code> within your newly created working directory. (e.g., <code>~/data-carpentry/data</code>)</li>
+<li>Create a new R script (File &gt; New File &gt; R script) and save it in your working directory (e.g. <code>data-carpentry-script.R</code>)</li>
+</ul>
+<p>Your working directory should now look like this:</p>
+<div class="figure">
+<img src="img/r_starting_how_it_should_like.png" alt="How it should look like at the beginning of this lesson" />
+<p class="caption">How it should look like at the beginning of this lesson</p>
+</div>
+<div id="organizing-your-working-directory" class="section level3">
+<h3>Organizing your working directory</h3>
+<p>Using a consistent folder structure across your projects will help keep things organized, and will also make it easy find/file things in the future. This can be especially helpful when you have multiple projects. In general, you may create directories (folders) for <strong>scripts</strong>, <strong>data</strong>, and <strong>documents</strong>.</p>
+<ul>
+<li><strong><code>data/</code></strong> Use this folder to store your raw data and intermediate datasets you may create for the need of a particular analysis. For the sake of transparency and <a href="https://en.wikipedia.org/wiki/Provenance">provenance</a>, you should <em>always</em> keep a copy of your raw data accessible and do as much of your data cleanup and preprocessing programmatically (i.e. with scripts, rather than manually) as possible. Separating raw data from processed data is also a good idea. For example, you could have files <code>data/raw/tree_survey.plot1.txt</code> and <code>...plot2.txt</code> kept separate from a <code>data/processed/tree.survey.csv</code> file generated by the <code>scripts/01.preprocess.tree_survey.R</code> script.</li>
+<li><strong><code>documents/</code></strong> This would be a place to keep outlines, drafts, and other text.</li>
+<li><strong><code>scripts/</code></strong> This would be the location to keep your R scripts for different analyses or plotting, and potentially a separate folder for your functions (more on that later).</li>
+</ul>
+<p>You may want additional directories or subdirectories depending on your project needs, but these should form the backbone of your working directory. For this workshop, you only need a <code>data/</code> folder.</p>
+<div class="figure">
+<img src="img/R-ecology-work_dir_structure.png" alt="Example of a working directory structure" />
+<p class="caption">Example of a working directory structure</p>
+</div>
+</div>
+</div>
+<div id="interacting-with-r" class="section level2">
+<h2>Interacting with R</h2>
+<p>While you can type R commands directly at the <code>&gt;</code> prompt in the R console, I recommend typing your commands into a script, which you’ll save for later reference, and then executing the commands from there.</p>
+<p>Start by typing the following into the R script in the top-left pane.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># R intro</span>
+
+<span class="dv">2016</span> -<span class="st"> </span><span class="dv">1969</span></code></pre></div>
+<p>Save the file clicking the computer disk icon, or by typing <kbd><code>Ctrl</code></kbd> + <kbd><code>S</code></kbd>.</p>
+<p>Now place the cursor on the line with <code>2016 - 1969</code> and type <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd>. The command will be copied to the R console and executed, and then the cursor will move to the next line.</p>
+<p>You can also highlight a bunch of code and execute the block all at once with <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd>.</p>
+<div id="commenting" class="section level3">
+<h3>Commenting</h3>
+<p>Use <code>#</code> signs to comment. Anything to the right of a <code>#</code> is ignored by R, meaning it won’t be executed. Comments are a great way to describe what your code does within the code itself, so comment liberally in your R scripts.</p>
+</div>
+</div>
 <div id="assignment-operator" class="section level2">
 <h2>Assignment operator</h2>
 <p>We can assign names to numbers and other objects with the assignment operator, <code>&lt;-</code>. For example:</p>
@@ -189,7 +298,7 @@ $(document).ready(function () {
 <p>In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write <code>&lt;-</code> in a single keystroke.</p>
 <p>If you’ve assigned a number to an object, you can then use it in further calculations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(age)</code></pre></div>
-<pre><code>#&gt; [1] 6.855655</code></pre>
+<pre><code>## [1] 6.855655</code></pre>
 <p>You can assigned <em>that</em> to something, and then use it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sqrt_age &lt;-<span class="st"> </span><span class="kw">sqrt</span>(age)
 <span class="kw">round</span>(sqrt_age)
@@ -266,9 +375,9 @@ tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">
 <p>If we want to extract one or several values from a vector, we must provide one or several indices in square brackets. For instance:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
 animals[<span class="dv">2</span>]</code></pre></div>
-<pre><code>#&gt; [1] &quot;rat&quot;</code></pre>
+<pre><code>## [1] &quot;rat&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
-<pre><code>#&gt; [1] &quot;mouse&quot; &quot;cat&quot;</code></pre>
+<pre><code>## [1] &quot;mouse&quot; &quot;cat&quot;</code></pre>
 <p>We can also repeat the indices to create an object with more elements than the original one:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">more_animals &lt;-<span class="st"> </span>animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
 <p>R indexes start at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, because that’s what human beings typically do. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that’s simpler for computers to do.</p>
@@ -284,26 +393,26 @@ animals[<span class="dv">2</span>]</code></pre></div>
 <p>Another common way of subsetting is by using a logical vector: <code>TRUE</code> will select the element with the same index, while <code>FALSE</code> will not:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">54</span>, <span class="dv">39</span>, <span class="dv">17</span>, <span class="dv">55</span>)
 weights[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</code></pre></div>
-<pre><code>#&gt; [1] 54 55</code></pre>
+<pre><code>## [1] 54 55</code></pre>
 <p>Typically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 50:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
-<pre><code>#&gt; [1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
+<pre><code>## [1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## so we can use this to select only the values above 50
 weights[weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>#&gt; [1] 54 55</code></pre>
+<pre><code>## [1] 54 55</code></pre>
 <p>You can combine multiple tests using <code>&amp;</code> (both conditions are true, AND) or <code>|</code> (at least one of the conditions is true, OR):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>#&gt; [1] 21 54 17 55</code></pre>
+<pre><code>## [1] 21 54 17 55</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &gt;<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>weights &lt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>#&gt; [1] 39</code></pre>
+<pre><code>## [1] 39</code></pre>
 <p>When working with vectors of characters, if you are trying to combine many conditions it can become tedious to type. The function <code>%in%</code> allows you to test if a value if found in a vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
 animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </span>animals ==<span class="st"> &quot;rat&quot;</span>] <span class="co"># returns both rat and cat</span></code></pre></div>
-<pre><code>#&gt; [1] &quot;rat&quot; &quot;cat&quot;</code></pre>
+<pre><code>## [1] &quot;rat&quot; &quot;cat&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)</code></pre></div>
-<pre><code>#&gt; [1] FALSE  TRUE  TRUE  TRUE</code></pre>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)]</code></pre></div>
-<pre><code>#&gt; [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
+<pre><code>## [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
 </div>
 <div id="challenge-3" class="section level3">
 <h3>Challenge</h3>

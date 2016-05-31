@@ -114,6 +114,35 @@ of first?
 # Challenge 8
 
 
+There are a few mistakes in this hand crafted `data.frame`, can you spot and
+fix them? Don't hesitate to experiment!
+
+```{r, eval=FALSE}
+author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
+                          author_last=c(Darwin, Mayr, Dobzhansky),
+                          year=c(1942, 1970))
+```
+
+
+---
+
+# Challenge 9
+
+
+1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
+   in conjuction with `seq()` to create a new `data.frame` called
+   `surveys_by_10` that includes every 10th row of the survey data frame
+   starting at row 10 (10, 20, 30, ...)
+
+1. Create a `data.frame` containing only the observations from 1999 of the
+   `surveys` dataset.
+
+
+---
+
+# Challenge 10
+
+
 - Create a new R Markdown document.
 - Delete all of the R code chunks and write a bit of Markdown (some sections, some italicized
 text, and an itemized list).
@@ -122,7 +151,7 @@ text, and an itemized list).
 
 ---
 
-# Challenge 9
+# Challenge 11
 
 
 Add code chunks to
@@ -134,7 +163,7 @@ Add code chunks to
 
 ---
 
-# Challenge 10
+# Challenge 12
 
 
 Use chunk options to control the size of a figure and to hide the
@@ -143,7 +172,7 @@ code.
 
 ---
 
-# Challenge 11
+# Challenge 13
 
 
 Try out a bit of in-line R code.

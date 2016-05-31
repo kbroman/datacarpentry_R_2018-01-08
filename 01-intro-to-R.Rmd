@@ -1,25 +1,226 @@
 ---
 layout: topic
-title: Introduction to R
+title: Intro to R
 author: Data Carpentry contributors
 minutes: 45
 ---
 
-
-```{r, echo=FALSE, message = FALSE}
-source("setup.R")
+```{r, echo=FALSE}
+knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 ```
 
 ------------
 
 > ## Learning Objectives
 >
+> * Basics of RStudio
+> * Organize files and directories related to a particular set of analyses in an
+>   R Project within RStudio
 > * Familiarize participants with R syntax
 > * Understand the concepts of objects and assignment
 > * Understand the concepts of vector and data types
 > * Get exposed to a few functions
 
 ------------
+
+## Basics of R
+
+R is a versatile, open source programming/scripting language that's useful both
+for statistics but also data science. Inspired by the programming language S.
+
+* Free/Libre/Open Source Software under the GPL.
+* Superior (if not just comparable) to commercial alternatives. R has over 7,000
+  user contributed packages at this time. It's widely used both in academia and
+  industry.
+* Available on all platforms.
+* Not just for statistics, but also general purpose programming.
+* For people who have experience in programmming: R is both an object-oriented
+  and a so-called [functional language](http://adv-r.had.co.nz/Functional-programming.html).
+* Large and growing community of peers.
+
+
+## Presentation of RStudio
+
+Let's start by learning about RStudio, the Integrated Development Environment
+(IDE) that we will use to write code, navigate the files found on our computer,
+inspect the variables we are going to create, and visualize the plots we will
+generate. RStudio can also be used for other things (e.g., version control,
+developing packages) that we will not cover during the workshop.
+
+RStudio is divided into 4 "Panes": the editor for your scripts and documents
+(top-left), the R console (bottom-left), your environment/history (top-right),
+and your files/plots/packages/help/viewer (bottom-right). The placement of these
+panes and their content can be customized.
+
+
+## R as a calculator
+
+The lower-left pane (the R "console") is where you can interact with R
+directly. The `>` sign is the R "prompt". It indicates that R is
+waiting for you to type something.
+
+You can type <kbd>`Ctrl`</kbd> + <kbd>`Shift`</kbd> + <kbd>`2`</kbd>
+to focus just on the R console pane. Use <kbd>`Ctrl`</kbd> +
+<kbd>`Shift`</kbd> + <kbd>`0`</kbd> to get back to the four panes. I
+use this when teaching but not otherwise.
+
+Let's start by subtracting a couple of numbers.
+
+```{r add, results='show'}
+2016 - 1969
+```
+
+R does the calculation and prints the result, and then you get the `>`
+prompt again. We won't discuss what that number might mean. (The `[1]`
+in the results is a bit weird; you can ignore that for now.)
+
+You can use R as a calculator in this way.
+
+```{r calculations, eval=FALSE}
+4*6
+4/6
+4^6
+log(4)
+log10(4)
+log(4, 10)
+log(4, 6)
+```
+
+Here `log` is a _function_ that gives you the natural logarithm. Much of
+your calculations in R will be through functions. The value in the
+parentheses is called the function "argument". `log10` is another
+function, that calculates the log base 10. There can be more than
+one argument, and some of them may have default values. `log` has a
+second argument `base` whose default (the value if left unspecified)
+is _e_.
+
+### Getting help
+
+If you type `log` and pause for a moment, you'll get a pop-up with
+information about the function.
+
+Alternatively, you could type
+
+```{r help, eval=FALSE}
+?log
+```
+
+and the documentation for the function will show up in the lower-right
+pane. These are often a bit _too_ detailed, and so they take some
+practice to read. I generally focus on Usage and Arguments, and then
+on Examples at the bottom. We'll talk more about getting help later.
+
+## Need for Scripts
+
+We can go along, typing directly into the R console. But there won't
+be an easy way to keep track of what we've done.
+
+It's best to write R "scripts" (files with R code), and work from them.
+And when we start creating scripts, we need to worry about how we
+organize the scripts and data for a project.
+
+And so let's pause for a moment and talk about file organization.
+
+
+## Creating an R Project
+
+It is good practice to keep a set of related data, analyses, and text
+self-contained in a single folder, called the **working directory**. All of the
+scripts within this folder can then use *relative paths* to files that indicate
+where inside the project a file is located (as opposed to absolute paths, which
+point to where a file is on a specific computer). Working this way makes it
+a lot easier to move your project around on your computer and share it with
+others without worrying about whether or not the underlying scripts will still
+work.
+
+RStudio provides a helpful set of tools to do this through its "Projects"
+interface, which not only creates a working directory for you but also
+remembers its location (allowing you to quickly navigate to it) and optonally
+preserves custom settings and open files to make it easier to resume work after
+a break. Below, we will go through the steps for creating an RProject for this
+tutorial.
+
+* Start RStudio (presentation of RStudio -below- should happen here)
+* Under the `File` menu, click on `New project`, choose `New directory`, then
+  `Empty project`
+* Enter a name for this new folder (or "directory", in computer science), and
+  choose a convenient location for it. This will be your **working directory**
+  for the rest of the day (e.g., `~/data-carpentry`)
+* Click on "Create project"
+* Under the `Files` tab on the right of the screen, click on `New Folder` and
+  create a folder named `data` within your newly created working directory. (e.g., `~/data-carpentry/data`)
+* Create a new R script (File > New File > R script) and save it in your working
+  directory (e.g. `data-carpentry-script.R`)
+
+Your working directory should now look like this:
+
+![How it should look like at the beginning of this lesson](img/r_starting_how_it_should_like.png)
+
+### Organizing your working directory
+
+Using a consistent folder structure across your projects will
+help keep things organized, and will also make it easy find/file things in the
+future. This can be especially helpful when you have multiple projects. In
+general, you may create directories (folders) for **scripts**, **data**, and
+**documents**.
+
+ - **`data/`** Use this folder to store your raw data and intermediate
+   datasets you may create for the need of a particular analysis. For the sake
+   of transparency and [provenance](https://en.wikipedia.org/wiki/Provenance),
+   you should *always* keep a copy of your raw data accessible and do as much
+   of your data cleanup and preprocessing programmatically (i.e. with scripts,
+   rather than manually) as possible. Separating raw data from processed data
+   is also a good idea. For example, you could have files
+   `data/raw/tree_survey.plot1.txt` and `...plot2.txt` kept separate from
+   a `data/processed/tree.survey.csv` file generated by the
+   `scripts/01.preprocess.tree_survey.R` script.
+ - **`documents/`** This would be a place to keep outlines, drafts, and other text.
+ - **`scripts/`** This would be the location to keep your R scripts for
+   different analyses or plotting, and potentially a separate folder for your
+   functions (more on that later).
+
+You may want additional directories or subdirectories depending on your project
+needs, but these should form the backbone of your working directory. For this
+workshop, you only need a `data/` folder.
+
+![Example of a working directory structure](img/R-ecology-work_dir_structure.png)
+
+
+
+
+## Interacting with R
+
+While you can type R commands directly at the `>` prompt in the R
+console, I recommend typing your commands into a script, which you'll
+save for later reference, and then executing the commands from there.
+
+Start by typing the following into the R script in the top-left pane.
+
+```{r rscript}
+# R intro
+
+2016 - 1969
+```
+
+Save the file clicking the computer disk icon, or by typing
+<kbd>`Ctrl`</kbd> + <kbd>`S`</kbd>.
+
+Now place the cursor on the line with `2016 - 1969` and type
+<kbd>`Ctrl`</kbd> + <kbd>`Enter`</kbd>. The command will be copied to
+the R console and executed, and then the cursor will move to the next
+line.
+
+You can also highlight a bunch of code and execute the block all at
+once with <kbd>`Ctrl`</kbd> + <kbd>`Enter`</kbd>.
+
+
+### Commenting
+
+Use `#` signs to comment. Anything to the right of a `#` is ignored by R,
+meaning it won't be executed. Comments are a great way to describe what your
+code does within the code itself, so comment liberally in your R scripts.
+
+
 
 ## Assignment operator
 
