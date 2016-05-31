@@ -1,4 +1,4 @@
-all: pages
+all: pages challenge_slides.html
 
 skeleton-%.R: %.Rmd
 	Rscript -e "knitr::purl('$<', output='$@', documentation=0L)"
@@ -14,6 +14,12 @@ handout-script.R: skeleton-00-before-we-start.R skeleton-01-intro-to-R.R skeleto
 	make clean-skeleton
 
 pages: motivation.html 00-before-we-start.html 01-intro-to-R.html 02-starting-with-data.html 03-data-frames.html 04-dplyr.html 05-visualization-ggplot2.html 06-rmarkdown.html 00-notes.html 01-notes.html
+
+challenge_slides.Rmd: ruby/make_challenge_slides.rb 01-intro-to-R.html 02-starting-with-data.html 03-data-frames.html 04-dplyr.html 05-visualization-ggplot2.html 06-rmarkdown.html
+	$<
+
+challenge_slides.html: challenge_slides.Rmd
+	R -e "rmarkdown::render('$<')"
 
 clean-skeleton:
 	-rm skeleton-*-*.R

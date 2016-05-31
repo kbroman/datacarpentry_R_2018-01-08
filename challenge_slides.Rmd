@@ -1,0 +1,65 @@
+---
+output: slidy_presentation
+---
+
+# Challenge 1
+
+
+What is the value of `y` after doing the following?
+
+```{r, eval=FALSE}
+x <- 55
+y <- x * 2.2
+x <- 100
+```
+
+
+---
+
+# Challenge 2
+
+
+What happens to vectors with mixed types?
+(Hint: use `class()`)
+
+```{r, echo=TRUE, eval=FALSE}
+x <- c(1, 2, 3, 'a')
+
+y <- c(1, 2, 3, TRUE)
+
+z <- c('a', 'b', 'c', TRUE)
+
+tricky <- c(1, 2, 3, '4')
+```
+
+
+---
+
+# Challenge 3
+
+
+Consider the following two vectors.
+
+```{r, eval=FALSE}
+animals <- c("mouse", "rat", "cat", "dog")
+weights <- c(30, 180, 4000, 8000)
+```
+
+Subset `animals` with `weights < 200`.
+
+
+---
+
+# Challenge 4
+
+
+Why does the following give an error?
+
+```{r mean_na, eval=FALSE}
+v <- c(2, 4, 4, "NA", 6)
+mean(v, na.rm=TRUE)
+```
+
+Why does the error message say the data are not numeric?
+
+
