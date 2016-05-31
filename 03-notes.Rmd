@@ -210,7 +210,38 @@ What was the heaviest animal measured in each year? Return the columns `year`,
 <!-- end challenge -->
 
 
+## Data cleaning preparations
 
+In preparations for the plotting, let's do a bit of data cleaning:
+remove rows with missing `species_id`, `weight`, `hindfoot_length`, or
+`sex`.
+
+```{r clean_data_1}
+surveys_complete <- surveys %>%
+    filter(species_id != "", !is.na(weight)) %>%
+    filter(!is.na(hindfoot_length), sex != "")
+```
+
+There are a lot of species with low counts. Let's remove the species
+with less than 10 counts.
+
+```{r}
+# count records per species
+species_counts <- surveys_complete %>%
+    group_by(species_id) %>%
+    tally
+
+head(species_counts)
+
+# get names of the species with counts >= 10
+frequent_species <-  species_counts %>%
+    filter(n >= 10) %>%
+    select(species_id)
+
+# filter out the less-frequent species
+surveys_complete <- surveys_complete %>%
+    filter(species_id %in% frequent_species$species_id)
+```
 
 
 
