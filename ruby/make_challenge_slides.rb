@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # grab the challenges from the .Rmd files and make slides
 
-files = ["01-intro-to-R.Rmd", "02-starting-with-data.Rmd"]
+files = ["01-intro-to-R.Rmd", "02-starting-with-data.Rmd", "06-rmarkdown.Rmd"]
 capfile = "capstone.Rmd"
 ofile = "challenge_slides.Rmd"
 

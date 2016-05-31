@@ -109,6 +109,46 @@ table(expt)
 of first?
 
 
+---
+
+# Challenge 8
+
+
+- Create a new R Markdown document.
+- Delete all of the R code chunks and write a bit of Markdown (some sections, some italicized
+text, and an itemized list).
+- Convert the document to a webpage.
+
+
+---
+
+# Challenge 9
+
+
+Add code chunks to
+
+- Load the ggplot2 package
+- Read the portal data
+- Create a plot
+
+
+---
+
+# Challenge 10
+
+
+Use chunk options to control the size of a figure and to hide the
+code.
+
+
+---
+
+# Challenge 11
+
+
+Try out a bit of in-line R code.
+
+
 
 # Capstone project
 
