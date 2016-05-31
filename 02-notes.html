@@ -283,9 +283,9 @@ surveys[<span class="dv">2</span>,]
 
 sex &lt;-<span class="st"> </span>surveys[,<span class="dv">7</span>]</code></pre></div>
 <p>Referring to columns.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">species_id &lt;-<span class="st"> </span>surveys[, <span class="st">&quot;sex&quot;</span>]
-species_id &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</span>]]
-species_id &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span>surveys[, <span class="st">&quot;sex&quot;</span>]
+sex &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</span>]]
+sex &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
 <div id="treating-blanks-as-missing" class="section level3">
 <h3>Treating blanks as missing</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</code></pre></div>

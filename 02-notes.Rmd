@@ -194,9 +194,9 @@ sex <- surveys[,7]
 Referring to columns.
 
 ```{r, eval = FALSE}
-species_id <- surveys[, "sex"]
-species_id <- surveys[["sex"]]
-species_id <- surveys$sex
+sex <- surveys[, "sex"]
+sex <- surveys[["sex"]]
+sex <- surveys$sex
 ```
 
 

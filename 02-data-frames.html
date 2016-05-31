@@ -400,9 +400,9 @@ table(expt)
 <p>And to get the entire 7th column, leave the row part blank:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span>surveys[,<span class="dv">7</span>]</code></pre></div>
 <p>You can also refer to columns by name, in multiple ways.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">species_id &lt;-<span class="st"> </span>surveys[, <span class="st">&quot;species_id&quot;</span>]
-species_id &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;species_id&quot;</span>]]
-species_id &lt;-<span class="st"> </span>surveys$species_id</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span>surveys[, <span class="st">&quot;sex&quot;</span>]
+ssex &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</span>]]
+sex &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
 <div id="treating-blanks-as-missing" class="section level3">
 <h3>Treating blanks as missing</h3>
 <p>Another aside: it’s probably best to treat those blanks as missing (<code>NA</code>). To do that, use the argument <code>na.strings</code> when reading the data.</p>

@@ -306,9 +306,9 @@ sex <- surveys[,7]
 You can also refer to columns by name, in multiple ways.
 
 ```{r, eval = FALSE}
-species_id <- surveys[, "species_id"]
-species_id <- surveys[["species_id"]]
-species_id <- surveys$species_id
+sex <- surveys[, "sex"]
+ssex <- surveys[["sex"]]
+sex <- surveys$sex
 ```
 
 ### Treating blanks as missing
