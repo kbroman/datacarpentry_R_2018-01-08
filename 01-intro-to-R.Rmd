@@ -6,7 +6,7 @@ minutes: 45
 ---
 
 
-```{r, echo=FALSE, purl=FALSE, message = FALSE}
+```{r, echo=FALSE, message = FALSE}
 source("setup.R")
 ```
 
@@ -42,7 +42,7 @@ a single keystroke.
 If you've assigned a number to an object, you can then use it in
 further calculations:
 
-```{r sqrt, results="markup"}
+```{r sqrt, results='show'}
 sqrt(age)
 ```
 
@@ -121,20 +121,20 @@ A vector is a group of values, mainly either numbers or characters. You can
 assign this set of values to a variable, just like you would for one item. For
 example we can create a vector of animal weights:
 
-```{r, purl=FALSE}
+```{r}
 weights <- c(30, 100, 4000, 8000)
 ```
 
 A vector can also contain text (character strings):
 
-```{r, purl=FALSE}
+```{r}
 animals <- c("rat", "cat")
 ```
 
 There are many functions that allow you to inspect the content of a
 vector. `length()` tells you how many elements are in a particular vector:
 
-```{r, purl=FALSE}
+```{r}
 length(weights)
 length(animals)
 ```
@@ -142,7 +142,7 @@ length(animals)
 An important feature of a vector, is that all of the elements are the same type of data.
 The function `class()` indicates the class (the type of element) of an object:
 
-```{r, purl=FALSE}
+```{r}
 class(weights)
 class(animals)
 ```
@@ -151,14 +151,14 @@ The function `str()` provides an overview of the object and the elements it
 contains. It is a really useful function when working with large and complex
 objects:
 
-```{r, purl=FALSE}
+```{r}
 str(weights)
 str(animals)
 ```
 
 You can add elements to your vector by using the `c()` function:
 
-```{r, purl=FALSE}
+```{r}
 animals <- c(animals, "dog") # adding at the end of the vector
 animals <- c("mouse", animals) # adding at the beginning of the vector
 ```
@@ -211,7 +211,7 @@ Vectors must all be of one type, and so R converts them.
 If we want to extract one or several values from a vector, we must provide one
 or several indices in square brackets. For instance:
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 animals <- c("mouse", "rat", "dog", "cat")
 animals[2]
 animals[c(1, 4)]
@@ -220,7 +220,7 @@ animals[c(1, 4)]
 We can also repeat the indices to create an object with more elements than the
 original one:
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 more_animals <- animals[c(1, 2, 3, 2, 1, 4)]
 ```
 
@@ -246,7 +246,7 @@ Subset to get the 2nd and 3rd values.
 Another common way of subsetting is by using a logical vector: `TRUE` will
 select the element with the same index, while `FALSE` will not:
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 weights <- c(21, 54, 39, 17, 55)
 weights[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
 ```
@@ -255,7 +255,7 @@ Typically, these logical vectors are not typed by hand, but are the output of
 other functions or logical tests. For instance, if you wanted to select only the
 values above 50:
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 weights > 50    # will return logicals with TRUE for the indices that meet the condition
 ## so we can use this to select only the values above 50
 weights[weights > 50]
@@ -264,7 +264,7 @@ weights[weights > 50]
 You can combine multiple tests using `&` (both conditions are true, AND) or `|`
 (at least one of the conditions is true, OR):
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 weights[weights < 30 | weights > 50]
 weights[weights > 30 & weights < 50]
 ```
@@ -273,7 +273,7 @@ When working with vectors of characters, if you are trying to combine many
 conditions it can become tedious to type. The function `%in%` allows you to test
 if a value if found in a vector:
 
-```{r, results='show', purl=FALSE}
+```{r, results='show'}
 animals <- c("mouse", "rat", "dog", "cat")
 animals[animals == "cat" | animals == "rat"] # returns both rat and cat
 animals %in% c("rat", "cat", "dog", "duck")
@@ -301,7 +301,7 @@ As R was designed to analyze datasets, it includes the concept of missing data
 (which is uncommon in other programming languages). Missing data are represented
 in vectors as `NA`.
 
-```{r, purl=FALSE}
+```{r}
 heights <- c(2, 4, 4, NA, 6)
 ```
 
@@ -310,7 +310,7 @@ you are working with include missing values. It is a safer behavior as otherwise
 you may overlook that you are dealing with missing data. You can add the
 argument `na.rm=TRUE` to calculate the result while ignoring the missing values.
 
-```{r, purl=FALSE}
+```{r}
 mean(heights)
 max(heights)
 mean(heights, na.rm = TRUE)
@@ -322,7 +322,7 @@ functions `is.na()` and `na.omit()`.
 examples.
 
 
-```{r, purl=FALSE}
+```{r}
 ## Extract those elements which are not missing values.
 heights[!is.na(heights)]
 ## shortcut to that
