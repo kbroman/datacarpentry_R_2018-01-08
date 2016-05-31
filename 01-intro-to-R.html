@@ -150,15 +150,17 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#the-r-syntax">The R syntax</a></li>
-<li><a href="#creating-objects">Creating objects</a><ul>
+<li><a href="#assignment-operator">Assignment operator</a></li>
+<li><a href="#object-names">Object names</a><ul>
 <li><a href="#challenge">Challenge</a></li>
 </ul></li>
+<li><a href="#objects-in-your-workspace">Objects in your workspace</a></li>
 <li><a href="#vectors-and-data-types">Vectors and data types</a><ul>
 <li><a href="#challenge-1">Challenge</a></li>
 </ul></li>
 <li><a href="#subsetting-vectors">Subsetting vectors</a><ul>
 <li><a href="#conditional-subsetting">Conditional subsetting</a></li>
+<li><a href="#challenge-2">Challenge</a></li>
 </ul></li>
 <li><a href="#missing-data">Missing data</a><ul>
 <li><a href="#challenge-3">Challenge</a></li>
@@ -177,77 +179,63 @@ $(document).ready(function () {
 </ul>
 </blockquote>
 <hr />
-<div id="the-r-syntax" class="section level2">
-<h2>The R syntax</h2>
-<p><em>Start by showing an example of a script</em></p>
-<ul>
-<li>Point to the different parts:</li>
-<li>a function</li>
-<li>the assignment operator <code>&lt;-</code></li>
-<li>the <code>=</code> for arguments</li>
-<li>the comments <code>#</code> and how they are used to document function and its content</li>
-<li>the <code>$</code> operator</li>
-<li>Point to indentation and consistency in spacing to improve clarity</li>
-</ul>
-<div class="figure">
-<img src="img/r_starting_example_script.png" alt="Example of a simple R script" />
-<p class="caption">Example of a simple R script</p>
+<div id="assignment-operator" class="section level2">
+<h2>Assignment operator</h2>
+<p>We can assign names to numbers and other objects with the assignment operator, <code>&lt;-</code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="dv">2016-1969</span></code></pre></div>
+<p>Type that into your script, and use <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd> to paste it to the console.</p>
+<p>You can also use <code>=</code> as assignment, but that symbol can have other meanings, and so I recommend sticking with the <code>&lt;-</code> combination.</p>
+<p>In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write <code>&lt;-</code> in a single keystroke.</p>
+<p>If you’ve assigned a number to an object, you can then use it in further calculations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(age)</code></pre></div>
+<pre><code>#&gt; [1] 6.855655</code></pre>
+<p>You can assigned <em>that</em> to something, and then use it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sqrt_age &lt;-<span class="st"> </span><span class="kw">sqrt</span>(age)
+<span class="kw">round</span>(sqrt_age)
+<span class="kw">round</span>(sqrt_age, <span class="dv">2</span>)</code></pre></div>
 </div>
-</div>
-<div id="creating-objects" class="section level2">
-<h2>Creating objects</h2>
-<p>You can get output from R simply by typing in math in the console</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> +<span class="st"> </span><span class="dv">5</span>
-<span class="dv">12</span>/<span class="dv">7</span></code></pre></div>
-<p>However, to do useful and interesting things, we need to assign <em>values</em> to <em>objects</em>. To create an object, we need to give it a name followed by the assignment operator <code>&lt;-</code>, and the value we want to give it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_kg &lt;-<span class="st"> </span><span class="dv">55</span></code></pre></div>
-<p>Objects can be given any name such as <code>x</code>, <code>current_temperature</code>, or <code>subject_id</code>. You want your object names to be explicit and not too long. They cannot start with a number (<code>2x</code> is not valid, but <code>x2</code> is). R is case sensitive (e.g., <code>weight_kg</code> is different from <code>Weight_kg</code>). There are some names that cannot be used because they are the names of fundamental functions in R (e.g., <code>if</code>, <code>else</code>, <code>for</code>, see <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html">here</a> for a complete list). In general, even if it’s allowed, it’s best to not use other function names (e.g., <code>c</code>, <code>T</code>, <code>mean</code>, <code>data</code>, <code>df</code>, <code>weights</code>). In doubt check the help to see if the name is already in use. It’s also best to avoid dots (<code>.</code>) within a variable name as in <code>my.dataset</code>. There are many functions in R with dots in their names for historical reasons, but because dots have a special meaning in R (for methods) and other programming languages, it’s best to avoid them. It is also recommended to use nouns for variable names, and verbs for function names. It’s important to be consistent in the styling of your code (where you put spaces, how you name variable, etc.). In R, two popular style guides are <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s</a> and <a href="https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml">Google’s</a>.</p>
-<p>When assigning a value to an object, R does not print anything. You can force to print the value by using parentheses or by typing the name:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_kg &lt;-<span class="st"> </span><span class="dv">55</span>    <span class="co"># doesn&#39;t print anything</span>
-(weight_kg &lt;-<span class="st"> </span><span class="dv">55</span>)  <span class="co"># but putting parenthesis around the call prints the value of `weight_kg`</span>
-weight_kg          <span class="co"># and so does typing the name of the object</span></code></pre></div>
-<p>Now that R has <code>weight_kg</code> in memory, we can do arithmetic with it. For instance, we may want to convert this weight in pounds (weight in pounds is 2.2 times the weight in kg):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="fl">2.2</span> *<span class="st"> </span>weight_kg</code></pre></div>
-<p>We can also change a variable’s value by assigning it a new one:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_kg &lt;-<span class="st"> </span><span class="fl">57.5</span>
-<span class="fl">2.2</span> *<span class="st"> </span>weight_kg</code></pre></div>
-<p>This means that assigning a value to one variable does not change the values of other variables. For example, let’s store the animal’s weight in pounds in a new variable, <code>weight_lb</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_lb &lt;-<span class="st"> </span><span class="fl">2.2</span> *<span class="st"> </span>weight_kg</code></pre></div>
-<p>and then change <code>weight_kg</code> to 100.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_kg &lt;-<span class="st"> </span><span class="dv">100</span></code></pre></div>
-<p>What do you think is the current content of the object <code>weight_lb</code>? 126.5 or 200?</p>
+<div id="object-names" class="section level2">
+<h2>Object names</h2>
+<p>Objects can be given any name such as <code>x</code>, <code>current_temperature</code>, or <code>subject_id</code>. You want your object names to be explicit and not too long.</p>
+<p>They cannot start with a number (<code>2x</code> is not valid, but <code>x2</code> is).</p>
+<p>R is case sensitive (e.g., <code>weight_kg</code> is different from <code>Weight_kg</code>). There are some names that cannot be used because they are the names of fundamental functions in R (e.g., <code>if</code>, <code>else</code>, <code>for</code>, see <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html">here</a> for a complete list).</p>
+<p>In general, even if it’s allowed, it’s best to not use other function names (e.g., <code>c</code>, <code>T</code>, <code>mean</code>, <code>data</code>, <code>df</code>, <code>weights</code>). In doubt check the help to see if the name is already in use.</p>
+<p>It’s also best to avoid dots (<code>.</code>) within a variable name as in <code>my.dataset</code>. There are many functions in R with dots in their names for historical reasons, but because dots have a special meaning in R (for methods) and other programming languages, it’s best to avoid them. It is also recommended to use nouns for variable names, and verbs for function names. It’s important to be consistent in the styling of your code (where you put spaces, how you name variable, etc.). In R, two popular style guides are <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s</a> and <a href="https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml">Google’s</a>.</p>
 <div id="challenge" class="section level3">
 <h3>Challenge</h3>
-<p>What are the values after each statement in the following?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mass &lt;-<span class="st"> </span><span class="fl">47.5</span>            <span class="co"># mass?</span>
-age  &lt;-<span class="st"> </span><span class="dv">122</span>             <span class="co"># age?</span>
-mass &lt;-<span class="st"> </span>mass *<span class="st"> </span><span class="fl">2.0</span>      <span class="co"># mass?</span>
-age  &lt;-<span class="st"> </span>age -<span class="st"> </span><span class="dv">20</span>        <span class="co"># age?</span>
-mass_index &lt;-<span class="st"> </span>mass/age  <span class="co"># mass_index?</span></code></pre></div>
+<p>What is the value of <code>y</code> after doing the following?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">55</span>
+y &lt;-<span class="st"> </span>x *<span class="st"> </span><span class="fl">2.2</span>
+x &lt;-<span class="st"> </span><span class="dv">100</span></code></pre></div>
+<!-- end challenge -->
+<p>Objects don’t get linked to each other, so if you change one, it won’t affect the values of any others.</p>
 </div>
+</div>
+<div id="objects-in-your-workspace" class="section level2">
+<h2>Objects in your workspace</h2>
+<p>The objects you create get added to your “workspace”. You can list the current objects with <code>ls()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre></div>
+<p>RStudio also shows thee objects in the Environment panel.</p>
 </div>
 <div id="vectors-and-data-types" class="section level2">
 <h2>Vectors and data types</h2>
-<p>A vector is the most common and basic data structure in R, and is pretty much the workhorse of R. It’s a group of values, mainly either numbers or characters. You can assign this list of values to a variable, just like you would for one item. For example we can create a vector of animal weights:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">82</span>)
-weight_g</code></pre></div>
-<p>A vector can also contain characters:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
-animals</code></pre></div>
+<p>A vector is a group of values, mainly either numbers or characters. You can assign this set of values to a variable, just like you would for one item. For example we can create a vector of animal weights:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">100</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
+<p>A vector can also contain text (character strings):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
 <p>There are many functions that allow you to inspect the content of a vector. <code>length()</code> tells you how many elements are in a particular vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(weight_g)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(weights)
 <span class="kw">length</span>(animals)</code></pre></div>
 <p>An important feature of a vector, is that all of the elements are the same type of data. The function <code>class()</code> indicates the class (the type of element) of an object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(weight_g)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(weights)
 <span class="kw">class</span>(animals)</code></pre></div>
 <p>The function <code>str()</code> provides an overview of the object and the elements it contains. It is a really useful function when working with large and complex objects:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(weight_g)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(weights)
 <span class="kw">str</span>(animals)</code></pre></div>
 <p>You can add elements to your vector by using the <code>c()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(weight_g, <span class="dv">90</span>) <span class="co"># adding at the end of the vector</span>
-weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, weight_g) <span class="co"># adding at the beginning of the vector</span>
-weight_g</code></pre></div>
-<p>What happens here is that we take the original vector <code>weight_g</code>, and we are adding another item first to the end of the other ones, and then another item at the beginning. We can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(animals, <span class="st">&quot;dog&quot;</span>) <span class="co"># adding at the end of the vector</span>
+animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, animals) <span class="co"># adding at the beginning of the vector</span></code></pre></div>
+<p>What happens here is that we take the original vector <code>animals</code>, and we are adding another item first to the end of the other ones, and then another item at the beginning. We can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.</p>
 <p>We just saw 2 of the 6 <strong>atomic vector</strong> types that R uses: <code>&quot;character&quot;</code> and <code>&quot;numeric&quot;</code>. These are the basic building blocks that all R objects are built from. The other 4 are:</p>
 <ul>
 <li><code>&quot;logical&quot;</code> for <code>TRUE</code> and <code>FALSE</code> (the boolean data type)</li>
@@ -258,32 +246,17 @@ weight_g</code></pre></div>
 <p>Vectors are one of the many <strong>data structures</strong> that R uses. Other important ones are lists (<code>list</code>), matrices (<code>matrix</code>), data frames (<code>data.frame</code>) and factors (<code>factor</code>).</p>
 <div id="challenge-1" class="section level3">
 <h3>Challenge</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## We’ve seen that atomic vectors can be of type character, numeric, integer, and
-## logical. But what happens if we try to mix these types in a single
-## vector?
+<p>What happens to vectors with mixed types? (Hint: use <code>class()</code>)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;a&#39;</span>)
 
-## What will happen in each of these examples? (hint: use `class()` to
-## check the data type of your object)
-num_char &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;a&#39;</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)
 
-num_logical &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)
+z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)
 
-char_logical &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)
-
-tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)
-
-## Why do you think it happens?
-
-## Can you draw a diagram that represents the hierarchy of the data
-## types?</code></pre></div>
-<ul>
-<li><strong>Question</strong>: We’ve seen that atomic vectors can be of type character, numeric, integer, and logical. But what happens if we try to mix these types in a single vector?</li>
-<li><p><em>Answer</em>: R implicitly converts them to all be the same type</p></li>
-<li><strong>Question</strong>: Why do you think it happens?</li>
-<li><p><em>Answer</em>: Vectors can be of only one data type. R tries to convert (=coerce) the content of this vector to find a “common denominator”.</p></li>
-<li><strong>Question</strong>: Can you draw a diagram that represents the hierarchy of the data types?</li>
-<li><p><em>Answer</em>: <code>logical --&gt; numeric --&gt; character &lt;-- logical</code></p></li>
-</ul>
+tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)</code></pre></div>
+<!-- end challenge -->
+<p>Vectors must all be of one type, and so R converts them.</p>
+<p><code>logical</code> → <code>numeric</code> → <code>character</code></p>
 </div>
 </div>
 <div id="subsetting-vectors" class="section level2">
@@ -302,19 +275,19 @@ more_animals</code></pre></div>
 <div id="conditional-subsetting" class="section level3">
 <h3>Conditional subsetting</h3>
 <p>Another common way of subsetting is by using a logical vector: <code>TRUE</code> will select the element with the same index, while <code>FALSE</code> will not:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">39</span>, <span class="dv">54</span>, <span class="dv">55</span>)
-weight_g[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">39</span>, <span class="dv">54</span>, <span class="dv">55</span>)
+weights[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</code></pre></div>
 <pre><code>#&gt; [1] 21 39 54</code></pre>
 <p>Typically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 50:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_g &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
 <pre><code>#&gt; [1] FALSE FALSE FALSE  TRUE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## so we can use this to select only the values above 50
-weight_g[weight_g &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+weights[weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
 <pre><code>#&gt; [1] 54 55</code></pre>
 <p>You can combine multiple tests using <code>&amp;</code> (both conditions are true, AND) or <code>|</code> (at least one of the conditions is true, OR):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_g[weight_g &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>weight_g &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
 <pre><code>#&gt; [1] 21 54 55</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_g[weight_g &gt;=<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>weight_g ==<span class="st"> </span><span class="dv">21</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &gt;=<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>weights ==<span class="st"> </span><span class="dv">21</span>]</code></pre></div>
 <pre><code>#&gt; numeric(0)</code></pre>
 <p>When working with vectors of characters, if you are trying to combine many conditions it can become tedious to type. The function <code>%in%</code> allows you to test if a value if found in a vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
@@ -324,21 +297,14 @@ animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </
 <pre><code>#&gt; [1] FALSE  TRUE  TRUE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)]</code></pre></div>
 <pre><code>#&gt; [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
-<blockquote>
-<h3 id="challenge-2" class="challenge">Challenge</h3>
-<ul>
-<li>Can you figure out why <code>&quot;four&quot; &gt; &quot;five&quot;</code> returns <code>TRUE</code>?</li>
-</ul>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># * Can you figure out why `&quot;four&quot; &gt; &quot;five&quot;` returns `TRUE`?</span></code></pre></div>
-<!--
-
-```r
-## Answers
-## * When using ">" or "<" on strings, R compares their alphabetical order. Here
-##   "four" comes after "five", and therefore is "greater than" it.
-```
--->
+</div>
+<div id="challenge-2" class="section level3 challenge">
+<h3>Challenge</h3>
+<p>Consider the following two vectors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
+weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">180</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
+<p>Subset <code>animals</code> for which <code>weights &lt; 200</code>.</p>
+<!-- end challenge -->
 </div>
 </div>
 <div id="missing-data" class="section level2">
@@ -363,19 +329,13 @@ heights[!<span class="kw">is.na</span>(heights)]
 heights[<span class="kw">complete.cases</span>(heights)]</code></pre></div>
 <div id="challenge-3" class="section level3">
 <h3>Challenge</h3>
-<ul>
-<li><strong>Question</strong>: Why does the following piece of code give an error message?</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)
-<span class="kw">mean</span>(sample, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>#&gt; Warning in mean.default(sample, na.rm = TRUE): argument is not numeric or
+<p>Why does the following give an error?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)
+<span class="kw">mean</span>(v, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>#&gt; Warning in mean.default(v, na.rm = TRUE): argument is not numeric or
 #&gt; logical: returning NA</code></pre>
-<ul>
-<li><p><em>Answer</em>: Because R recognizes the NA in quotes as a character.</p></li>
-<li><strong>Question</strong>: Why does the error message say the argument is not numeric?</li>
-<li><p><em>Answer</em>: R converts the entire vector to character because of the “NA”, and doesn’t recognize it as numeric.</p></li>
-</ul>
-<p>Next, we will use the “surveys” dataset to explore the <code>data.frame</code> data structure, which is one of the most common types of R objects.</p>
+<p>Why does the error message say the data are not numeric?</p>
+<!-- end challenge -->
 </div>
 </div>
 

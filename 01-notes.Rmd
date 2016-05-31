@@ -1,0 +1,104 @@
+---
+layout: topic
+title: Before we start (notes)
+author: Data Carpentry contributors
+minutes: 15
+---
+
+```{r, echo=FALSE, purl=FALSE}
+knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
+```
+
+## Assigment operator
+
+```{r assign}
+age <- 2016 - 1969
+```
+
+- Paste into console.
+- Can also use `=`, but recommend `<-`.
+- Can use <kbd>Alt</kbd> + <kbd>-</kbd>
+
+### Using the stuff you assigned
+
+```{r sqrt}
+sqrt(age)
+```
+
+```{r more_assign}
+sqrt_age <- sqrt(age)
+round(sqrt_age)
+round(sqrt_age, 2)
+```
+
+### Object names
+
+- explicit but not too long
+- can't start with a number
+- there are some names not allowed (`if`, `for`, `else`)
+- other names you can but shouldn't use (`c`, `data`, `mean`)
+- Can use `.`, but best not to
+
+### Challenge
+
+What is the value of `y` after doing the following?
+
+```{r, purl=FALSE}
+x <- 55
+y <- x * 2.2
+x <- 100
+```
+
+### Objects in workspace
+
+- `ls()`
+- Environment panel
+
+## Vectors and data types
+
+```{r vectors}
+weights <- c(30, 100, 4000, 8000)
+animals <- c("rat", "cat")
+```
+
+### length, class, str
+
+```{r length}
+length(weights)
+length(animals)
+```
+
+```{r class_str}
+class(weights)
+class(animals)
+str(weights)
+str(animals)
+```
+
+### Add to a vector
+
+```{r, purl=FALSE}
+animals <- c(animals, "dog") # adding at the end of the vector
+animals <- c("mouse", animals) # adding at the beginning of the vector
+```
+
+
+### Challenge
+
+What happens to vectors with mixed types?
+(Hint: use `class()`)
+
+```{r, echo=TRUE, eval=FALSE, purl=TRUE}
+x <- c(1, 2, 3, 'a')
+
+y <- c(1, 2, 3, TRUE)
+
+z <- c('a', 'b', 'c', TRUE)
+
+tricky <- c(1, 2, 3, '4')
+```
+
+
+
+
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>

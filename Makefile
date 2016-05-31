@@ -13,7 +13,7 @@ handout-script.R: skeleton-00-before-we-start.R skeleton-01-intro-to-R.R skeleto
 	for f in $^; do cat $$f; echo "\n"; done > $@
 	make clean-skeleton
 
-pages: motivation.html 00-before-we-start.html 01-intro-to-R.html 02-starting-with-data.html 03-data-frames.html 04-dplyr.html 05-visualization-ggplot2.html 06-rmarkdown.html 00-notes.html
+pages: motivation.html 00-before-we-start.html 01-intro-to-R.html 02-starting-with-data.html 03-data-frames.html 04-dplyr.html 05-visualization-ggplot2.html 06-rmarkdown.html 00-notes.html 01-notes.html
 
 clean-skeleton:
 	-rm skeleton-*-*.R
