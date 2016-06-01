@@ -187,8 +187,14 @@ sex <- surveys$sex
 
 ### Treating blanks as missing
 
+Mention use of `"NA"` as the standard missing value code, and that
+this can be a problem if that's a valid value.
+
+Also that blanks in numeric columns got converted to `NA`, but blanks
+in the `sex` column were left as `""`.
+
 ```{r}
-surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings=c("", "NA"))
+surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings="")
 ```
 
 ### Slices

@@ -405,8 +405,8 @@ ssex &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</sp
 sex &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
 <div id="treating-blanks-as-missing" class="section level3">
 <h3>Treating blanks as missing</h3>
-<p>Another aside: it’s probably best to treat those blanks as missing (<code>NA</code>). To do that, use the argument <code>na.strings</code> when reading the data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</code></pre></div>
+<p>Another aside: it’s probably best to treat those blanks as missing (<code>NA</code>). To do that, use the argument <code>na.strings</code> when reading the data. <code>na.strings</code> can be a vector of multiple character strings. We need that a missing value code can never exist as a valid value, because they all will be converted to the missing data code <code>NA</code>. And note that the default for <code>na.strings</code> is <code>&quot;NA&quot;</code>, which will cause problems if <code>&quot;NA&quot;</code> is a valid value for your data (e.g., as an abbreviation <code>&quot;North America&quot;</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
 </div>
 <div id="slices" class="section level3">
 <h3>Slices</h3>

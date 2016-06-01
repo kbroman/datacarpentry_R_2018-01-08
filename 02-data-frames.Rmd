@@ -315,10 +315,15 @@ sex <- surveys$sex
 
 Another aside: it's probably best to treat those blanks as missing
 (`NA`). To do that, use the argument `na.strings` when reading the
-data.
+data. `na.strings` can be a vector of multiple character strings. We
+need that a missing value code can never exist as a valid value,
+because they all will be converted to the missing data code `NA`.  And
+note that the default for `na.strings` is `"NA"`, which will cause
+problems if `"NA"` is a valid value for your data (e.g., as an
+abbreviation `"North America"`).
 
 ```{r}
-surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings=c("", "NA"))
+surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings="")
 ```
 
 

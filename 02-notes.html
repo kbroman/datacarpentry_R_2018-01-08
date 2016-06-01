@@ -275,7 +275,9 @@ sex &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</spa
 sex &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
 <div id="treating-blanks-as-missing" class="section level3">
 <h3>Treating blanks as missing</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</code></pre></div>
+<p>Mention use of <code>&quot;NA&quot;</code> as the standard missing value code, and that this can be a problem if that’s a valid value.</p>
+<p>Also that blanks in numeric columns got converted to <code>NA</code>, but blanks in the <code>sex</code> column were left as <code>&quot;&quot;</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
 </div>
 <div id="slices" class="section level3">
 <h3>Slices</h3>
