@@ -263,6 +263,8 @@ length for each species.
 What was the heaviest animal measured in each year? Return the columns `year`,
 `genus`, `species`, and `weight`.
 
+Hint: Use `filter()` rather than `summarize()`.
+
 <!-- end challenge -->
 
 ### A bit of data cleaning
