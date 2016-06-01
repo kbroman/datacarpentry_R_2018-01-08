@@ -383,3 +383,13 @@ yearly_weight %>% filter(species_id %in% c("DM", "DO", "DS")) %>%
     geom_line() +
     facet_grid(species_id ~ sex)
 ```
+
+## Saving plots to a file
+
+## Customizing plots
+
+### Axis limits
+
+### Color choices
+
+## Themes
