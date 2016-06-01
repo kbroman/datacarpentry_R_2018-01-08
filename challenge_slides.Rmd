@@ -8,9 +8,9 @@ output: slidy_presentation
 What is the value of `y` after doing the following?
 
 ```{r, eval=FALSE}
-x <- 55
-y <- x * 2.2
-x <- 100
+x <- 50
+y <- x * 2
+x <- 80
 ```
 
 

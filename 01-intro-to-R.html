@@ -314,9 +314,9 @@ $(document).ready(function () {
 <div id="challenge" class="section level3">
 <h3>Challenge</h3>
 <p>What is the value of <code>y</code> after doing the following?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">55</span>
-y &lt;-<span class="st"> </span>x *<span class="st"> </span><span class="fl">2.2</span>
-x &lt;-<span class="st"> </span><span class="dv">100</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">50</span>
+y &lt;-<span class="st"> </span>x *<span class="st"> </span><span class="dv">2</span>
+x &lt;-<span class="st"> </span><span class="dv">80</span></code></pre></div>
 <!-- end challenge -->
 <p>Objects don’t get linked to each other, so if you change one, it won’t affect the values of any others.</p>
 </div>
@@ -391,19 +391,19 @@ animals[<span class="dv">2</span>]</code></pre></div>
 <div id="conditional-subsetting" class="section level3">
 <h3>Conditional subsetting</h3>
 <p>Another common way of subsetting is by using a logical vector: <code>TRUE</code> will select the element with the same index, while <code>FALSE</code> will not:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">54</span>, <span class="dv">39</span>, <span class="dv">17</span>, <span class="dv">55</span>)
-weights[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">54</span>, <span class="dv">39</span>, <span class="dv">17</span>, <span class="dv">55</span>)
+x[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</code></pre></div>
 <pre><code>## [1] 54 55</code></pre>
 <p>Typically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 50:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## so we can use this to select only the values above 50
-weights[weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+x[x &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
 <pre><code>## [1] 54 55</code></pre>
 <p>You can combine multiple tests using <code>&amp;</code> (both conditions are true, AND) or <code>|</code> (at least one of the conditions is true, OR):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>weights &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>x &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
 <pre><code>## [1] 21 54 17 55</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights[weights &gt;<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>weights &lt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &gt;<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>x &lt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
 <pre><code>## [1] 39</code></pre>
 <p>When working with vectors of characters, if you are trying to combine many conditions it can become tedious to type. The function <code>%in%</code> allows you to test if a value if found in a vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)

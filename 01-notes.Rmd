@@ -129,9 +129,9 @@ round(sqrt_age, 2)
 What is the value of `y` after doing the following?
 
 ```{r}
-x <- 55
-y <- x * 2.2
-x <- 100
+x <- 50
+y <- x * 2
+x <- 80
 ```
 
 ### Objects in workspace
@@ -211,23 +211,23 @@ Subset to get the 2nd and 3rd values.
 Subsetting with a logical vector.
 
 ```{r, results='show'}
-weights <- c(21, 54, 39, 17, 55)
-weights[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
+x <- c(21, 54, 39, 17, 55)
+x[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
 ```
 
 Creating a logical vector.
 
 ```{r, results='show'}
-weights > 50    # will return logicals with TRUE for the indices that meet the condition
+x > 50    # will return logicals with TRUE for the indices that meet the condition
 ## so we can use this to select only the values above 50
-weights[weights > 50]
+x[x>50]
 ```
 
 Using `&` and `|`.
 
 ```{r, results='show'}
-weights[weights < 30 | weights > 50]
-weights[weights > 30 & weights < 50]
+x[x < 30 | x > 50]
+x[x > 30 & x < 50]
 ```
 
 Using `%in%` with character strings.

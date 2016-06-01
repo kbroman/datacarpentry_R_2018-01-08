@@ -290,9 +290,9 @@ guides are [Hadley Wickham's](http://adv-r.had.co.nz/Style.html) and
 What is the value of `y` after doing the following?
 
 ```{r, eval=FALSE}
-x <- 55
-y <- x * 2.2
-x <- 100
+x <- 50
+y <- x * 2
+x <- 80
 ```
 
 <!-- end challenge -->
@@ -448,8 +448,8 @@ Another common way of subsetting is by using a logical vector: `TRUE` will
 select the element with the same index, while `FALSE` will not:
 
 ```{r, results='show'}
-weights <- c(21, 54, 39, 17, 55)
-weights[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
+x <- c(21, 54, 39, 17, 55)
+x[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
 ```
 
 Typically, these logical vectors are not typed by hand, but are the output of
@@ -457,17 +457,17 @@ other functions or logical tests. For instance, if you wanted to select only the
 values above 50:
 
 ```{r, results='show'}
-weights > 50    # will return logicals with TRUE for the indices that meet the condition
+x > 50    # will return logicals with TRUE for the indices that meet the condition
 ## so we can use this to select only the values above 50
-weights[weights > 50]
+x[x > 50]
 ```
 
 You can combine multiple tests using `&` (both conditions are true, AND) or `|`
 (at least one of the conditions is true, OR):
 
 ```{r, results='show'}
-weights[weights < 30 | weights > 50]
-weights[weights > 30 & weights < 50]
+x[x < 30 | x > 50]
+x[x > 30 & x < 50]
 ```
 
 When working with vectors of characters, if you are trying to combine many
