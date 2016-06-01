@@ -5,7 +5,7 @@ author: Data Carpentry contributors
 ---
 
 ```{r, echo=FALSE}
-knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-notes-', results='hide')
+knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-notes-', results='hide', eval=FALSE)
 ```
 
 ```{r, data cleaning, echo=FALSE}
