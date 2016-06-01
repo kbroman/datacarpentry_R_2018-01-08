@@ -156,9 +156,8 @@ $(document).ready(function () {
 <li><a href="#factors">Factors</a><ul>
 <li><a href="#challenge-1">Challenge</a></li>
 </ul></li>
-<li><a href="#section"><br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/></a></li>
-<li><a href="#stringsasfactors">stringsAsFactors</a></li>
-<li><a href="#constructing-data-frames-by-hand">Constructing data frames “by hand”</a><ul>
+<li><a href="#stringsasfactors">stringsAsFactors</a><ul>
+<li><a href="#constructing-data-frames-by-hand">Constructing data frames “by hand”</a></li>
 <li><a href="#challenge-2">Challenge</a></li>
 </ul></li>
 <li><a href="#inspecting-data-frames">Inspecting data frames</a></li>
@@ -225,34 +224,23 @@ table(expt)</code></pre>
 </ul>
 </div>
 </div>
-<div id="section" class="section level2">
-<h2><br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/></h2>
-<p>layout: topic title: Data frames (notes) author: Data Carpentry contributors minutes: 30 —</p>
-</div>
 <div id="stringsasfactors" class="section level2">
 <h2>stringsAsFactors</h2>
 <p>Avoid factors with <code>stringsAsFactors=FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_chr &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys_chr)</code></pre></div>
-</div>
-<div id="constructing-data-frames-by-hand" class="section level2">
-<h2>Constructing data frames “by hand”</h2>
+<div id="constructing-data-frames-by-hand" class="section level3">
+<h3>Constructing data frames “by hand”</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
                   <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
                   <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>))
-<span class="kw">str</span>(df1)</code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
-##  $ animal: Factor w/ 4 levels &quot;cat&quot;,&quot;dog&quot;,&quot;sea cucumber&quot;,..: 2 1 3 4
-##  $ feel  : Factor w/ 3 levels &quot;furry&quot;,&quot;spiny&quot;,..: 1 1 3 2
-##  $ weight: num  45 8 1.1 0.8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
+<span class="kw">str</span>(df1)
+
+df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
                   <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
                   <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
 <span class="kw">str</span>(df2)</code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
-##  $ animal: chr  &quot;dog&quot; &quot;cat&quot; &quot;sea cucumber&quot; &quot;sea urchin&quot;
-##  $ feel  : chr  &quot;furry&quot; &quot;furry&quot; &quot;squishy&quot; &quot;spiny&quot;
-##  $ weight: num  45 8 1.1 0.8</code></pre>
+</div>
 <div id="challenge-2" class="section level3">
 <h3>Challenge</h3>
 <p>There are a few mistakes in this hand crafted <code>data.frame</code>, can you spot and fix them? Don’t hesitate to experiment!</p>

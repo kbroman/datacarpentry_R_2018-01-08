@@ -5,7 +5,7 @@ author: Data Carpentry contributors
 minutes: 15
 ---
 
-```{r, echo=FALSE, purl=FALSE}
+```{r, echo=FALSE}
 knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 ```
 
@@ -13,14 +13,14 @@ knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 
 We first download the file:
 
-```{r, eval=FALSE, purl=TRUE}
+```{r, eval=FALSE}
 download.file("http://kbroman.org/datacarp/portal_data_joined.csv",
               "data/portal_data_joined.csv")
 ```
 
 We then load them into R:
 
-```{r, eval=TRUE, purl=FALSE}
+```{r, eval=TRUE}
 surveys <- read.csv('data/portal_data_joined.csv')
 ```
 
@@ -66,13 +66,13 @@ string labels for the distinct values, called _levels_.
 
 Use `factor()` to create a vector that is a factor.
 
-```{r, purl=TRUE}
+```{r}
 sex <- factor(c("male", "female", "female", "male"))
 ```
 
 Use `levels()` and `nlevels()` to see the levels and their number.
 
-```{r, purl=FALSE}
+```{r}
 levels(sex)
 nlevels(sex)
 ```
@@ -80,7 +80,7 @@ nlevels(sex)
 If you provide the `levels` argument to `factor()`, you'll get the
 levels in a particular order.
 
-```{r, purl=TRUE}
+```{r}
 food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
 levels(food)
 food <- factor(food, levels=c("low", "medium", "high"))
@@ -89,7 +89,7 @@ levels(food)
 
 Converting factors to numeric.
 
-```{r, purl=TRUE}
+```{r}
 f <- factor(c(1, 5, 10, 2))
 as.numeric(f)               ## wrong! and there is no warning...
 as.numeric(as.character(f)) ## works...
@@ -111,19 +111,6 @@ table(expt)
 of first?
 
 
-<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
----
-layout: topic
-title: Data frames (notes)
-author: Data Carpentry contributors
-minutes: 30
----
-
-```{r, echo=FALSE, purl=FALSE}
-knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
-surveys <- read.csv("data/portal_data_joined.csv")
-```
-
 ## stringsAsFactors
 
 Avoid factors with `stringsAsFactors=FALSE`.
@@ -137,9 +124,9 @@ str(surveys_chr)
 ```
 
 
-## Constructing data frames "by hand"
+### Constructing data frames "by hand"
 
-```{r, results='show'}
+```{r}
 df1 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
                   feel=c("furry", "furry", "squishy", "spiny"),
                   weight=c(45, 8, 1.1, 0.8))
