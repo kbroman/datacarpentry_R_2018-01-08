@@ -239,8 +239,6 @@ hidden.
 A variant on the box plot is the violin plot. Use `geom_violin()` to
 make violin plots of `hindfoot_length` by `species_id`.
 
-<!-- end challenge -->
-
 ## Faceting
 
 ggplot has a special technique called *faceting* that allows to split one plot
@@ -264,9 +262,6 @@ measured. To do that we need to make counts in data frame grouped by sex.
 - make the faceted plot splitting further by sex (within each panel)
 
 - color by sex rather than species
-
-<!--  end challenge -->
-
 
 
 Suppose I make a similar plot of average weight by species:
