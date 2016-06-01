@@ -26,7 +26,7 @@ install.packages("dplyr")
 install.packages("ggplot2")
 ```
 
-```{r}
+```{r, message=FALSE}
 library(dplyr)
 ```
 
