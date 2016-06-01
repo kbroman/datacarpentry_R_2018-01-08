@@ -12,22 +12,15 @@ knitr::opts_chunk$set(fig.keep='last')
 source("setup.R")
 ```
 
-#### Disclaimer
-
-We will be using the functions in the ggplot2 package. R has powerful built-in
-plotting capabilities, but for this exercise, we will be using the ggplot2
-package, which facilitates the creation of highly-informative plots of
-structured data.
-
 > ### Learning Objectives
 >
 > -	Visualize some of the [mammals data](https://dx.doi.org/10.6084/m9.figshare.1314459.v5)
-> from Figshare [surveys.csv](https://ndownloader.figshare.com/files/2292172)
+> from [`portal_data_joined.csv`](http://kbroman.org/datacarp/portal_data_joined.csv)
 > -	Understand how to plot these data using R ggplot2 package. For more details
 > on using ggplot2 see [official documentation](http://docs.ggplot2.org/current/).
 > -	Building step by step complex plots with the ggplot2 package
 
-```{r load_data_and_clean, echo=FALSE}
+```{r load_data_and_clean, echo=FALSE, message=FALSE}
 library(dplyr)
 surveys <- read.csv("data/portal_data_joined.csv")
 surveys_complete <- surveys %>%
@@ -79,10 +72,15 @@ Another key aspect of ggplot2: the `ggplot()` function creates a
 graphics object; additional controls are added with the `+`
 operator. The actual plot is made when the object is printed.
 
-```{r exlicit_printing, results='hide'}
+```{r explicit_printing, eval=FALSE}
 p1 <- ggplot(surveys_complete, aes(x=weight, y=hindfoot_length))
 p2 <- p1 + geom_point()
 print(p2)
+```
+
+```{r explicit_printing_run, echo=FALSE}
+p1 <- ggplot(surveys_complete, aes(x=weight, y=hindfoot_length))
+p2 <- p1 + geom_point()
 ```
 
 If we saved the pieces like this, we could apply other options
@@ -111,8 +109,8 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 
 ## Other aesthetics
 
-For scatterplot, additional aesthetics include `shape`, `size`, and
-`color`. Also "`alpha`" (for transparency of points).
+For scatterplot, additional aesthetics include `shape`, `size`,
+`color`, and "`alpha`" (for transparency of points).
 
 Let's make a template for our plot, to make modifications easier.
 
@@ -140,7 +138,7 @@ Things get more interesting when we assign these aesthetics to data.
 
 
 ```{r scatter_colored_by_species}
-surveys_plot + geom_point(alpha = 0.1, aes(color = species_id))
+surveys_plot + geom_point(aes(color = species_id))
 ```
 
 
@@ -149,7 +147,7 @@ surveys_plot + geom_point(alpha = 0.1, aes(color = species_id))
 Use dplyr to calculate the mean `weight` and `hindfoot_length` as well
 as the sample size for each species.
 
-Make a scatterplot of mean `hindfoot_length` vs `mean_weight`, with
+Make a scatterplot of mean `hindfoot_length` vs mean `weight`, with
 the sizes of the points corresponding to the sample size.
 
 <!-- end challenge -->
@@ -386,10 +384,98 @@ yearly_weight %>% filter(species_id %in% c("DM", "DO", "DS")) %>%
 
 ## Saving plots to a file
 
+If you want to save a plot, to share with others, use the `ggsave`
+function.
+
+The default is to save the last plot that you created, but I think
+it's safer to first save the plot as an object and pass that to
+`ggsave`. Also give the height and width in inches.
+
+```{r ggsave_example, eval=FALSE}
+p <- ggplot(surveys_complete, aes(x=weight, y=hindfoot_length)) + geom_points()
+ggsave("scatter.png", p, height=6, width=8)
+```
+
+The image file type is taken from the file name extension.
+To make a PDF instead:
+
+```{r ggsave_pdf, eval=FALSE}
+ggsave("scatter.pdf", p, height=6, width=8)
+```
+
+Use `scale` to adjust the sizes of things, for example for a talk/poster
+versus a paper/report. Use `scale < 1` to make the various elements
+bigger relative to the plotting area.
+
+```{r ggsave_scale, eval=FALSE}
+ggsave("scatter_2.png", p, height=6, width=8, scale=0.8)
+```
+
 ## Customizing plots
 
 ### Axis limits
 
+When faceting, the different panels are given common x- and y-axis
+limits. If we were to create separate plots (say one for each
+country), we would need to do a bit extra to ensure that common axis
+limits are used.
+
+Recall the `scale_x_log10()` function that we had used to create the log
+scale for the x axis. This can take an argument `limits` (a
+vector of length 2) defining the minimum and maximum values plotted.
+
+There is also a `scale_y_log10()` function, but if you want to change
+the y-axis limits without going to a log scale, you would use
+`scale_y_continuous()`. (Similarly, there's a `scale_x_continuous`.)
+
+For example, to plot the data for China, using axis limits defined by
+the full data, we'd do the following:
+
+```{r limits}
+xrange <- range(surveys_complete$weight)
+yrange <- range(surveys_complete$hindfoot_length)
+
+p <- surveys_complete %>% filter(species_id=="DM") %>%
+    ggplot(aes(x=weight, y=hindfoot_length)) +
+    geom_point()
+p + scale_x_log10(limits=xrange) +
+    scale_y_continuous(limits=yrange)
+```
+
 ### Color choices
 
+If you don't like the choices for point colors, you can customize
+them in a number of ways. First, you can use `scale_color_manual()`
+with a vector of your preferred choices. (If it's `fill` rather than
+`color` that you want to change, you'll need to use `scale_fill_manual()`.)
+
+```{r custom_colors}
+p <- surveys_complete %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
+    ggplot(aes(x=weight, y=hindfoot_length)) +
+    geom_point(aes(color=species_id))
+
+colors <- c("blue", "green", "orange")
+p + scale_color_manual(values=colors)
+```
+
+You can also use RGB hex values.
+
+```{r custom_colors_rgb}
+hexcolors <- c("#001F3F", "#0074D9", "#01FF70")
+p + scale_color_manual(values=hexcolors)
+```
+
+
 ## Themes
+
+Not everyone gray background and such in the default ggplot plots.
+
+But you can apply one of a variety of "themes" to control the overall
+appearance of plots.
+
+One that a lot of people like is `theme_bw()`. Add it to a plot, and
+the overall appearance changes.
+
+```{r theme}
+p + theme_bw()
+```

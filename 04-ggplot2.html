@@ -176,26 +176,14 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<div id="disclaimer" class="section level4">
-<h4>Disclaimer</h4>
-<p>We will be using the functions in the ggplot2 package. R has powerful built-in plotting capabilities, but for this exercise, we will be using the ggplot2 package, which facilitates the creation of highly-informative plots of structured data.</p>
 <blockquote>
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
-<li>Visualize some of the <a href="https://dx.doi.org/10.6084/m9.figshare.1314459.v5">mammals data</a> from Figshare <a href="https://ndownloader.figshare.com/files/2292172">surveys.csv</a></li>
+<li>Visualize some of the <a href="https://dx.doi.org/10.6084/m9.figshare.1314459.v5">mammals data</a> from <a href="http://kbroman.org/datacarp/portal_data_joined.csv"><code>portal_data_joined.csv</code></a></li>
 <li>Understand how to plot these data using R ggplot2 package. For more details on using ggplot2 see <a href="http://docs.ggplot2.org/current/">official documentation</a>.</li>
 <li>Building step by step complex plots with the ggplot2 package</li>
 </ul>
 </blockquote>
-<pre><code>#&gt; 
-#&gt; Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>#&gt; The following objects are masked from &#39;package:stats&#39;:
-#&gt; 
-#&gt;     filter, lag</code></pre>
-<pre><code>#&gt; The following objects are masked from &#39;package:base&#39;:
-#&gt; 
-#&gt;     intersect, setdiff, setequal, union</code></pre>
-</div>
 <div id="plotting-with-ggplot2" class="section level2">
 <h2>Plotting with ggplot2</h2>
 <p>There are two main systems for making plots in R: “base graphics” (which are the traditional plotting functions distributed with R) and ggplot2, written by Hadley Wickham following Leland Wilkinson’s book <em>Grammar of Graphics</em>. We’re going to show you how to use ggplot2. It’s may seem a bit complicated at first, but once you get a hang of it, you’ll be able to make really useful visualizations quite rapidly.</p>
@@ -211,7 +199,6 @@ $(document).ready(function () {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length))
 p2 &lt;-<span class="st"> </span>p1 +<span class="st"> </span><span class="kw">geom_point</span>()
 <span class="kw">print</span>(p2)</code></pre></div>
-<p><img src="img/R-ecology-exlicit_printing-1.png" width="672" /></p>
 <p>If we saved the pieces like this, we could apply other options afterwards. For example, if we wanted <code>weight</code> on a log scale:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 +<span class="st"> </span><span class="kw">scale_x_log10</span>()</code></pre></div>
 <p><img src="img/R-ecology-weight_on_log_scale-1.png" width="672" /></p>
@@ -226,7 +213,7 @@ p2 &lt;-<span class="st"> </span>p1 +<span class="st"> </span><span class="kw">g
 </div>
 <div id="other-aesthetics" class="section level2">
 <h2>Other aesthetics</h2>
-<p>For scatterplot, additional aesthetics include <code>shape</code>, <code>size</code>, and <code>color</code>. Also “<code>alpha</code>” (for transparency of points).</p>
+<p>For scatterplot, additional aesthetics include <code>shape</code>, <code>size</code>, <code>color</code>, and “<code>alpha</code>” (for transparency of points).</p>
 <p>Let’s make a template for our plot, to make modifications easier.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length))</code></pre></div>
 <ul>
@@ -242,12 +229,12 @@ p2 &lt;-<span class="st"> </span>p1 +<span class="st"> </span><span class="kw">g
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">color =</span> <span class="st">&quot;slateblue&quot;</span>, <span class="dt">size=</span><span class="fl">0.5</span>)</code></pre></div>
 <p><img src="img/R-ecology-changing%20the%20size%20of%20the%20points-1.png" width="672" /></p>
 <p>Things get more interesting when we assign these aesthetics to data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="kw">aes</span>(<span class="dt">color =</span> species_id))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> species_id))</code></pre></div>
 <p><img src="img/R-ecology-scatter_colored_by_species-1.png" width="672" /></p>
 <div id="challenge-1" class="section level3">
 <h3>Challenge</h3>
 <p>Use dplyr to calculate the mean <code>weight</code> and <code>hindfoot_length</code> as well as the sample size for each species.</p>
-<p>Make a scatterplot of mean <code>hindfoot_length</code> vs <code>mean_weight</code>, with the sizes of the points corresponding to the sample size.</p>
+<p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, with the sizes of the points corresponding to the sample size.</p>
 <!-- end challenge -->
 </div>
 </div>
@@ -390,18 +377,56 @@ yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(spec
 </div>
 <div id="saving-plots-to-a-file" class="section level2">
 <h2>Saving plots to a file</h2>
+<p>If you want to save a plot, to share with others, use the <code>ggsave</code> function.</p>
+<p>The default is to save the last plot that you created, but I think it’s safer to first save the plot as an object and pass that to <code>ggsave</code>. Also give the height and width in inches.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +<span class="st"> </span><span class="kw">geom_points</span>()
+<span class="kw">ggsave</span>(<span class="st">&quot;scatter.png&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>)</code></pre></div>
+<p>The image file type is taken from the file name extension. To make a PDF instead:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;scatter.pdf&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>)</code></pre></div>
+<p>Use <code>scale</code> to adjust the sizes of things, for example for a talk/poster versus a paper/report. Use <code>scale &lt; 1</code> to make the various elements bigger relative to the plotting area.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;scatter_2.png&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>, <span class="dt">scale=</span><span class="fl">0.8</span>)</code></pre></div>
 </div>
 <div id="customizing-plots" class="section level2">
 <h2>Customizing plots</h2>
 <div id="axis-limits" class="section level3">
 <h3>Axis limits</h3>
+<p>When faceting, the different panels are given common x- and y-axis limits. If we were to create separate plots (say one for each country), we would need to do a bit extra to ensure that common axis limits are used.</p>
+<p>Recall the <code>scale_x_log10()</code> function that we had used to create the log scale for the x axis. This can take an argument <code>limits</code> (a vector of length 2) defining the minimum and maximum values plotted.</p>
+<p>There is also a <code>scale_y_log10()</code> function, but if you want to change the y-axis limits without going to a log scale, you would use <code>scale_y_continuous()</code>. (Similarly, there’s a <code>scale_x_continuous</code>.)</p>
+<p>For example, to plot the data for China, using axis limits defined by the full data, we’d do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xrange &lt;-<span class="st"> </span><span class="kw">range</span>(surveys_complete$weight)
+yrange &lt;-<span class="st"> </span><span class="kw">range</span>(surveys_complete$hindfoot_length)
+
+p &lt;-<span class="st"> </span>surveys_complete %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id==<span class="st">&quot;DM&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +
+<span class="st">    </span><span class="kw">geom_point</span>()
+p +<span class="st"> </span><span class="kw">scale_x_log10</span>(<span class="dt">limits=</span>xrange) +
+<span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span>yrange)</code></pre></div>
+<p><img src="img/R-ecology-limits-1.png" width="672" /></p>
 </div>
 <div id="color-choices" class="section level3">
 <h3>Color choices</h3>
+<p>If you don’t like the choices for point colors, you can customize them in a number of ways. First, you can use <code>scale_color_manual()</code> with a vector of your preferred choices. (If it’s <code>fill</code> rather than <code>color</code> that you want to change, you’ll need to use <code>scale_fill_manual()</code>.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>surveys_complete %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) %&gt;%
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))
+
+colors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>)
+p +<span class="st"> </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>colors)</code></pre></div>
+<p><img src="img/R-ecology-custom_colors-1.png" width="672" /></p>
+<p>You can also use RGB hex values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hexcolors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#001F3F&quot;</span>, <span class="st">&quot;#0074D9&quot;</span>, <span class="st">&quot;#01FF70&quot;</span>)
+p +<span class="st"> </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>hexcolors)</code></pre></div>
+<p><img src="img/R-ecology-custom_colors_rgb-1.png" width="672" /></p>
 </div>
 </div>
 <div id="themes" class="section level2">
 <h2>Themes</h2>
+<p>Not everyone gray background and such in the default ggplot plots.</p>
+<p>But you can apply one of a variety of “themes” to control the overall appearance of plots.</p>
+<p>One that a lot of people like is <code>theme_bw()</code>. Add it to a plot, and the overall appearance changes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="img/R-ecology-theme-1.png" width="672" /></p>
 </div>
 
 

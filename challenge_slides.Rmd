@@ -204,7 +204,7 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 Use dplyr to calculate the mean `weight` and `hindfoot_length` as well
 as the sample size for each species.
 
-Make a scatterplot of mean `hindfoot_length` vs `mean_weight`, with
+Make a scatterplot of mean `hindfoot_length` vs mean `weight`, with
 the sizes of the points corresponding to the sample size.
 
 
