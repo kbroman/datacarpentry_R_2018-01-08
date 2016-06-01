@@ -159,11 +159,11 @@ The `!` symbol negates it, so we're asking for everything that is not an `NA`.
 
 Create a new dataframe from the survey data that meets the following
 criteria: contains only the `species_id` column and a column that contains
-values that are half the `hindfoot_length` values (e.g. a new column
-`hindfoot_half`). In this `hindfoot_half` column, there are no NA values
-and all values are < 30.
+values that are the square-root of `hindfoot_length` values (e.g. a new column
+`hindfoot_sqrt`). In this `hindfoot_sqrt` column, there are no NA values
+and all values are < 3.
 
-Hint: think about how the commands should be ordered to produce this data frame!
+Hint: think about how the commands should be ordered
 
 <!-- end challenge -->
 

@@ -105,13 +105,11 @@ surveys %>%
 
 Create a new dataframe from the survey data that meets the following
 criteria: contains only the `species_id` column and a column that contains
-values that are half the `hindfoot_length` values (e.g. a new column
-`hindfoot_half`). In this `hindfoot_half` column, there are no NA values
-and all values are < 30.
+values that are the square-root of `hindfoot_length` values (e.g. a new column
+`hindfoot_sqrt`). In this `hindfoot_sqrt` column, there are no NA values
+and all values are < 3.
 
-Hint: think about how the commands should be ordered to produce this data frame!
-
-<!-- end challenge -->
+Hint: think about how the commands should be ordered
 
 ### split-apply-combine data analyses (group-by and summarize)
 
@@ -192,22 +190,16 @@ surveys %>%
 
 How many times was each `plot_type` surveyed?
 
-<!-- end challenge -->
-
 
 ### Challenge
 
 Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
 length for each species.
 
-<!-- end challenge -->
-
 ### Challenge
 
 What was the heaviest animal measured in each year? Return the columns `year`,
 `genus`, `species`, and `weight`.
-
-<!-- end challenge -->
 
 
 ## Data cleaning preparations

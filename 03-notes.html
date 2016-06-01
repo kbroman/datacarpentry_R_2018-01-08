@@ -220,9 +220,8 @@ $(document).ready(function () {
 <span class="st">  </span>head</code></pre></div>
 <div id="challenge-1" class="section level3">
 <h3>Challenge</h3>
-<p>Create a new dataframe from the survey data that meets the following criteria: contains only the <code>species_id</code> column and a column that contains values that are half the <code>hindfoot_length</code> values (e.g. a new column <code>hindfoot_half</code>). In this <code>hindfoot_half</code> column, there are no NA values and all values are &lt; 30.</p>
-<p>Hint: think about how the commands should be ordered to produce this data frame!</p>
-<!-- end challenge -->
+<p>Create a new dataframe from the survey data that meets the following criteria: contains only the <code>species_id</code> column and a column that contains values that are the square-root of <code>hindfoot_length</code> values (e.g. a new column <code>hindfoot_sqrt</code>). In this <code>hindfoot_sqrt</code> column, there are no NA values and all values are &lt; 3.</p>
+<p>Hint: think about how the commands should be ordered</p>
 </div>
 <div id="split-apply-combine-data-analyses-group-by-and-summarize" class="section level3">
 <h3>split-apply-combine data analyses (group-by and summarize)</h3>
@@ -268,17 +267,14 @@ $(document).ready(function () {
 <div id="challenge-2" class="section level3">
 <h3>Challenge</h3>
 <p>How many times was each <code>plot_type</code> surveyed?</p>
-<!-- end challenge -->
 </div>
 <div id="challenge-3" class="section level3">
 <h3>Challenge</h3>
 <p>Use <code>group_by()</code> and <code>summarize()</code> to find the mean, min, and max hindfoot length for each species.</p>
-<!-- end challenge -->
 </div>
 <div id="challenge-4" class="section level3">
 <h3>Challenge</h3>
 <p>What was the heaviest animal measured in each year? Return the columns <code>year</code>, <code>genus</code>, <code>species</code>, and <code>weight</code>.</p>
-<!-- end challenge -->
 </div>
 </div>
 <div id="data-cleaning-preparations" class="section level2">
