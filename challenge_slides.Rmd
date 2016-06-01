@@ -192,6 +192,69 @@ What was the heaviest animal measured in each year? Return the columns `year`,
 # Challenge 15
 
 
+Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
+`species_id`, `"DM"`.
+
+
+---
+
+# Challenge 16
+
+
+Use dplyr to calculate the mean `weight` and `hindfoot_length` as well
+as the sample size for each species.
+
+Make a scatterplot of mean `hindfoot_length` vs `mean_weight`, with
+the sizes of the points corresponding to the sample size.
+
+
+---
+
+# Challenge 17
+
+
+Make a plot of counts of `species_id` `"DM"` and `"DS"` by year. See
+if you can make the lines black but the points colored by species.
+
+
+---
+
+# Challenge 18
+
+
+Try using `geom_histogram()` to make a histogram visualization of the
+distribution of `weight`.
+
+Hint: You want `weight` as the x-axis aesthetic. Try specifying `bins`
+in `geom_histogram()`.
+
+
+---
+
+# Challenge 19
+
+
+A variant on the box plot is the violin plot. Use `geom_violin()` to
+make violin plots of `hindfoot_length` by `species_id`.
+
+
+---
+
+# Challenge 20
+
+
+- Calculate counts grouped by year, species_id, and sex
+
+- make the faceted plot splitting further by sex (within each panel)
+
+- color by sex rather than species
+
+
+---
+
+# Challenge 21
+
+
 - Create a new R Markdown document.
 - Delete all of the R code chunks and write a bit of Markdown (some sections, some italicized
 text, and an itemized list).
@@ -200,7 +263,7 @@ text, and an itemized list).
 
 ---
 
-# Challenge 16
+# Challenge 22
 
 
 Add code chunks to
@@ -212,7 +275,7 @@ Add code chunks to
 
 ---
 
-# Challenge 17
+# Challenge 23
 
 
 Use chunk options to control the size of a figure and to hide the
@@ -221,7 +284,7 @@ code.
 
 ---
 
-# Challenge 18
+# Challenge 24
 
 
 Try out a bit of in-line R code.

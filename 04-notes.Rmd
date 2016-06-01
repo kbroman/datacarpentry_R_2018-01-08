@@ -5,9 +5,109 @@ author: Data Carpentry contributors
 ---
 
 ```{r, echo=FALSE}
-knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
-surveys <- read.csv("data/portal_data_joined.csv")
+knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-notes-', results='hide')
 ```
+
+```{r, data cleaning, echo=FALSE}
+library(dplyr)
+surveys <- read.csv("data/portal_data_joined.csv")
+surveys_complete <- surveys %>%
+    filter(species_id != "", !is.na(weight)) %>%
+    filter(!is.na(hindfoot_length), sex != "")
+species_counts <- surveys_complete %>%
+    group_by(species_id) %>%
+    tally
+frequent_species <-  species_counts %>%
+    filter(n >= 10) %>%
+    select(species_id)
+surveys_complete <- surveys_complete %>%
+    filter(species_id %in% frequent_species$species_id)
+```
+
+## load libraries
+
+```{r, load_lib}
+library(ggplot2)
+library(dplyr)
+```
+
+**Mention ggplot vs base graphics**
+
+First plot:
+
+```{r first-ggplot}
+ggplot(surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point()
+```
+
+Key concepts of "grammar of graphics":
+- _aesthetics_ map features of the data to features of the
+visualization
+(for example, the `weight` variable is mapped to the y-axis coordinate)
+- _geoms_ concern what actually gets plotted (here, each row in the data
+becomes a point in the plot)
+
+- `ggplot()` creates a graphics objects
+- additional controls added with the `+` operator
+- actual plot made when object is printed
+
+```{r exlicit_printing, results='hide'}
+p1 <- ggplot(surveys_complete, aes(x=weight, y=hindfoot_length))
+p2 <- p1 + geom_point()
+print(p2)
+```
+
+Can be convenient to have saved the results. For example, to make that
+last plot have `weight` on the log scale:
+
+```{r weight_on_log_scale}
+p2 + scale_x_log10()
+```
+
+and on square-root scale:
+
+```{r weight_on_sqrt_scale}
+p2 + scale_x_sqrt()
+```
+
+### Challenge
+
+Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
+`species_id`, `"DM"`.
+
+
+## Other aesthetics
+
+For scatterplot, `shape`, `size`, `color`, and `alpha`.
+
+```{r create-ggplot-object}
+surveys_plot <- ggplot(surveys_complete, aes(x = weight, y = hindfoot_length))
+
+surveys_plot + geom_point(alpha = 0.1)
+
+surveys_plot + geom_point(alpha = 0.1, color = "slateblue")
+
+surveys_plot + geom_point(alpha = 0.1, color = "slateblue", size=0.5)
+```
+
+Things get more interesting when we assign these aesthetics to data.
+
+
+```{r scatter_colored_by_species}
+surveys_plot + geom_point(alpha = 0.1, aes(color = species_id))
+```
+
+
+### Challenge
+
+Use dplyr to calculate the mean `weight` and `hindfoot_length` as well
+as the sample size for each species.
+
+Make a scatterplot of mean `hindfoot_length` vs `mean_weight`, with
+the sizes of the points corresponding to the sample size.
+
+
+
+
 
 
 <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
