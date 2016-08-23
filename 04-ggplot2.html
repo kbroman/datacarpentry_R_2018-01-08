@@ -124,7 +124,7 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="libs/navigation-1.0/tabsets.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -266,13 +266,13 @@ p +<span class="st"> </span><span class="kw">geom_line</span>()</code></pre></di
 <p><img src="img/R-ecology-points_colored_by_year_2-1.png" width="672" /></p>
 <div id="challenge-2" class="section level3">
 <h3>Challenge</h3>
-<p>Make a plot of counts of <code>species_id</code> <code>&quot;DM&quot;</code> and <code>&quot;DS&quot;</code> by year. See if you can make the lines black but the points colored by species.</p>
+<p>Make a plot of counts of <code>species_id</code> <code>&quot;DM&quot;</code> and <code>&quot;DS&quot;</code> by year.</p>
 <!-- end challenge -->
 </div>
 </div>
 <div id="groups" class="section level2">
 <h2>Groups</h2>
-<p>One’s first attempt at the previous challenge may look like this:</p>
+<p>Suppose, in that last challenge, we’d wanted to have black lines but the points colored by species. We might have done this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts_dm_ds &lt;-<span class="st"> </span>surveys_complete %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>)) %&gt;%
 <span class="st">    </span><span class="kw">group_by</span>(species_id, year) %&gt;%<span class="st"> </span>tally
 p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(counts_dm_ds, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n))

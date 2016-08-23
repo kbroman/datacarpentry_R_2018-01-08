@@ -215,8 +215,7 @@ the sizes of the points corresponding to the sample size.
 # Challenge 17
 
 
-Make a plot of counts of `species_id` `"DM"` and `"DS"` by year. See
-if you can make the lines black but the points colored by species.
+Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
 
 
 ---

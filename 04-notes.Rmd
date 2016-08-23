@@ -161,12 +161,12 @@ p + geom_line() + geom_point() + aes(color=year)
 
 ### Challenge
 
-Make a plot of counts of `species_id` `"DM"` and `"DS"` by year. See
-if you can make the lines black but the points colored by species.
+Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
 
 ## Groups
 
-One's first attempt at the previous challenge may look like this:
+Suppose, in that last challenge, we'd wanted to have black lines but
+the points colored by species. We might have done this:
 
 ```{r misgrouped}
 counts_dm_ds <- surveys_complete %>% filter(species_id %in% c("DM", "DS")) %>%
