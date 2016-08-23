@@ -2,7 +2,7 @@
 layout: topic
 title: Intro to R (notes)
 author: Data Carpentry contributors
-minutes: 15
+minutes: 45
 ---
 
 ```{r, echo=FALSE}
@@ -281,6 +281,247 @@ mean(v, na.rm=TRUE)
 ```
 
 Why does the error message say the data are not numeric?
+
+
+## Load the data
+
+We first download the file:
+
+```{r, eval=FALSE}
+download.file("http://kbroman.org/datacarp/portal_data_joined.csv",
+              "data/portal_data_joined.csv")
+```
+
+We then load them into R:
+
+```{r, eval=TRUE}
+surveys <- read.csv('data/portal_data_joined.csv')
+```
+
+Can also do:
+
+```{r eval=FALSE}
+surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
+```
+
+Use `head()` to view the first few rows.
+
+```{r head}
+head(surveys)
+```
+
+Use `tail()` to view the last few rows.
+
+
+```{r tail}
+tail(surveys)
+```
+
+Use `str()` to look at the structure of the data.
+
+```{r str}
+str(surveys)
+```
+
+### Challenge
+
+Based on the output of `str(surveys)`, can you answer the following questions?
+
+* What is the class of the object `surveys`?
+* How many rows and how many columns are in this object?
+* How many species have been recorded during these surveys?
+
+
+## Factors
+
+Factors are categorical variables. They look like a vector of
+character strings, but they're stored as integers with character
+string labels for the distinct values, called _levels_.
+
+Use `factor()` to create a vector that is a factor.
+
+```{r}
+sex <- factor(c("male", "female", "female", "male"))
+```
+
+Use `levels()` and `nlevels()` to see the levels and their number.
+
+```{r}
+levels(sex)
+nlevels(sex)
+```
+
+If you provide the `levels` argument to `factor()`, you'll get the
+levels in a particular order.
+
+```{r}
+food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
+levels(food)
+food <- factor(food, levels=c("low", "medium", "high"))
+levels(food)
+```
+
+Converting factors to numeric.
+
+```{r}
+f <- factor(c(1, 5, 10, 2))
+as.numeric(f)               ## wrong! and there is no warning...
+as.numeric(as.character(f)) ## works...
+```
+
+### Challenge
+
+The function `table()` tabulates observations.
+
+```
+expt <- c("treat1", "treat2", "treat1", "treat3", "treat1", "control",
+          "treat1", "treat2", "treat3")
+expt <- factor(expt)
+table(expt)
+```
+
+* In which order are the treatments listed?
+* How can you recreate this table with "control" listed last instead
+of first?
+
+
+## stringsAsFactors
+
+Avoid factors with `stringsAsFactors=FALSE`.
+
+```{r}
+surveys_chr <- read.csv("data/portal_data_joined.csv", stringsAsFactors=FALSE)
+```
+
+```{r}
+str(surveys_chr)
+```
+
+
+### Constructing data frames "by hand"
+
+```{r}
+df1 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
+                  feel=c("furry", "furry", "squishy", "spiny"),
+                  weight=c(45, 8, 1.1, 0.8))
+str(df1)
+
+df2 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
+                  feel=c("furry", "furry", "squishy", "spiny"),
+                  weight=c(45, 8, 1.1, 0.8), stringsAsFactors=FALSE)
+str(df2)
+```
+
+
+### Challenge
+
+There are a few mistakes in this hand crafted `data.frame`, can you spot and
+fix them? Don't hesitate to experiment!
+
+```{r, eval=FALSE}
+author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
+                          author_last=c(Darwin, Mayr, Dobzhansky),
+                          year=c(1942, 1970))
+```
+
+
+## Inspecting data frames
+
+```{r}
+dim(surveys)
+nrow(surveys)
+ncol(surveys)
+
+names(surveys)
+rownames(surveys)
+
+summary(surveys)
+```
+
+## Indexing, sequences, subsetting
+
+```{r}
+surveys[1,1]
+
+surveys[2,7]
+
+surveys[2,]
+
+sex <- surveys[,7]
+```
+
+Referring to columns.
+
+```{r, eval = FALSE}
+sex <- surveys[, "sex"]
+sex <- surveys[["sex"]]
+sex <- surveys$sex
+```
+
+
+### Treating blanks as missing
+
+Mention use of `"NA"` as the standard missing value code, and that
+this can be a problem if that's a valid value.
+
+Also that blanks in numeric columns got converted to `NA`, but blanks
+in the `sex` column were left as `""`.
+
+```{r}
+surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings="")
+```
+
+### Slices
+
+As with vectors, you can also use logical vectors when indexing.
+
+```{r}
+weights_males <- surveys[surveys$sex == 'M', "weight"]
+mean(weights_males, na.rm=TRUE)
+
+mean(surveys[surveys$sex == 'F', "weight"], na.rm=TRUE)
+```
+
+Or you can use numeric vectors. To pull out larger slices, it's
+helpful to have ways of creating sequences of numbers.
+
+First, `:`
+
+
+```{r}
+1:10
+10:1
+5:8
+```
+
+`seq` is more flexible.
+
+```{r}
+seq(1, 10, by=2)
+seq(5, 10, length.out=3)
+seq(50, by=5, length.out=10)
+seq(1, 8, by=3) # sequence stops to stay below upper limit
+seq(10, 2, by=-2)  # can also go backwards
+```
+
+Use these to take slices of the data.
+
+```{r}
+surveys[1:3, 7]   # first three elements in the 7th column
+surveys[1, 1:3]   # first three columns in the first row
+surveys[2:4, 6:7] # rows 2-4, columns 6-7
+```
+
+### Challenge
+
+1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
+   in conjuction with `seq()` to create a new `data.frame` called
+   `surveys_by_10` that includes every 10th row of the survey data frame
+   starting at row 10 (10, 20, 30, ...)
+
+2. Create a `data.frame` containing only the observations from the
+   year 1999 of the `surveys` dataset.
+
 
 
 <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>

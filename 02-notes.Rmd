@@ -1,252 +1,241 @@
 ---
 layout: topic
-title: Data and data frames (notes)
+title: Aggregating and analyzing data with dplyr (notes)
 author: Data Carpentry contributors
-minutes: 15
 ---
 
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
+surveys <- read.csv("data/portal_data_joined.csv")
 ```
 
-## Load the data
+## Key idea
 
-We first download the file:
+All that bracket-based selecting can be a bit cumbersome.
+Add-on package dplyr greatly simplifies the process; inspired by SQL.
 
-```{r, eval=FALSE}
-download.file("http://kbroman.org/datacarp/portal_data_joined.csv",
-              "data/portal_data_joined.csv")
-```
+`select`, `filter`, `mutate`, `group_by`, `summarize`
 
-We then load them into R:
+(also `tally` and `arrange`)
 
-```{r, eval=TRUE}
-surveys <- read.csv('data/portal_data_joined.csv')
-```
 
-Can also do:
+## Install and load the library
 
 ```{r eval=FALSE}
-surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
+install.packages("dplyr")
+install.packages("ggplot2")
 ```
 
-Use `head()` to view the first few rows.
-
-```{r head}
-head(surveys)
+```{r, message=FALSE}
+library(dplyr)
 ```
 
-Use `tail()` to view the last few rows.
 
+## Select and filter
 
-```{r tail}
-tail(surveys)
+Select to grab columns.
+
+```r
+selectedcol <- select(surveys, species_id, plot_type, weight)
+head(selectedcol)
 ```
 
-Use `str()` to look at the structure of the data.
 
-```{r str}
-str(surveys)
+Filter to grab rows.
+
+```{r filter}
+surveys2002 <- filter(surveys, year==2002)
+head(surveys2002)
 ```
 
-### Challenge
+## Pipe
 
-Based on the output of `str(surveys)`, can you answer the following questions?
-
-* What is the class of the object `surveys`?
-* How many rows and how many columns are in this object?
-* How many species have been recorded during these surveys?
-
-
-## Factors
-
-Factors are categorical variables. They look like a vector of
-character strings, but they're stored as integers with character
-string labels for the distinct values, called _levels_.
-
-Use `factor()` to create a vector that is a factor.
+Output of one function becomes the input to the next.
 
 ```{r}
-sex <- factor(c("male", "female", "female", "male"))
+surveys %>%
+  filter(weight < 5) %>%
+  select(species_id, sex, weight)
 ```
 
-Use `levels()` and `nlevels()` to see the levels and their number.
+<kbd>`Ctrl`</kbd> + <kbd>`Shift`</kbd> + <kbd>`M`</kbd> to insert `%>%`
+
+Could assign this to something:
 
 ```{r}
-levels(sex)
-nlevels(sex)
-```
-
-If you provide the `levels` argument to `factor()`, you'll get the
-levels in a particular order.
-
-```{r}
-food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
-levels(food)
-food <- factor(food, levels=c("low", "medium", "high"))
-levels(food)
-```
-
-Converting factors to numeric.
-
-```{r}
-f <- factor(c(1, 5, 10, 2))
-as.numeric(f)               ## wrong! and there is no warning...
-as.numeric(as.character(f)) ## works...
-```
-
-### Challenge
-
-The function `table()` tabulates observations.
-
-```
-expt <- c("treat1", "treat2", "treat1", "treat3", "treat1", "control",
-          "treat1", "treat2", "treat3")
-expt <- factor(expt)
-table(expt)
-```
-
-* In which order are the treatments listed?
-* How can you recreate this table with "control" listed last instead
-of first?
-
-
-## stringsAsFactors
-
-Avoid factors with `stringsAsFactors=FALSE`.
-
-```{r}
-surveys_chr <- read.csv("data/portal_data_joined.csv", stringsAsFactors=FALSE)
-```
-
-```{r}
-str(surveys_chr)
-```
-
-
-### Constructing data frames "by hand"
-
-```{r}
-df1 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
-                  feel=c("furry", "furry", "squishy", "spiny"),
-                  weight=c(45, 8, 1.1, 0.8))
-str(df1)
-
-df2 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
-                  feel=c("furry", "furry", "squishy", "spiny"),
-                  weight=c(45, 8, 1.1, 0.8), stringsAsFactors=FALSE)
-str(df2)
+surveys_sml <- surveys %>%
+  filter(weight < 5) %>%
+  select(species_id, sex, weight)
 ```
 
 
 ### Challenge
 
-There are a few mistakes in this hand crafted `data.frame`, can you spot and
-fix them? Don't hesitate to experiment!
-
-```{r, eval=FALSE}
-author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
-                          author_last=c(Darwin, Mayr, Dobzhansky),
-                          year=c(1942, 1970))
-```
+Using pipes, subset the data to include individuals collected before 1995,
+and retain the columns `year`, `sex`, and `weight.`
 
 
-## Inspecting data frames
+## Mutate
+
+`mutate()` to derive a new column.
 
 ```{r}
-dim(surveys)
-nrow(surveys)
-ncol(surveys)
-
-names(surveys)
-rownames(surveys)
-
-summary(surveys)
+surveys %>%
+  mutate(weight_kg = weight / 1000)
 ```
 
-## Indexing, sequences, subsetting
+To just look at the top:
 
 ```{r}
-surveys[1,1]
-
-surveys[2,7]
-
-surveys[2,]
-
-sex <- surveys[,7]
+surveys %>%
+  mutate(weight_kg = weight / 1000) %>%
+  head
 ```
 
-Referring to columns.
-
-```{r, eval = FALSE}
-sex <- surveys[, "sex"]
-sex <- surveys[["sex"]]
-sex <- surveys$sex
-```
-
-
-### Treating blanks as missing
-
-Mention use of `"NA"` as the standard missing value code, and that
-this can be a problem if that's a valid value.
-
-Also that blanks in numeric columns got converted to `NA`, but blanks
-in the `sex` column were left as `""`.
+Filter out `NA`s:
 
 ```{r}
-surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings="")
-```
-
-### Slices
-
-As with vectors, you can also use logical vectors when indexing.
-
-```{r}
-weights_males <- surveys[surveys$sex == 'M', "weight"]
-mean(weights_males, na.rm=TRUE)
-
-mean(surveys[surveys$sex == 'F', "weight"], na.rm=TRUE)
-```
-
-Or you can use numeric vectors. To pull out larger slices, it's
-helpful to have ways of creating sequences of numbers.
-
-First, `:`
-
-
-```{r}
-1:10
-10:1
-5:8
-```
-
-`seq` is more flexible.
-
-```{r}
-seq(1, 10, by=2)
-seq(5, 10, length.out=3)
-seq(50, by=5, length.out=10)
-seq(1, 8, by=3) # sequence stops to stay below upper limit
-seq(10, 2, by=-2)  # can also go backwards
-```
-
-Use these to take slices of the data.
-
-```{r}
-surveys[1:3, 7]   # first three elements in the 7th column
-surveys[1, 1:3]   # first three columns in the first row
-surveys[2:4, 6:7] # rows 2-4, columns 6-7
+surveys %>%
+  filter(!is.na(weight)) %>%
+  mutate(weight_kg = weight / 1000) %>%
+  head
 ```
 
 ### Challenge
 
-1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
-   in conjuction with `seq()` to create a new `data.frame` called
-   `surveys_by_10` that includes every 10th row of the survey data frame
-   starting at row 10 (10, 20, 30, ...)
+Create a new dataframe from the survey data that meets the following
+criteria: contains only the `species_id` column and a column that contains
+values that are the square-root of `hindfoot_length` values (e.g. a new column
+`hindfoot_sqrt`). In this `hindfoot_sqrt` column, there are no NA values
+and all values are < 3.
 
-2. Create a `data.frame` containing only the observations from the
-   year 1999 of the `surveys` dataset.
+Hint: think about how the commands should be ordered
+
+### split-apply-combine data analyses (group-by and summarize)
+
+Many analyses fit a split-apply-combine pattern: split the data into
+groups, apply some analysis to each group, and then combine the
+results.
+
+With dplyr, we use `group_by()` for the splitting and `tally` or
+`summarize()` for the rest.
+
+Count individuals by sex:
+
+```{r}
+surveys %>%
+  group_by(sex) %>%
+  tally()
+```
+
+Average weight by sex:
+
+```{r}
+surveys %>%
+  group_by(sex) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE))
+```
+
+Can group by multiple columns:
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE))
+```
+
+Maybe filter those `NA`s
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+  filter(!is.na(mean_weight))
+```
+
+Another thing we might do here is sort rows by `mean_weight`, using
+`arrange()`.
+
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+    filter(!is.na(mean_weight)) %>%
+    arrange(mean_weight)
+```
+
+If you want them sorted from highest to lowest, use `desc()`.
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE)) %>%
+    filter(!is.na(mean_weight)) %>%
+    arrange(desc(mean_weight))
+```
+
+Also note that you can include multiple summaries.
+
+```{r}
+surveys %>%
+  group_by(sex, species_id) %>%
+  summarize(mean_weight = mean(weight, na.rm = TRUE),
+            min_weight = min(weight, na.rm = TRUE)) %>%
+    filter(!is.na(mean_weight)) %>%
+    arrange(desc(mean_weight))
+```
+
+### Challenge
+
+How many times was each `plot_type` surveyed?
+
+
+### Challenge
+
+Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
+length for each species.
+
+### Challenge
+
+What was the heaviest animal measured in each year? Return the columns `year`,
+`genus`, `species`, and `weight`.
+
+
+## Data cleaning preparations
+
+In preparations for the plotting, let's do a bit of data cleaning:
+remove rows with missing `species_id`, `weight`, `hindfoot_length`, or
+`sex`.
+
+```{r clean_data_1}
+surveys_complete <- surveys %>%
+    filter(species_id != "", !is.na(weight)) %>%
+    filter(!is.na(hindfoot_length), sex != "")
+```
+
+There are a lot of species with low counts. Let's remove the species
+with less than 10 counts.
+
+```{r}
+# count records per species
+species_counts <- surveys_complete %>%
+    group_by(species_id) %>%
+    tally
+
+head(species_counts)
+
+# get names of the species with counts >= 10
+frequent_species <-  species_counts %>%
+    filter(n >= 10) %>%
+    select(species_id)
+
+# filter out the less-frequent species
+surveys_complete <- surveys_complete %>%
+    filter(species_id %in% frequent_species$species_id)
+```
+
+
 
 
 

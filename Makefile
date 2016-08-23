@@ -6,9 +6,9 @@ all: pages challenge_slides.html capstone_soln/capstone_soln.html
 motivation.html: motivation.md
 	pandoc -o $@ $^
 
-pages: motivation.html 01-intro-to-R.html 02-data-frames.html 03-dplyr.html 04-ggplot2.html 05-rmarkdown.html capstone.html 01-notes.html 02-notes.html 03-notes.html 04-notes.html
+pages: motivation.html 01-intro-to-R.html 02-dplyr.html 03-ggplot2.html 04-rmarkdown.html capstone.html 01-notes.html 02-notes.html 03-notes.html
 
-challenge_slides.Rmd: ruby/make_challenge_slides.rb 01-intro-to-R.Rmd 02-data-frames.Rmd 03-dplyr.Rmd 04-ggplot2.Rmd capstone.Rmd
+challenge_slides.Rmd: ruby/make_challenge_slides.rb 01-intro-to-R.Rmd 02-dplyr.Rmd 03-ggplot2.Rmd 04-rmarkdown.Rmd capstone.Rmd
 	$<
 
 challenge_slides.html: challenge_slides.Rmd
