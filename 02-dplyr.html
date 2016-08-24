@@ -311,8 +311,10 @@ frequent_species &lt;-<span class="st">  </span>species_counts %&gt;%
 <span class="st">    </span><span class="kw">select</span>(species_id)
 
 <span class="co"># filter out the less-frequent species</span>
-surveys_complete &lt;-<span class="st"> </span>surveys_complete %&gt;%
+reduced &lt;-<span class="st"> </span>surveys_complete %&gt;%
 <span class="st">    </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span>frequent_species$species_id)</code></pre></div>
+<p>We might save this to a file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(reduced, <span class="st">&quot;CleanData/portal_data_reduced.csv&quot;</span>)</code></pre></div>
 <p><a href="http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Handy dplyr cheatsheet</a></p>
 </div>
 </div>

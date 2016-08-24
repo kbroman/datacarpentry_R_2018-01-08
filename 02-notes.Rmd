@@ -235,6 +235,11 @@ surveys_complete <- surveys_complete %>%
     filter(species_id %in% frequent_species$species_id)
 ```
 
+We might save this to a file:
+
+```{r save_reduced_data_to_file, eval=FALSE}
+write.csv(reduced, "CleanData/portal_data_reduced.csv")
+```
 
 
 

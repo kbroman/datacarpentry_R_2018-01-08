@@ -299,9 +299,16 @@ frequent_species <-  species_counts %>%
     select(species_id)
 
 # filter out the less-frequent species
-surveys_complete <- surveys_complete %>%
+reduced <- surveys_complete %>%
     filter(species_id %in% frequent_species$species_id)
 ```
+
+We might save this to a file:
+
+```{r save_reduced_data_to_file, eval=FALSE}
+write.csv(reduced, "CleanData/portal_data_reduced.csv")
+```
+
 
 
 [Handy dplyr cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
