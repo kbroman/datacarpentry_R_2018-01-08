@@ -13,8 +13,9 @@ Study the output of `str(surveys)`. How are the missing values being treated?
 # Challenge 2
 
 
-The function `nrow()` on a `data.frame` returns the number of rows. Use it,
-in conjuction with `seq()` to create a new `data.frame` called
+The function `nrow()` on a `data.frame` returns the number of rows.
+
+Use `nrow()`, in conjuction with `seq()` to create a new `data.frame` called
 `surveys_by_10` that includes every 10th row of the survey data frame
 starting at row 10 (10, 20, 30, ...)
 
@@ -53,9 +54,12 @@ and retain the columns `year`, `sex`, and `weight.`
 
 
 Create a new dataframe from the survey data that meets the following
-criteria: contains only the `species_id` column and a column that contains
+criteria:
+
+- contains only the `species_id` column and a column that contains
 values that are the square-root of `hindfoot_length` values (e.g. a new column
-`hindfoot_sqrt`). In this `hindfoot_sqrt` column, there are no NA values
+`hindfoot_sqrt`).
+- In this `hindfoot_sqrt` column, there are no NA values
 and all values are < 3.
 
 Hint: think about how the commands should be ordered
