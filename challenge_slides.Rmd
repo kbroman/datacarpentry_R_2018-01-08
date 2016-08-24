@@ -5,13 +5,7 @@ output: slidy_presentation
 # Challenge 1
 
 
-What is the value of `y` after doing the following?
-
-```{r, eval=FALSE}
-x <- 50
-y <- x * 2
-x <- 80
-```
+Study the output of `str(surveys)`. How are the missing values being treated?
 
 
 ---
@@ -19,80 +13,15 @@ x <- 80
 # Challenge 2
 
 
-What happens to vectors with mixed types?
-
-```{r, echo=TRUE, eval=FALSE}
-x <- c(1, 2, 3, 'a')
-
-y <- c(1, 2, 3, TRUE)
-
-z <- c('a', TRUE, 'b', 'c')
-
-tricky <- c(1, '2', 3, 4)
-```
-
-Hint: use `class()`
+The function `nrow()` on a `data.frame` returns the number of rows. Use it,
+in conjuction with `seq()` to create a new `data.frame` called
+`surveys_by_10` that includes every 10th row of the survey data frame
+starting at row 10 (10, 20, 30, ...)
 
 
 ---
 
 # Challenge 3
-
-
-Consider the `animals` vector.
-
-```{r eval=FALSE}
-animals <- c("mouse", "rat", "dog", "cat")
-```
-
-Subset to get the 2nd and 3rd values.
-
-
----
-
-# Challenge 4
-
-
-Consider the following two vectors.
-
-```{r, eval=FALSE}
-animals <- c("mouse", "rat", "cat", "dog")
-weights <- c(30, 180, 4000, 8000)
-```
-
-Subset `animals` with `weights < 200`.
-
-
----
-
-# Challenge 5
-
-
-Why does the following give an error?
-
-```{r mean_na, eval=FALSE}
-v <- c(2, 4, 4, "NA", 6)
-mean(v, na.rm=TRUE)
-```
-
-Why does the error message say the data are not numeric?
-
-
----
-
-# Challenge 6
-
-
-Based on the output of `str(surveys)`, can you answer the following questions?
-
-* What is the class of the object `surveys`?
-* How many rows and how many columns are in this object?
-* How many species have been recorded during these surveys?
-
-
----
-
-# Challenge 7
 
 
 The function `table()` tabulates observations.
@@ -111,36 +40,7 @@ of first?
 
 ---
 
-# Challenge 8
-
-
-There are a few mistakes in this hand crafted `data.frame`, can you spot and
-fix them? Don't hesitate to experiment!
-
-```{r, eval=FALSE}
-author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
-                          author_last=c(Darwin, Mayr, Dobzhansky),
-                          year=c(1942, 1970))
-```
-
-
----
-
-# Challenge 9
-
-
-1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
-   in conjuction with `seq()` to create a new `data.frame` called
-   `surveys_by_10` that includes every 10th row of the survey data frame
-   starting at row 10 (10, 20, 30, ...)
-
-1. Create a `data.frame` containing only the observations from the
-   year 1999 of the `surveys` dataset.
-
-
----
-
-# Challenge 10
+# Challenge 4
 
 
 Using pipes, subset the data to include individuals collected before 1995,
@@ -149,7 +49,7 @@ and retain the columns `year`, `sex`, and `weight.`
 
 ---
 
-# Challenge 11
+# Challenge 5
 
 
 Create a new dataframe from the survey data that meets the following
@@ -163,7 +63,7 @@ Hint: think about how the commands should be ordered
 
 ---
 
-# Challenge 12
+# Challenge 6
 
 
 How many times was each `plot_type` surveyed?
@@ -171,7 +71,7 @@ How many times was each `plot_type` surveyed?
 
 ---
 
-# Challenge 13
+# Challenge 7
 
 
 Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
@@ -180,7 +80,7 @@ length for each species.
 
 ---
 
-# Challenge 14
+# Challenge 8
 
 
 What was the heaviest animal measured in each year? Return the columns `year`,
@@ -191,7 +91,7 @@ Hint: Use `filter()` rather than `summarize()`.
 
 ---
 
-# Challenge 15
+# Challenge 9
 
 
 Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
@@ -200,7 +100,7 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 
 ---
 
-# Challenge 16
+# Challenge 10
 
 
 Use dplyr to calculate the mean `weight` and `hindfoot_length` as well
@@ -212,7 +112,7 @@ the sizes of the points corresponding to the sample size.
 
 ---
 
-# Challenge 17
+# Challenge 11
 
 
 Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
@@ -220,7 +120,7 @@ Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
 
 ---
 
-# Challenge 18
+# Challenge 12
 
 
 Try using `geom_histogram()` to make a histogram visualization of the
@@ -232,7 +132,7 @@ in `geom_histogram()`.
 
 ---
 
-# Challenge 19
+# Challenge 13
 
 
 A variant on the box plot is the violin plot. Use `geom_violin()` to
@@ -241,7 +141,7 @@ make violin plots of `hindfoot_length` by `species_id`.
 
 ---
 
-# Challenge 20
+# Challenge 14
 
 
 - Calculate counts grouped by year, species_id, and sex
@@ -253,7 +153,7 @@ make violin plots of `hindfoot_length` by `species_id`.
 
 ---
 
-# Challenge 21
+# Challenge 15
 
 
 - Create a new R Markdown document.
@@ -264,7 +164,7 @@ text, and an itemized list).
 
 ---
 
-# Challenge 22
+# Challenge 16
 
 
 Add code chunks to
@@ -276,7 +176,7 @@ Add code chunks to
 
 ---
 
-# Challenge 23
+# Challenge 17
 
 
 Use chunk options to control the size of a figure and to hide the
@@ -285,7 +185,7 @@ code.
 
 ---
 
-# Challenge 24
+# Challenge 18
 
 
 Try out a bit of in-line R code.

@@ -50,54 +50,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <body>
 <div id="challenge-1" class="slide section level1">
 <h1>Challenge 1</h1>
-<p>What is the value of <code>y</code> after doing the following?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">50</span>
-y &lt;-<span class="st"> </span>x *<span class="st"> </span><span class="dv">2</span>
-x &lt;-<span class="st"> </span><span class="dv">80</span></code></pre></div>
+<p>Study the output of <code>str(surveys)</code>. How are the missing values being treated?</p>
 </div>
 <div id="challenge-2" class="slide section level1">
 <h1>Challenge 2</h1>
-<p>What happens to vectors with mixed types?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">'a'</span>)
-
-y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)
-
-z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'a'</span>, <span class="ot">TRUE</span>, <span class="st">'b'</span>, <span class="st">'c'</span>)
-
-tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="st">'2'</span>, <span class="dv">3</span>, <span class="dv">4</span>)</code></pre></div>
-<p>Hint: use <code>class()</code></p>
+<p>The function <code>nrow()</code> on a <code>data.frame</code> returns the number of rows. Use it, in conjuction with <code>seq()</code> to create a new <code>data.frame</code> called <code>surveys_by_10</code> that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)</p>
 </div>
 <div id="challenge-3" class="slide section level1">
 <h1>Challenge 3</h1>
-<p>Consider the <code>animals</code> vector.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
-<p>Subset to get the 2nd and 3rd values.</p>
-</div>
-<div id="challenge-4" class="slide section level1">
-<h1>Challenge 4</h1>
-<p>Consider the following two vectors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
-weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">180</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
-<p>Subset <code>animals</code> with <code>weights &lt; 200</code>.</p>
-</div>
-<div id="challenge-5" class="slide section level1">
-<h1>Challenge 5</h1>
-<p>Why does the following give an error?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)
-<span class="kw">mean</span>(v, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
-<p>Why does the error message say the data are not numeric?</p>
-</div>
-<div id="challenge-6" class="slide section level1">
-<h1>Challenge 6</h1>
-<p>Based on the output of <code>str(surveys)</code>, can you answer the following questions?</p>
-<ul>
-<li>What is the class of the object <code>surveys</code>?</li>
-<li>How many rows and how many columns are in this object?</li>
-<li>How many species have been recorded during these surveys?</li>
-</ul>
-</div>
-<div id="challenge-7" class="slide section level1">
-<h1>Challenge 7</h1>
 <p>The function <code>table()</code> tabulates observations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat3&quot;</span>, <span class="st">&quot;treat1&quot;</span>,
           <span class="st">&quot;control&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat3&quot;</span>)
@@ -108,82 +68,68 @@ expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
 <li>How can you recreate this table with “<code>control</code>” listed last instead of first?</li>
 </ul>
 </div>
-<div id="challenge-8" class="slide section level1">
-<h1>Challenge 8</h1>
-<p>There are a few mistakes in this hand crafted <code>data.frame</code>, can you spot and fix them? Don’t hesitate to experiment!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">author_book &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">author_first=</span><span class="kw">c</span>(<span class="st">&quot;Charles&quot;</span>, <span class="st">&quot;Ernst&quot;</span>, <span class="st">&quot;Theodosius&quot;</span>),
-                          <span class="dt">author_last=</span><span class="kw">c</span>(Darwin, Mayr, Dobzhansky),
-                          <span class="dt">year=</span><span class="kw">c</span>(<span class="dv">1942</span>, <span class="dv">1970</span>))</code></pre></div>
-</div>
-<div id="challenge-9" class="slide section level1">
-<h1>Challenge 9</h1>
-<ol style="list-style-type: decimal">
-<li><p>The function <code>nrow()</code> on a <code>data.frame</code> returns the number of rows. Use it, in conjuction with <code>seq()</code> to create a new <code>data.frame</code> called <code>surveys_by_10</code> that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)</p></li>
-<li><p>Create a <code>data.frame</code> containing only the observations from the year 1999 of the <code>surveys</code> dataset.</p></li>
-</ol>
-</div>
-<div id="challenge-10" class="slide section level1">
-<h1>Challenge 10</h1>
+<div id="challenge-4" class="slide section level1">
+<h1>Challenge 4</h1>
 <p>Using pipes, subset the data to include individuals collected before 1995, and retain the columns <code>year</code>, <code>sex</code>, and <code>weight.</code></p>
 </div>
-<div id="challenge-11" class="slide section level1">
-<h1>Challenge 11</h1>
+<div id="challenge-5" class="slide section level1">
+<h1>Challenge 5</h1>
 <p>Create a new dataframe from the survey data that meets the following criteria: contains only the <code>species_id</code> column and a column that contains values that are the square-root of <code>hindfoot_length</code> values (e.g. a new column <code>hindfoot_sqrt</code>). In this <code>hindfoot_sqrt</code> column, there are no NA values and all values are &lt; 3.</p>
 <p>Hint: think about how the commands should be ordered</p>
 </div>
-<div id="challenge-12" class="slide section level1">
-<h1>Challenge 12</h1>
+<div id="challenge-6" class="slide section level1">
+<h1>Challenge 6</h1>
 <p>How many times was each <code>plot_type</code> surveyed?</p>
 </div>
-<div id="challenge-13" class="slide section level1">
-<h1>Challenge 13</h1>
+<div id="challenge-7" class="slide section level1">
+<h1>Challenge 7</h1>
 <p>Use <code>group_by()</code> and <code>summarize()</code> to find the mean, min, and max hindfoot length for each species.</p>
 </div>
-<div id="challenge-14" class="slide section level1">
-<h1>Challenge 14</h1>
+<div id="challenge-8" class="slide section level1">
+<h1>Challenge 8</h1>
 <p>What was the heaviest animal measured in each year? Return the columns <code>year</code>, <code>genus</code>, <code>species</code>, and <code>weight</code>.</p>
 <p>Hint: Use <code>filter()</code> rather than <code>summarize()</code>.</p>
 </div>
-<div id="challenge-15" class="slide section level1">
-<h1>Challenge 15</h1>
+<div id="challenge-9" class="slide section level1">
+<h1>Challenge 9</h1>
 <p>Make a scatterplot of <code>hindfoot_length</code> vs <code>weight</code>, but only for the <code>species_id</code>, <code>&quot;DM&quot;</code>.</p>
 </div>
-<div id="challenge-16" class="slide section level1">
-<h1>Challenge 16</h1>
+<div id="challenge-10" class="slide section level1">
+<h1>Challenge 10</h1>
 <p>Use dplyr to calculate the mean <code>weight</code> and <code>hindfoot_length</code> as well as the sample size for each species.</p>
 <p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, with the sizes of the points corresponding to the sample size.</p>
 </div>
-<div id="challenge-17" class="slide section level1">
-<h1>Challenge 17</h1>
+<div id="challenge-11" class="slide section level1">
+<h1>Challenge 11</h1>
 <p>Make a plot of counts of <code>species_id</code> <code>&quot;DM&quot;</code> and <code>&quot;DS&quot;</code> by year.</p>
 </div>
-<div id="challenge-18" class="slide section level1">
-<h1>Challenge 18</h1>
+<div id="challenge-12" class="slide section level1">
+<h1>Challenge 12</h1>
 <p>Try using <code>geom_histogram()</code> to make a histogram visualization of the distribution of <code>weight</code>.</p>
 <p>Hint: You want <code>weight</code> as the x-axis aesthetic. Try specifying <code>bins</code> in <code>geom_histogram()</code>.</p>
 </div>
-<div id="challenge-19" class="slide section level1">
-<h1>Challenge 19</h1>
+<div id="challenge-13" class="slide section level1">
+<h1>Challenge 13</h1>
 <p>A variant on the box plot is the violin plot. Use <code>geom_violin()</code> to make violin plots of <code>hindfoot_length</code> by <code>species_id</code>.</p>
 </div>
-<div id="challenge-20" class="slide section level1">
-<h1>Challenge 20</h1>
+<div id="challenge-14" class="slide section level1">
+<h1>Challenge 14</h1>
 <ul>
 <li><p>Calculate counts grouped by year, species_id, and sex</p></li>
 <li><p>make the faceted plot splitting further by sex (within each panel)</p></li>
 <li><p>color by sex rather than species</p></li>
 </ul>
 </div>
-<div id="challenge-21" class="slide section level1">
-<h1>Challenge 21</h1>
+<div id="challenge-15" class="slide section level1">
+<h1>Challenge 15</h1>
 <ul>
 <li>Create a new R Markdown document.</li>
 <li>Delete all of the R code chunks and write a bit of Markdown (some sections, some italicized text, and an itemized list).</li>
 <li>Convert the document to a webpage.</li>
 </ul>
 </div>
-<div id="challenge-22" class="slide section level1">
-<h1>Challenge 22</h1>
+<div id="challenge-16" class="slide section level1">
+<h1>Challenge 16</h1>
 <p>Add code chunks to</p>
 <ul>
 <li>Load the ggplot2 package</li>
@@ -191,12 +137,12 @@ expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
 <li>Create a plot</li>
 </ul>
 </div>
-<div id="challenge-23" class="slide section level1">
-<h1>Challenge 23</h1>
+<div id="challenge-17" class="slide section level1">
+<h1>Challenge 17</h1>
 <p>Use chunk options to control the size of a figure and to hide the code.</p>
 </div>
-<div id="challenge-24" class="slide section level1">
-<h1>Challenge 24</h1>
+<div id="challenge-18" class="slide section level1">
+<h1>Challenge 18</h1>
 <p>Try out a bit of in-line R code.</p>
 </div>
 <div id="capstone-project" class="slide section level1">

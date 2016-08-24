@@ -5,7 +5,7 @@ author: Data Carpentry contributors
 minutes: 45
 ---
 
-```{r, echo=FALSE}
+```{r knitr_options, echo=FALSE}
 knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-')
 ```
 
@@ -82,32 +82,7 @@ You can use R as a calculator in this way.
 4^6
 log(4)
 log10(4)
-log(4, 10)
 ```
-
-Here `log` is a _function_ that gives you the natural logarithm. Much of
-your calculations in R will be through functions. The value in the
-parentheses is called the function "argument". `log10` is another
-function, that calculates the log base 10. There can be more than
-one argument, and some of them may have default values. `log` has a
-second argument `base` whose default (the value if left unspecified)
-is _e_.
-
-### Getting help
-
-If you type `log` and pause for a moment, you'll get a pop-up with
-information about the function.
-
-Alternatively, you could type
-
-```{r help, eval=FALSE}
-?log
-```
-
-and the documentation for the function will show up in the lower-right
-pane. These are often a bit _too_ detailed, and so they take some
-practice to read. I generally focus on Usage and Arguments, and then
-on Examples at the bottom. We'll talk more about getting help later.
 
 ## Need for Scripts
 
@@ -187,344 +162,7 @@ code does within the code itself, so comment liberally in your R scripts.
 
 
 
-
-
-
-
-
-
-## Assignment operator
-
-We can assign names to numbers and other objects with the assignment
-operator, `<-`. For example:
-
-```{r assign}
-age <- 2016-1969
-```
-
-Type that into your script, and use <kbd>`Ctrl`</kbd> +
-<kbd>`Enter`</kbd> to paste it to the console.
-
-You can also use `=` as assignment, but that symbol can have other
-meanings, and so I recommend sticking with the `<-` combination.
-
-In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write ` <- ` in
-a single keystroke.
-
-If you've assigned a number to an object, you can then use it in
-further calculations:
-
-```{r sqrt, results='show'}
-sqrt(age)
-```
-
-You can assigned _that_ to something, and then use it.
-
-```{r round_sqrt_age}
-sqrt_age <- sqrt(age)
-round(sqrt_age)
-round(sqrt_age, 2)
-```
-
-## Object names
-
-Objects can be given any name such as `x`, `current_temperature`, or
-`subject_id`. You want your object names to be explicit and not too
-long.
-
-They cannot start with a number (`2x` is not valid, but `x2` is).
-
-R is case sensitive
-(e.g., `weight_kg` is different from `Weight_kg`). There are some names that
-cannot be used because they are the names of fundamental functions in R (e.g.,
-`if`, `else`, `for`, see
-[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
-for a complete list).
-
-In general, even if it's allowed, it's best to not use
-other function names (e.g., `c`, `T`, `mean`, `data`, `df`, `weights`). In doubt
-check the help to see if the name is already in use.
-
-It's also best to avoid
-dots (`.`) within a variable name as in `my.dataset`. There are many functions
-in R with dots in their names for historical reasons, but because dots have a
-special meaning in R (for methods) and other programming languages, it's best to
-avoid them. It is also recommended to use nouns for variable names, and verbs
-for function names. It's important to be consistent in the styling of your code
-(where you put spaces, how you name variable, etc.). In R, two popular style
-guides are [Hadley Wickham's](http://adv-r.had.co.nz/Style.html) and
-[Google's](https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml).
-
-
-### Challenge
-
-What is the value of `y` after doing the following?
-
-```{r, eval=FALSE}
-x <- 50
-y <- x * 2
-x <- 80
-```
-
-<!-- end challenge -->
-
-Objects don't get linked to each other, so if you change one, it won't
-affect the values of any others.
-
-## Objects in your workspace
-
-The objects you create get added to your "workspace". You can list the
-current objects with `ls()`.
-
-```{r ls}
-ls()
-```
-
-RStudio also shows thee objects in the Environment panel.
-
-
-## Vectors and data types
-
-```{r, echo=FALSE, purl=TRUE}
-### Vectors and data types
-```
-
-A vector is a group of values, mainly either numbers or characters. You can
-assign this set of values to a variable, just like you would for one item. For
-example we can create a vector of animal weights:
-
-```{r}
-weights <- c(30, 100, 4000, 8000)
-```
-
-A vector can also contain text (character strings):
-
-```{r}
-animals <- c("rat", "cat")
-```
-
-There are many functions that allow you to inspect the content of a
-vector. `length()` tells you how many elements are in a particular vector:
-
-```{r}
-length(weights)
-length(animals)
-```
-
-An important feature of a vector, is that all of the elements are the same type of data.
-The function `class()` indicates the class (the type of element) of an object:
-
-```{r}
-class(weights)
-class(animals)
-```
-
-The function `str()` provides an overview of the object and the elements it
-contains. It is a really useful function when working with large and complex
-objects:
-
-```{r}
-str(weights)
-str(animals)
-```
-
-You can add elements to your vector by using the `c()` function:
-
-```{r}
-animals <- c(animals, "dog") # adding at the end of the vector
-animals <- c("mouse", animals) # adding at the beginning of the vector
-```
-
-What happens here is that we take the original vector `animals`, and we are
-adding another item first to the end of the other ones, and then another item at
-the beginning. We can do this over and over again to grow a vector, or assemble
-a dataset. As we program, this may be useful to add results that we are
-collecting or calculating.
-
-We just saw 2 of the 6 **atomic vector** types that R uses: `"character"` and
-`"numeric"`. These are the basic building blocks that all R objects are built
-from. The other 4 are:
-
-* `"logical"` for `TRUE` and `FALSE` (the boolean data type)
-* `"integer"` for integer numbers (e.g., `2L`, the `L` indicates to R that it's an integer)
-* `"complex"` to represent complex numbers (e.g. `1+4i`)
-* `"raw"` that we won't discuss further
-
-Vectors are one of the many **data structures** that R uses. Other important
-ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`) and
-factors (`factor`).
-
-
-### Challenge
-
-What happens to vectors with mixed types?
-
-```{r, echo=TRUE, eval=FALSE}
-x <- c(1, 2, 3, 'a')
-
-y <- c(1, 2, 3, TRUE)
-
-z <- c('a', TRUE, 'b', 'c')
-
-tricky <- c(1, '2', 3, 4)
-```
-
-Hint: use `class()`
-
-<!-- end challenge -->
-
-Vectors must all be of one type, and so R converts them.
-
-`logical` → `numeric` → `character`
-
-
-## Subsetting vectors
-
-If we want to extract one or several values from a vector, we must provide one
-or several indices in square brackets. For instance:
-
-```{r, results='show'}
-animals <- c("mouse", "rat", "dog", "cat")
-animals[2]
-animals[c(1, 4)]
-```
-
-We can also repeat the indices to create an object with more elements than the
-original one:
-
-```{r, results='show'}
-more_animals <- animals[c(1, 2, 3, 2, 1, 4)]
-```
-
-R indexes start at 1. Programming languages like Fortran, MATLAB, and R start
-counting at 1, because that's what human beings typically do. Languages in the C
-family (including C++, Java, Perl, and Python) count from 0 because that's
-simpler for computers to do.
-
-### Challenge
-
-Consider the `animals` vector.
-
-```{r eval=FALSE}
-animals <- c("mouse", "rat", "dog", "cat")
-```
-
-Subset to get the 2nd and 3rd values.
-
-<!-- end challenge -->
-
-### Conditional subsetting
-
-Another common way of subsetting is by using a logical vector: `TRUE` will
-select the element with the same index, while `FALSE` will not:
-
-```{r, results='show'}
-x <- c(21, 54, 39, 17, 55)
-x[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
-```
-
-Typically, these logical vectors are not typed by hand, but are the output of
-other functions or logical tests. For instance, if you wanted to select only the
-values above 50:
-
-```{r, results='show'}
-x > 50    # will return logicals with TRUE for the indices that meet the condition
-## so we can use this to select only the values above 50
-x[x > 50]
-```
-
-You can combine multiple tests using `&` (both conditions are true, AND) or `|`
-(at least one of the conditions is true, OR):
-
-```{r, results='show'}
-x[x < 30 | x > 50]
-x[x > 30 & x < 50]
-```
-
-When working with vectors of characters, if you are trying to combine many
-conditions it can become tedious to type. The function `%in%` allows you to test
-if a value if found in a vector:
-
-```{r, results='show'}
-animals <- c("mouse", "rat", "dog", "cat")
-animals[animals == "cat" | animals == "rat"] # returns both rat and cat
-animals %in% c("rat", "cat", "dog", "duck")
-animals[animals %in% c("rat", "cat", "dog", "duck")]
-```
-
-### Challenge
-
-Consider the following two vectors.
-
-```{r, eval=FALSE}
-animals <- c("mouse", "rat", "cat", "dog")
-weights <- c(30, 180, 4000, 8000)
-```
-
-Subset `animals` with `weights < 200`.
-
-<!-- end challenge -->
-
-
-
-## Missing data
-
-As R was designed to analyze datasets, it includes the concept of missing data
-(which is uncommon in other programming languages). Missing data are represented
-in vectors as `NA`.
-
-```{r}
-heights <- c(2, 4, 4, NA, 6)
-```
-
-When doing operations on numbers, most functions will return `NA` if the data
-you are working with include missing values. It is a safer behavior as otherwise
-you may overlook that you are dealing with missing data. You can add the
-argument `na.rm=TRUE` to calculate the result while ignoring the missing values.
-
-```{r}
-mean(heights)
-max(heights)
-mean(heights, na.rm = TRUE)
-max(heights, na.rm = TRUE)
-```
-
-If your data include missing values, you may want to become familiar with the
-functions `is.na()` and `na.omit()`.
-examples.
-
-
-```{r}
-## Extract those elements which are not missing values.
-heights[!is.na(heights)]
-## shortcut to that
-na.omit(heights)
-```
-
-
-### Challenge
-
-Why does the following give an error?
-
-```{r mean_na, eval=FALSE}
-v <- c(2, 4, 4, "NA", 6)
-mean(v, na.rm=TRUE)
-```
-
-Why does the error message say the data are not numeric?
-
-<!-- end challenge -->
-
-```{r, echo=FALSE, message = FALSE}
-source("setup.R")
-```
-
-------------
-
-
-------------
-
-## Presentation of the Survey Data
+## Plunge straight into the Survey Data
 
 We will continue to look at the species and weight of animals caught
 in plots in a study area in Arizona over time. The dataset is stored
@@ -549,25 +187,100 @@ columns represent:
 
 The data are available at <http://kbroman.org/datacarp/portal_data_joined.csv>.
 
-We first use `download_file()` to download the data into the `data/` subdirectory:
+We can read that data straight from the web, as follows
 
-```{r, eval=FALSE, purl=TRUE}
-download.file("http://kbroman.org/datacarp/portal_data_joined.csv",
-              "data/portal_data_joined.csv")
-```
-
-We then use `read.csv()` to load the data into R:
-
-```{r, eval=TRUE}
-surveys <- read.csv('data/portal_data_joined.csv')
-```
-
-We can actually use `read.csv` to grab the data directly from the web,
-but it's probably best to download a copy first.
-
-```{r eval=FALSE}
+```{r read_csv_from_web}
 surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
 ```
+
+
+### Functions
+
+`read.csv` is a "function". It does something, and "returns" some
+result.
+
+The file name in quotes is called the function "argument": the
+function's "input".
+
+`read.csv` will read in the data from that file, and then spit the
+data back out.
+
+
+### Assignment operator
+
+The `<-` symbol is used to assign the data to an object. In other
+words, it gives the data a name.
+
+You can also use `=` as assignment, but that symbol can have other
+meanings, and so I recommend sticking with the `<-` combination.
+
+In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write ` <- ` in
+a single keystroke.
+
+
+### Objects in your workspace
+
+The objects you create get added to your "workspace". You can list the
+current objects with `ls()`.
+
+```{r ls}
+ls()
+```
+
+RStudio also shows the objects in the Environment panel.
+
+
+### Object names
+
+Objects can be given any name such as `x`, `current_temperature`, or
+`subject_id`. You want your object names to be explicit and not too
+long.
+
+They cannot start with a number (`2x` is not valid, but `x2` is).
+
+R is case sensitive
+(e.g., `weight_kg` is different from `Weight_kg`). There are some names that
+cannot be used because they are the names of fundamental functions in R (e.g.,
+`if`, `else`, `for`, see
+[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
+for a complete list).
+
+In general, even if it's allowed, it's best to not use
+other function names (e.g., `c`, `T`, `mean`, `data`, `df`,
+`weights`). If in doubt, type the name to see if it's already in use.
+
+It's also best to avoid
+dots (`.`) within a variable name as in `my.dataset`. There are many functions
+in R with dots in their names for historical reasons, but because dots have a
+special meaning in R (for methods) and other programming languages, it's best to
+avoid them. It is also recommended to use nouns for variable names, and verbs
+for function names. It's important to be consistent in the styling of your code
+(where you put spaces, how you name variable, etc.). In R, two popular style
+guides are [Hadley Wickham's](http://adv-r.had.co.nz/Style.html) and
+[Google's](https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml).
+
+
+
+### Getting help
+
+If you type `read.csv` and pause for a moment, you'll get a pop-up with
+information about the function.
+
+Alternatively, you could type
+
+```{r help, eval=FALSE}
+?read.csv
+```
+
+and the documentation for the function will show up in the lower-right
+pane. These are often a bit _too_ detailed, and so they take some
+practice to read. I generally focus on Usage and Arguments, and then
+on Examples at the bottom. We'll talk more about getting help later.
+
+
+
+
+## Data frames
 
 The data are stored in what's called a "data frame". It's a big
 rectangle, with rows being observations and columns being
@@ -592,20 +305,238 @@ Use `str()` to look at the structure of the data.
 str(surveys)
 ```
 
+This shows that there are `r nrow(surveys)` rows and `r ncol(surveys)`
+columns, and then for each column, it gives information about the data
+type and shows the first few values.
+
+For these data, the columns have two types: integer, or "Factor".
+Factor columns are text with a discrete set of possible values. We'll
+come back to this in a bit.
+
 ### Challenge
 
-Based on the output of `str(surveys)`, can you answer the following questions?
-
-* What is the class of the object `surveys`?
-* How many rows and how many columns are in this object?
-* How many species have been recorded during these surveys?
+Study the output of `str(surveys)`. How are the missing values being treated?
 
 <!-- end challenge -->
 
-As you can see, many of the columns consist of integers, however, the columns
-`species` and `sex` are of a special class called a `factor`. Before we learn
-more about the `data.frame` class, let's talk about factors. They are very
-useful but not necessarily intuitive, and therefore require some attention.
+### Another summary
+
+Another useful function in `summary()`.
+
+```{r summary}
+summary(surveys)
+```
+
+For the numeric data, you get six statistics (min, 25th percentile,
+median, mean, 75th percentile, and max). For the factors, you get a
+table with counts for the most-frequent "levels", and then for the rest.
+
+
+## Inspecting data frames
+
+We already saw how the functions `head()` and `str()` can be useful to check the
+content and the structure of a `data.frame`. Here is a non-exhaustive list of
+functions to get a sense of the content/structure of the data.
+
+* Size:
+    * `dim()` - returns a vector with the number of rows in the first element,
+      and the number of columns as the second element (the __dim__ensions of the
+      object)
+    * `nrow()` - returns the number of rows
+    * `ncol()` - returns the number of columns
+
+* Content:
+    * `head()` - shows the first 6 rows
+    * `tail()` - shows the last 6 rows
+
+* Names:
+    * `names()` - returns the column names (synonym of `colnames()` for `data.frame`
+       objects)
+    * `rownames()` - returns the row names
+
+* Summary:
+    * `str()` - structure of the object and information about the class, length and
+       content of  each column
+    * `summary()` - summary statistics for each column
+
+Note: most of these functions are "generic", they can be used on other types of
+objects besides `data.frame`.
+
+
+
+## Maybe download the file first
+
+It probably is best to first download the file, so that we have a
+local copy, and then read it in.
+
+We could first use `download_file()` to download the data into the `CleanData/` subdirectory:
+
+```{r download_file, eval=FALSE, purl=TRUE}
+download.file("http://kbroman.org/datacarp/portal_data_joined.csv",
+              "CleanData/portal_data_joined.csv")
+```
+
+We could then use `read.csv()` to load the data into R, from the
+downloaded file:
+
+```{r read_csv_local_file, eval=FALSE}
+surveys <- read.csv('CleanData/portal_data_joined.csv')
+```
+
+
+
+## Indexing, Sequences, and Subsetting
+
+We can pull out parts of a data frame using square brackets.  We need
+to provide two values: row and column, with a comma between them.
+
+For example, to get the element in the 1st row, 1st column:
+
+```{r one_one_element}
+surveys[1,1]
+```
+
+To get the element in the 2nd row, 7th column:
+
+```{r two_seven_element}
+surveys[2,7]
+```
+
+To get the entire 2nd row, leave the column part blank:
+
+```{r second_row}
+surveys[2,]
+```
+
+And to get the entire 7th column, leave the row part blank:
+
+```{r seventh_column}
+sex <- surveys[,7]
+```
+
+You can also refer to columns by name, in multiple ways.
+
+```{r grab_sex, eval = FALSE}
+sex <- surveys[, "sex"]
+sex <- surveys$sex
+sex <- surveys[["sex"]]
+```
+
+When we pull out a single column, the result is a "vector". We can
+again use square brackets to pull out individual values, but providing
+a single number.
+
+```{r grab_individual_sexes}
+sex[1]
+sex[10000]
+```
+
+
+### Slices
+
+You can pull out larger slices from the vector by providing vectors of
+indices.  You can use the `c()` function to create a vector.
+
+```{r grab_some_sexes}
+c(1,3,5)
+sex[c(1,3,5)]
+```
+
+To pull out larger slices, it's
+helpful to have ways of creating sequences of numbers.
+
+First, the operator `:` gives you a sequence of consecutive values.
+
+```{r}
+1:10
+10:1
+5:8
+```
+
+`seq` is more flexible.
+
+```{r}
+seq(1, 10, by=2)
+seq(5, 10, length.out=3)
+seq(50, by=5, length.out=10)
+seq(1, 8, by=3) # sequence stops to stay below upper limit
+seq(10, 2, by=-2)  # can also go backwards
+```
+
+
+To get slices of our data frame, we can include a vector for the row
+or column indexes (or both)
+
+```{r}
+surveys[1:3, 7]   # first three elements in the 7th column
+surveys[1, 1:3]   # first three columns in the first row
+surveys[2:4, 6:7] # rows 2-4, columns 6-7
+```
+
+
+### Challenge
+
+The function `nrow()` on a `data.frame` returns the number of rows. Use it,
+in conjuction with `seq()` to create a new `data.frame` called
+`surveys_by_10` that includes every 10th row of the survey data frame
+starting at row 10 (10, 20, 30, ...)
+
+<!-- end challenge -->
+
+
+
+
+
+## Missing data
+
+As R was designed to analyze datasets, it includes the concept of missing data
+(which is uncommon in other programming languages). Missing data are represented
+in vectors as `NA`.
+
+```{r create_vec_with_missing}
+heights <- c(2, 4, 4, NA, 6)
+```
+
+When doing operations on numbers, most functions will return `NA` if the data
+you are working with include missing values. It is a safer behavior as otherwise
+you may overlook that you are dealing with missing data. You can add the
+argument `na.rm=TRUE` to calculate the result while ignoring the missing values.
+
+```{r na_rm}
+mean(heights)
+max(heights)
+mean(heights, na.rm = TRUE)
+max(heights, na.rm = TRUE)
+```
+
+If your data include missing values, you may want to become familiar with the
+functions `is.na()` and `na.omit()`.
+examples.
+
+
+```{r extract_non_missing}
+## Extract those elements which are not missing values.
+heights[!is.na(heights)]
+## shortcut to that
+na.omit(heights)
+```
+
+
+### Treating blanks as missing
+
+Another aside: it's probably best to treat those blanks as missing
+(`NA`). To do that, use the argument `na.strings` when reading the
+data. `na.strings` can be a vector of multiple character strings. We
+need that a missing value code can never exist as a valid value,
+because they all will be converted to the missing data code `NA`.  And
+note that the default for `na.strings` is `"NA"`, which will cause
+problems if `"NA"` is a valid value for your data (e.g., as an
+abbreviation `"North America"`).
+
+```{r read.csv_blanks_missing, eval=FALSE}
+surveys_noblanks <- read.csv("CleanData/portal_data_joined.csv", na.strings="")
+```
+
 
 
 ## Factors
@@ -623,7 +554,7 @@ Once created, factors can only contain a pre-defined set of values, known as
 *levels*. By default, R always sorts *levels* in alphabetical order. For
 instance, if you use `factor()` to create a factor with 2 levels:
 
-```{r, purl=TRUE}
+```{r create_sex_vector, purl=TRUE}
 sex <- factor(c("male", "female", "female", "male"))
 ```
 
@@ -632,7 +563,7 @@ R will assign `1` to the level `"female"` and `2` to the level `"male"` (because
 `"male"`). You can check this by using the function `levels()`, and check the
 number of levels using `nlevels()`:
 
-```{r}
+```{r levels_of_sex}
 levels(sex)
 nlevels(sex)
 ```
@@ -640,7 +571,7 @@ nlevels(sex)
 Sometimes, the order of the factors does not matter, other times you might want
 to specify a particular order.
 
-```{r, purl=TRUE}
+```{r food_factor, purl=TRUE}
 food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
 levels(food)
 food <- factor(food, levels=c("low", "medium", "high"))
@@ -658,7 +589,7 @@ levels) to a numeric vector is a little trickier.  One method is to convert
 factors to characters and then numbers.
 function. Compare:
 
-```{r, purl=TRUE}
+```{r convert_factor, purl=TRUE}
 f <- factor(c(1, 5, 10, 2))
 as.numeric(f)               ## wrong! and there is no warning...
 as.numeric(as.character(f)) ## works...
@@ -694,194 +625,20 @@ table(expt)
 ```
 --->
 
-## stringsAsFactors
+### stringsAsFactors
 
 The default when reading in data with `read.csv()`, columns with text
 get turned into factors.
 
 You can avoid this with the argument `stringsAsFactors=FALSE`.
 
-```{r}
-surveys_chr <- read.csv("data/portal_data_joined.csv", stringsAsFactors=FALSE)
+```{r read_csv_stringsAsFactors, eval=FALSE}
+surveys_chr <- read.csv("CleanData/portal_data_joined.csv", stringsAsFactors=FALSE)
 ```
 
 Then when you look at the result of `str()`, you'll see that the
 previously factor columns are now `chr`.
 
-```{r}
+```{r str_on_that, eval=FALSE}
 str(surveys_chr)
 ```
-
-## Constructing data frames "by hand"
-
-You can also create a data frame manually with the function `data.frame()`. This
-function can also take the argument `stringsAsFactors`. Compare the output of
-these examples, and compare the difference between when the data are being read
-as `character`, and when they are being read as `factor`.
-
-```{r, results='show'}
-df1 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
-                  feel=c("furry", "furry", "squishy", "spiny"),
-                  weight=c(45, 8, 1.1, 0.8))
-str(df1)
-
-df2 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
-                  feel=c("furry", "furry", "squishy", "spiny"),
-                  weight=c(45, 8, 1.1, 0.8), stringsAsFactors=FALSE)
-str(df2)
-```
-
-### Challenge
-
-There are a few mistakes in this hand crafted `data.frame`, can you spot and
-fix them? Don't hesitate to experiment!
-
-```{r, eval=FALSE}
-author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
-                          author_last=c(Darwin, Mayr, Dobzhansky),
-                          year=c(1942, 1970))
-```
-
-<!-- end challenge -->
-
-## Inspecting data frames
-
-We already saw how the functions `head()` and `str()` can be useful to check the
-content and the structure of a `data.frame`. Here is a non-exhaustive list of
-functions to get a sense of the content/structure of the data.
-
-* Size:
-    * `dim()` - returns a vector with the number of rows in the first element,
-      and the number of columns as the second element (the __dim__ensions of the
-      object)
-    * `nrow()` - returns the number of rows
-    * `ncol()` - returns the number of columns
-
-* Content:
-    * `head()` - shows the first 6 rows
-    * `tail()` - shows the last 6 rows
-
-* Names:
-    * `names()` - returns the column names (synonym of `colnames()` for `data.frame`
-       objects)
-    * `rownames()` - returns the row names
-
-* Summary:
-    * `str()` - structure of the object and information about the class, length and
-       content of  each column
-    * `summary()` - summary statistics for each column
-
-Note: most of these functions are "generic", they can be used on other types of
-objects besides `data.frame`.
-
-## Indexing, Sequences, and Subsetting
-
-We pulled out parts of a vector by indexing with square brackets. We
-can do the same thing with data frames, but we need to provide two
-values: row and column, with a comma between them.
-
-For example, to get the element in the 1st row, 1st column:
-
-```{r}
-surveys[1,1]
-```
-
-To get the element in the 2nd row, 7th column:
-
-```{r}
-surveys[2,7]
-```
-
-To get the entire 2nd row, leave the column part blank:
-
-```{r}
-surveys[2,]
-```
-
-And to get the entire 7th column, leave the row part blank:
-
-```{r}
-sex <- surveys[,7]
-```
-
-You can also refer to columns by name, in multiple ways.
-
-```{r, eval = FALSE}
-sex <- surveys[, "sex"]
-ssex <- surveys[["sex"]]
-sex <- surveys$sex
-```
-
-### Treating blanks as missing
-
-Another aside: it's probably best to treat those blanks as missing
-(`NA`). To do that, use the argument `na.strings` when reading the
-data. `na.strings` can be a vector of multiple character strings. We
-need that a missing value code can never exist as a valid value,
-because they all will be converted to the missing data code `NA`.  And
-note that the default for `na.strings` is `"NA"`, which will cause
-problems if `"NA"` is a valid value for your data (e.g., as an
-abbreviation `"North America"`).
-
-```{r}
-surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings="")
-```
-
-
-### Slices
-
-As with vectors, you can also use logical vectors when indexing.
-
-```{r}
-weights_males <- surveys[surveys$sex == 'M', "weight"]
-mean(weights_males, na.rm=TRUE)
-
-mean(surveys[surveys$sex == 'F', "weight"], na.rm=TRUE)
-```
-
-Or you can use numeric vectors. To pull out larger slices, it's
-helpful to have ways of creating sequences of numbers.
-
-First, the operator `:` gives you a sequence of consecutive values.
-
-
-```{r}
-1:10
-10:1
-5:8
-```
-
-`seq` is more flexible.
-
-```{r}
-seq(1, 10, by=2)
-seq(5, 10, length.out=3)
-seq(50, by=5, length.out=10)
-seq(1, 8, by=3) # sequence stops to stay below upper limit
-seq(10, 2, by=-2)  # can also go backwards
-```
-
-
-
-
-To get slices of our data frame, we can include a vector for the row
-or column indexes (or both)
-
-```{r}
-surveys[1:3, 7]   # first three elements in the 7th column
-surveys[1, 1:3]   # first three columns in the first row
-surveys[2:4, 6:7] # rows 2-4, columns 6-7
-```
-
-
-### Challenge
-
-1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
-   in conjuction with `seq()` to create a new `data.frame` called
-   `surveys_by_10` that includes every 10th row of the survey data frame
-   starting at row 10 (10, 20, 30, ...)
-
-1. Create a `data.frame` containing only the observations from the
-   year 1999 of the `surveys` dataset.
-
-<!-- end challenge -->

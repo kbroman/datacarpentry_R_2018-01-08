@@ -152,48 +152,36 @@ $(document).ready(function () {
 <ul>
 <li><a href="#basics-of-r">Basics of R</a></li>
 <li><a href="#presentation-of-rstudio">Presentation of RStudio</a></li>
-<li><a href="#r-as-a-calculator">R as a calculator</a><ul>
-<li><a href="#getting-help">Getting help</a></li>
-</ul></li>
+<li><a href="#r-as-a-calculator">R as a calculator</a></li>
 <li><a href="#need-for-scripts">Need for Scripts</a></li>
-<li><a href="#creating-an-r-project">Creating an R Project</a><ul>
-<li><a href="#organizing-your-working-directory">Organizing your working directory</a></li>
-</ul></li>
+<li><a href="#creating-an-r-project">Creating an R Project</a></li>
 <li><a href="#interacting-with-r">Interacting with R</a><ul>
 <li><a href="#commenting">Commenting</a></li>
 </ul></li>
+<li><a href="#plunge-straight-into-the-survey-data">Plunge straight into the Survey Data</a><ul>
+<li><a href="#functions">Functions</a></li>
 <li><a href="#assignment-operator">Assignment operator</a></li>
-<li><a href="#object-names">Object names</a><ul>
-<li><a href="#challenge">Challenge</a></li>
-</ul></li>
 <li><a href="#objects-in-your-workspace">Objects in your workspace</a></li>
-<li><a href="#vectors-and-data-types">Vectors and data types</a><ul>
+<li><a href="#object-names">Object names</a></li>
+<li><a href="#getting-help">Getting help</a></li>
+</ul></li>
+<li><a href="#data-frames">Data frames</a><ul>
+<li><a href="#challenge">Challenge</a></li>
+<li><a href="#another-summary">Another summary</a></li>
+</ul></li>
+<li><a href="#inspecting-data-frames">Inspecting data frames</a></li>
+<li><a href="#maybe-download-the-file-first">Maybe download the file first</a></li>
+<li><a href="#indexing-sequences-and-subsetting">Indexing, Sequences, and Subsetting</a><ul>
+<li><a href="#slices">Slices</a></li>
 <li><a href="#challenge-1">Challenge</a></li>
 </ul></li>
-<li><a href="#subsetting-vectors">Subsetting vectors</a><ul>
-<li><a href="#challenge-2">Challenge</a></li>
-<li><a href="#conditional-subsetting">Conditional subsetting</a></li>
-<li><a href="#challenge-3">Challenge</a></li>
-</ul></li>
 <li><a href="#missing-data">Missing data</a><ul>
-<li><a href="#challenge-4">Challenge</a></li>
-</ul></li>
-<li><a href="#presentation-of-the-survey-data">Presentation of the Survey Data</a><ul>
-<li><a href="#challenge-5">Challenge</a></li>
+<li><a href="#treating-blanks-as-missing">Treating blanks as missing</a></li>
 </ul></li>
 <li><a href="#factors">Factors</a><ul>
 <li><a href="#converting-factors">Converting factors</a></li>
-<li><a href="#challenge-6">Challenge</a></li>
-</ul></li>
+<li><a href="#challenge-2">Challenge</a></li>
 <li><a href="#stringsasfactors">stringsAsFactors</a></li>
-<li><a href="#constructing-data-frames-by-hand">Constructing data frames “by hand”</a><ul>
-<li><a href="#challenge-7">Challenge</a></li>
-</ul></li>
-<li><a href="#inspecting-data-frames">Inspecting data frames</a></li>
-<li><a href="#indexing-sequences-and-subsetting">Indexing, Sequences, and Subsetting</a><ul>
-<li><a href="#treating-blanks-as-missing">Treating blanks as missing</a></li>
-<li><a href="#slices">Slices</a></li>
-<li><a href="#challenge-8">Challenge</a></li>
 </ul></li>
 </ul>
 </div>
@@ -202,12 +190,12 @@ $(document).ready(function () {
 <blockquote>
 <h2 id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>Basics of RStudio</li>
-<li>Organize files and directories related to a particular set of analyses in an R Project within RStudio</li>
-<li>Familiarize participants with R syntax</li>
-<li>Understand the concepts of objects and assignment</li>
-<li>Understand the concepts of vector and data types</li>
-<li>Get exposed to a few functions</li>
+<li>load external data (CSV files) in memory using the survey table (<code>surveys.csv</code>) as an example</li>
+<li>explore the structure and the content of a data frame in R</li>
+<li>understand what factors are and how to manipulate them</li>
+<li>understand the concept of a <code>data.frame</code></li>
+<li>use sequences</li>
+<li>know how to access any element of a <code>data.frame</code></li>
 </ul>
 </blockquote>
 <hr />
@@ -241,17 +229,7 @@ $(document).ready(function () {
 <span class="dv">4</span>/<span class="dv">6</span>
 <span class="dv">4</span>^<span class="dv">6</span>
 <span class="kw">log</span>(<span class="dv">4</span>)
-<span class="kw">log10</span>(<span class="dv">4</span>)
-<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">10</span>)
-<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">6</span>)</code></pre></div>
-<p>Here <code>log</code> is a <em>function</em> that gives you the natural logarithm. Much of your calculations in R will be through functions. The value in the parentheses is called the function “argument”. <code>log10</code> is another function, that calculates the log base 10. There can be more than one argument, and some of them may have default values. <code>log</code> has a second argument <code>base</code> whose default (the value if left unspecified) is <em>e</em>.</p>
-<div id="getting-help" class="section level3">
-<h3>Getting help</h3>
-<p>If you type <code>log</code> and pause for a moment, you’ll get a pop-up with information about the function.</p>
-<p>Alternatively, you could type</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?log</code></pre></div>
-<p>and the documentation for the function will show up in the lower-right pane. These are often a bit <em>too</em> detailed, and so they take some practice to read. I generally focus on Usage and Arguments, and then on Examples at the bottom. We’ll talk more about getting help later.</p>
-</div>
+<span class="kw">log10</span>(<span class="dv">4</span>)</code></pre></div>
 </div>
 <div id="need-for-scripts" class="section level2">
 <h2>Need for Scripts</h2>
@@ -262,34 +240,14 @@ $(document).ready(function () {
 <div id="creating-an-r-project" class="section level2">
 <h2>Creating an R Project</h2>
 <p>It is good practice to keep a set of related data, analyses, and text self-contained in a single folder, called the <strong>working directory</strong>. All of the scripts within this folder can then use <em>relative paths</em> to files that indicate where inside the project a file is located (as opposed to absolute paths, which point to where a file is on a specific computer). Working this way makes it a lot easier to move your project around on your computer and share it with others without worrying about whether or not the underlying scripts will still work.</p>
-<p>RStudio provides a helpful set of tools to do this through its “Projects” interface, which not only creates a working directory for you but also remembers its location (allowing you to quickly navigate to it) and optonally preserves custom settings and open files to make it easier to resume work after a break. Below, we will go through the steps for creating an RProject for this tutorial.</p>
+<p>RStudio provides a helpful set of tools to do this through its “Projects” interface, which can create a working directory for you (or use an existing one) and also remembers its location (allowing you to quickly navigate to it) and optionally preserves custom settings and open files to make it easier to resume work after a break. Below, we will go through the steps for creating an RProject for this tutorial.</p>
+<p>We assume you’ve already got a <code>DataCarpentry</code> folder that you’re going to use.</p>
 <ul>
 <li>Start RStudio (presentation of RStudio -below- should happen here)</li>
-<li>Under the <code>File</code> menu, click on <code>New project</code>, choose <code>New directory</code>, then <code>Empty project</code></li>
-<li>Enter a name for this new folder (or “directory”, in computer science), and choose a convenient location for it. This will be your <strong>working directory</strong> for the rest of the day (e.g., <code>~/data-carpentry</code>)</li>
+<li>Under the <code>File</code> menu, click on <code>New project</code>, choose <code>Existing directory</code>, then click the “<code>Browse</code>” button and find your <code>DataCarpentry</code> folder.</li>
 <li>Click on “Create project”</li>
-<li>Under the <code>Files</code> tab on the right of the screen, click on <code>New Folder</code> and create a folder named <code>data</code> within your newly created working directory. (e.g., <code>~/data-carpentry/data</code>)</li>
-<li>Create a new R script (File &gt; New File &gt; R script) and save it in your working directory (e.g. <code>data-carpentry-script.R</code>)</li>
+<li>Create a new R script (File &gt; New File &gt; R script) and save it in your <code>Code</code> subfolder (e.g. <code>~/DataCarpentry/Code</code>)</li>
 </ul>
-<p>Your working directory should now look like this:</p>
-<div class="figure">
-<img src="img/r_starting_how_it_should_like.png" alt="How it should look like at the beginning of this lesson" />
-<p class="caption">How it should look like at the beginning of this lesson</p>
-</div>
-<div id="organizing-your-working-directory" class="section level3">
-<h3>Organizing your working directory</h3>
-<p>Using a consistent folder structure across your projects will help keep things organized, and will also make it easy find/file things in the future. This can be especially helpful when you have multiple projects. In general, you may create directories (folders) for <strong>scripts</strong>, <strong>data</strong>, and <strong>documents</strong>.</p>
-<ul>
-<li><strong><code>data/</code></strong> Use this folder to store your raw data and intermediate datasets you may create for the need of a particular analysis. For the sake of transparency and <a href="https://en.wikipedia.org/wiki/Provenance">provenance</a>, you should <em>always</em> keep a copy of your raw data accessible and do as much of your data cleanup and preprocessing programmatically (i.e. with scripts, rather than manually) as possible. Separating raw data from processed data is also a good idea. For example, you could have files <code>data/raw/tree_survey.plot1.txt</code> and <code>...plot2.txt</code> kept separate from a <code>data/processed/tree.survey.csv</code> file generated by the <code>scripts/01.preprocess.tree_survey.R</code> script.</li>
-<li><strong><code>documents/</code></strong> This would be a place to keep outlines, drafts, and other text.</li>
-<li><strong><code>scripts/</code></strong> This would be the location to keep your R scripts for different analyses or plotting, and potentially a separate folder for your functions (more on that later).</li>
-</ul>
-<p>You may want additional directories or subdirectories depending on your project needs, but these should form the backbone of your working directory. For this workshop, you only need a <code>data/</code> folder.</p>
-<div class="figure">
-<img src="img/R-ecology-work_dir_structure.png" alt="Example of a working directory structure" />
-<p class="caption">Example of a working directory structure</p>
-</div>
-</div>
 </div>
 <div id="interacting-with-r" class="section level2">
 <h2>Interacting with R</h2>
@@ -306,249 +264,110 @@ $(document).ready(function () {
 <p>Use <code>#</code> signs to comment. Anything to the right of a <code>#</code> is ignored by R, meaning it won’t be executed. Comments are a great way to describe what your code does within the code itself, so comment liberally in your R scripts.</p>
 </div>
 </div>
-<div id="assignment-operator" class="section level2">
-<h2>Assignment operator</h2>
-<p>We can assign names to numbers and other objects with the assignment operator, <code>&lt;-</code>. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="dv">2016-1969</span></code></pre></div>
-<p>Type that into your script, and use <kbd><code>Ctrl</code></kbd> + <kbd><code>Enter</code></kbd> to paste it to the console.</p>
-<p>You can also use <code>=</code> as assignment, but that symbol can have other meanings, and so I recommend sticking with the <code>&lt;-</code> combination.</p>
-<p>In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write <code>&lt;-</code> in a single keystroke.</p>
-<p>If you’ve assigned a number to an object, you can then use it in further calculations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(age)</code></pre></div>
-<pre><code>## [1] 6.855655</code></pre>
-<p>You can assigned <em>that</em> to something, and then use it.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sqrt_age &lt;-<span class="st"> </span><span class="kw">sqrt</span>(age)
-<span class="kw">round</span>(sqrt_age)
-<span class="kw">round</span>(sqrt_age, <span class="dv">2</span>)</code></pre></div>
-</div>
-<div id="object-names" class="section level2">
-<h2>Object names</h2>
-<p>Objects can be given any name such as <code>x</code>, <code>current_temperature</code>, or <code>subject_id</code>. You want your object names to be explicit and not too long.</p>
-<p>They cannot start with a number (<code>2x</code> is not valid, but <code>x2</code> is).</p>
-<p>R is case sensitive (e.g., <code>weight_kg</code> is different from <code>Weight_kg</code>). There are some names that cannot be used because they are the names of fundamental functions in R (e.g., <code>if</code>, <code>else</code>, <code>for</code>, see <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html">here</a> for a complete list).</p>
-<p>In general, even if it’s allowed, it’s best to not use other function names (e.g., <code>c</code>, <code>T</code>, <code>mean</code>, <code>data</code>, <code>df</code>, <code>weights</code>). In doubt check the help to see if the name is already in use.</p>
-<p>It’s also best to avoid dots (<code>.</code>) within a variable name as in <code>my.dataset</code>. There are many functions in R with dots in their names for historical reasons, but because dots have a special meaning in R (for methods) and other programming languages, it’s best to avoid them. It is also recommended to use nouns for variable names, and verbs for function names. It’s important to be consistent in the styling of your code (where you put spaces, how you name variable, etc.). In R, two popular style guides are <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s</a> and <a href="https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml">Google’s</a>.</p>
-<div id="challenge" class="section level3">
-<h3>Challenge</h3>
-<p>What is the value of <code>y</code> after doing the following?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">50</span>
-y &lt;-<span class="st"> </span>x *<span class="st"> </span><span class="dv">2</span>
-x &lt;-<span class="st"> </span><span class="dv">80</span></code></pre></div>
-<!-- end challenge -->
-<p>Objects don’t get linked to each other, so if you change one, it won’t affect the values of any others.</p>
-</div>
-</div>
-<div id="objects-in-your-workspace" class="section level2">
-<h2>Objects in your workspace</h2>
-<p>The objects you create get added to your “workspace”. You can list the current objects with <code>ls()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre></div>
-<p>RStudio also shows thee objects in the Environment panel.</p>
-</div>
-<div id="vectors-and-data-types" class="section level2">
-<h2>Vectors and data types</h2>
-<p>A vector is a group of values, mainly either numbers or characters. You can assign this set of values to a variable, just like you would for one item. For example we can create a vector of animal weights:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">100</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
-<p>A vector can also contain text (character strings):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
-<p>There are many functions that allow you to inspect the content of a vector. <code>length()</code> tells you how many elements are in a particular vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(weights)
-<span class="kw">length</span>(animals)</code></pre></div>
-<p>An important feature of a vector, is that all of the elements are the same type of data. The function <code>class()</code> indicates the class (the type of element) of an object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(weights)
-<span class="kw">class</span>(animals)</code></pre></div>
-<p>The function <code>str()</code> provides an overview of the object and the elements it contains. It is a really useful function when working with large and complex objects:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(weights)
-<span class="kw">str</span>(animals)</code></pre></div>
-<p>You can add elements to your vector by using the <code>c()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(animals, <span class="st">&quot;dog&quot;</span>) <span class="co"># adding at the end of the vector</span>
-animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, animals) <span class="co"># adding at the beginning of the vector</span></code></pre></div>
-<p>What happens here is that we take the original vector <code>animals</code>, and we are adding another item first to the end of the other ones, and then another item at the beginning. We can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.</p>
-<p>We just saw 2 of the 6 <strong>atomic vector</strong> types that R uses: <code>&quot;character&quot;</code> and <code>&quot;numeric&quot;</code>. These are the basic building blocks that all R objects are built from. The other 4 are:</p>
-<ul>
-<li><code>&quot;logical&quot;</code> for <code>TRUE</code> and <code>FALSE</code> (the boolean data type)</li>
-<li><code>&quot;integer&quot;</code> for integer numbers (e.g., <code>2L</code>, the <code>L</code> indicates to R that it’s an integer)</li>
-<li><code>&quot;complex&quot;</code> to represent complex numbers (e.g. <code>1+4i</code>)</li>
-<li><code>&quot;raw&quot;</code> that we won’t discuss further</li>
-</ul>
-<p>Vectors are one of the many <strong>data structures</strong> that R uses. Other important ones are lists (<code>list</code>), matrices (<code>matrix</code>), data frames (<code>data.frame</code>) and factors (<code>factor</code>).</p>
-<div id="challenge-1" class="section level3">
-<h3>Challenge</h3>
-<p>What happens to vectors with mixed types?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;a&#39;</span>)
-
-y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)
-
-z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="ot">TRUE</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>)
-
-tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="st">&#39;2&#39;</span>, <span class="dv">3</span>, <span class="dv">4</span>)</code></pre></div>
-<p>Hint: use <code>class()</code></p>
-<!-- end challenge -->
-<p>Vectors must all be of one type, and so R converts them.</p>
-<p><code>logical</code> → <code>numeric</code> → <code>character</code></p>
-</div>
-</div>
-<div id="subsetting-vectors" class="section level2">
-<h2>Subsetting vectors</h2>
-<p>If we want to extract one or several values from a vector, we must provide one or several indices in square brackets. For instance:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
-animals[<span class="dv">2</span>]</code></pre></div>
-<pre><code>## [1] &quot;rat&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
-<pre><code>## [1] &quot;mouse&quot; &quot;cat&quot;</code></pre>
-<p>We can also repeat the indices to create an object with more elements than the original one:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">more_animals &lt;-<span class="st"> </span>animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
-<p>R indexes start at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, because that’s what human beings typically do. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that’s simpler for computers to do.</p>
-<div id="challenge-2" class="section level3">
-<h3>Challenge</h3>
-<p>Consider the <code>animals</code> vector.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
-<p>Subset to get the 2nd and 3rd values.</p>
-<!-- end challenge -->
-</div>
-<div id="conditional-subsetting" class="section level3">
-<h3>Conditional subsetting</h3>
-<p>Another common way of subsetting is by using a logical vector: <code>TRUE</code> will select the element with the same index, while <code>FALSE</code> will not:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">54</span>, <span class="dv">39</span>, <span class="dv">17</span>, <span class="dv">55</span>)
-x[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</code></pre></div>
-<pre><code>## [1] 54 55</code></pre>
-<p>Typically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 50:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
-<pre><code>## [1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## so we can use this to select only the values above 50
-x[x &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 54 55</code></pre>
-<p>You can combine multiple tests using <code>&amp;</code> (both conditions are true, AND) or <code>|</code> (at least one of the conditions is true, OR):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>x &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 21 54 17 55</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &gt;<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>x &lt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 39</code></pre>
-<p>When working with vectors of characters, if you are trying to combine many conditions it can become tedious to type. The function <code>%in%</code> allows you to test if a value if found in a vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
-animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </span>animals ==<span class="st"> &quot;rat&quot;</span>] <span class="co"># returns both rat and cat</span></code></pre></div>
-<pre><code>## [1] &quot;rat&quot; &quot;cat&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)</code></pre></div>
-<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)]</code></pre></div>
-<pre><code>## [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
-</div>
-<div id="challenge-3" class="section level3">
-<h3>Challenge</h3>
-<p>Consider the following two vectors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
-weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">180</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
-<p>Subset <code>animals</code> with <code>weights &lt; 200</code>.</p>
-<!-- end challenge -->
-</div>
-</div>
-<div id="missing-data" class="section level2">
-<h2>Missing data</h2>
-<p>As R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as <code>NA</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">6</span>)</code></pre></div>
-<p>When doing operations on numbers, most functions will return <code>NA</code> if the data you are working with include missing values. It is a safer behavior as otherwise you may overlook that you are dealing with missing data. You can add the argument <code>na.rm=TRUE</code> to calculate the result while ignoring the missing values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(heights)
-<span class="kw">max</span>(heights)
-<span class="kw">mean</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-<span class="kw">max</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>If your data include missing values, you may want to become familiar with the functions <code>is.na()</code> and <code>na.omit()</code>. examples.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Extract those elements which are not missing values.
-heights[!<span class="kw">is.na</span>(heights)]
-## shortcut to that
-<span class="kw">na.omit</span>(heights)</code></pre></div>
-<div id="challenge-4" class="section level3">
-<h3>Challenge</h3>
-<p>Why does the following give an error?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)
-<span class="kw">mean</span>(v, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
-<p>Why does the error message say the data are not numeric?</p>
-<!-- end challenge -->
-<hr />
-<blockquote>
-<h2 id="learning-objectives-1">Learning Objectives</h2>
-<ul>
-<li>load external data (CSV files) in memory using the survey table (<code>surveys.csv</code>) as an example</li>
-<li>explore the structure and the content of a data frame in R</li>
-<li>understand what factors are and how to manipulate them</li>
-<li>understand the concept of a <code>data.frame</code></li>
-<li>use sequences</li>
-<li>know how to access any element of a <code>data.frame</code></li>
-</ul>
-</blockquote>
-<hr />
-</div>
-</div>
-<div id="presentation-of-the-survey-data" class="section level2">
-<h2>Presentation of the Survey Data</h2>
+<div id="plunge-straight-into-the-survey-data" class="section level2">
+<h2>Plunge straight into the Survey Data</h2>
 <p>We will continue to look at the species and weight of animals caught in plots in a study area in Arizona over time. The dataset is stored as a CSV file: each row holds information for a single animal, and the columns represent:</p>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Column</th>
-<th align="left">Description</th>
+<th>Column</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">record_id</td>
-<td align="left">Unique id for the observation</td>
+<td>record_id</td>
+<td>Unique id for the observation</td>
 </tr>
 <tr class="even">
-<td align="left">month</td>
-<td align="left">month of observation</td>
+<td>month</td>
+<td>month of observation</td>
 </tr>
 <tr class="odd">
-<td align="left">day</td>
-<td align="left">day of observation</td>
+<td>day</td>
+<td>day of observation</td>
 </tr>
 <tr class="even">
-<td align="left">year</td>
-<td align="left">year of observation</td>
+<td>year</td>
+<td>year of observation</td>
 </tr>
 <tr class="odd">
-<td align="left">plot_id</td>
-<td align="left">ID of a particular plot</td>
+<td>plot_id</td>
+<td>ID of a particular plot</td>
 </tr>
 <tr class="even">
-<td align="left">species_id</td>
-<td align="left">2-letter code</td>
+<td>species_id</td>
+<td>2-letter code</td>
 </tr>
 <tr class="odd">
-<td align="left">sex</td>
-<td align="left">sex of animal (“M”, “F”)</td>
+<td>sex</td>
+<td>sex of animal (“M”, “F”)</td>
 </tr>
 <tr class="even">
-<td align="left">hindfoot_length</td>
-<td align="left">length of the hindfoot in mm</td>
+<td>hindfoot_length</td>
+<td>length of the hindfoot in mm</td>
 </tr>
 <tr class="odd">
-<td align="left">weight</td>
-<td align="left">weight of the animal in grams</td>
+<td>weight</td>
+<td>weight of the animal in grams</td>
 </tr>
 <tr class="even">
-<td align="left">genus</td>
-<td align="left">genus of animal</td>
+<td>genus</td>
+<td>genus of animal</td>
 </tr>
 <tr class="odd">
-<td align="left">species</td>
-<td align="left">species of animal</td>
+<td>species</td>
+<td>species of animal</td>
 </tr>
 <tr class="even">
-<td align="left">taxa</td>
-<td align="left">e.g. Rodent, Reptile, Bird, Rabbit</td>
+<td>taxa</td>
+<td>e.g. Rodent, Reptile, Bird, Rabbit</td>
 </tr>
 <tr class="odd">
-<td align="left">plot_type</td>
-<td align="left">type of plot</td>
+<td>plot_type</td>
+<td>type of plot</td>
 </tr>
 </tbody>
 </table>
 <p>The data are available at <a href="http://kbroman.org/datacarp/portal_data_joined.csv" class="uri">http://kbroman.org/datacarp/portal_data_joined.csv</a>.</p>
-<p>We first use <code>download_file()</code> to download the data into the <code>data/</code> subdirectory:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>,
-              <span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</code></pre></div>
-<p>We then use <code>read.csv()</code> to load the data into R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/portal_data_joined.csv&#39;</span>)</code></pre></div>
-<p>We can actually use <code>read.csv</code> to grab the data directly from the web, but it’s probably best to download a copy first.</p>
+<p>We can read that data straight from the web, as follows</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>)</code></pre></div>
+<div id="functions" class="section level3">
+<h3>Functions</h3>
+<p><code>read.csv</code> is a “function”. It does something, and “returns” some result.</p>
+<p>The file name in quotes is called the function “argument”: the function’s “input”.</p>
+<p><code>read.csv</code> will read in the data from that file, and then spit the data back out.</p>
+</div>
+<div id="assignment-operator" class="section level3">
+<h3>Assignment operator</h3>
+<p>The <code>&lt;-</code> symbol is used to assign the data to an object. In other words, it gives the data a name.</p>
+<p>You can also use <code>=</code> as assignment, but that symbol can have other meanings, and so I recommend sticking with the <code>&lt;-</code> combination.</p>
+<p>In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write <code>&lt;-</code> in a single keystroke.</p>
+</div>
+<div id="objects-in-your-workspace" class="section level3">
+<h3>Objects in your workspace</h3>
+<p>The objects you create get added to your “workspace”. You can list the current objects with <code>ls()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre></div>
+<p>RStudio also shows the objects in the Environment panel.</p>
+</div>
+<div id="object-names" class="section level3">
+<h3>Object names</h3>
+<p>Objects can be given any name such as <code>x</code>, <code>current_temperature</code>, or <code>subject_id</code>. You want your object names to be explicit and not too long.</p>
+<p>They cannot start with a number (<code>2x</code> is not valid, but <code>x2</code> is).</p>
+<p>R is case sensitive (e.g., <code>weight_kg</code> is different from <code>Weight_kg</code>). There are some names that cannot be used because they are the names of fundamental functions in R (e.g., <code>if</code>, <code>else</code>, <code>for</code>, see <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html">here</a> for a complete list).</p>
+<p>In general, even if it’s allowed, it’s best to not use other function names (e.g., <code>c</code>, <code>T</code>, <code>mean</code>, <code>data</code>, <code>df</code>, <code>weights</code>). If in doubt, type the name to see if it’s already in use.</p>
+<p>It’s also best to avoid dots (<code>.</code>) within a variable name as in <code>my.dataset</code>. There are many functions in R with dots in their names for historical reasons, but because dots have a special meaning in R (for methods) and other programming languages, it’s best to avoid them. It is also recommended to use nouns for variable names, and verbs for function names. It’s important to be consistent in the styling of your code (where you put spaces, how you name variable, etc.). In R, two popular style guides are <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s</a> and <a href="https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml">Google’s</a>.</p>
+</div>
+<div id="getting-help" class="section level3">
+<h3>Getting help</h3>
+<p>If you type <code>read.csv</code> and pause for a moment, you’ll get a pop-up with information about the function.</p>
+<p>Alternatively, you could type</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?read.csv</code></pre></div>
+<p>and the documentation for the function will show up in the lower-right pane. These are often a bit <em>too</em> detailed, and so they take some practice to read. I generally focus on Usage and Arguments, and then on Examples at the bottom. We’ll talk more about getting help later.</p>
+</div>
+</div>
+<div id="data-frames" class="section level2">
+<h2>Data frames</h2>
 <p>The data are stored in what’s called a “data frame”. It’s a big rectangle, with rows being observations and columns being variables. The different columns can be different types (numeric, character, etc.), but they’re all the same length.</p>
 <p>Use <code>head()</code> to view the first few rows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(surveys)</code></pre></div>
@@ -556,101 +375,18 @@ heights[!<span class="kw">is.na</span>(heights)]
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(surveys)</code></pre></div>
 <p>Use <code>str()</code> to look at the structure of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys)</code></pre></div>
-<div id="challenge-5" class="section level3">
+<p>This shows that there are 34786 rows and 13 columns, and then for each column, it gives information about the data type and shows the first few values.</p>
+<p>For these data, the columns have two types: integer, or “Factor”. Factor columns are text with a discrete set of possible values. We’ll come back to this in a bit.</p>
+<div id="challenge" class="section level3">
 <h3>Challenge</h3>
-<p>Based on the output of <code>str(surveys)</code>, can you answer the following questions?</p>
-<ul>
-<li>What is the class of the object <code>surveys</code>?</li>
-<li>How many rows and how many columns are in this object?</li>
-<li>How many species have been recorded during these surveys?</li>
-</ul>
+<p>Study the output of <code>str(surveys)</code>. How are the missing values being treated?</p>
 <!-- end challenge -->
-<p>As you can see, many of the columns consist of integers, however, the columns <code>species</code> and <code>sex</code> are of a special class called a <code>factor</code>. Before we learn more about the <code>data.frame</code> class, let’s talk about factors. They are very useful but not necessarily intuitive, and therefore require some attention.</p>
 </div>
-</div>
-<div id="factors" class="section level2">
-<h2>Factors</h2>
-<p>Factors are used to represent categorical data. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting.</p>
-<p>Factors are stored as integers, and have labels associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
-<p>Once created, factors can only contain a pre-defined set of values, known as <em>levels</em>. By default, R always sorts <em>levels</em> in alphabetical order. For instance, if you use <code>factor()</code> to create a factor with 2 levels:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</code></pre></div>
-<p>R will assign <code>1</code> to the level <code>&quot;female&quot;</code> and <code>2</code> to the level <code>&quot;male&quot;</code> (because <code>f</code> comes before <code>m</code>, even though the first element in this vector is <code>&quot;male&quot;</code>). You can check this by using the function <code>levels()</code>, and check the number of levels using <code>nlevels()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(sex)
-<span class="kw">nlevels</span>(sex)</code></pre></div>
-<p>Sometimes, the order of the factors does not matter, other times you might want to specify a particular order.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">food &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
-<span class="kw">levels</span>(food)
-food &lt;-<span class="st"> </span><span class="kw">factor</span>(food, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
-<span class="kw">levels</span>(food)</code></pre></div>
-<div id="converting-factors" class="section level3">
-<h3>Converting factors</h3>
-<p>If you need to convert a factor to a character vector, you use <code>as.character(x)</code>.</p>
-<p>Converting factors where the levels appear as numbers (such as concentration levels) to a numeric vector is a little trickier. One method is to convert factors to characters and then numbers. function. Compare:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>))
-<span class="kw">as.numeric</span>(f)               ## wrong! and there is no warning...
-<span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) ## works...</code></pre></div>
-</div>
-<div id="challenge-6" class="section level3">
-<h3>Challenge</h3>
-<p>The function <code>table()</code> tabulates observations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat3&quot;</span>, <span class="st">&quot;treat1&quot;</span>,
-          <span class="st">&quot;control&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat3&quot;</span>)
-expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
-<span class="kw">table</span>(expt)</code></pre></div>
-<ul>
-<li>In which order are the treatments listed?</li>
-<li>How can you recreate this table with “<code>control</code>” listed last instead of first?</li>
-</ul>
-<!-- end challenge -->
-<!---
-
-```r
-## Answers
-##
-## * The treatments are listed in alphabetical order because they are factors.
-## * By redefining the order of the levels
-expt <- c("treat1", "treat2", "treat1", "treat3", "treat1",
-          "control", "treat1", "treat2", "treat3")
-expt <- factor(expt, levels=c("treat1", "treat2", "treat3", "control"))
-table(expt)
-```
---->
-</div>
-</div>
-<div id="stringsasfactors" class="section level2">
-<h2>stringsAsFactors</h2>
-<p>The default when reading in data with <code>read.csv()</code>, columns with text get turned into factors.</p>
-<p>You can avoid this with the argument <code>stringsAsFactors=FALSE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_chr &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre></div>
-<p>Then when you look at the result of <code>str()</code>, you’ll see that the previously factor columns are now <code>chr</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys_chr)</code></pre></div>
-</div>
-<div id="constructing-data-frames-by-hand" class="section level2">
-<h2>Constructing data frames “by hand”</h2>
-<p>You can also create a data frame manually with the function <code>data.frame()</code>. This function can also take the argument <code>stringsAsFactors</code>. Compare the output of these examples, and compare the difference between when the data are being read as <code>character</code>, and when they are being read as <code>factor</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
-                  <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
-                  <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>))
-<span class="kw">str</span>(df1)</code></pre></div>
-<pre><code>#&gt; &#39;data.frame&#39;:    4 obs. of  3 variables:
-#&gt;  $ animal: Factor w/ 4 levels &quot;cat&quot;,&quot;dog&quot;,&quot;sea cucumber&quot;,..: 2 1 3 4
-#&gt;  $ feel  : Factor w/ 3 levels &quot;furry&quot;,&quot;spiny&quot;,..: 1 1 3 2
-#&gt;  $ weight: num  45 8 1.1 0.8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
-                  <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
-                  <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
-<span class="kw">str</span>(df2)</code></pre></div>
-<pre><code>#&gt; &#39;data.frame&#39;:    4 obs. of  3 variables:
-#&gt;  $ animal: chr  &quot;dog&quot; &quot;cat&quot; &quot;sea cucumber&quot; &quot;sea urchin&quot;
-#&gt;  $ feel  : chr  &quot;furry&quot; &quot;furry&quot; &quot;squishy&quot; &quot;spiny&quot;
-#&gt;  $ weight: num  45 8 1.1 0.8</code></pre>
-<div id="challenge-7" class="section level3">
-<h3>Challenge</h3>
-<p>There are a few mistakes in this hand crafted <code>data.frame</code>, can you spot and fix them? Don’t hesitate to experiment!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">author_book &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">author_first=</span><span class="kw">c</span>(<span class="st">&quot;Charles&quot;</span>, <span class="st">&quot;Ernst&quot;</span>, <span class="st">&quot;Theodosius&quot;</span>),
-                          <span class="dt">author_last=</span><span class="kw">c</span>(Darwin, Mayr, Dobzhansky),
-                          <span class="dt">year=</span><span class="kw">c</span>(<span class="dv">1942</span>, <span class="dv">1970</span>))</code></pre></div>
-<!-- end challenge -->
+<div id="another-summary" class="section level3">
+<h3>Another summary</h3>
+<p>Another useful function in <code>summary()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(surveys)</code></pre></div>
+<p>For the numeric data, you get six statistics (min, 25th percentile, median, mean, 75th percentile, and max). For the factors, you get a table with counts for the most-frequent “levels”, and then for the rest.</p>
 </div>
 </div>
 <div id="inspecting-data-frames" class="section level2">
@@ -681,9 +417,18 @@ table(expt)
 </ul>
 <p>Note: most of these functions are “generic”, they can be used on other types of objects besides <code>data.frame</code>.</p>
 </div>
+<div id="maybe-download-the-file-first" class="section level2">
+<h2>Maybe download the file first</h2>
+<p>It probably is best to first download the file, so that we have a local copy, and then read it in.</p>
+<p>We could first use <code>download_file()</code> to download the data into the <code>CleanData/</code> subdirectory:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>,
+              <span class="st">&quot;CleanData/portal_data_joined.csv&quot;</span>)</code></pre></div>
+<p>We could then use <code>read.csv()</code> to load the data into R, from the downloaded file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;CleanData/portal_data_joined.csv&#39;</span>)</code></pre></div>
+</div>
 <div id="indexing-sequences-and-subsetting" class="section level2">
 <h2>Indexing, Sequences, and Subsetting</h2>
-<p>We pulled out parts of a vector by indexing with square brackets. We can do the same thing with data frames, but we need to provide two values: row and column, with a comma between them.</p>
+<p>We can pull out parts of a data frame using square brackets. We need to provide two values: row and column, with a comma between them.</p>
 <p>For example, to get the element in the 1st row, 1st column:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="dv">1</span>,<span class="dv">1</span>]</code></pre></div>
 <p>To get the element in the 2nd row, 7th column:</p>
@@ -694,21 +439,17 @@ table(expt)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span>surveys[,<span class="dv">7</span>]</code></pre></div>
 <p>You can also refer to columns by name, in multiple ways.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span>surveys[, <span class="st">&quot;sex&quot;</span>]
-ssex &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</span>]]
-sex &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
-<div id="treating-blanks-as-missing" class="section level3">
-<h3>Treating blanks as missing</h3>
-<p>Another aside: it’s probably best to treat those blanks as missing (<code>NA</code>). To do that, use the argument <code>na.strings</code> when reading the data. <code>na.strings</code> can be a vector of multiple character strings. We need that a missing value code can never exist as a valid value, because they all will be converted to the missing data code <code>NA</code>. And note that the default for <code>na.strings</code> is <code>&quot;NA&quot;</code>, which will cause problems if <code>&quot;NA&quot;</code> is a valid value for your data (e.g., as an abbreviation <code>&quot;North America&quot;</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
-</div>
+sex &lt;-<span class="st"> </span>surveys$sex
+sex &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</span>]]</code></pre></div>
+<p>When we pull out a single column, the result is a “vector”. We can again use square brackets to pull out individual values, but providing a single number.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex[<span class="dv">1</span>]
+sex[<span class="dv">10000</span>]</code></pre></div>
 <div id="slices" class="section level3">
 <h3>Slices</h3>
-<p>As with vectors, you can also use logical vectors when indexing.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights_males &lt;-<span class="st"> </span>surveys[surveys$sex ==<span class="st"> &#39;M&#39;</span>, <span class="st">&quot;weight&quot;</span>]
-<span class="kw">mean</span>(weights_males, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-
-<span class="kw">mean</span>(surveys[surveys$sex ==<span class="st"> &#39;F&#39;</span>, <span class="st">&quot;weight&quot;</span>], <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
-<p>Or you can use numeric vectors. To pull out larger slices, it’s helpful to have ways of creating sequences of numbers.</p>
+<p>You can pull out larger slices from the vector by providing vectors of indices. You can use the <code>c()</code> function to create a vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)
+sex[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</code></pre></div>
+<p>To pull out larger slices, it’s helpful to have ways of creating sequences of numbers.</p>
 <p>First, the operator <code>:</code> gives you a sequence of consecutive values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>:<span class="dv">10</span>
 <span class="dv">10</span>:<span class="dv">1</span>
@@ -724,13 +465,87 @@ sex &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
 surveys[<span class="dv">1</span>, <span class="dv">1</span>:<span class="dv">3</span>]   <span class="co"># first three columns in the first row</span>
 surveys[<span class="dv">2</span>:<span class="dv">4</span>, <span class="dv">6</span>:<span class="dv">7</span>] <span class="co"># rows 2-4, columns 6-7</span></code></pre></div>
 </div>
-<div id="challenge-8" class="section level3">
+<div id="challenge-1" class="section level3">
 <h3>Challenge</h3>
-<ol style="list-style-type: decimal">
-<li><p>The function <code>nrow()</code> on a <code>data.frame</code> returns the number of rows. Use it, in conjuction with <code>seq()</code> to create a new <code>data.frame</code> called <code>surveys_by_10</code> that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)</p></li>
-<li><p>Create a <code>data.frame</code> containing only the observations from the year 1999 of the <code>surveys</code> dataset.</p></li>
-</ol>
+<p>The function <code>nrow()</code> on a <code>data.frame</code> returns the number of rows. Use it, in conjuction with <code>seq()</code> to create a new <code>data.frame</code> called <code>surveys_by_10</code> that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)</p>
 <!-- end challenge -->
+</div>
+</div>
+<div id="missing-data" class="section level2">
+<h2>Missing data</h2>
+<p>As R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as <code>NA</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">6</span>)</code></pre></div>
+<p>When doing operations on numbers, most functions will return <code>NA</code> if the data you are working with include missing values. It is a safer behavior as otherwise you may overlook that you are dealing with missing data. You can add the argument <code>na.rm=TRUE</code> to calculate the result while ignoring the missing values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(heights)
+<span class="kw">max</span>(heights)
+<span class="kw">mean</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+<span class="kw">max</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>If your data include missing values, you may want to become familiar with the functions <code>is.na()</code> and <code>na.omit()</code>. examples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Extract those elements which are not missing values.
+heights[!<span class="kw">is.na</span>(heights)]
+## shortcut to that
+<span class="kw">na.omit</span>(heights)</code></pre></div>
+<div id="treating-blanks-as-missing" class="section level3">
+<h3>Treating blanks as missing</h3>
+<p>Another aside: it’s probably best to treat those blanks as missing (<code>NA</code>). To do that, use the argument <code>na.strings</code> when reading the data. <code>na.strings</code> can be a vector of multiple character strings. We need that a missing value code can never exist as a valid value, because they all will be converted to the missing data code <code>NA</code>. And note that the default for <code>na.strings</code> is <code>&quot;NA&quot;</code>, which will cause problems if <code>&quot;NA&quot;</code> is a valid value for your data (e.g., as an abbreviation <code>&quot;North America&quot;</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CleanData/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="factors" class="section level2">
+<h2>Factors</h2>
+<p>Factors are used to represent categorical data. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting.</p>
+<p>Factors are stored as integers, and have labels associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
+<p>Once created, factors can only contain a pre-defined set of values, known as <em>levels</em>. By default, R always sorts <em>levels</em> in alphabetical order. For instance, if you use <code>factor()</code> to create a factor with 2 levels:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</code></pre></div>
+<p>R will assign <code>1</code> to the level <code>&quot;female&quot;</code> and <code>2</code> to the level <code>&quot;male&quot;</code> (because <code>f</code> comes before <code>m</code>, even though the first element in this vector is <code>&quot;male&quot;</code>). You can check this by using the function <code>levels()</code>, and check the number of levels using <code>nlevels()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(sex)
+<span class="kw">nlevels</span>(sex)</code></pre></div>
+<p>Sometimes, the order of the factors does not matter, other times you might want to specify a particular order.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">food &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
+<span class="kw">levels</span>(food)
+food &lt;-<span class="st"> </span><span class="kw">factor</span>(food, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
+<span class="kw">levels</span>(food)</code></pre></div>
+<div id="converting-factors" class="section level3">
+<h3>Converting factors</h3>
+<p>If you need to convert a factor to a character vector, you use <code>as.character(x)</code>.</p>
+<p>Converting factors where the levels appear as numbers (such as concentration levels) to a numeric vector is a little trickier. One method is to convert factors to characters and then numbers. function. Compare:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>))
+<span class="kw">as.numeric</span>(f)               ## wrong! and there is no warning...
+<span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) ## works...</code></pre></div>
+</div>
+<div id="challenge-2" class="section level3">
+<h3>Challenge</h3>
+<p>The function <code>table()</code> tabulates observations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat3&quot;</span>, <span class="st">&quot;treat1&quot;</span>,
+          <span class="st">&quot;control&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat3&quot;</span>)
+expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
+<span class="kw">table</span>(expt)</code></pre></div>
+<ul>
+<li>In which order are the treatments listed?</li>
+<li>How can you recreate this table with “<code>control</code>” listed last instead of first?</li>
+</ul>
+<!-- end challenge -->
+<!---
+
+```r
+## Answers
+##
+## * The treatments are listed in alphabetical order because they are factors.
+## * By redefining the order of the levels
+expt <- c("treat1", "treat2", "treat1", "treat3", "treat1",
+          "control", "treat1", "treat2", "treat3")
+expt <- factor(expt, levels=c("treat1", "treat2", "treat3", "control"))
+table(expt)
+```
+--->
+</div>
+<div id="stringsasfactors" class="section level3">
+<h3>stringsAsFactors</h3>
+<p>The default when reading in data with <code>read.csv()</code>, columns with text get turned into factors.</p>
+<p>You can avoid this with the argument <code>stringsAsFactors=FALSE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_chr &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CleanData/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p>Then when you look at the result of <code>str()</code>, you’ll see that the previously factor columns are now <code>chr</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys_chr)</code></pre></div>
 </div>
 </div>
 
