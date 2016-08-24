@@ -52,10 +52,9 @@ for each level and a very brief introduction to plotting.
 ## Lessons:
 
 1. [Introduction to R](01-intro-to-R.html)
-2. [Data and data frames](02-data-frames.html)
-3. [Aggregating and analyzing data with dplyr](03-dplyr.html)
-4. [Data visualization with ggplot2](04-ggplot2.html)
-5. [Reproducible reports with R Markdown](05-rmarkdown.html)
+3. [Aggregating and analyzing data with dplyr](02-dplyr.html)
+4. [Data visualization with ggplot2](03-ggplot2.html)
+5. [Reproducible reports with R Markdown](04-rmarkdown.html)
 6. [Capstone project](capstone.html)
 
 ## Data
