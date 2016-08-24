@@ -16,7 +16,7 @@ status: Teaching
 This particular set of lessons has revisions by
 [Karl Broman](http://kbroman.org) for a
 [Data Carpentry workshop](http://uw-madison-aci.github.io/2016-06-01-uwmadison/)
-at UW-Madison on 1-2 June 2016. The official Data Carpentry R-Ecology
+at UW-Madison on 23-24 August 2016. The official Data Carpentry R-Ecology
 lessons are at <http://www.datacarpentry.org/R-ecology-lesson/>.
 
 # Data Carpentry {{ page.topic }} for {{ page.domain }}
