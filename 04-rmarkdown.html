@@ -81,7 +81,7 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="libs/navigation-1.0/tabsets.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -234,7 +234,7 @@ summary(cars)
 <p>The main code chunks look like this:</p>
 <pre>
 &#96;&#96;&#96;{r load_data}
-surveys <- read.csv("data/portal_data_joined.csv")
+reduced <- read.csv("CleanData/portal_data_reduced.csv")
 &#96;&#96;&#96;
 </pre>
 <p>That is, you place a chunk of R code between <code>```{r chunk_name}</code> and <code>```</code>. It’s a good idea to give each chunk a name, as they will help you to fix errors and, if any graphs are produced, the file names are based on the name of the code chunk that produced them.</p>

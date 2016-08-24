@@ -219,7 +219,7 @@ The main code chunks look like this:
 
 <pre>
 &#96;&#96;&#96;{r load_data}
-surveys <- read.csv("data/portal_data_joined.csv")
+reduced <- read.csv("CleanData/portal_data_reduced.csv")
 &#96;&#96;&#96;
 </pre>
 
