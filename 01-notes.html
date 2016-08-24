@@ -156,46 +156,35 @@ $(document).ready(function () {
 <li><a href="#rstudio-orientation">RStudio orientation</a></li>
 </ul></li>
 <li><a href="#r-as-a-calculator">R as a calculator</a></li>
-<li><a href="#getting-help">Getting help</a></li>
 <li><a href="#need-for-scripts">Need for scripts</a><ul>
 <li><a href="#create-a-new-r-project">Create a new R project</a></li>
 <li><a href="#create-an-r-script">Create an R script</a></li>
 </ul></li>
 <li><a href="#typing-into-the-script-and-pasting-to-console">Typing into the script and pasting to console</a></li>
-<li><a href="#assigment-operator">Assigment operator</a><ul>
-<li><a href="#using-the-stuff-you-assigned">Using the stuff you assigned</a></li>
-<li><a href="#object-names">Object names</a></li>
-<li><a href="#challenge">Challenge</a></li>
+<li><a href="#plunge-into-survey-data">Plunge into Survey Data</a><ul>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#assigment-operator">Assigment operator</a></li>
 <li><a href="#objects-in-workspace">Objects in workspace</a></li>
+<li><a href="#object-names">Object names</a></li>
+<li><a href="#getting-help">Getting help</a></li>
 </ul></li>
-<li><a href="#vectors-and-data-types">Vectors and data types</a><ul>
-<li><a href="#length-class-str">length, class, str</a></li>
-<li><a href="#add-to-a-vector">Add to a vector</a></li>
-<li><a href="#challenge-1">Challenge</a></li>
-</ul></li>
-<li><a href="#subsetting-vectors">Subsetting vectors</a><ul>
-<li><a href="#challenge-2">Challenge</a></li>
-<li><a href="#conditional-subsetting">Conditional subsetting</a></li>
-<li><a href="#challenge-3">Challenge</a></li>
-</ul></li>
-<li><a href="#missing-data">Missing data</a><ul>
-<li><a href="#challenge-4">Challenge</a></li>
-</ul></li>
-<li><a href="#load-the-data">Load the data</a><ul>
-<li><a href="#challenge-5">Challenge</a></li>
-</ul></li>
-<li><a href="#factors">Factors</a><ul>
-<li><a href="#challenge-6">Challenge</a></li>
-</ul></li>
-<li><a href="#stringsasfactors">stringsAsFactors</a><ul>
-<li><a href="#constructing-data-frames-by-hand">Constructing data frames “by hand”</a></li>
-<li><a href="#challenge-7">Challenge</a></li>
+<li><a href="#data-frames">Data frames</a><ul>
+<li><a href="#challenge">Challenge</a></li>
+<li><a href="#another-summary">Another summary</a></li>
 </ul></li>
 <li><a href="#inspecting-data-frames">Inspecting data frames</a></li>
-<li><a href="#indexing-sequences-subsetting">Indexing, sequences, subsetting</a><ul>
-<li><a href="#treating-blanks-as-missing">Treating blanks as missing</a></li>
+<li><a href="#download-and-then-load-the-data">Download and then load the data</a></li>
+<li><a href="#indexing-sequences-and-subsetting">Indexing, Sequences, and Subsetting</a><ul>
 <li><a href="#slices">Slices</a></li>
-<li><a href="#challenge-8">Challenge</a></li>
+<li><a href="#challenge-1">Challenge</a></li>
+</ul></li>
+<li><a href="#missing-data">Missing data</a><ul>
+<li><a href="#treating-blanks-as-missing">Treating blanks as missing</a></li>
+</ul></li>
+<li><a href="#factors">Factors</a><ul>
+<li><a href="#converting-factors">Converting factors</a></li>
+<li><a href="#challenge-2">Challenge</a></li>
+<li><a href="#stringsasfactors">stringsAsFactors</a></li>
 </ul></li>
 </ul>
 </div>
@@ -243,19 +232,7 @@ $(document).ready(function () {
 <span class="dv">4</span>/<span class="dv">6</span>
 <span class="dv">4</span>^<span class="dv">6</span>
 <span class="kw">log</span>(<span class="dv">4</span>)
-<span class="kw">log10</span>(<span class="dv">4</span>)
-<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">10</span>)
-<span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">6</span>)</code></pre></div>
-<ul>
-<li>Explain that <code>log</code> is a function with two arguments.</li>
-</ul>
-</div>
-<div id="getting-help" class="section level2">
-<h2>Getting help</h2>
-<ul>
-<li>Pause for a moment after typing <code>log</code></li>
-<li>Type <code>?log</code></li>
-</ul>
+<span class="kw">log10</span>(<span class="dv">4</span>)</code></pre></div>
 </div>
 <div id="need-for-scripts" class="section level2">
 <h2>Need for scripts</h2>
@@ -266,16 +243,14 @@ $(document).ready(function () {
 <div id="create-a-new-r-project" class="section level3">
 <h3>Create a new R project</h3>
 <ul>
-<li>File → New Project → New directory → Empty project</li>
-<li>Give it a name, like <code>~/data-carpentry</code></li>
-<li>Under files tab on the bottom right, click “New Folder” and create a folder named <code>data</code></li>
+<li>File → New Project → Existing directory → Browse for folder → Create project</li>
 </ul>
 </div>
 <div id="create-an-r-script" class="section level3">
 <h3>Create an R script</h3>
 <ul>
 <li>File → New File → R script</li>
-<li>Save it in the current working directory, <code>data-carpentry-script.R</code></li>
+<li>Save it in the <code>Code/</code> directory, <code>data-carpentry-script.R</code></li>
 </ul>
 </div>
 </div>
@@ -292,20 +267,31 @@ $(document).ready(function () {
 <li><p>Explain comment sign, <code>#</code></p></li>
 </ul>
 </div>
-<div id="assigment-operator" class="section level2">
-<h2>Assigment operator</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="dv">2016</span> -<span class="st"> </span><span class="dv">1969</span></code></pre></div>
+<div id="plunge-into-survey-data" class="section level2">
+<h2>Plunge into Survey Data</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>)</code></pre></div>
+<div id="functions" class="section level3">
+<h3>Functions</h3>
 <ul>
-<li>Paste into console.</li>
+<li><code>read.csv</code> is a function</li>
+<li>the thing within parentheses is the input/argument</li>
+<li>it produces some output/returns a result</li>
+</ul>
+</div>
+<div id="assigment-operator" class="section level3">
+<h3>Assigment operator</h3>
+<ul>
+<li><code>&lt;-</code> assigns a name to the data (assigns the data to an object)</li>
 <li>Can also use <code>=</code>, but recommend <code>&lt;-</code>.</li>
 <li>Can use <kbd>Alt</kbd> + <kbd>-</kbd></li>
 </ul>
-<div id="using-the-stuff-you-assigned" class="section level3">
-<h3>Using the stuff you assigned</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(age)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sqrt_age &lt;-<span class="st"> </span><span class="kw">sqrt</span>(age)
-<span class="kw">round</span>(sqrt_age)
-<span class="kw">round</span>(sqrt_age, <span class="dv">2</span>)</code></pre></div>
+</div>
+<div id="objects-in-workspace" class="section level3">
+<h3>Objects in workspace</h3>
+<ul>
+<li><code>ls()</code></li>
+<li>Environment panel</li>
+</ul>
 </div>
 <div id="object-names" class="section level3">
 <h3>Object names</h3>
@@ -317,235 +303,81 @@ $(document).ready(function () {
 <li>Can use <code>.</code>, but best not to</li>
 </ul>
 </div>
-<div id="challenge" class="section level3">
-<h3>Challenge</h3>
-<p>What is the value of <code>y</code> after doing the following?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">50</span>
-y &lt;-<span class="st"> </span>x *<span class="st"> </span><span class="dv">2</span>
-x &lt;-<span class="st"> </span><span class="dv">80</span></code></pre></div>
-</div>
-<div id="objects-in-workspace" class="section level3">
-<h3>Objects in workspace</h3>
+<div id="getting-help" class="section level3">
+<h3>Getting help</h3>
 <ul>
-<li><code>ls()</code></li>
-<li>Environment panel</li>
+<li>type <code>read.csv</code> and then pause for a bit</li>
+<li>Or type <code>?read.csv</code></li>
 </ul>
 </div>
 </div>
-<div id="vectors-and-data-types" class="section level2">
-<h2>Vectors and data types</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">100</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)
-animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
-<div id="length-class-str" class="section level3">
-<h3>length, class, str</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(weights)
-<span class="kw">length</span>(animals)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(weights)
-<span class="kw">class</span>(animals)
-<span class="kw">str</span>(weights)
-<span class="kw">str</span>(animals)</code></pre></div>
-</div>
-<div id="add-to-a-vector" class="section level3">
-<h3>Add to a vector</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(animals, <span class="st">&quot;dog&quot;</span>) <span class="co"># adding at the end of the vector</span>
-animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, animals) <span class="co"># adding at the beginning of the vector</span></code></pre></div>
-</div>
-<div id="challenge-1" class="section level3">
-<h3>Challenge</h3>
-<p>What happens to vectors with mixed types? (Hint: use <code>class()</code>)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;a&#39;</span>)
-
-y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)
-
-z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)
-
-tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)</code></pre></div>
-</div>
-</div>
-<div id="subsetting-vectors" class="section level2">
-<h2>Subsetting vectors</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
-animals[<span class="dv">2</span>]
-animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">more_animals &lt;-<span class="st"> </span>animals[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)]</code></pre></div>
-<div id="challenge-2" class="section level3">
-<h3>Challenge</h3>
-<p>Consider the <code>animals</code> vector.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)</code></pre></div>
-<p>Subset to get the 2nd and 3rd values.</p>
-</div>
-<div id="conditional-subsetting" class="section level3">
-<h3>Conditional subsetting</h3>
-<p>Subsetting with a logical vector.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">54</span>, <span class="dv">39</span>, <span class="dv">17</span>, <span class="dv">55</span>)
-x[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</code></pre></div>
-<pre><code>## [1] 54 55</code></pre>
-<p>Creating a logical vector.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &gt;<span class="st"> </span><span class="dv">50</span>    <span class="co"># will return logicals with TRUE for the indices that meet the condition</span></code></pre></div>
-<pre><code>## [1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## so we can use this to select only the values above 50
-x[x&gt;<span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 54 55</code></pre>
-<p>Using <code>&amp;</code> and <code>|</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &lt;<span class="st"> </span><span class="dv">30</span> |<span class="st"> </span>x &gt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 21 54 17 55</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &gt;<span class="st"> </span><span class="dv">30</span> &amp;<span class="st"> </span>x &lt;<span class="st"> </span><span class="dv">50</span>]</code></pre></div>
-<pre><code>## [1] 39</code></pre>
-<p>Using <code>%in%</code> with character strings.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>)
-animals[animals ==<span class="st"> &quot;cat&quot;</span> |<span class="st"> </span>animals ==<span class="st"> &quot;rat&quot;</span>] <span class="co"># returns both rat and cat</span></code></pre></div>
-<pre><code>## [1] &quot;rat&quot; &quot;cat&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)</code></pre></div>
-<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals[animals %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;duck&quot;</span>)]</code></pre></div>
-<pre><code>## [1] &quot;rat&quot; &quot;dog&quot; &quot;cat&quot;</code></pre>
-</div>
-<div id="challenge-3" class="section level3">
-<h3>Challenge</h3>
-<p>Consider the following two vectors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
-weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">180</span>, <span class="dv">4000</span>, <span class="dv">8000</span>)</code></pre></div>
-<p>Subset <code>animals</code> with <code>weights &lt; 200</code>.</p>
-</div>
-</div>
-<div id="missing-data" class="section level2">
-<h2>Missing data</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">6</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(heights)
-<span class="kw">max</span>(heights)
-<span class="kw">mean</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-<span class="kw">max</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Extract those elements which are not missing values.
-heights[!<span class="kw">is.na</span>(heights)]
-## shortcut to that
-<span class="kw">na.omit</span>(heights)</code></pre></div>
-<div id="challenge-4" class="section level3">
-<h3>Challenge</h3>
-<p>Why does the following give an error?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">6</span>)
-<span class="kw">mean</span>(v, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
-<p>Why does the error message say the data are not numeric?</p>
-</div>
-</div>
-<div id="load-the-data" class="section level2">
-<h2>Load the data</h2>
-<p>We first download the file:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>,
-              <span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</code></pre></div>
-<p>We then load them into R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/portal_data_joined.csv&#39;</span>)</code></pre></div>
-<p>Can also do:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>)</code></pre></div>
+<div id="data-frames" class="section level2">
+<h2>Data frames</h2>
 <p>Use <code>head()</code> to view the first few rows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(surveys)</code></pre></div>
 <p>Use <code>tail()</code> to view the last few rows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(surveys)</code></pre></div>
 <p>Use <code>str()</code> to look at the structure of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys)</code></pre></div>
-<div id="challenge-5" class="section level3">
+<p>Talk about integers and factors; more on factors later.</p>
+<div id="challenge" class="section level3">
 <h3>Challenge</h3>
-<p>Based on the output of <code>str(surveys)</code>, can you answer the following questions?</p>
+<p>Study the output of <code>str(surveys)</code>. How are the missing values being treated?</p>
+<!-- end challenge -->
+</div>
+<div id="another-summary" class="section level3">
+<h3>Another summary</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(surveys)</code></pre></div>
 <ul>
-<li>What is the class of the object <code>surveys</code>?</li>
-<li>How many rows and how many columns are in this object?</li>
-<li>How many species have been recorded during these surveys?</li>
+<li>six-number summary for the numeric columns</li>
+<li>table for the factor columns</li>
 </ul>
-</div>
-</div>
-<div id="factors" class="section level2">
-<h2>Factors</h2>
-<p>Factors are categorical variables. They look like a vector of character strings, but they’re stored as integers with character string labels for the distinct values, called <em>levels</em>.</p>
-<p>Use <code>factor()</code> to create a vector that is a factor.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</code></pre></div>
-<p>Use <code>levels()</code> and <code>nlevels()</code> to see the levels and their number.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(sex)
-<span class="kw">nlevels</span>(sex)</code></pre></div>
-<p>If you provide the <code>levels</code> argument to <code>factor()</code>, you’ll get the levels in a particular order.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">food &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
-<span class="kw">levels</span>(food)
-food &lt;-<span class="st"> </span><span class="kw">factor</span>(food, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
-<span class="kw">levels</span>(food)</code></pre></div>
-<p>Converting factors to numeric.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>))
-<span class="kw">as.numeric</span>(f)               ## wrong! and there is no warning...
-<span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) ## works...</code></pre></div>
-<div id="challenge-6" class="section level3">
-<h3>Challenge</h3>
-<p>The function <code>table()</code> tabulates observations.</p>
-<pre><code>expt &lt;- c(&quot;treat1&quot;, &quot;treat2&quot;, &quot;treat1&quot;, &quot;treat3&quot;, &quot;treat1&quot;, &quot;control&quot;,
-          &quot;treat1&quot;, &quot;treat2&quot;, &quot;treat3&quot;)
-expt &lt;- factor(expt)
-table(expt)</code></pre>
-<ul>
-<li>In which order are the treatments listed?</li>
-<li>How can you recreate this table with “control” listed last instead of first?</li>
-</ul>
-</div>
-</div>
-<div id="stringsasfactors" class="section level2">
-<h2>stringsAsFactors</h2>
-<p>Avoid factors with <code>stringsAsFactors=FALSE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_chr &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys_chr)</code></pre></div>
-<div id="constructing-data-frames-by-hand" class="section level3">
-<h3>Constructing data frames “by hand”</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
-                  <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
-                  <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>))
-<span class="kw">str</span>(df1)
-
-df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
-                  <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
-                  <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
-<span class="kw">str</span>(df2)</code></pre></div>
-</div>
-<div id="challenge-7" class="section level3">
-<h3>Challenge</h3>
-<p>There are a few mistakes in this hand crafted <code>data.frame</code>, can you spot and fix them? Don’t hesitate to experiment!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">author_book &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">author_first=</span><span class="kw">c</span>(<span class="st">&quot;Charles&quot;</span>, <span class="st">&quot;Ernst&quot;</span>, <span class="st">&quot;Theodosius&quot;</span>),
-                          <span class="dt">author_last=</span><span class="kw">c</span>(Darwin, Mayr, Dobzhansky),
-                          <span class="dt">year=</span><span class="kw">c</span>(<span class="dv">1942</span>, <span class="dv">1970</span>))</code></pre></div>
 </div>
 </div>
 <div id="inspecting-data-frames" class="section level2">
 <h2>Inspecting data frames</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(surveys)
-<span class="kw">nrow</span>(surveys)
-<span class="kw">ncol</span>(surveys)
-
-<span class="kw">names</span>(surveys)
-<span class="kw">rownames</span>(surveys)
-
-<span class="kw">summary</span>(surveys)</code></pre></div>
+<ul>
+<li><code>dim()</code></li>
+<li><code>nrow()</code></li>
+<li><code>ncol()</code></li>
+<li><code>names()</code></li>
+<li><code>colnames()</code></li>
+<li><code>rownames()</code></li>
+</ul>
 </div>
-<div id="indexing-sequences-subsetting" class="section level2">
-<h2>Indexing, sequences, subsetting</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="dv">1</span>,<span class="dv">1</span>]
-
-surveys[<span class="dv">2</span>,<span class="dv">7</span>]
-
-surveys[<span class="dv">2</span>,]
-
-sex &lt;-<span class="st"> </span>surveys[,<span class="dv">7</span>]</code></pre></div>
-<p>Referring to columns.</p>
+<div id="download-and-then-load-the-data" class="section level2">
+<h2>Download and then load the data</h2>
+<p>We first download the file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_joined.csv&quot;</span>,
+              <span class="st">&quot;CleanData/portal_data_joined.csv&quot;</span>)</code></pre></div>
+<p>We then load them into R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CleanData/portal_data_joined.csv&quot;</span>)</code></pre></div>
+</div>
+<div id="indexing-sequences-and-subsetting" class="section level2">
+<h2>Indexing, Sequences, and Subsetting</h2>
+<p>We can pull out parts of a data frame using square brackets. We need to provide two values: row and column, with a comma between them.</p>
+<p>For example, to get the element in the 1st row, 1st column:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="dv">1</span>,<span class="dv">1</span>]</code></pre></div>
+<p>To get the element in the 2nd row, 7th column:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="dv">2</span>,<span class="dv">7</span>]</code></pre></div>
+<p>To get the entire 2nd row, leave the column part blank:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="dv">2</span>,]</code></pre></div>
+<p>And to get the entire 7th column, leave the row part blank:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span>surveys[,<span class="dv">7</span>]</code></pre></div>
+<p>You can also refer to columns by name, in multiple ways.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span>surveys[, <span class="st">&quot;sex&quot;</span>]
-sex &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</span>]]
-sex &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
-<div id="treating-blanks-as-missing" class="section level3">
-<h3>Treating blanks as missing</h3>
-<p>Mention use of <code>&quot;NA&quot;</code> as the standard missing value code, and that this can be a problem if that’s a valid value.</p>
-<p>Also that blanks in numeric columns got converted to <code>NA</code>, but blanks in the <code>sex</code> column were left as <code>&quot;&quot;</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
-</div>
+sex &lt;-<span class="st"> </span>surveys$sex
+sex &lt;-<span class="st"> </span>surveys[[<span class="st">&quot;sex&quot;</span>]]</code></pre></div>
+<p>When we pull out a single column, the result is a “vector”. We can again use square brackets to pull out individual values, but providing a single number.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex[<span class="dv">1</span>]
+sex[<span class="dv">10000</span>]</code></pre></div>
 <div id="slices" class="section level3">
 <h3>Slices</h3>
-<p>As with vectors, you can also use logical vectors when indexing.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weights_males &lt;-<span class="st"> </span>surveys[surveys$sex ==<span class="st"> &#39;M&#39;</span>, <span class="st">&quot;weight&quot;</span>]
-<span class="kw">mean</span>(weights_males, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-
-<span class="kw">mean</span>(surveys[surveys$sex ==<span class="st"> &#39;F&#39;</span>, <span class="st">&quot;weight&quot;</span>], <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
-<p>Or you can use numeric vectors. To pull out larger slices, it’s helpful to have ways of creating sequences of numbers.</p>
-<p>First, <code>:</code></p>
+<p>You can pull out larger slices from the vector by providing vectors of indices. You can use the <code>c()</code> function to create a vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)
+sex[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</code></pre></div>
+<p>To pull out larger slices, it’s helpful to have ways of creating sequences of numbers.</p>
+<p>First, the operator <code>:</code> gives you a sequence of consecutive values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>:<span class="dv">10</span>
 <span class="dv">10</span>:<span class="dv">1</span>
 <span class="dv">5</span>:<span class="dv">8</span></code></pre></div>
@@ -555,17 +387,97 @@ sex &lt;-<span class="st"> </span>surveys$sex</code></pre></div>
 <span class="kw">seq</span>(<span class="dv">50</span>, <span class="dt">by=</span><span class="dv">5</span>, <span class="dt">length.out=</span><span class="dv">10</span>)
 <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">8</span>, <span class="dt">by=</span><span class="dv">3</span>) <span class="co"># sequence stops to stay below upper limit</span>
 <span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">2</span>, <span class="dt">by=</span>-<span class="dv">2</span>)  <span class="co"># can also go backwards</span></code></pre></div>
-<p>Use these to take slices of the data.</p>
+<p>To get slices of our data frame, we can include a vector for the row or column indexes (or both)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys[<span class="dv">1</span>:<span class="dv">3</span>, <span class="dv">7</span>]   <span class="co"># first three elements in the 7th column</span>
 surveys[<span class="dv">1</span>, <span class="dv">1</span>:<span class="dv">3</span>]   <span class="co"># first three columns in the first row</span>
 surveys[<span class="dv">2</span>:<span class="dv">4</span>, <span class="dv">6</span>:<span class="dv">7</span>] <span class="co"># rows 2-4, columns 6-7</span></code></pre></div>
 </div>
-<div id="challenge-8" class="section level3">
+<div id="challenge-1" class="section level3">
 <h3>Challenge</h3>
-<ol style="list-style-type: decimal">
-<li><p>The function <code>nrow()</code> on a <code>data.frame</code> returns the number of rows. Use it, in conjuction with <code>seq()</code> to create a new <code>data.frame</code> called <code>surveys_by_10</code> that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)</p></li>
-<li><p>Create a <code>data.frame</code> containing only the observations from the year 1999 of the <code>surveys</code> dataset.</p></li>
-</ol>
+<p>The function <code>nrow()</code> on a <code>data.frame</code> returns the number of rows.</p>
+<p>Use <code>nrow()</code>, in conjuction with <code>seq()</code> to create a new <code>data.frame</code> called <code>surveys_by_10</code> that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)</p>
+<!-- end challenge -->
+</div>
+</div>
+<div id="missing-data" class="section level2">
+<h2>Missing data</h2>
+<p>Missing data value, <code>NA</code>. Different from character string <code>&quot;NA&quot;</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">6</span>)</code></pre></div>
+<p>Many functions will return <code>NA</code> if there is any missing data. Need to use <code>na.rm=TRUE</code> to strip off missing values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(heights)
+<span class="kw">max</span>(heights)
+<span class="kw">mean</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+<span class="kw">max</span>(heights, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>If your data include missing values, you may want to become familiar with the functions <code>is.na()</code> and <code>na.omit()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Extract those elements which are not missing values.
+heights[!<span class="kw">is.na</span>(heights)]
+## shortcut to that
+<span class="kw">na.omit</span>(heights)</code></pre></div>
+<div id="treating-blanks-as-missing" class="section level3">
+<h3>Treating blanks as missing</h3>
+<ul>
+<li>blank character strings might be best treated as missing values.</li>
+<li>I prefer not to have blank fields, but it’s difficult to choose a universal missing value code.</li>
+<li>Use <code>na.strings</code> in <code>read.csv()</code> to indicate missing value codes.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_noblanks &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CleanData/portal_data_joined.csv&quot;</span>, <span class="dt">na.strings=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="factors" class="section level2">
+<h2>Factors</h2>
+<p>Factors represent categorical data. They can be useful, but they can be a pain. And understanding them is necessary for statistical analysis and for plotting.</p>
+<p>Factors are stored as integers, and have labels associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
+<p>Once created, factors can only contain a pre-defined set of values, known as <em>levels</em>. By default, R always sorts <em>levels</em> in alphabetical order. For instance, if you use <code>factor()</code> to create a factor with 2 levels:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</code></pre></div>
+<p>R will assign <code>1</code> to the level <code>&quot;female&quot;</code> and <code>2</code> to the level <code>&quot;male&quot;</code> (because <code>f</code> comes before <code>m</code>, even though the first element in this vector is <code>&quot;male&quot;</code>). You can check this by using the function <code>levels()</code>, and check the number of levels using <code>nlevels()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(sex)
+<span class="kw">nlevels</span>(sex)</code></pre></div>
+<p>Sometimes, the order of the factors does not matter, other times you might want to specify a particular order.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">food &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
+<span class="kw">levels</span>(food)
+food &lt;-<span class="st"> </span><span class="kw">factor</span>(food, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))
+<span class="kw">levels</span>(food)</code></pre></div>
+<div id="converting-factors" class="section level3">
+<h3>Converting factors</h3>
+<p>If you need to convert a factor to a character vector, you use <code>as.character(x)</code>.</p>
+<p>Converting factors where the levels appear as numbers (such as concentration levels) to a numeric vector is a little trickier. One method is to convert factors to characters and then numbers. function. Compare:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>))
+<span class="kw">as.numeric</span>(f)               ## wrong! and there is no warning...
+<span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) ## works...</code></pre></div>
+</div>
+<div id="challenge-2" class="section level3">
+<h3>Challenge</h3>
+<p>The function <code>table()</code> tabulates observations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat3&quot;</span>, <span class="st">&quot;treat1&quot;</span>,
+          <span class="st">&quot;control&quot;</span>, <span class="st">&quot;treat1&quot;</span>, <span class="st">&quot;treat2&quot;</span>, <span class="st">&quot;treat3&quot;</span>)
+expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
+<span class="kw">table</span>(expt)</code></pre></div>
+<ul>
+<li>In which order are the treatments listed?</li>
+<li>How can you recreate this table with “<code>control</code>” listed last instead of first?</li>
+</ul>
+<!-- end challenge -->
+<!---
+
+```r
+## Answers
+##
+## * The treatments are listed in alphabetical order because they are factors.
+## * By redefining the order of the levels
+expt <- c("treat1", "treat2", "treat1", "treat3", "treat1",
+          "control", "treat1", "treat2", "treat3")
+expt <- factor(expt, levels=c("treat1", "treat2", "treat3", "control"))
+table(expt)
+```
+--->
+</div>
+<div id="stringsasfactors" class="section level3">
+<h3>stringsAsFactors</h3>
+<p>The default when reading in data with <code>read.csv()</code>, columns with text get turned into factors.</p>
+<p>You can avoid this with the argument <code>stringsAsFactors=FALSE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_chr &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CleanData/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p>Then when you look at the result of <code>str()</code>, you’ll see that the previously factor columns are now <code>chr</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(surveys_chr)</code></pre></div>
 <p><br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/></p>
 </div>
 </div>

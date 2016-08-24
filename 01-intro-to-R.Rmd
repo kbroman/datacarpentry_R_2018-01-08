@@ -512,7 +512,6 @@ max(heights, na.rm = TRUE)
 
 If your data include missing values, you may want to become familiar with the
 functions `is.na()` and `na.omit()`.
-examples.
 
 
 ```{r extract_non_missing}

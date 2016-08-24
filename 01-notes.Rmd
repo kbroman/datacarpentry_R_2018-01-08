@@ -51,16 +51,7 @@ Four panes (can be re-organized, but always these four panes)
 4^6
 log(4)
 log10(4)
-log(4, 10)
-log(4, 6)
 ```
-
-- Explain that `log` is a function with two arguments.
-
-## Getting help
-
-- Pause for a moment after typing `log`
-- Type `?log`
 
 ## Need for scripts
 
@@ -69,15 +60,14 @@ log(4, 6)
 
 ### Create a new R project
 
-- File → New Project → New directory → Empty project
-- Give it a name, like `~/data-carpentry`
-- Under files tab on the bottom right, click "New Folder" and create a
-  folder named `data`
+- File → New Project → Existing directory → Browse for folder
+  → Create project
 
 ### Create an R script
 
 - File → New File → R script
-- Save it in the current working directory, `data-carpentry-script.R`
+- Save it in the `Code/` directory, `data-carpentry-script.R`
+
 
 ## Typing into the script and pasting to console
 
@@ -94,27 +84,31 @@ log(4, 6)
 - Explain comment sign, `#`
 
 
-## Assigment operator
+## Plunge into Survey Data
 
-```{r assign}
-age <- 2016 - 1969
+```{r read_csv_from_web}
+surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
 ```
 
-- Paste into console.
+
+### Functions
+
+- `read.csv` is a function
+- the thing within parentheses is the input/argument
+- it produces some output/returns a result
+
+
+### Assigment operator
+
+- `<-` assigns a name to the data (assigns the data to an object)
 - Can also use `=`, but recommend `<-`.
 - Can use <kbd>Alt</kbd> + <kbd>-</kbd>
 
-### Using the stuff you assigned
+### Objects in workspace
 
-```{r sqrt}
-sqrt(age)
-```
+- `ls()`
+- Environment panel
 
-```{r more_assign}
-sqrt_age <- sqrt(age)
-round(sqrt_age)
-round(sqrt_age, 2)
-```
 
 ### Object names
 
@@ -124,185 +118,16 @@ round(sqrt_age, 2)
 - other names you can but shouldn't use (`c`, `data`, `mean`)
 - Can use `.`, but best not to
 
-### Challenge
-
-What is the value of `y` after doing the following?
-
-```{r}
-x <- 50
-y <- x * 2
-x <- 80
-```
-
-### Objects in workspace
-
-- `ls()`
-- Environment panel
-
-## Vectors and data types
-
-```{r vectors}
-weights <- c(30, 100, 4000, 8000)
-animals <- c("rat", "cat")
-```
-
-### length, class, str
-
-```{r length}
-length(weights)
-length(animals)
-```
-
-```{r class_str}
-class(weights)
-class(animals)
-str(weights)
-str(animals)
-```
-
-### Add to a vector
-
-```{r}
-animals <- c(animals, "dog") # adding at the end of the vector
-animals <- c("mouse", animals) # adding at the beginning of the vector
-```
 
 
-### Challenge
+### Getting help
 
-What happens to vectors with mixed types?
-(Hint: use `class()`)
-
-```{r, echo=TRUE, eval=FALSE}
-x <- c(1, 2, 3, 'a')
-
-y <- c(1, 2, 3, TRUE)
-
-z <- c('a', 'b', 'c', TRUE)
-
-tricky <- c(1, 2, 3, '4')
-```
-
-## Subsetting vectors
-
-```{r, subset1}
-animals <- c("mouse", "rat", "dog", "cat")
-animals[2]
-animals[c(1, 4)]
-```
-
-```{r, results='show'}
-more_animals <- animals[c(1, 2, 3, 2, 1, 4)]
-```
-
-### Challenge
-
-Consider the `animals` vector.
-
-```{r eval=FALSE}
-animals <- c("mouse", "rat", "dog", "cat")
-```
-
-Subset to get the 2nd and 3rd values.
+- type `read.csv` and then pause for a bit
+- Or type `?read.csv`
 
 
-### Conditional subsetting
 
-Subsetting with a logical vector.
-
-```{r, results='show'}
-x <- c(21, 54, 39, 17, 55)
-x[c(FALSE, TRUE, FALSE, FALSE, TRUE)]
-```
-
-Creating a logical vector.
-
-```{r, results='show'}
-x > 50    # will return logicals with TRUE for the indices that meet the condition
-## so we can use this to select only the values above 50
-x[x>50]
-```
-
-Using `&` and `|`.
-
-```{r, results='show'}
-x[x < 30 | x > 50]
-x[x > 30 & x < 50]
-```
-
-Using `%in%` with character strings.
-
-```{r, results='show'}
-animals <- c("mouse", "rat", "dog", "cat")
-animals[animals == "cat" | animals == "rat"] # returns both rat and cat
-animals %in% c("rat", "cat", "dog", "duck")
-animals[animals %in% c("rat", "cat", "dog", "duck")]
-```
-
-### Challenge
-
-Consider the following two vectors.
-
-```{r, eval=FALSE}
-animals <- c("mouse", "rat", "cat", "dog")
-weights <- c(30, 180, 4000, 8000)
-```
-
-Subset `animals` with `weights < 200`.
-
-
-## Missing data
-
-```{r}
-heights <- c(2, 4, 4, NA, 6)
-```
-
-```{r}
-mean(heights)
-max(heights)
-mean(heights, na.rm = TRUE)
-max(heights, na.rm = TRUE)
-```
-
-```{r}
-## Extract those elements which are not missing values.
-heights[!is.na(heights)]
-## shortcut to that
-na.omit(heights)
-```
-
-### Challenge
-
-Why does the following give an error?
-
-```{r mean_na, eval=FALSE}
-v <- c(2, 4, 4, "NA", 6)
-mean(v, na.rm=TRUE)
-```
-
-Why does the error message say the data are not numeric?
-
-
-## Load the data
-
-We first download the file:
-
-```{r, eval=FALSE}
-download.file("http://kbroman.org/datacarp/portal_data_joined.csv",
-              "data/portal_data_joined.csv")
-```
-
-We then load them into R:
-
-```{r, eval=TRUE}
-surveys <- read.csv('data/portal_data_joined.csv')
-```
-
-Can also do:
-
-```{r eval=FALSE}
-surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
-```
+## Data frames
 
 Use `head()` to view the first few rows.
 
@@ -323,170 +148,112 @@ Use `str()` to look at the structure of the data.
 str(surveys)
 ```
 
-### Challenge
-
-Based on the output of `str(surveys)`, can you answer the following questions?
-
-* What is the class of the object `surveys`?
-* How many rows and how many columns are in this object?
-* How many species have been recorded during these surveys?
-
-
-## Factors
-
-Factors are categorical variables. They look like a vector of
-character strings, but they're stored as integers with character
-string labels for the distinct values, called _levels_.
-
-Use `factor()` to create a vector that is a factor.
-
-```{r}
-sex <- factor(c("male", "female", "female", "male"))
-```
-
-Use `levels()` and `nlevels()` to see the levels and their number.
-
-```{r}
-levels(sex)
-nlevels(sex)
-```
-
-If you provide the `levels` argument to `factor()`, you'll get the
-levels in a particular order.
-
-```{r}
-food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
-levels(food)
-food <- factor(food, levels=c("low", "medium", "high"))
-levels(food)
-```
-
-Converting factors to numeric.
-
-```{r}
-f <- factor(c(1, 5, 10, 2))
-as.numeric(f)               ## wrong! and there is no warning...
-as.numeric(as.character(f)) ## works...
-```
-
-### Challenge
-
-The function `table()` tabulates observations.
-
-```
-expt <- c("treat1", "treat2", "treat1", "treat3", "treat1", "control",
-          "treat1", "treat2", "treat3")
-expt <- factor(expt)
-table(expt)
-```
-
-* In which order are the treatments listed?
-* How can you recreate this table with "control" listed last instead
-of first?
-
-
-## stringsAsFactors
-
-Avoid factors with `stringsAsFactors=FALSE`.
-
-```{r}
-surveys_chr <- read.csv("data/portal_data_joined.csv", stringsAsFactors=FALSE)
-```
-
-```{r}
-str(surveys_chr)
-```
-
-
-### Constructing data frames "by hand"
-
-```{r}
-df1 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
-                  feel=c("furry", "furry", "squishy", "spiny"),
-                  weight=c(45, 8, 1.1, 0.8))
-str(df1)
-
-df2 <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
-                  feel=c("furry", "furry", "squishy", "spiny"),
-                  weight=c(45, 8, 1.1, 0.8), stringsAsFactors=FALSE)
-str(df2)
-```
+Talk about integers and factors; more on factors later.
 
 
 ### Challenge
 
-There are a few mistakes in this hand crafted `data.frame`, can you spot and
-fix them? Don't hesitate to experiment!
+Study the output of `str(surveys)`. How are the missing values being treated?
 
-```{r, eval=FALSE}
-author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
-                          author_last=c(Darwin, Mayr, Dobzhansky),
-                          year=c(1942, 1970))
+<!-- end challenge -->
+
+
+### Another summary
+
+```{r summary}
+summary(surveys)
 ```
+
+- six-number summary for the numeric columns
+- table for the factor columns
 
 
 ## Inspecting data frames
 
-```{r}
-dim(surveys)
-nrow(surveys)
-ncol(surveys)
+- `dim()`
+- `nrow()`
+- `ncol()`
+- `names()`
+- `colnames()`
+- `rownames()`
 
-names(surveys)
-rownames(surveys)
 
-summary(surveys)
+## Download and then load the data
+
+We first download the file:
+
+```{r download_file, eval=FALSE}
+download.file("http://kbroman.org/datacarp/portal_data_joined.csv",
+              "CleanData/portal_data_joined.csv")
 ```
 
-## Indexing, sequences, subsetting
+We then load them into R:
 
-```{r}
+```{r load_from_local_file, eval=FALSE}
+surveys <- read.csv("CleanData/portal_data_joined.csv")
+```
+
+## Indexing, Sequences, and Subsetting
+
+We can pull out parts of a data frame using square brackets.  We need
+to provide two values: row and column, with a comma between them.
+
+For example, to get the element in the 1st row, 1st column:
+
+```{r one_one_element}
 surveys[1,1]
+```
 
+To get the element in the 2nd row, 7th column:
+
+```{r two_seven_element}
 surveys[2,7]
+```
 
+To get the entire 2nd row, leave the column part blank:
+
+```{r second_row}
 surveys[2,]
+```
 
+And to get the entire 7th column, leave the row part blank:
+
+```{r seventh_column}
 sex <- surveys[,7]
 ```
 
-Referring to columns.
+You can also refer to columns by name, in multiple ways.
 
-```{r, eval = FALSE}
+```{r grab_sex, eval = FALSE}
 sex <- surveys[, "sex"]
-sex <- surveys[["sex"]]
 sex <- surveys$sex
+sex <- surveys[["sex"]]
 ```
 
+When we pull out a single column, the result is a "vector". We can
+again use square brackets to pull out individual values, but providing
+a single number.
 
-### Treating blanks as missing
-
-Mention use of `"NA"` as the standard missing value code, and that
-this can be a problem if that's a valid value.
-
-Also that blanks in numeric columns got converted to `NA`, but blanks
-in the `sex` column were left as `""`.
-
-```{r}
-surveys_noblanks <- read.csv("data/portal_data_joined.csv", na.strings="")
+```{r grab_individual_sexes}
+sex[1]
+sex[10000]
 ```
+
 
 ### Slices
 
-As with vectors, you can also use logical vectors when indexing.
+You can pull out larger slices from the vector by providing vectors of
+indices.  You can use the `c()` function to create a vector.
 
-```{r}
-weights_males <- surveys[surveys$sex == 'M', "weight"]
-mean(weights_males, na.rm=TRUE)
-
-mean(surveys[surveys$sex == 'F', "weight"], na.rm=TRUE)
+```{r grab_some_sexes}
+c(1,3,5)
+sex[c(1,3,5)]
 ```
 
-Or you can use numeric vectors. To pull out larger slices, it's
+To pull out larger slices, it's
 helpful to have ways of creating sequences of numbers.
 
-First, `:`
-
+First, the operator `:` gives you a sequence of consecutive values.
 
 ```{r}
 1:10
@@ -504,7 +271,9 @@ seq(1, 8, by=3) # sequence stops to stay below upper limit
 seq(10, 2, by=-2)  # can also go backwards
 ```
 
-Use these to take slices of the data.
+
+To get slices of our data frame, we can include a vector for the row
+or column indexes (or both)
 
 ```{r}
 surveys[1:3, 7]   # first three elements in the 7th column
@@ -512,15 +281,166 @@ surveys[1, 1:3]   # first three columns in the first row
 surveys[2:4, 6:7] # rows 2-4, columns 6-7
 ```
 
+
 ### Challenge
 
-1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
-   in conjuction with `seq()` to create a new `data.frame` called
-   `surveys_by_10` that includes every 10th row of the survey data frame
-   starting at row 10 (10, 20, 30, ...)
+The function `nrow()` on a `data.frame` returns the number of rows.
 
-2. Create a `data.frame` containing only the observations from the
-   year 1999 of the `surveys` dataset.
+Use `nrow()`, in conjuction with `seq()` to create a new `data.frame` called
+`surveys_by_10` that includes every 10th row of the survey data frame
+starting at row 10 (10, 20, 30, ...)
+
+<!-- end challenge -->
+
+
+
+## Missing data
+
+Missing data value, `NA`. Different from character string `"NA"`.
+
+```{r create_vec_with_missing}
+heights <- c(2, 4, 4, NA, 6)
+```
+
+Many functions will return `NA` if there is any missing data. Need to
+use `na.rm=TRUE` to strip off missing values.
+
+```{r na_rm}
+mean(heights)
+max(heights)
+mean(heights, na.rm = TRUE)
+max(heights, na.rm = TRUE)
+```
+
+If your data include missing values, you may want to become familiar with the
+functions `is.na()` and `na.omit()`.
+
+
+```{r extract_non_missing}
+## Extract those elements which are not missing values.
+heights[!is.na(heights)]
+## shortcut to that
+na.omit(heights)
+```
+
+
+### Treating blanks as missing
+
+- blank character strings might be best treated as missing values.
+- I prefer not to have blank fields, but it's difficult to choose a
+universal missing value code.
+- Use `na.strings` in `read.csv()` to indicate missing value codes.
+
+```{r read.csv_blanks_missing, eval=FALSE}
+surveys_noblanks <- read.csv("CleanData/portal_data_joined.csv", na.strings="")
+```
+
+
+
+## Factors
+
+Factors represent categorical data. They can be useful, but they can
+be a pain. And understanding them is necessary for statistical analysis and for
+plotting.
+
+Factors are stored as integers, and have labels associated with these unique
+integers. While factors look (and often behave) like character vectors, they are
+actually integers under the hood, and you need to be careful when treating them
+like strings.
+
+Once created, factors can only contain a pre-defined set of values, known as
+*levels*. By default, R always sorts *levels* in alphabetical order. For
+instance, if you use `factor()` to create a factor with 2 levels:
+
+```{r create_sex_vector, purl=TRUE}
+sex <- factor(c("male", "female", "female", "male"))
+```
+
+R will assign `1` to the level `"female"` and `2` to the level `"male"` (because
+`f` comes before `m`, even though the first element in this vector is
+`"male"`). You can check this by using the function `levels()`, and check the
+number of levels using `nlevels()`:
+
+```{r levels_of_sex}
+levels(sex)
+nlevels(sex)
+```
+
+Sometimes, the order of the factors does not matter, other times you might want
+to specify a particular order.
+
+```{r food_factor, purl=TRUE}
+food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
+levels(food)
+food <- factor(food, levels=c("low", "medium", "high"))
+levels(food)
+```
+
+
+### Converting factors
+
+If you need to convert a factor to a character vector, you use
+`as.character(x)`.
+
+Converting factors where the levels appear as numbers (such as concentration
+levels) to a numeric vector is a little trickier.  One method is to convert
+factors to characters and then numbers.
+function. Compare:
+
+```{r convert_factor, purl=TRUE}
+f <- factor(c(1, 5, 10, 2))
+as.numeric(f)               ## wrong! and there is no warning...
+as.numeric(as.character(f)) ## works...
+```
+
+### Challenge
+
+The function `table()` tabulates observations.
+
+```{r table, eval=FALSE}
+expt <- c("treat1", "treat2", "treat1", "treat3", "treat1",
+          "control", "treat1", "treat2", "treat3")
+expt <- factor(expt)
+table(expt)
+```
+
+* In which order are the treatments listed?
+* How can you recreate this table with "`control`" listed last instead
+of first?
+
+<!-- end challenge -->
+
+<!---
+```{r correct-order}
+## Answers
+##
+## * The treatments are listed in alphabetical order because they are factors.
+## * By redefining the order of the levels
+expt <- c("treat1", "treat2", "treat1", "treat3", "treat1",
+          "control", "treat1", "treat2", "treat3")
+expt <- factor(expt, levels=c("treat1", "treat2", "treat3", "control"))
+table(expt)
+```
+--->
+
+### stringsAsFactors
+
+The default when reading in data with `read.csv()`, columns with text
+get turned into factors.
+
+You can avoid this with the argument `stringsAsFactors=FALSE`.
+
+```{r read_csv_stringsAsFactors, eval=FALSE}
+surveys_chr <- read.csv("CleanData/portal_data_joined.csv", stringsAsFactors=FALSE)
+```
+
+Then when you look at the result of `str()`, you'll see that the
+previously factor columns are now `chr`.
+
+```{r str_on_that, eval=FALSE}
+str(surveys_chr)
+```
+
 
 
 
