@@ -178,20 +178,26 @@ $(document).ready(function () {
 </ul>
 </div>
 
+<p>Load the cleaned/reduced data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reduced &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_reduced.csv&quot;</span>)</code></pre></div>
+<p>Or:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_reduced.csv&quot;</span>,
+              <span class="st">&quot;CleanData/portal_data_reduced.csv&quot;</span>)
+reduced &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CleanData/portal_data_reduced.csv&quot;</span>)</code></pre></div>
 <div id="load-libraries" class="section level2">
 <h2>load libraries</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(dplyr)</code></pre></div>
 <p><strong>Mention ggplot vs base graphics</strong></p>
 <p>First plot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 <p>Key concepts of “grammar of graphics”: - <em>aesthetics</em> map features of the data to features of the visualization (for example, the <code>weight</code> variable is mapped to the y-axis coordinate) - <em>geoms</em> concern what actually gets plotted (here, each row in the data becomes a point in the plot)</p>
 <ul>
 <li><code>ggplot()</code> creates a graphics objects</li>
 <li>additional controls added with the <code>+</code> operator</li>
 <li>actual plot made when object is printed</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length))
 p2 &lt;-<span class="st"> </span>p1 +<span class="st"> </span><span class="kw">geom_point</span>()
 <span class="kw">print</span>(p2)</code></pre></div>
 <p>Can be convenient to have saved the results. For example, to make that last plot have <code>weight</code> on the log scale:</p>
@@ -206,7 +212,7 @@ p2 &lt;-<span class="st"> </span>p1 +<span class="st"> </span><span class="kw">g
 <div id="other-aesthetics" class="section level2">
 <h2>Other aesthetics</h2>
 <p>For scatterplot, <code>shape</code>, <code>size</code>, <code>color</code>, and <code>alpha</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length))
 
 surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>)
 
@@ -224,7 +230,7 @@ surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span 
 <div id="layers" class="section level2">
 <h2>Layers</h2>
 <p>You can use <code>geom_line()</code> to make a line plot. For example, let’s plot the counts of animals by year.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">count_by_year &lt;-<span class="st"> </span>surveys_complete %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">count_by_year &lt;-<span class="st"> </span>reduced %&gt;%
 <span class="st">    </span><span class="kw">group_by</span>(year) %&gt;%
 <span class="st">    </span>tally
 
@@ -249,7 +255,7 @@ p +<span class="st"> </span><span class="kw">geom_line</span>()</code></pre></di
 <div id="groups" class="section level2">
 <h2>Groups</h2>
 <p>Suppose, in that last challenge, we’d wanted to have black lines but the points colored by species. We might have done this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts_dm_ds &lt;-<span class="st"> </span>surveys_complete %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>)) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts_dm_ds &lt;-<span class="st"> </span>reduced %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>)) %&gt;%
 <span class="st">    </span><span class="kw">group_by</span>(species_id, year) %&gt;%<span class="st"> </span>tally
 p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(counts_dm_ds, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n))
 p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))</code></pre></div>
@@ -272,10 +278,10 @@ p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st
 <div id="boxplot" class="section level3">
 <h3>Boxplot</h3>
 <p>Visualising the distribution of weight within each species.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> hindfoot_length)) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> hindfoot_length)) +
 <span class="st">    </span><span class="kw">geom_boxplot</span>()</code></pre></div>
 <p>By adding points to boxplot, we can have a better idea of the number of measurements and of their distribution:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> hindfoot_length)) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> hindfoot_length)) +
 <span class="st">    </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="dv">0</span>) +
 <span class="st">    </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>)</code></pre></div>
 <p>Notice how the boxplot layer is behind the jitter layer? What do you need to change in the code to put the boxplot in front of the points such that it’s not hidden.</p>
@@ -288,7 +294,7 @@ p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st
 <div id="faceting" class="section level2">
 <h2>Faceting</h2>
 <p>ggplot has a special technique called <em>faceting</em> that allows to split one plot into multiple plots based on a factor included in the dataset. We will use it to make one plot for a time series for each species.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_counts &lt;-<span class="st"> </span>surveys_complete %&gt;%<span class="st"> </span><span class="kw">group_by</span>(year, species_id) %&gt;%<span class="st"> </span>tally
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_counts &lt;-<span class="st"> </span>reduced %&gt;%<span class="st"> </span><span class="kw">group_by</span>(year, species_id) %&gt;%<span class="st"> </span>tally
 <span class="kw">ggplot</span>(yearly_counts, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">group =</span> species_id, <span class="dt">colour =</span> species_id)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
 <span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>species_id)</code></pre></div>
@@ -301,7 +307,7 @@ p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st
 <li><p>color by sex rather than species</p></li>
 </ul>
 <p>Suppose I make a similar plot of average weight by species:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_weight &lt;-<span class="st"> </span>surveys_complete %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_weight &lt;-<span class="st"> </span>reduced %&gt;%
 <span class="st">                 </span><span class="kw">group_by</span>(year, species_id, sex) %&gt;%
 <span class="st">                 </span><span class="kw">summarise</span>(<span class="dt">avg_weight =</span> <span class="kw">mean</span>(weight, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
 <span class="kw">ggplot</span>(yearly_weight, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) +
@@ -309,7 +315,7 @@ p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st
 <span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>species_id)</code></pre></div>
 <p>Why do we see those steps in the plot?</p>
 <p><strong>Oops</strong> need to group by sex</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_weight &lt;-<span class="st"> </span>surveys_complete %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_weight &lt;-<span class="st"> </span>reduced %&gt;%
 <span class="st">                 </span><span class="kw">group_by</span>(year, species_id, sex) %&gt;%
 <span class="st">                 </span><span class="kw">summarise</span>(<span class="dt">avg_weight =</span> <span class="kw">mean</span>(weight, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
 <span class="kw">ggplot</span>(yearly_weight, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> sex, <span class="dt">group =</span> sex)) +
@@ -340,7 +346,7 @@ yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(spec
 <h2>Saving plots to a file</h2>
 <p>If you want to save a plot, to share with others, use the <code>ggsave</code> function.</p>
 <p>The default is to save the last plot that you created, but I think it’s safer to first save the plot as an object and pass that to <code>ggsave</code>. Also give the height and width in inches.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(surveys_complete, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +<span class="st"> </span><span class="kw">geom_points</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +<span class="st"> </span><span class="kw">geom_points</span>()
 <span class="kw">ggsave</span>(<span class="st">&quot;scatter.png&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>)</code></pre></div>
 <p>The image file type is taken from the file name extension. To make a PDF instead:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;scatter.pdf&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>)</code></pre></div>
@@ -355,10 +361,10 @@ yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(spec
 <p>Recall the <code>scale_x_log10()</code> function that we had used to create the log scale for the x axis. This can take an argument <code>limits</code> (a vector of length 2) defining the minimum and maximum values plotted.</p>
 <p>There is also a <code>scale_y_log10()</code> function, but if you want to change the y-axis limits without going to a log scale, you would use <code>scale_y_continuous()</code>. (Similarly, there’s a <code>scale_x_continuous</code>.)</p>
 <p>For example, to plot the data for China, using axis limits defined by the full data, we’d do the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xrange &lt;-<span class="st"> </span><span class="kw">range</span>(surveys_complete$weight)
-yrange &lt;-<span class="st"> </span><span class="kw">range</span>(surveys_complete$hindfoot_length)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xrange &lt;-<span class="st"> </span><span class="kw">range</span>(reduced$weight)
+yrange &lt;-<span class="st"> </span><span class="kw">range</span>(reduced$hindfoot_length)
 
-p &lt;-<span class="st"> </span>surveys_complete %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id==<span class="st">&quot;DM&quot;</span>) %&gt;%
+p &lt;-<span class="st"> </span>reduced %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id==<span class="st">&quot;DM&quot;</span>) %&gt;%
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +
 <span class="st">    </span><span class="kw">geom_point</span>()
 p +<span class="st"> </span><span class="kw">scale_x_log10</span>(<span class="dt">limits=</span>xrange) +
@@ -367,7 +373,7 @@ p +<span class="st"> </span><span class="kw">scale_x_log10</span>(<span class="d
 <div id="color-choices" class="section level3">
 <h3>Color choices</h3>
 <p>If you don’t like the choices for point colors, you can customize them in a number of ways. First, you can use <code>scale_color_manual()</code> with a vector of your preferred choices. (If it’s <code>fill</code> rather than <code>color</code> that you want to change, you’ll need to use <code>scale_fill_manual()</code>.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>surveys_complete %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>reduced %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) %&gt;%
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +
 <span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))
 

@@ -10,7 +10,7 @@ knitr::opts_chunk$set(results='hide', fig.path='img/r-lesson-notes-', results='h
 
 ```{r, data cleaning, echo=FALSE}
 library(dplyr)
-surveys <- read.csv("data/portal_data_joined.csv")
+surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
 surveys_complete <- surveys %>%
     filter(species_id != "", !is.na(weight)) %>%
     filter(!is.na(hindfoot_length), sex != "")
@@ -20,9 +20,24 @@ species_counts <- surveys_complete %>%
 frequent_species <-  species_counts %>%
     filter(n >= 10) %>%
     select(species_id)
-surveys_complete <- surveys_complete %>%
+reduced <- surveys_complete %>%
     filter(species_id %in% frequent_species$species_id)
 ```
+
+Load the cleaned/reduced data:
+
+```{r load_clean_data, eval=FALSE}
+reduced <- read.csv("http://kbroman.org/datacarp/portal_data_reduced.csv")
+```
+
+Or:
+
+```{r download_then_load, eval=FALSE}
+download.file("http://kbroman.org/datacarp/portal_data_reduced.csv",
+              "CleanData/portal_data_reduced.csv")
+reduced <- read.csv("CleanData/portal_data_reduced.csv")
+```
+
 
 ## load libraries
 
@@ -36,7 +51,7 @@ library(dplyr)
 First plot:
 
 ```{r first-ggplot}
-ggplot(surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point()
+ggplot(reduced, aes(x = weight, y = hindfoot_length)) + geom_point()
 ```
 
 Key concepts of "grammar of graphics":
@@ -51,7 +66,7 @@ becomes a point in the plot)
 - actual plot made when object is printed
 
 ```{r exlicit_printing, results='hide'}
-p1 <- ggplot(surveys_complete, aes(x=weight, y=hindfoot_length))
+p1 <- ggplot(reduced, aes(x=weight, y=hindfoot_length))
 p2 <- p1 + geom_point()
 print(p2)
 ```
@@ -80,7 +95,7 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 For scatterplot, `shape`, `size`, `color`, and `alpha`.
 
 ```{r create-ggplot-object}
-surveys_plot <- ggplot(surveys_complete, aes(x = weight, y = hindfoot_length))
+surveys_plot <- ggplot(reduced, aes(x = weight, y = hindfoot_length))
 
 surveys_plot + geom_point(alpha = 0.1)
 
@@ -111,7 +126,7 @@ You can use `geom_line()` to make a line plot. For example, let's plot
 the counts of animals by year.
 
 ```{r plot_counts_by_year}
-count_by_year <- surveys_complete %>%
+count_by_year <- reduced %>%
     group_by(year) %>%
     tally
 
@@ -169,7 +184,7 @@ Suppose, in that last challenge, we'd wanted to have black lines but
 the points colored by species. We might have done this:
 
 ```{r misgrouped}
-counts_dm_ds <- surveys_complete %>% filter(species_id %in% c("DM", "DS")) %>%
+counts_dm_ds <- reduced %>% filter(species_id %in% c("DM", "DS")) %>%
     group_by(species_id, year) %>% tally
 p <- ggplot(counts_dm_ds, aes(x=year, y=n))
 p + geom_line() + geom_point(aes(color=species_id))
@@ -217,7 +232,7 @@ in `geom_histogram()`.
 Visualising the distribution of weight within each species.
 
 ```{r boxplot}
-ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) +
+ggplot(reduced, aes(x = species_id, y = hindfoot_length)) +
     geom_boxplot()
 ```
 
@@ -225,7 +240,7 @@ By adding points to boxplot, we can have a better idea of the number of
 measurements and of their distribution:
 
 ```{r boxplot-with-points}
-ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) +
+ggplot(reduced, aes(x = species_id, y = hindfoot_length)) +
     geom_boxplot(alpha = 0) +
     geom_jitter(alpha = 0.3, color = "tomato")
 ```
@@ -246,7 +261,7 @@ into multiple plots based on a factor included in the dataset. We will use it to
 make one plot for a time series for each species.
 
 ```{r first-facet}
-yearly_counts <- surveys_complete %>% group_by(year, species_id) %>% tally
+yearly_counts <- reduced %>% group_by(year, species_id) %>% tally
 ggplot(yearly_counts, aes(x = year, y = n, group = species_id, colour = species_id)) +
     geom_line() +
     facet_wrap(~ species_id)
@@ -267,7 +282,7 @@ measured. To do that we need to make counts in data frame grouped by sex.
 Suppose I make a similar plot of average weight by species:
 
 ```{r average-weight-timeseries}
-yearly_weight <- surveys_complete %>%
+yearly_weight <- reduced %>%
                  group_by(year, species_id, sex) %>%
                  summarise(avg_weight = mean(weight, na.rm = TRUE))
 ggplot(yearly_weight, aes(x=year, y=avg_weight, color = species_id, group = species_id)) +
@@ -280,7 +295,7 @@ Why do we see those steps in the plot?
 **Oops** need to group by sex
 
 ```{r average-weight-timeseries-fixed}
-yearly_weight <- surveys_complete %>%
+yearly_weight <- reduced %>%
                  group_by(year, species_id, sex) %>%
                  summarise(avg_weight = mean(weight, na.rm = TRUE))
 ggplot(yearly_weight, aes(x=year, y=avg_weight, color = sex, group = sex)) +
@@ -331,7 +346,7 @@ it's safer to first save the plot as an object and pass that to
 `ggsave`. Also give the height and width in inches.
 
 ```{r ggsave_example, eval=FALSE}
-p <- ggplot(surveys_complete, aes(x=weight, y=hindfoot_length)) + geom_points()
+p <- ggplot(reduced, aes(x=weight, y=hindfoot_length)) + geom_points()
 ggsave("scatter.png", p, height=6, width=8)
 ```
 
@@ -371,10 +386,10 @@ For example, to plot the data for China, using axis limits defined by
 the full data, we'd do the following:
 
 ```{r limits}
-xrange <- range(surveys_complete$weight)
-yrange <- range(surveys_complete$hindfoot_length)
+xrange <- range(reduced$weight)
+yrange <- range(reduced$hindfoot_length)
 
-p <- surveys_complete %>% filter(species_id=="DM") %>%
+p <- reduced %>% filter(species_id=="DM") %>%
     ggplot(aes(x=weight, y=hindfoot_length)) +
     geom_point()
 p + scale_x_log10(limits=xrange) +
@@ -389,7 +404,7 @@ with a vector of your preferred choices. (If it's `fill` rather than
 `color` that you want to change, you'll need to use `scale_fill_manual()`.)
 
 ```{r custom_colors}
-p <- surveys_complete %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
+p <- reduced %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
     ggplot(aes(x=weight, y=hindfoot_length)) +
     geom_point(aes(color=species_id))
 
