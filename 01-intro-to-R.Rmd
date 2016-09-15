@@ -291,7 +291,7 @@ Use `head()` to view the first few rows.
 head(surveys)
 ```
 
-Use `tail()` to view the first few rows.
+Use `tail()` to view the last few rows.
 
 ```{r tail}
 tail(surveys)
