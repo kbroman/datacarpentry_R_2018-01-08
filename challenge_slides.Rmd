@@ -5,12 +5,26 @@ output: slidy_presentation
 # Challenge 1
 
 
-Study the output of `str(surveys)`. How are the missing values being treated?
+What is the value of `y` after doing the following?
+
+```{r, eval=FALSE}
+x <- 50
+y <- x * 2
+x <- 80
+```
 
 
 ---
 
 # Challenge 2
+
+
+Study the output of `str(surveys)`. How are the missing values being treated?
+
+
+---
+
+# Challenge 3
 
 
 The function `nrow()` on a `data.frame` returns the number of rows.
@@ -22,7 +36,7 @@ starting at row 10 (10, 20, 30, ...)
 
 ---
 
-# Challenge 3
+# Challenge 4
 
 
 The function `table()` tabulates observations.
@@ -41,7 +55,7 @@ of first?
 
 ---
 
-# Challenge 4
+# Challenge 5
 
 
 Using pipes, subset the data to include individuals collected before 1995,
@@ -50,7 +64,7 @@ and retain the columns `year`, `sex`, and `weight.`
 
 ---
 
-# Challenge 5
+# Challenge 6
 
 
 Create a new dataframe from the survey data that meets the following
@@ -67,7 +81,7 @@ Hint: think about how the commands should be ordered
 
 ---
 
-# Challenge 6
+# Challenge 7
 
 
 How many times was each `plot_type` surveyed?
@@ -75,7 +89,7 @@ How many times was each `plot_type` surveyed?
 
 ---
 
-# Challenge 7
+# Challenge 8
 
 
 Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
@@ -84,7 +98,7 @@ length for each species.
 
 ---
 
-# Challenge 8
+# Challenge 9
 
 
 What was the heaviest animal measured in each year? Return the columns `year`,
@@ -95,7 +109,7 @@ Hint: Use `filter()` rather than `summarize()`.
 
 ---
 
-# Challenge 9
+# Challenge 10
 
 
 Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
@@ -104,7 +118,7 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 
 ---
 
-# Challenge 10
+# Challenge 11
 
 
 Use dplyr to calculate the mean `weight` and `hindfoot_length` as well
@@ -116,7 +130,7 @@ the sizes of the points corresponding to the sample size.
 
 ---
 
-# Challenge 11
+# Challenge 12
 
 
 Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
@@ -124,7 +138,7 @@ Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
 
 ---
 
-# Challenge 12
+# Challenge 13
 
 
 Try using `geom_histogram()` to make a histogram visualization of the
@@ -136,7 +150,7 @@ in `geom_histogram()`.
 
 ---
 
-# Challenge 13
+# Challenge 14
 
 
 A variant on the box plot is the violin plot. Use `geom_violin()` to
@@ -145,7 +159,7 @@ make violin plots of `hindfoot_length` by `species_id`.
 
 ---
 
-# Challenge 14
+# Challenge 15
 
 
 - Calculate counts grouped by year, species_id, and sex
@@ -157,7 +171,7 @@ make violin plots of `hindfoot_length` by `species_id`.
 
 ---
 
-# Challenge 15
+# Challenge 16
 
 
 - Create a new R Markdown document.
@@ -168,7 +182,7 @@ text, and an itemized list).
 
 ---
 
-# Challenge 16
+# Challenge 17
 
 
 Add code chunks to
@@ -180,7 +194,7 @@ Add code chunks to
 
 ---
 
-# Challenge 17
+# Challenge 18
 
 
 Use chunk options to control the size of a figure and to hide the
@@ -189,7 +203,7 @@ code.
 
 ---
 
-# Challenge 18
+# Challenge 19
 
 
 Try out a bit of in-line R code.
