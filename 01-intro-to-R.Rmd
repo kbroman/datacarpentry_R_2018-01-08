@@ -84,6 +84,30 @@ log(4)
 log10(4)
 ```
 
+Here `log` is a _function_ that gives you the natural logarithm. Much of
+your calculations in R will be through functions. The value in the
+parentheses is called the function "argument". `log10` is another
+function, that calculates the log base 10. There can be more than
+one argument, and some of them may have default values. `log` has a
+second argument `base` whose default (the value if left unspecified)
+is _e_.
+
+### Getting help
+
+If you type `log` and pause for a moment, you'll get a pop-up with
+information about the function.
+
+Alternatively, you could type
+
+```{r help, eval=FALSE}
+?log
+```
+
+and the documentation for the function will show up in the lower-right
+pane. These are often a bit _too_ detailed, and so they take some
+practice to read. I generally focus on Usage and Arguments, and then
+on Examples at the bottom. We'll talk more about getting help later.
+
 ## Need for Scripts
 
 We can go along, typing directly into the R console. But there won't
@@ -160,7 +184,95 @@ Use `#` signs to comment. Anything to the right of a `#` is ignored by R,
 meaning it won't be executed. Comments are a great way to describe what your
 code does within the code itself, so comment liberally in your R scripts.
 
+## Assignment operator
 
+We can assign names to numbers and other objects with the assignment
+operator, `<-`. For example:
+
+```{r assign}
+age <- 2016-1969
+```
+
+Type that into your script, and use <kbd>`Ctrl`</kbd> +
+<kbd>`Enter`</kbd> to paste it to the console.
+
+You can also use `=` as assignment, but that symbol can have other
+meanings, and so I recommend sticking with the `<-` combination.
+
+In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write ` <- ` in
+a single keystroke.
+
+If you've assigned a number to an object, you can then use it in
+further calculations:
+
+```{r sqrt, results='show'}
+sqrt(age)
+```
+
+You can assigned _that_ to something, and then use it.
+
+```{r round_sqrt_age}
+sqrt_age <- sqrt(age)
+round(sqrt_age)
+round(sqrt_age, 2)
+```
+## Object names
+
+Objects can be given any name such as `x`, `current_temperature`, or
+`subject_id`. You want your object names to be explicit and not too
+long.
+
+They cannot start with a number (`2x` is not valid, but `x2` is).
+
+R is case sensitive
+(e.g., `weight_kg` is different from `Weight_kg`). There are some names that
+cannot be used because they are the names of fundamental functions in R (e.g.,
+`if`, `else`, `for`, see
+[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
+for a complete list).
+
+In general, even if it's allowed, it's best to not use
+other function names (e.g., `c`, `T`, `mean`, `data`, `df`, `weights`). In doubt
+check the help to see if the name is already in use.
+
+It's also best to avoid
+dots (`.`) within a variable name as in `my.dataset`. There are many functions
+in R with dots in their names for historical reasons, but because dots have a
+special meaning in R (for methods) and other programming languages, it's best to
+avoid them. It is also recommended to use nouns for variable names, and verbs
+for function names. It's important to be consistent in the styling of your code
+(where you put spaces, how you name variable, etc.). In R, two popular style
+guides are [Hadley Wickham's](http://adv-r.had.co.nz/Style.html) and
+[Google's](https://google.github.io/styleguide/Rguide.xml).
+
+### Using named arguments
+
+For the `round()` function the 1st argument is the number to round and the 2nd is how many digits to round to. There are some functions that take many arguments and you can imagine that it might get confusing trying to keep them in order. In that case, it is often better to expiclity name the arguments. You can find the argument names using the help methods we discussed earlier.
+
+Here is an example using named arguments with round.  When the arguments are named the order doesn't matter. You might enter the first few important arguments positionally, and later ones by naming them.
+
+```{r round_w_named_args}
+round(x = sqrt_age, digits = 2)
+round(digits = 2, x = sqrt_age)
+round(sqrt_age, digits = 2)
+```
+
+In the coming materials we may enter named arguments, as needed.
+
+### Challenge
+
+What is the value of `y` after doing the following?
+
+```{r, eval=FALSE}
+x <- 50
+y <- x * 2
+x <- 80
+```
+
+<!-- end challenge -->
+
+Objects don't get linked to each other, so if you change one, it won't
+affect the values of any others.
 
 ## Plunge straight into the Survey Data
 
@@ -194,30 +306,6 @@ surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
 ```
 
 
-### Functions
-
-`read.csv` is a "function". It does something, and "returns" some
-result.
-
-The file name in quotes is called the function "argument": the
-function's "input".
-
-`read.csv` will read in the data from that file, and then spit the
-data back out.
-
-
-### Assignment operator
-
-The `<-` symbol is used to assign the data to an object. In other
-words, it gives the data a name.
-
-You can also use `=` as assignment, but that symbol can have other
-meanings, and so I recommend sticking with the `<-` combination.
-
-In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> will write ` <- ` in
-a single keystroke.
-
-
 ### Objects in your workspace
 
 The objects you create get added to your "workspace". You can list the
@@ -228,55 +316,6 @@ ls()
 ```
 
 RStudio also shows the objects in the Environment panel.
-
-
-### Object names
-
-Objects can be given any name such as `x`, `current_temperature`, or
-`subject_id`. You want your object names to be explicit and not too
-long.
-
-They cannot start with a number (`2x` is not valid, but `x2` is).
-
-R is case sensitive
-(e.g., `weight_kg` is different from `Weight_kg`). There are some names that
-cannot be used because they are the names of fundamental functions in R (e.g.,
-`if`, `else`, `for`, see
-[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
-for a complete list).
-
-In general, even if it's allowed, it's best to not use
-other function names (e.g., `c`, `T`, `mean`, `data`, `df`,
-`weights`). If in doubt, type the name to see if it's already in use.
-
-It's also best to avoid
-dots (`.`) within a variable name as in `my.dataset`. There are many functions
-in R with dots in their names for historical reasons, but because dots have a
-special meaning in R (for methods) and other programming languages, it's best to
-avoid them. It is also recommended to use nouns for variable names, and verbs
-for function names. It's important to be consistent in the styling of your code
-(where you put spaces, how you name variable, etc.). In R, two popular style
-guides are [Hadley Wickham's](http://adv-r.had.co.nz/Style.html) and
-[Google's](https://google.github.io/styleguide/Rguide.xml).
-
-### Getting help
-
-If you type `read.csv` and pause for a moment, you'll get a pop-up with
-information about the function.
-
-Alternatively, you could type
-
-```{r help, eval=FALSE}
-?read.csv
-```
-
-and the documentation for the function will show up in the lower-right
-pane. These are often a bit _too_ detailed, and so they take some
-practice to read. I generally focus on Usage and Arguments, and then
-on Examples at the bottom. We'll talk more about getting help later.
-
-
-
 
 ## Data frames
 
