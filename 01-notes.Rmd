@@ -53,6 +53,13 @@ log(4)
 log10(4)
 ```
 
+- Explain that `log` is a function with two arguments.
+
+## Getting help
+
+- Pause for a moment after typing `log`
+- Type `?log`
+
 ## Need for scripts
 
 - Want to save what we're doing
@@ -83,6 +90,64 @@ log10(4)
 
 - Explain comment sign, `#`
 
+## Assigment operator
+
+```{r assign}
+age <- 2016 - 1969
+```
+
+- Paste into console.
+- Can also use `=`, but recommend `<-`.
+- Can use <kbd>Alt</kbd> + <kbd>-</kbd>
+
+### Using the stuff you assigned
+
+```{r sqrt}
+sqrt(age)
+```
+
+```{r more_assign}
+sqrt_age <- sqrt(age)
+round(sqrt_age)
+round(sqrt_age, 2)
+```
+
+### Object names
+
+- explicit but not too long
+- can't start with a number
+- there are some names not allowed (`if`, `for`, `else`)
+- other names you can but shouldn't use (`c`, `data`, `mean`)
+- Can use `.`, but best not to
+
+- Reminder: The last round shows a function with 2 arguments and order matters.
+
+### Named arguments
+
+- Named arguments useful for commands that have lots of them as order can get confusing
+- Can then switch them
+- Generally the first argument or two will be entered positionally and then later ones w/name
+- Names can be found using help methods from earlier
+
+```{r round_w_named_args}
+round(x = sqrt_age, digits = 2)
+round(digits = 2,x = sqrt_age)
+round(sqrt_age, digits = 2)
+```
+
+- We may occasionally used named arguments in these lessons
+
+### Challenge
+
+What is the value of `y` after doing the following?
+
+```{r}
+x <- 50
+y <- x * 2
+x <- 80
+```
+
+- Objects don't get linked together
 
 ## Plunge into Survey Data
 
