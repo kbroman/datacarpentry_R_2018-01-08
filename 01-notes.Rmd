@@ -156,40 +156,10 @@ surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
 ```
 
 
-### Functions
-
-- `read.csv` is a function
-- the thing within parentheses is the input/argument
-- it produces some output/returns a result
-
-
-### Assigment operator
-
-- `<-` assigns a name to the data (assigns the data to an object)
-- Can also use `=`, but recommend `<-`.
-- Can use <kbd>Alt</kbd> + <kbd>-</kbd>
-
 ### Objects in workspace
 
 - `ls()`
 - Environment panel
-
-
-### Object names
-
-- explicit but not too long
-- can't start with a number
-- there are some names not allowed (`if`, `for`, `else`)
-- other names you can but shouldn't use (`c`, `data`, `mean`)
-- Can use `.`, but best not to
-
-
-
-### Getting help
-
-- type `read.csv` and then pause for a bit
-- Or type `?read.csv`
-
 
 
 ## Data frames
