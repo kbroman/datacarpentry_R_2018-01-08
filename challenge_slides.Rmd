@@ -214,7 +214,7 @@ Try out a bit of in-line R code.
 
 Create and compile an R Markdown report:
 
-1. Load the `combined.csv` data.
+1. Load the `portal_data_joined.csv` data.
 
 2. Create boxplots of weight by sex, _omitting individuals with
 missing sex_.
