@@ -19,6 +19,7 @@
 <script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 
 
 
@@ -78,10 +79,10 @@ button.code-folding-btn:focus {
 </style>
 
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -224,7 +225,7 @@ summary(cars)
 <h3>A bit more Markdown</h3>
 <p>You can make a hyperlink like this: <code>[text to show](http://the-web-page.com)</code>.</p>
 <p>You can include an image file like this: <code>![caption](http://url/for/file)</code></p>
-<p>You can do subscripts (e.g., F<sub>2</sub>) with <code>F~2</code> and superscripts (e.g., F<sup>2</sup>) with <code>F^2^</code>.</p>
+<p>You can do subscripts (e.g., F<sub>2</sub>) with <code>F~2~</code> and superscripts (e.g., F<sup>2</sup>) with <code>F^2^</code>.</p>
 <p>If you know how to write equations in <a href="http://www.latex-project.org/">LaTeX</a>, you’ll be glad to know that you can use <code>$ $</code> and <code>$$ $$</code> to insert math equations, like <code>$E = mc^2$</code> and</p>
 <pre><code>$$y = \mu + \sum_{i=1}^p \beta_i x_i + \epsilon$$</code></pre>
 </div>
@@ -293,7 +294,7 @@ knitr::opts_chunk$set(fig.path="Figs/", message=FALSE, warning=FALSE,
 <p>Don’t let these in-line chunks get split across lines.</p>
 <p>Perhaps precede the paragraph with a larger code chunk that does calculations and defines things, with <code>include=FALSE</code> for that larger chunk (which is the same as <code>echo=FALSE</code> and <code>results=&quot;hide&quot;</code>).</p>
 <p>I’m very particular about rounding in such situations. I may want <code>2.0</code>, but <code>round(2.03, 1)</code> will give just <code>2</code>.</p>
-<p>The <a href="https://github.com/kbroman/broman/blob/master/R/myround.R"><code>myround</code></a> function in my <a href="https://github.com/kbroman">R/broman</a> package handles this.</p>
+<p>The <a href="https://github.com/kbroman/broman/blob/master/R/myround.R"><code>myround</code></a> function in my <a href="https://github.com/kbroman/broman">R/broman</a> package handles this.</p>
 </div>
 <div id="challenge-3" class="section level3">
 <h3>Challenge</h3>
@@ -323,9 +324,13 @@ knitr::opts_chunk$set(fig.path="Figs/", message=FALSE, warning=FALSE,
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 
