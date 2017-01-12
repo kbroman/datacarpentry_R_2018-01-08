@@ -20,6 +20,7 @@
 <script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -122,10 +123,10 @@ button.code-folding-btn:focus {
 </style>
 
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -346,7 +347,7 @@ yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(spec
 <h2>Saving plots to a file</h2>
 <p>If you want to save a plot, to share with others, use the <code>ggsave</code> function.</p>
 <p>The default is to save the last plot that you created, but I think it’s safer to first save the plot as an object and pass that to <code>ggsave</code>. Also give the height and width in inches.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +<span class="st"> </span><span class="kw">geom_points</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +<span class="st"> </span><span class="kw">geom_point</span>()
 <span class="kw">ggsave</span>(<span class="st">&quot;scatter.png&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>)</code></pre></div>
 <p>The image file type is taken from the file name extension. To make a PDF instead:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;scatter.pdf&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>)</code></pre></div>
@@ -401,9 +402,13 @@ p +<span class="st"> </span><span class="kw">scale_color_manual</span>(<span cla
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

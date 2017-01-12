@@ -346,7 +346,7 @@ it's safer to first save the plot as an object and pass that to
 `ggsave`. Also give the height and width in inches.
 
 ```{r ggsave_example, eval=FALSE}
-p <- ggplot(reduced, aes(x=weight, y=hindfoot_length)) + geom_points()
+p <- ggplot(reduced, aes(x=weight, y=hindfoot_length)) + geom_point()
 ggsave("scatter.png", p, height=6, width=8)
 ```
 
