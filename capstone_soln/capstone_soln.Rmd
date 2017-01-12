@@ -1,7 +1,7 @@
 ---
 title: "Capstone project"
 author: "Karl Broman"
-date: "2016-06-01"
+date: "2017-01-11"
 output: html_document
 ---
 
@@ -23,7 +23,7 @@ Boxplots of weight by sex, omitting individuals with missing sex.
 
 ```{r boxplots_weight}
 surveys %>% select(weight, sex) %>%
-    filter(sex != "", !is.na(weight)) %>%
+    filter(sex != "", !is.na(sex)) %>%
     ggplot() + geom_boxplot(aes(x=sex, y=weight))
 ```
 
@@ -43,7 +43,7 @@ surveys %>% filter(species_id %in% c("DM", "DO", "DS")) %>%
     geom_point(aes(color=species_id)) + facet_grid(species_id ~ .)
 ```
 
-## 5. Table with counts of "DM" by plot_type in 1977.
+## 5. Table with counts of "DM" by plot_type in 1977
 
 ```{r table_plot_type}
 counts1977 <- surveys %>% filter(species_id == "DM", year==1977) %>%
