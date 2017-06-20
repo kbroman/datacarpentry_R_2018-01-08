@@ -108,8 +108,8 @@ expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
 </div>
 <div id="challenge-11" class="slide section level1">
 <h1>Challenge 11</h1>
-<p>Use dplyr to calculate the mean <code>weight</code> and <code>hindfoot_length</code> as well as the sample size for each species.</p>
-<p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, with the sizes of the points corresponding to the sample size.</p>
+<p>Use dplyr to calculate the mean <code>weight</code> and <code>hindfoot_length</code> for each species.</p>
+<p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>.</p>
 </div>
 <div id="challenge-12" class="slide section level1">
 <h1>Challenge 12</h1>
@@ -127,9 +127,9 @@ expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
 <div id="challenge-15" class="slide section level1">
 <h1>Challenge 15</h1>
 <ul>
-<li><p>Calculate counts grouped by year, species_id, and sex</p></li>
-<li><p>make the faceted plot splitting further by sex (within each panel)</p></li>
-<li><p>color by sex rather than species</p></li>
+<li><p>Calculate counts grouped by <code>year</code>, <code>species_id</code>, and <code>sex</code></p></li>
+<li><p>Make a plot of the counts by year, faceting on <code>species_id</code></p></li>
+<li><p>Split by sex within each panel, using different colors for the two sexes.</p></li>
 </ul>
 </div>
 <div id="challenge-16" class="slide section level1">
@@ -175,7 +175,7 @@ expt &lt;-<span class="st"> </span><span class="kw">factor</span>(expt)
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>

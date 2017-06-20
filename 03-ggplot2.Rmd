@@ -160,11 +160,10 @@ surveys_plot + geom_point(aes(color = species_id))
 
 ### Challenge
 
-Use dplyr to calculate the mean `weight` and `hindfoot_length` as well
-as the sample size for each species.
+Use dplyr to calculate the mean `weight` and `hindfoot_length`
+for each species.
 
-Make a scatterplot of mean `hindfoot_length` vs mean `weight`, with
-the sizes of the points corresponding to the sample size.
+Make a scatterplot of mean `hindfoot_length` vs mean `weight`.
 
 <!-- end challenge -->
 
@@ -331,11 +330,11 @@ measured. To do that we need to make counts in data frame grouped by sex.
 
 ### Challenge
 
-- Calculate counts grouped by year, species_id, and sex
+- Calculate counts grouped by `year`, `species_id`, and `sex`
 
-- make the faceted plot splitting further by sex (within each panel)
+- Make a plot of the counts by year, faceting on `species_id`
 
-- color by sex rather than species
+- Split by sex within each panel, using different colors for the two sexes.
 
 <!--  end challenge -->
 

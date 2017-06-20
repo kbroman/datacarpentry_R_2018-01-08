@@ -121,11 +121,10 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 # Challenge 11
 
 
-Use dplyr to calculate the mean `weight` and `hindfoot_length` as well
-as the sample size for each species.
+Use dplyr to calculate the mean `weight` and `hindfoot_length`
+for each species.
 
-Make a scatterplot of mean `hindfoot_length` vs mean `weight`, with
-the sizes of the points corresponding to the sample size.
+Make a scatterplot of mean `hindfoot_length` vs mean `weight`.
 
 
 ---
@@ -162,11 +161,11 @@ make violin plots of `hindfoot_length` by `species_id`.
 # Challenge 15
 
 
-- Calculate counts grouped by year, species_id, and sex
+- Calculate counts grouped by `year`, `species_id`, and `sex`
 
-- make the faceted plot splitting further by sex (within each panel)
+- Make a plot of the counts by year, faceting on `species_id`
 
-- color by sex rather than species
+- Split by sex within each panel, using different colors for the two sexes.
 
 
 ---
