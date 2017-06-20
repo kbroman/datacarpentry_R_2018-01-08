@@ -113,7 +113,7 @@ Hint: Use `filter()` rather than `summarize()`.
 
 
 Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
-`species_id`, `"DM"`.
+`species_id` `"DM"`.
 
 
 ---

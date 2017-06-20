@@ -117,7 +117,7 @@ p2 + scale_x_sqrt()
 ### Challenge
 
 Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
-`species_id`, `"DM"`.
+`species_id` `"DM"`.
 
 <!-- end challenge -->
 
