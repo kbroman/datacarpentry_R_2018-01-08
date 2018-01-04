@@ -7,10 +7,9 @@ minutes: 60
 
 Create and compile an R Markdown report:
 
-1. Load the `portal_data_joined.csv` data.
+1. Load the `portal_clean.csv` data.
 
-2. Create boxplots of weight by sex, _omitting individuals with
-missing sex_.
+2. Create boxplots of weight by sex.
 
 3. Create a histogram of hindfoot lengths.
 
