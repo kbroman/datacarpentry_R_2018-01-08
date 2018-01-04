@@ -1,6 +1,11 @@
 ## file structure
 if (! file.exists("data")) dir.create("data")
 
+if (!file.exists("data/portal_clean.csv")) {
+    download.file("http://kbroman.org/datacarp/portal_clean.csv",
+                  "data/portal_clean.csv")
+}
+
 if (!file.exists("data/surveys.csv")) {
     download.file("https://ndownloader.figshare.com/files/2292172",
                   "data/surveys.csv")

@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -180,96 +180,115 @@ $(document).ready(function () {
 <blockquote>
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
-<li>Visualize some of the <a href="https://dx.doi.org/10.6084/m9.figshare.1314459.v5">mammals data</a> from <a href="http://kbroman.org/datacarp/portal_data_joined.csv"><code>portal_data_joined.csv</code></a></li>
-<li>Understand how to plot these data using R ggplot2 package. For more details on using ggplot2 see <a href="http://docs.ggplot2.org/current/">official documentation</a>.</li>
-<li>Building step by step complex plots with the ggplot2 package</li>
+<li>Visualize some of the <a href="https://dx.doi.org/10.6084/m9.figshare.1314459.v5">mammals data</a> from <a href="http://kbroman.org/datacarp/portal_clean.csv"><code>portal_clean.csv</code></a></li>
+<li>Understand how to plot these data using R ggplot2 package. For more details on using ggplot2 see the <a href="http://docs.ggplot2.org/current/">official documentation</a> or the <a href="http://ggplot2.org/book/">ggplot2 book</a>.</li>
+<li>Building complex plots, step by step, with the ggplot2 package</li>
 </ul>
 </blockquote>
-<p>I’ve placed these reduced data on the web, so you can download them directly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reduced &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_reduced.csv&quot;</span>)</code></pre></div>
-<p>Or download the file and then load it</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_data_reduced.csv&quot;</span>,
-              <span class="st">&quot;CleanData/portal_data_reduced.csv&quot;</span>)
-reduced &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CleanData/portal_data_reduced.csv&quot;</span>)</code></pre></div>
+<p>First, load the “portal” data directly from the web:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_clean.csv&quot;</span>)</code></pre></div>
+<p>Or download the file and then load it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://kbroman.org/datacarp/portal_clean.csv&quot;</span>,
+              <span class="st">&quot;CleanData/portal_clean.csv&quot;</span>)
+surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CleanData/portal_clean.csv&quot;</span>)</code></pre></div>
 <div id="plotting-with-ggplot2" class="section level2">
 <h2>Plotting with ggplot2</h2>
-<p>There are two main systems for making plots in R: “base graphics” (which are the traditional plotting functions distributed with R) and ggplot2, written by Hadley Wickham following Leland Wilkinson’s book <em>Grammar of Graphics</em>. We’re going to show you how to use ggplot2. It’s may seem a bit complicated at first, but once you get a hang of it, you’ll be able to make really useful visualizations quite rapidly.</p>
+<p>There are two main systems for making plots in R: “base graphics” (which are the traditional plotting functions distributed with R) and ggplot2, written by Hadley Wickham following Leland Wilkinson’s book <em>Grammar of Graphics</em>. We’re going to show you how to use ggplot2. It may seem a bit complicated at first, but once you get a hang of it, you’ll be able to make really useful visualizations quite rapidly.</p>
 <p>We first need to load the dplyr and ggplot2 packages.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(dplyr)</code></pre></div>
-<p>I’ll assume the data are available, and we’ll focus on the “cleaned” version, <code>reduced</code>.</p>
 <p>Let’s first make a scatterplot of hindfoot length vs weight. Here’s the code to do it.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="img/R-ecology-first-ggplot-1.png" width="672" /></p>
-<p>Two key concepts in the grammar of graphics: <em>aesthetics</em> map features of the data (for example, the <code>weight</code> variable) to features of the visualization (for example the y-axis coordinate), and <em>geoms</em> concern what actually gets plotted (here, each row in the data becomes a point in the plot).</p>
+<p>Two key concepts in the grammar of graphics: <em>aesthetics</em> map features of the data (for example, the <code>weight</code> variable) to features of the visualization (for example the x-axis coordinate), and <em>geoms</em> concern what actually gets plotted (here, each row in the data becomes a point in the plot).</p>
 <p>Another key aspect of ggplot2: the <code>ggplot()</code> function creates a graphics object; additional controls are added with the <code>+</code> operator. The actual plot is made when the object is printed.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length))
-p2 &lt;-<span class="st"> </span>p1 +<span class="st"> </span><span class="kw">geom_point</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length))
+p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
 <span class="kw">print</span>(p2)</code></pre></div>
 <p>If we saved the pieces like this, we could apply other options afterwards. For example, if we wanted <code>weight</code> on a log scale:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 +<span class="st"> </span><span class="kw">scale_x_log10</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_log10</span>()</code></pre></div>
 <p><img src="img/R-ecology-weight_on_log_scale-1.png" width="672" /></p>
 <p>This makes it kind of easy to try out different things. For example, we could plot the x-axis on a square root scale.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 +<span class="st"> </span><span class="kw">scale_x_sqrt</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_sqrt</span>()</code></pre></div>
 <p><img src="img/R-ecology-weight_on_sqrt_scale-1.png" width="672" /></p>
 <div id="challenge" class="section level3">
 <h3>Challenge</h3>
-<p>Make a scatterplot of <code>hindfoot_length</code> vs <code>weight</code>, but only for the <code>species_id</code>, <code>&quot;DM&quot;</code>.</p>
+<p>Make a scatterplot of <code>hindfoot_length</code> vs <code>weight</code>, but only for the <code>species_id</code> <code>&quot;DM&quot;</code>.</p>
+<ul>
+<li>Use dplyr to make a dataset with just <code>species_id == &quot;DM&quot;</code></li>
+<li>Use our ggplot2 code above but with this new dataset.</li>
+</ul>
 <!-- end challenge -->
 </div>
 </div>
 <div id="other-aesthetics" class="section level2">
 <h2>Other aesthetics</h2>
 <p>For scatterplot, additional aesthetics include <code>shape</code>, <code>size</code>, <code>color</code>, and “<code>alpha</code>” (for transparency of points).</p>
-<p>Let’s make a template for our plot, to make modifications easier.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length))</code></pre></div>
 <ul>
-<li>adding transparency (alpha)</li>
+<li>adding transparency (alpha) to the points</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>)</code></pre></div>
 <p><img src="img/R-ecology-adding-transparency-1.png" width="672" /></p>
 <ul>
-<li>adding colors</li>
+<li>changing the color of the points</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">color =</span> <span class="st">&quot;slateblue&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">color =</span> <span class="st">&quot;slateblue&quot;</span>)</code></pre></div>
 <p><img src="img/R-ecology-adding-colors-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">color =</span> <span class="st">&quot;slateblue&quot;</span>, <span class="dt">size=</span><span class="fl">0.5</span>)</code></pre></div>
+<ul>
+<li>changing the size of the points</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">color =</span> <span class="st">&quot;slateblue&quot;</span>, <span class="dt">size=</span><span class="fl">0.5</span>)</code></pre></div>
 <p><img src="img/R-ecology-changing%20the%20size%20of%20the%20points-1.png" width="672" /></p>
-<p>Things get more interesting when we assign these aesthetics to data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_plot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> species_id))</code></pre></div>
+<p>Things get more interesting when we assign these aesthetics to data. We need to wrap it in <code>aes()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x =</span> weight, <span class="dt">y =</span> hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> species_id))</code></pre></div>
 <p><img src="img/R-ecology-scatter_colored_by_species-1.png" width="672" /></p>
 <div id="challenge-1" class="section level3">
 <h3>Challenge</h3>
-<p>Use dplyr to calculate the mean <code>weight</code> and <code>hindfoot_length</code> as well as the sample size for each species.</p>
-<p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, with the sizes of the points corresponding to the sample size.</p>
+<p>Use dplyr to calculate the mean <code>weight</code> and <code>hindfoot_length</code> for each species. (Use <code>group_by()</code> and <code>summarize()</code>.)</p>
+<p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, where each point is a species.</p>
 <!-- end challenge -->
 </div>
 </div>
 <div id="layers" class="section level2">
 <h2>Layers</h2>
 <p>You can use <code>geom_line</code> to make a line plot. For example, we could plot the counts of species by year.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">count_by_year &lt;-<span class="st"> </span>reduced %&gt;%
-<span class="st">    </span><span class="kw">group_by</span>(year) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">count_by_year &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
 <span class="st">    </span>tally
 
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(count_by_year, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n))
-p +<span class="st"> </span><span class="kw">geom_line</span>()</code></pre></div>
+<span class="kw">ggplot</span>(count_by_year, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>()</code></pre></div>
 <p><img src="img/R-ecology-plot_counts_by_year-1.png" width="672" /></p>
 <p>You can use <em>both</em> <code>geom_line</code> and <code>geom_point</code> to make a line plot with points at the data values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(count_by_year, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="img/R-ecology-line_plus_point-1.png" width="672" /></p>
 <p>This brings up another important concept with ggplot2: <em>layers</em>. A given plot can have multiple layers of geometric objects, plotted one on top of the other.</p>
 <p>If you make the lines and points different colors, we can see that the points are placed <em>on top</em> of the lines.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;lightblue&quot;</span>) +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;violetred&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(count_by_year, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;violetred&quot;</span>)</code></pre></div>
 <p><img src="img/R-ecology-line_plus_point_wcolors-1.png" width="672" /></p>
 <p>If we switch the order of <code>geom_point</code> and <code>geom_line</code>, we’ll reverse the layers.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;violetred&quot;</span>) +<span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;lightblue&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(count_by_year, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;violetred&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;lightblue&quot;</span>)</code></pre></div>
 <p><img src="img/R-ecology-line_plus_point_wcolors_alt-1.png" width="672" /></p>
 <p>Note that aesthetics included in the call to <code>ggplot()</code> (or completely separately) are made to be the defaults for all layers, but we can separately control the aesthetics for each layer. For example, we could color the points by year:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>year))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(count_by_year, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>year))</code></pre></div>
 <p><img src="img/R-ecology-points_colored_by_year-1.png" width="672" /></p>
 <p>Compare that to the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st"> </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">aes</span>(<span class="dt">color=</span>year)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(count_by_year, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">aes</span>(<span class="dt">color=</span>year)</code></pre></div>
 <p><img src="img/R-ecology-points_colored_by_year_2-1.png" width="672" /></p>
 <div id="challenge-2" class="section level3">
 <h3>Challenge</h3>
@@ -280,20 +299,29 @@ p +<span class="st"> </span><span class="kw">geom_line</span>()</code></pre></di
 <div id="groups" class="section level2">
 <h2>Groups</h2>
 <p>Suppose, in that last challenge, we’d wanted to have black lines but the points colored by species. We might have done this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts_dm_ds &lt;-<span class="st"> </span>reduced %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>)) %&gt;%
-<span class="st">    </span><span class="kw">group_by</span>(species_id, year) %&gt;%<span class="st"> </span>tally
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(counts_dm_ds, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n))
-p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts_dm_ds &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(species_id, year) <span class="op">%&gt;%</span><span class="st"> </span>tally
+<span class="kw">ggplot</span>(counts_dm_ds, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))</code></pre></div>
 <p><img src="img/R-ecology-misgrouped-1.png" width="672" /></p>
 <p>The points get connected left-to-right, which is not what we want.</p>
 <p>If we make the <code>color=species_id</code> aesthetic <em>global</em>, we don’t have this problem.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st"> </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">aes</span>(<span class="dt">color=</span>species_id)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(counts_dm_ds, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">aes</span>(<span class="dt">color=</span>species_id)</code></pre></div>
 <p><img src="img/R-ecology-color_global-1.png" width="672" /></p>
 <p>Alternatively, we can use the <code>group</code> aesthetic, which indicates that certain data points go together. This way the lines can be a constant color.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group=</span>species_id)) +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(counts_dm_ds, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group=</span>species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))</code></pre></div>
 <p><img src="img/R-ecology-group_aes-1.png" width="672" /></p>
 <p>We could also make the group aesthetic global</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">aes</span>(<span class="dt">group=</span>species_id) +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(counts_dm_ds, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">aes</span>(<span class="dt">group=</span>species_id) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))</code></pre></div>
 <p><img src="img/R-ecology-group_global-1.png" width="672" /></p>
 </div>
 <div id="univariate-geoms" class="section level2">
@@ -308,12 +336,12 @@ p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st
 <div id="boxplot" class="section level3">
 <h3>Boxplot</h3>
 <p>Visualising the distribution of weight within each species.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> hindfoot_length)) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> hindfoot_length)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_boxplot</span>()</code></pre></div>
 <p><img src="img/R-ecology-boxplot-1.png" width="672" /></p>
 <p>By adding points to boxplot, we can have a better idea of the number of measurements and of their distribution:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> hindfoot_length)) +
-<span class="st">    </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="dv">0</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x =</span> species_id, <span class="dt">y =</span> hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="dv">0</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>)</code></pre></div>
 <p><img src="img/R-ecology-boxplot-with-points-1.png" width="672" /></p>
 <p>Notice how the boxplot layer is behind the jitter layer? What do you need to change in the code to put the boxplot in front of the points such that it’s not hidden.</p>
@@ -327,58 +355,58 @@ p +<span class="st"> </span><span class="kw">geom_line</span>() +<span class="st
 <div id="faceting" class="section level2">
 <h2>Faceting</h2>
 <p>ggplot has a special technique called <em>faceting</em> that allows to split one plot into multiple plots based on a factor included in the dataset. We will use it to make one plot for a time series for each species.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_counts &lt;-<span class="st"> </span>reduced %&gt;%<span class="st"> </span><span class="kw">group_by</span>(year, species_id) %&gt;%<span class="st"> </span>tally
-<span class="kw">ggplot</span>(yearly_counts, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">group =</span> species_id, <span class="dt">colour =</span> species_id)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>species_id)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_counts &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(year, species_id) <span class="op">%&gt;%</span><span class="st"> </span>tally
+<span class="kw">ggplot</span>(yearly_counts, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">group =</span> species_id, <span class="dt">colour =</span> species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>species_id)</code></pre></div>
 <p><img src="img/R-ecology-first-facet-1.png" width="672" /></p>
 <p>Now we would like to split line in each plot by sex of each individual measured. To do that we need to make counts in data frame grouped by sex.</p>
 <div id="challenge-5" class="section level3">
 <h3>Challenge</h3>
 <ul>
-<li><p>Calculate counts grouped by year, species_id, and sex</p></li>
-<li><p>make the faceted plot splitting further by sex (within each panel)</p></li>
-<li><p>color by sex rather than species</p></li>
+<li><p>Calculate counts grouped by <code>year</code>, <code>species_id</code>, and <code>sex</code></p></li>
+<li><p>Make a plot of the counts by year, faceting on <code>species_id</code></p></li>
+<li><p>Split by sex within each panel, using different colors for the two sexes.</p></li>
 </ul>
 <!--  end challenge -->
 <p>Suppose I make a similar plot of average weight by species:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_weight &lt;-<span class="st"> </span>reduced %&gt;%
-<span class="st">                 </span><span class="kw">group_by</span>(year, species_id, sex) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_weight &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span>
+<span class="st">                 </span><span class="kw">group_by</span>(year, species_id, sex) <span class="op">%&gt;%</span>
 <span class="st">                 </span><span class="kw">summarise</span>(<span class="dt">avg_weight =</span> <span class="kw">mean</span>(weight, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-<span class="kw">ggplot</span>(yearly_weight, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>species_id)</code></pre></div>
+<span class="kw">ggplot</span>(yearly_weight, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>species_id)</code></pre></div>
 <p><img src="img/R-ecology-average-weight-timeseries-1.png" width="672" /></p>
 <p>Why do we see those steps in the plot?</p>
 <p><strong>Oops</strong> need to group by sex</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_weight &lt;-<span class="st"> </span>reduced %&gt;%
-<span class="st">                 </span><span class="kw">group_by</span>(year, species_id, sex) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearly_weight &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span>
+<span class="st">                 </span><span class="kw">group_by</span>(year, species_id, sex) <span class="op">%&gt;%</span>
 <span class="st">                 </span><span class="kw">summarise</span>(<span class="dt">avg_weight =</span> <span class="kw">mean</span>(weight, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-<span class="kw">ggplot</span>(yearly_weight, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> sex, <span class="dt">group =</span> sex)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>species_id)</code></pre></div>
+<span class="kw">ggplot</span>(yearly_weight, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> sex, <span class="dt">group =</span> sex)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>species_id)</code></pre></div>
 <p><img src="img/R-ecology-average-weight-timeseries-fixed-1.png" width="672" /></p>
 </div>
 <div id="facet_grid" class="section level3">
 <h3>facet_grid</h3>
 <p>The <code>facet_wrap</code> geometry extracts plots into an arbitrary number of dimensions to allow them to cleanly fit on one page. On the other hand, the <code>facet_grid</code> geometry allows you to explicitly specify how you want your plots to be arranged via formula notation (<code>rows ~ columns</code>; a <code>.</code> can be used as a placeholder that indicates only one row or column).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## One column, facet by rows
-yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DO&quot;</span>, <span class="st">&quot;DS&quot;</span>)) %&gt;%
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">facet_grid</span>(sex ~<span class="st"> </span>.)</code></pre></div>
+yearly_weight <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DO&quot;</span>, <span class="st">&quot;DS&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_grid</span>(sex <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
 <p><img src="img/R-ecology-average-weight-time-facet_sex_rows-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># One row, facet by column</span>
-yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DO&quot;</span>, <span class="st">&quot;DS&quot;</span>)) %&gt;%
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">facet_grid</span>( ~<span class="st"> </span>sex)</code></pre></div>
+yearly_weight <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DO&quot;</span>, <span class="st">&quot;DS&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_grid</span>( <span class="op">~</span><span class="st"> </span>sex)</code></pre></div>
 <p><img src="img/R-ecology-average-weight-time-facet_sex_columns-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># separate panel for each sex and species</span>
-yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DO&quot;</span>, <span class="st">&quot;DS&quot;</span>)) %&gt;%
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">facet_grid</span>(species_id ~<span class="st"> </span>sex)</code></pre></div>
+yearly_weight <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DO&quot;</span>, <span class="st">&quot;DS&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>avg_weight, <span class="dt">color =</span> species_id, <span class="dt">group =</span> species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_grid</span>(species_id <span class="op">~</span><span class="st"> </span>sex)</code></pre></div>
 <p><img src="img/R-ecology-average-weight-time-facet_sex_columns_species_rows-1.png" width="672" /></p>
 </div>
 </div>
@@ -386,7 +414,7 @@ yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(spec
 <h2>Saving plots to a file</h2>
 <p>If you want to save a plot, to share with others, use the <code>ggsave</code> function.</p>
 <p>The default is to save the last plot that you created, but I think it’s safer to first save the plot as an object and pass that to <code>ggsave</code>. Also give the height and width in inches.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(reduced, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +<span class="st"> </span><span class="kw">geom_point</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(surveys, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
 <span class="kw">ggsave</span>(<span class="st">&quot;scatter.png&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>)</code></pre></div>
 <p>The image file type is taken from the file name extension. To make a PDF instead:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;scatter.pdf&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>)</code></pre></div>
@@ -401,29 +429,32 @@ yearly_weight %&gt;%<span class="st"> </span><span class="kw">filter</span>(spec
 <p>Recall the <code>scale_x_log10()</code> function that we had used to create the log scale for the x axis. This can take an argument <code>limits</code> (a vector of length 2) defining the minimum and maximum values plotted.</p>
 <p>There is also a <code>scale_y_log10()</code> function, but if you want to change the y-axis limits without going to a log scale, you would use <code>scale_y_continuous()</code>. (Similarly, there’s a <code>scale_x_continuous</code>.)</p>
 <p>For example, to plot the data for China, using axis limits defined by the full data, we’d do the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xrange &lt;-<span class="st"> </span><span class="kw">range</span>(reduced$weight)
-yrange &lt;-<span class="st"> </span><span class="kw">range</span>(reduced$hindfoot_length)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xrange &lt;-<span class="st"> </span><span class="kw">range</span>(surveys<span class="op">$</span>weight)
+yrange &lt;-<span class="st"> </span><span class="kw">range</span>(surveys<span class="op">$</span>hindfoot_length)
 
-p &lt;-<span class="st"> </span>reduced %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id==<span class="st">&quot;DM&quot;</span>) %&gt;%
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +
-<span class="st">    </span><span class="kw">geom_point</span>()
-p +<span class="st"> </span><span class="kw">scale_x_log10</span>(<span class="dt">limits=</span>xrange) +
+surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id<span class="op">==</span><span class="st">&quot;DM&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_x_log10</span>(<span class="dt">limits=</span>xrange) <span class="op">+</span>
 <span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span>yrange)</code></pre></div>
 <p><img src="img/R-ecology-limits-1.png" width="672" /></p>
 </div>
 <div id="color-choices" class="section level3">
 <h3>Color choices</h3>
 <p>If you don’t like the choices for point colors, you can customize them in a number of ways. First, you can use <code>scale_color_manual()</code> with a vector of your preferred choices. (If it’s <code>fill</code> rather than <code>color</code> that you want to change, you’ll need to use <code>scale_fill_manual()</code>.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>reduced %&gt;%<span class="st"> </span><span class="kw">filter</span>(species_id %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) %&gt;%
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) +
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">colors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>)
 
-colors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>)
-p +<span class="st"> </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>colors)</code></pre></div>
+surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>colors)</code></pre></div>
 <p><img src="img/R-ecology-custom_colors-1.png" width="672" /></p>
 <p>You can also use RGB hex values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hexcolors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#001F3F&quot;</span>, <span class="st">&quot;#0074D9&quot;</span>, <span class="st">&quot;#01FF70&quot;</span>)
-p +<span class="st"> </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>hexcolors)</code></pre></div>
+surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>hexcolors)</code></pre></div>
 <p><img src="img/R-ecology-custom_colors_rgb-1.png" width="672" /></p>
 </div>
 </div>
@@ -432,7 +463,11 @@ p +<span class="st"> </span><span class="kw">scale_color_manual</span>(<span cla
 <p>Not everyone gray background and such in the default ggplot plots.</p>
 <p>But you can apply one of a variety of “themes” to control the overall appearance of plots.</p>
 <p>One that a lot of people like is <code>theme_bw()</code>. Add it to a plot, and the overall appearance changes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>hexcolors) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
 <p><img src="img/R-ecology-theme-1.png" width="672" /></p>
 </div>
 
@@ -459,7 +494,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

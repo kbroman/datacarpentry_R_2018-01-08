@@ -5,13 +5,11 @@ output: slidy_presentation
 # Challenge 1
 
 
-What is the value of `y` after doing the following?
+Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
+`species_id` `"DM"`.
 
-```{r, eval=FALSE}
-x <- 50
-y <- x * 2
-x <- 80
-```
+- Use dplyr to make a dataset with just `species_id == "DM"`
+- Use our ggplot2 code above but with this new dataset.
 
 
 ---
@@ -19,7 +17,11 @@ x <- 80
 # Challenge 2
 
 
-Study the output of `str(surveys)`. How are the missing values being treated?
+Use dplyr to calculate the mean `weight` and `hindfoot_length`
+for each species. (Use `group_by()` and `summarize()`.)
+
+Make a scatterplot of mean `hindfoot_length` vs mean `weight`, where
+each point is a species.
 
 
 ---
@@ -27,117 +29,12 @@ Study the output of `str(surveys)`. How are the missing values being treated?
 # Challenge 3
 
 
-The function `nrow()` on a `data.frame` returns the number of rows.
-
-Use `nrow()`, in conjuction with `seq()` to create a new `data.frame` called
-`surveys_by_10` that includes every 10th row of the survey data frame
-starting at row 10 (10, 20, 30, ...)
-
-
----
-
-# Challenge 4
-
-
-The function `table()` tabulates observations.
-
-```{r table, eval=FALSE}
-expt <- c("treat1", "treat2", "treat1", "treat3", "treat1",
-          "control", "treat1", "treat2", "treat3")
-expt <- factor(expt)
-table(expt)
-```
-
-* In which order are the treatments listed?
-* How can you recreate this table with "`control`" listed last instead
-of first?
-
-
----
-
-# Challenge 5
-
-
-Using pipes, subset the data to include individuals collected before 1995,
-and retain the columns `year`, `sex`, and `weight.`
-
-
----
-
-# Challenge 6
-
-
-Create a new dataframe from the survey data that meets the following
-criteria:
-
-- contains only the `species_id` column and a column that contains
-values that are the square-root of `hindfoot_length` values (e.g. a new column
-`hindfoot_sqrt`).
-- In this `hindfoot_sqrt` column, there are no NA values
-and all values are < 3.
-
-Hint: think about how the commands should be ordered
-
-
----
-
-# Challenge 7
-
-
-How many times was each `plot_type` surveyed?
-
-
----
-
-# Challenge 8
-
-
-Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
-length for each species.
-
-
----
-
-# Challenge 9
-
-
-What was the heaviest animal measured in each year? Return the columns `year`,
-`genus`, `species`, and `weight`.
-
-Hint: Use `filter()` rather than `summarize()`.
-
-
----
-
-# Challenge 10
-
-
-Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
-`species_id` `"DM"`.
-
-
----
-
-# Challenge 11
-
-
-Use dplyr to calculate the mean `weight` and `hindfoot_length`
-for each species.
-
-Make a scatterplot of mean `hindfoot_length` vs mean `weight`.
-
-
----
-
-# Challenge 12
-
-
 Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
 
 
 ---
 
-# Challenge 13
+# Challenge 4
 
 
 Try using `geom_histogram()` to make a histogram visualization of the
@@ -149,7 +46,7 @@ in `geom_histogram()`.
 
 ---
 
-# Challenge 14
+# Challenge 5
 
 
 A variant on the box plot is the violin plot. Use `geom_violin()` to
@@ -158,7 +55,7 @@ make violin plots of `hindfoot_length` by `species_id`.
 
 ---
 
-# Challenge 15
+# Challenge 6
 
 
 - Calculate counts grouped by `year`, `species_id`, and `sex`
@@ -170,7 +67,7 @@ make violin plots of `hindfoot_length` by `species_id`.
 
 ---
 
-# Challenge 16
+# Challenge 7
 
 
 - Create a new R Markdown document.
@@ -181,7 +78,7 @@ text, and an itemized list).
 
 ---
 
-# Challenge 17
+# Challenge 8
 
 
 Add code chunks to
@@ -193,7 +90,7 @@ Add code chunks to
 
 ---
 
-# Challenge 18
+# Challenge 9
 
 
 Use chunk options to control the size of a figure and to hide the
@@ -202,7 +99,7 @@ code.
 
 ---
 
-# Challenge 19
+# Challenge 10
 
 
 Try out a bit of in-line R code.

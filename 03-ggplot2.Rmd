@@ -15,40 +15,29 @@ source("setup.R")
 > ### Learning Objectives
 >
 > -	Visualize some of the [mammals data](https://dx.doi.org/10.6084/m9.figshare.1314459.v5)
-> from [`portal_data_joined.csv`](http://kbroman.org/datacarp/portal_data_joined.csv)
+> from [`portal_clean.csv`](http://kbroman.org/datacarp/portal_clean.csv)
 > -	Understand how to plot these data using R ggplot2 package. For more details
-> on using ggplot2 see [official documentation](http://docs.ggplot2.org/current/).
-> -	Building step by step complex plots with the ggplot2 package
+> on using ggplot2 see the [official documentation](http://docs.ggplot2.org/current/)
+> or the [ggplot2 book](http://ggplot2.org/book/).
+> -	Building complex plots, step by step, with the ggplot2 package
 
-```{r load_data_and_clean, echo=FALSE, message=FALSE}
-library(dplyr)
-surveys <- read.csv("http://kbroman.org/datacarp/portal_data_joined.csv")
-surveys_complete <- surveys %>%
-    filter(species_id != "", !is.na(weight)) %>%
-    filter(!is.na(hindfoot_length), sex != "")
-species_counts <- surveys_complete %>%
-    group_by(species_id) %>%
-    tally
-frequent_species <-  species_counts %>%
-    filter(n >= 10) %>%
-    select(species_id)
-reduced <- surveys_complete %>%
-    filter(species_id %in% frequent_species$species_id)
+```{r load_clean_data_really, echo=FALSE, message=FALSE}
+surveys <- read.csv("data/portal_clean.csv")
 ```
 
-I've placed these reduced data on the web, so you can download them
-directly.
+
+First, load the "portal" data directly from the web:
 
 ```{r load_clean_data, eval=FALSE}
-reduced <- read.csv("http://kbroman.org/datacarp/portal_data_reduced.csv")
+surveys <- read.csv("http://kbroman.org/datacarp/portal_clean.csv")
 ```
 
-Or download the file and then load it
+Or download the file and then load it:
 
 ```{r download_then_load, eval=FALSE}
-download.file("http://kbroman.org/datacarp/portal_data_reduced.csv",
-              "CleanData/portal_data_reduced.csv")
-reduced <- read.csv("CleanData/portal_data_reduced.csv")
+download.file("http://kbroman.org/datacarp/portal_clean.csv",
+              "CleanData/portal_clean.csv")
+surveys <- read.csv("CleanData/portal_clean.csv")
 ```
 
 
@@ -58,7 +47,7 @@ There are two main systems for making plots in R: "base graphics"
 (which are the traditional plotting functions distributed with R) and
 ggplot2, written by Hadley Wickham following Leland Wilkinson's book
 _Grammar of Graphics_. We're going to show you how to use
-ggplot2. It's may seem a bit complicated at first, but once you get a
+ggplot2. It may seem a bit complicated at first, but once you get a
 hang of it, you'll be able to make really useful visualizations quite rapidly.
 
 We first need to load the dplyr and ggplot2 packages.
@@ -68,19 +57,16 @@ library(ggplot2)
 library(dplyr)
 ```
 
-I'll assume the data are available, and we'll focus on the "cleaned"
-version, `reduced`.
-
 Let's first make a scatterplot of hindfoot length vs weight. Here's
 the code to do it.
 
 ```{r first-ggplot}
-ggplot(reduced, aes(x = weight, y = hindfoot_length)) + geom_point()
+ggplot(surveys, aes(x = weight, y = hindfoot_length)) + geom_point()
 ```
 
 Two key concepts in the grammar of graphics: _aesthetics_ map features
 of the data (for example, the `weight` variable) to features of the
-visualization (for example the y-axis coordinate), and
+visualization (for example the x-axis coordinate), and
 _geoms_ concern what actually gets plotted (here, each row in the data
 becomes a point in the plot).
 
@@ -89,13 +75,13 @@ graphics object; additional controls are added with the `+`
 operator. The actual plot is made when the object is printed.
 
 ```{r explicit_printing, eval=FALSE}
-p1 <- ggplot(reduced, aes(x=weight, y=hindfoot_length))
+p1 <- ggplot(surveys, aes(x=weight, y=hindfoot_length))
 p2 <- p1 + geom_point()
 print(p2)
 ```
 
 ```{r explicit_printing_run, echo=FALSE}
-p1 <- ggplot(reduced, aes(x=weight, y=hindfoot_length))
+p1 <- ggplot(surveys, aes(x=weight, y=hindfoot_length))
 p2 <- p1 + geom_point()
 ```
 
@@ -119,6 +105,9 @@ p2 + scale_x_sqrt()
 Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 `species_id` `"DM"`.
 
+- Use dplyr to make a dataset with just `species_id == "DM"`
+- Use our ggplot2 code above but with this new dataset.
+
 <!-- end challenge -->
 
 
@@ -128,42 +117,43 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 For scatterplot, additional aesthetics include `shape`, `size`,
 `color`, and "`alpha`" (for transparency of points).
 
-Let's make a template for our plot, to make modifications easier.
-
-```{r create-ggplot-object}
-surveys_plot <- ggplot(reduced, aes(x = weight, y = hindfoot_length))
-```
-
-- adding transparency (alpha)
+- adding transparency (alpha) to the points
 
 ```{r adding-transparency}
-surveys_plot + geom_point(alpha = 0.1)
+ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
+    geom_point(alpha = 0.1)
 ```
 
-- adding colors
+- changing the color of the points
 
 ```{r adding-colors}
-surveys_plot + geom_point(alpha = 0.1, color = "slateblue")
+ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
+    geom_point(alpha = 0.1, color = "slateblue")
 ```
 
+- changing the size of the points
+
 ```{r changing the size of the points}
-surveys_plot + geom_point(alpha = 0.1, color = "slateblue", size=0.5)
+ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
+    geom_point(alpha = 0.1, color = "slateblue", size=0.5)
 ```
 
 Things get more interesting when we assign these aesthetics to data.
-
+We need to wrap it in `aes()`.
 
 ```{r scatter_colored_by_species}
-surveys_plot + geom_point(aes(color = species_id))
+ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
+    geom_point(aes(color = species_id))
 ```
 
 
 ### Challenge
 
 Use dplyr to calculate the mean `weight` and `hindfoot_length`
-for each species.
+for each species. (Use `group_by()` and `summarize()`.)
 
-Make a scatterplot of mean `hindfoot_length` vs mean `weight`.
+Make a scatterplot of mean `hindfoot_length` vs mean `weight`, where
+each point is a species.
 
 <!-- end challenge -->
 
@@ -173,19 +163,21 @@ You can use `geom_line` to make a line plot. For example, we could
 plot the counts of species by year.
 
 ```{r plot_counts_by_year}
-count_by_year <- reduced %>%
+count_by_year <- surveys %>%
     group_by(year) %>%
     tally
 
-p <- ggplot(count_by_year, aes(x=year, y=n))
-p + geom_line()
+ggplot(count_by_year, aes(x=year, y=n)) +
+    geom_line()
 ```
 
 You can use _both_ `geom_line` and `geom_point` to make a line plot
 with points at the data values.
 
 ```{r line_plus_point}
-p + geom_line() + geom_point()
+ggplot(count_by_year, aes(x=year, y=n)) +
+    geom_line() +
+    geom_point()
 ```
 
 This brings up another important concept with ggplot2: _layers_. A
@@ -196,14 +188,18 @@ If you make the lines and points different colors, we can see that the
 points are placed _on top_ of the lines.
 
 ```{r line_plus_point_wcolors}
-p + geom_line(color="lightblue") + geom_point(color="violetred")
+ggplot(count_by_year, aes(x=year, y=n)) +
+    geom_line(color="lightblue") +
+    geom_point(color="violetred")
 ```
 
 If we switch the order of `geom_point` and `geom_line`, we'll reverse
 the layers.
 
 ```{r line_plus_point_wcolors_alt}
-p + geom_point(color="violetred") + geom_line(color="lightblue")
+ggplot(count_by_year, aes(x=year, y=n)) +
+    geom_point(color="violetred") +
+    geom_line(color="lightblue")
 ```
 
 Note that aesthetics included in the call to `ggplot()` (or completely
@@ -212,13 +208,18 @@ separately control the aesthetics for each layer. For example, we
 could color the points by year:
 
 ```{r points_colored_by_year}
-p + geom_line() + geom_point(aes(color=year))
+ggplot(count_by_year, aes(x=year, y=n)) +
+    geom_line() +
+    geom_point(aes(color=year))
 ```
 
 Compare that to the following:
 
 ```{r points_colored_by_year_2}
-p + geom_line() + geom_point() + aes(color=year)
+ggplot(count_by_year, aes(x=year, y=n)) +
+    geom_line() +
+    geom_point() +
+    aes(color=year)
 ```
 
 ### Challenge
@@ -233,10 +234,11 @@ Suppose, in that last challenge, we'd wanted to have black lines but
 the points colored by species. We might have done this:
 
 ```{r misgrouped}
-counts_dm_ds <- reduced %>% filter(species_id %in% c("DM", "DS")) %>%
+counts_dm_ds <- surveys %>% filter(species_id %in% c("DM", "DS")) %>%
     group_by(species_id, year) %>% tally
-p <- ggplot(counts_dm_ds, aes(x=year, y=n))
-p + geom_line() + geom_point(aes(color=species_id))
+ggplot(counts_dm_ds, aes(x=year, y=n)) +
+    geom_line() +
+    geom_point(aes(color=species_id))
 ```
 
 The points get connected left-to-right, which is not what we want.
@@ -245,7 +247,10 @@ If we make the `color=species_id` aesthetic _global_, we don't have
 this problem.
 
 ```{r color_global}
-p + geom_line() + geom_point() + aes(color=species_id)
+ggplot(counts_dm_ds, aes(x=year, y=n)) +
+    geom_line() +
+    geom_point() +
+    aes(color=species_id)
 ```
 
 Alternatively, we can use the `group` aesthetic, which indicates that
@@ -253,13 +258,18 @@ certain data points go together. This way the lines can be a constant
 color.
 
 ```{r group_aes}
-p + geom_line(aes(group=species_id)) + geom_point(aes(color=species_id))
+ggplot(counts_dm_ds, aes(x=year, y=n)) +
+    geom_line(aes(group=species_id)) +
+    geom_point(aes(color=species_id))
 ```
 
 We could also make the group aesthetic global
 
 ```{r group_global}
-p + aes(group=species_id) + geom_line() + geom_point(aes(color=species_id))
+ggplot(counts_dm_ds, aes(x=year, y=n)) +
+    aes(group=species_id) +
+    geom_line() +
+    geom_point(aes(color=species_id))
 ```
 
 
@@ -286,7 +296,7 @@ in `geom_histogram()`.
 Visualising the distribution of weight within each species.
 
 ```{r boxplot}
-ggplot(reduced, aes(x = species_id, y = hindfoot_length)) +
+ggplot(surveys, aes(x = species_id, y = hindfoot_length)) +
     geom_boxplot()
 ```
 
@@ -294,7 +304,7 @@ By adding points to boxplot, we can have a better idea of the number of
 measurements and of their distribution:
 
 ```{r boxplot-with-points}
-ggplot(reduced, aes(x = species_id, y = hindfoot_length)) +
+ggplot(surveys, aes(x = species_id, y = hindfoot_length)) +
     geom_boxplot(alpha = 0) +
     geom_jitter(alpha = 0.3, color = "tomato")
 ```
@@ -319,7 +329,7 @@ into multiple plots based on a factor included in the dataset. We will use it to
 make one plot for a time series for each species.
 
 ```{r first-facet}
-yearly_counts <- reduced %>% group_by(year, species_id) %>% tally
+yearly_counts <- surveys %>% group_by(year, species_id) %>% tally
 ggplot(yearly_counts, aes(x = year, y = n, group = species_id, colour = species_id)) +
     geom_line() +
     facet_wrap(~ species_id)
@@ -343,7 +353,7 @@ measured. To do that we need to make counts in data frame grouped by sex.
 Suppose I make a similar plot of average weight by species:
 
 ```{r average-weight-timeseries}
-yearly_weight <- reduced %>%
+yearly_weight <- surveys %>%
                  group_by(year, species_id, sex) %>%
                  summarise(avg_weight = mean(weight, na.rm = TRUE))
 ggplot(yearly_weight, aes(x=year, y=avg_weight, color = species_id, group = species_id)) +
@@ -356,7 +366,7 @@ Why do we see those steps in the plot?
 **Oops** need to group by sex
 
 ```{r average-weight-timeseries-fixed}
-yearly_weight <- reduced %>%
+yearly_weight <- surveys %>%
                  group_by(year, species_id, sex) %>%
                  summarise(avg_weight = mean(weight, na.rm = TRUE))
 ggplot(yearly_weight, aes(x=year, y=avg_weight, color = sex, group = sex)) +
@@ -407,7 +417,7 @@ it's safer to first save the plot as an object and pass that to
 `ggsave`. Also give the height and width in inches.
 
 ```{r ggsave_example, eval=FALSE}
-p <- ggplot(reduced, aes(x=weight, y=hindfoot_length)) + geom_point()
+p <- ggplot(surveys, aes(x=weight, y=hindfoot_length)) + geom_point()
 ggsave("scatter.png", p, height=6, width=8)
 ```
 
@@ -447,13 +457,13 @@ For example, to plot the data for China, using axis limits defined by
 the full data, we'd do the following:
 
 ```{r limits}
-xrange <- range(reduced$weight)
-yrange <- range(reduced$hindfoot_length)
+xrange <- range(surveys$weight)
+yrange <- range(surveys$hindfoot_length)
 
-p <- reduced %>% filter(species_id=="DM") %>%
+surveys %>% filter(species_id=="DM") %>%
     ggplot(aes(x=weight, y=hindfoot_length)) +
-    geom_point()
-p + scale_x_log10(limits=xrange) +
+    geom_point() +
+    scale_x_log10(limits=xrange) +
     scale_y_continuous(limits=yrange)
 ```
 
@@ -465,19 +475,22 @@ with a vector of your preferred choices. (If it's `fill` rather than
 `color` that you want to change, you'll need to use `scale_fill_manual()`.)
 
 ```{r custom_colors}
-p <- reduced %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
-    ggplot(aes(x=weight, y=hindfoot_length)) +
-    geom_point(aes(color=species_id))
-
 colors <- c("blue", "green", "orange")
-p + scale_color_manual(values=colors)
+
+surveys %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
+    ggplot(aes(x=weight, y=hindfoot_length)) +
+    geom_point(aes(color=species_id)) +
+    scale_color_manual(values=colors)
 ```
 
 You can also use RGB hex values.
 
 ```{r custom_colors_rgb}
 hexcolors <- c("#001F3F", "#0074D9", "#01FF70")
-p + scale_color_manual(values=hexcolors)
+surveys %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
+    ggplot(aes(x=weight, y=hindfoot_length)) +
+    geom_point(aes(color=species_id)) +
+    scale_color_manual(values=hexcolors)
 ```
 
 
@@ -492,5 +505,9 @@ One that a lot of people like is `theme_bw()`. Add it to a plot, and
 the overall appearance changes.
 
 ```{r theme}
-p + theme_bw()
+surveys %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
+    ggplot(aes(x=weight, y=hindfoot_length)) +
+    geom_point(aes(color=species_id)) +
+    scale_color_manual(values=hexcolors) +
+    theme_bw()
 ```
