@@ -8,8 +8,8 @@ output: slidy_presentation
 Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 `species_id` `"DM"`.
 
-- Use dplyr to make a dataset with just `species_id == "DM"`
-- Use our ggplot2 code above but with this new dataset.
+- Use the dataset we'd created, `just_dm`
+- Use our ggplot2 code above but with this new dataset in place of `surveys`.
 
 
 ---
@@ -17,11 +17,13 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 # Challenge 2
 
 
-Use dplyr to calculate the mean `weight` and `hindfoot_length`
-for each species. (Use `group_by()` and `summarize()`.)
-
 Make a scatterplot of mean `hindfoot_length` vs mean `weight`, where
 each point is a species.
+
+- Use the dataset we'd created, `stat_summary`
+
+- Use our ggplot code with the aesthetics
+  `x=mean_wt` and `y=mean_hfl`.
 
 
 ---
@@ -29,12 +31,22 @@ each point is a species.
 # Challenge 3
 
 
-Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
+- Use the `year_summary` dataset to make a line plot of counts of each
+  species by year, with a different line for each species.
 
 
 ---
 
 # Challenge 4
+
+
+A variant on the box plot is the violin plot. Use `geom_violin()` to
+make violin plots of `hindfoot_length` by `species_id`.
+
+
+---
+
+# Challenge 5
 
 
 Try using `geom_histogram()` to make a histogram visualization of the
@@ -46,23 +58,17 @@ in `geom_histogram()`.
 
 ---
 
-# Challenge 5
-
-
-A variant on the box plot is the violin plot. Use `geom_violin()` to
-make violin plots of `hindfoot_length` by `species_id`.
-
-
----
-
 # Challenge 6
 
 
-- Calculate counts grouped by `year`, `species_id`, and `sex`
+Use the `year_summary` dataset and make scatterplots of mean hindfoot
+length vs mean weight (with each point being a species), faceting by year.
 
-- Make a plot of the counts by year, faceting on `species_id`
+- Use aesthetics `x=mean_wt` and `y=mean_hfl`
 
-- Split by sex within each panel, using different colors for the two sexes.
+- Use `geom_point(aes(color=species_id))`
+
+- Use `facet_wrap(~ year)`
 
 
 ---
@@ -120,6 +126,6 @@ Create and compile an R Markdown report:
 `"DM"`, `"DO"`, and `"DS"`. _Use different colors for the three
 species, and put the three species in different panels._
 
-5. Create a table of counts of `"DM"` by plot type for the year 1977.
+5. Create a line plot of the counts of `"DM"` in `"Rodent Exclosure"` plots over time.
 
-6. Create a line plot of the counts of `"DM"` in `"Rodent Exclosure"` plots over time.
+6. Create a table of counts of `"DM"` by plot type for the year 1977.

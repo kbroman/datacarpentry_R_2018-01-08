@@ -15,34 +15,40 @@
 <h1>Challenge 1</h1>
 <p>Make a scatterplot of <code>hindfoot_length</code> vs <code>weight</code>, but only for the <code>species_id</code> <code>&quot;DM&quot;</code>.</p>
 <ul>
-<li>Use dplyr to make a dataset with just <code>species_id == &quot;DM&quot;</code></li>
-<li>Use our ggplot2 code above but with this new dataset.</li>
+<li>Use the dataset we’d created, <code>just_dm</code></li>
+<li>Use our ggplot2 code above but with this new dataset in place of <code>surveys</code>.</li>
 </ul>
 </div>
 <div id="challenge-2" class="slide section level1">
 <h1>Challenge 2</h1>
-<p>Use dplyr to calculate the mean <code>weight</code> and <code>hindfoot_length</code> for each species. (Use <code>group_by()</code> and <code>summarize()</code>.)</p>
 <p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, where each point is a species.</p>
+<ul>
+<li><p>Use the dataset we’d created, <code>stat_summary</code></p></li>
+<li><p>Use our ggplot code with the aesthetics <code>x=mean_wt</code> and <code>y=mean_hfl</code>.</p></li>
+</ul>
 </div>
 <div id="challenge-3" class="slide section level1">
 <h1>Challenge 3</h1>
-<p>Make a plot of counts of <code>species_id</code> <code>&quot;DM&quot;</code> and <code>&quot;DS&quot;</code> by year.</p>
+<ul>
+<li>Use the <code>year_summary</code> dataset to make a line plot of counts of each species by year, with a different line for each species.</li>
+</ul>
 </div>
 <div id="challenge-4" class="slide section level1">
 <h1>Challenge 4</h1>
-<p>Try using <code>geom_histogram()</code> to make a histogram visualization of the distribution of <code>weight</code>.</p>
-<p>Hint: You want <code>weight</code> as the x-axis aesthetic. Try specifying <code>bins</code> in <code>geom_histogram()</code>.</p>
+<p>A variant on the box plot is the violin plot. Use <code>geom_violin()</code> to make violin plots of <code>hindfoot_length</code> by <code>species_id</code>.</p>
 </div>
 <div id="challenge-5" class="slide section level1">
 <h1>Challenge 5</h1>
-<p>A variant on the box plot is the violin plot. Use <code>geom_violin()</code> to make violin plots of <code>hindfoot_length</code> by <code>species_id</code>.</p>
+<p>Try using <code>geom_histogram()</code> to make a histogram visualization of the distribution of <code>weight</code>.</p>
+<p>Hint: You want <code>weight</code> as the x-axis aesthetic. Try specifying <code>bins</code> in <code>geom_histogram()</code>.</p>
 </div>
 <div id="challenge-6" class="slide section level1">
 <h1>Challenge 6</h1>
+<p>Use the <code>year_summary</code> dataset and make scatterplots of mean hindfoot length vs mean weight (with each point being a species), faceting by year.</p>
 <ul>
-<li><p>Calculate counts grouped by <code>year</code>, <code>species_id</code>, and <code>sex</code></p></li>
-<li><p>Make a plot of the counts by year, faceting on <code>species_id</code></p></li>
-<li><p>Split by sex within each panel, using different colors for the two sexes.</p></li>
+<li><p>Use aesthetics <code>x=mean_wt</code> and <code>y=mean_hfl</code></p></li>
+<li><p>Use <code>geom_point(aes(color=species_id))</code></p></li>
+<li><p>Use <code>facet_wrap(~ year)</code></p></li>
 </ul>
 </div>
 <div id="challenge-7" class="slide section level1">
@@ -78,8 +84,8 @@
 <li><p>Create boxplots of weight by sex.</p></li>
 <li><p>Create a histogram of hindfoot lengths.</p></li>
 <li><p>Create a scatterplot of hindfoot length vs weight for the species <code>&quot;DM&quot;</code>, <code>&quot;DO&quot;</code>, and <code>&quot;DS&quot;</code>. <em>Use different colors for the three species, and put the three species in different panels.</em></p></li>
-<li><p>Create a table of counts of <code>&quot;DM&quot;</code> by plot type for the year 1977.</p></li>
 <li><p>Create a line plot of the counts of <code>&quot;DM&quot;</code> in <code>&quot;Rodent Exclosure&quot;</code> plots over time.</p></li>
+<li><p>Create a table of counts of <code>&quot;DM&quot;</code> by plot type for the year 1977.</p></li>
 </ol>
 </div>
 
