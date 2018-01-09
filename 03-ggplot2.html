@@ -220,7 +220,7 @@ just_dm &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><spa
               <span class="dt">mean_hfl=</span><span class="kw">mean</span>(hindfoot_length),
               <span class="dt">n=</span><span class="kw">n</span>())</code></pre></div>
 <blockquote>
-<p>_Make a data set called <code>year_summary</code> that contains the yearly average weight, hindfoot length, and count data for each species and sex combination</p>
+<p><em>Make a data set called <code>year_summary</code> that contains the yearly average weight, hindfoot length, and count data for each species and sex combination.</em></p>
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">year_summary &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">group_by</span>(species_id, year) <span class="op">%&gt;%</span>

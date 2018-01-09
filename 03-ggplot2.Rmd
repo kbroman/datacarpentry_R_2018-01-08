@@ -68,7 +68,7 @@ stat_summary <- surveys %>%
 
 > _Make a data set called `year_summary` that contains the yearly average
 > weight, hindfoot length, and count data for each species and sex
-> combination
+> combination._
 
 ```{r construct_year_summary}
 year_summary <- surveys %>%
