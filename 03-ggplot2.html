@@ -368,7 +368,7 @@ p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> <
 <div id="faceting" class="section level2">
 <h2>Faceting</h2>
 <p>ggplot has a special technique called <em>faceting</em> that allows to split one plot into multiple papels based on a factor included in the dataset. We will use it to make one plot for a time series for each species.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(year_summary, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">group =</span> species_id, <span class="dt">colour =</span> species_id)) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(year_summary, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">group =</span> species_id, <span class="dt">color =</span> species_id)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>species_id)</code></pre></div>
 <p><img src="img/R-ecology-first-facet-1.png" width="672" /></p>

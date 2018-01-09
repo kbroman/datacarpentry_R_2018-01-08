@@ -327,7 +327,7 @@ into multiple papels based on a factor included in the dataset. We will use it t
 make one plot for a time series for each species.
 
 ```{r first-facet}
-ggplot(year_summary, aes(x = year, y = n, group = species_id, colour = species_id)) +
+ggplot(year_summary, aes(x = year, y = n, group = species_id, color = species_id)) +
     geom_line() +
     facet_wrap(~ species_id)
 ```
