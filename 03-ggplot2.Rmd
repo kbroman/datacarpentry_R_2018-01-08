@@ -1,4 +1,4 @@
----
+--
 layout: topic
 title: Data visualization with ggplot2
 minutes: 60
@@ -38,8 +38,8 @@ Or download the file and then load it:
 
 ```{r download_then_load, eval=FALSE}
 download.file("http://kbroman.org/datacarp/portal_clean.csv",
-              "CleanData/portal_clean.csv")
-surveys <- read.csv("CleanData/portal_clean.csv")
+              "clean_data/portal_clean.csv")
+surveys <- read.csv("clean_data/portal_clean.csv")
 ```
 
 Later, we're going to use a few datasets that were created at the end
