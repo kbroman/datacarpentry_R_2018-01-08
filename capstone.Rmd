@@ -17,6 +17,6 @@ Create and compile an R Markdown report:
 `"DM"`, `"DO"`, and `"DS"`. _Use different colors for the three
 species, and put the three species in different panels._
 
-5. Create a table of counts of `"DM"` by plot type for the year 1977.
+5. Create a line plot of the counts of `"DM"` in `"Rodent Exclosure"` plots over time.
 
-6. Create a line plot of the counts of `"DM"` in `"Rodent Exclosure"` plots over time.
+6. Create a table of counts of `"DM"` by plot type for the year 1977.
