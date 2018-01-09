@@ -169,11 +169,11 @@ $(document).ready(function () {
 <li><a href="#facet_grid">facet_grid</a></li>
 </ul></li>
 <li><a href="#saving-plots-to-a-file">Saving plots to a file</a></li>
+<li><a href="#themes">Themes</a></li>
 <li><a href="#customizing-plots">Customizing plots</a><ul>
 <li><a href="#axis-limits">Axis limits</a></li>
 <li><a href="#color-choices">Color choices</a></li>
 </ul></li>
-<li><a href="#themes">Themes</a></li>
 </ul>
 </div>
 
@@ -248,7 +248,7 @@ p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> <
 <p>Make a scatterplot of <code>hindfoot_length</code> vs <code>weight</code>, but only for the <code>species_id</code> <code>&quot;DM&quot;</code>.</p>
 <ul>
 <li>Use the dataset we’d created, <code>just_dm</code></li>
-<li>Use our ggplot2 code above but with this new dataset in place of <code>species</code>.</li>
+<li>Use our ggplot2 code above but with this new dataset in place of <code>surveys</code>.</li>
 </ul>
 <!-- end challenge -->
 </div>
@@ -283,7 +283,7 @@ p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> <
 <p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, where each point is a species.</p>
 <ul>
 <li><p>Use the dataset we’d created, <code>stat_summary</code></p></li>
-<li><p>Use our ggplot code but with <code>stat_summary</code> and using the aesthetics <code>x=mean_wt</code> and <code>y=mean_hfl</code>.</p></li>
+<li><p>Use our ggplot code with the aesthetics <code>x=mean_wt</code> and <code>y=mean_hfl</code>.</p></li>
 </ul>
 <!-- end challenge -->
 </div>
@@ -417,6 +417,17 @@ p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> <
 <p>Use <code>scale</code> to adjust the sizes of things, for example for a talk/poster versus a paper/report. Use <code>scale &lt; 1</code> to make the various elements bigger relative to the plotting area.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;scatter_2.png&quot;</span>, p, <span class="dt">height=</span><span class="dv">6</span>, <span class="dt">width=</span><span class="dv">8</span>, <span class="dt">scale=</span><span class="fl">0.8</span>)</code></pre></div>
 </div>
+<div id="themes" class="section level2">
+<h2>Themes</h2>
+<p>Not everyone gray background and such in the default ggplot plots.</p>
+<p>But you can apply one of a variety of “themes” to control the overall appearance of plots.</p>
+<p>One that a lot of people like is <code>theme_bw()</code>. Add it to a plot, and the overall appearance changes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="img/R-ecology-theme-1.png" width="672" /></p>
+</div>
 <div id="customizing-plots" class="section level2">
 <h2>Customizing plots</h2>
 <div id="axis-limits" class="section level3">
@@ -453,18 +464,6 @@ surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">
 <span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>hexcolors)</code></pre></div>
 <p><img src="img/R-ecology-custom_colors_rgb-1.png" width="672" /></p>
 </div>
-</div>
-<div id="themes" class="section level2">
-<h2>Themes</h2>
-<p>Not everyone gray background and such in the default ggplot plots.</p>
-<p>But you can apply one of a variety of “themes” to control the overall appearance of plots.</p>
-<p>One that a lot of people like is <code>theme_bw()</code>. Add it to a plot, and the overall appearance changes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;DM&quot;</span>, <span class="st">&quot;DS&quot;</span>, <span class="st">&quot;DO&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>hindfoot_length)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>species_id)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>hexcolors) <span class="op">+</span>
-<span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="img/R-ecology-theme-1.png" width="672" /></p>
 </div>
 
 

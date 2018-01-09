@@ -440,7 +440,6 @@ the overall appearance changes.
 surveys %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
     ggplot(aes(x=weight, y=hindfoot_length)) +
     geom_point(aes(color=species_id)) +
-    scale_color_manual(values=hexcolors) +
     theme_bw()
 ```
 
