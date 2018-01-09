@@ -21,6 +21,8 @@ source("setup.R")
 > or the [ggplot2 book](http://ggplot2.org/book/).
 > -	Building complex plots, step by step, with the ggplot2 package
 
+## Set up
+
 ```{r load_clean_data_really, echo=FALSE, message=FALSE}
 surveys <- read.csv("data/portal_clean.csv")
 ```
@@ -40,6 +42,42 @@ download.file("http://kbroman.org/datacarp/portal_clean.csv",
 surveys <- read.csv("CleanData/portal_clean.csv")
 ```
 
+Later, we're going to use a few datasets that were created at the end
+of the dplyr lesson. For completeness, let's create them here.
+
+> _Make a data set called `just_dm` that is only the observations from
+> the species with the id `"DM"` from the original `surveys` data
+> set._
+
+```{r construct_just_dm}
+library(dplyr)
+just_dm <- surveys %>% filter(species_id=="DM")
+```
+
+> _Make a data set called `stat_summary` that contains the average weight
+> and hindfoot length of each species, as well as a count of the
+> number of observations for each species (using the `n()` function)._
+
+```{r construct_stat_summary}
+stat_summary <- surveys %>%
+    group_by(species_id) %>%
+    summarize(mean_wt=mean(weight),
+              mean_hfl=mean(hindfoot_length),
+              n=n())
+```
+
+> _Make a data set called `year_summary` that contains the yearly average
+> weight, hindfoot length, and count data for each species and sex
+> combination
+
+```{r construct_year_summary}
+year_summary <- surveys %>%
+    group_by(species_id, year) %>%
+    summarize(mean_wt=mean(weight),
+              mean_hfl=mean(hindfoot_length),
+              n=n())
+```
+
 
 ## Plotting with ggplot2
 
@@ -50,11 +88,10 @@ _Grammar of Graphics_. We're going to show you how to use
 ggplot2. It may seem a bit complicated at first, but once you get a
 hang of it, you'll be able to make really useful visualizations quite rapidly.
 
-We first need to load the dplyr and ggplot2 packages.
+We first need to load the ggplot2 package.
 
 ```{r, message=FALSE}
 library(ggplot2)
-library(dplyr)
 ```
 
 Let's first make a scatterplot of hindfoot length vs weight. Here's
@@ -105,8 +142,8 @@ p2 + scale_x_sqrt()
 Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 `species_id` `"DM"`.
 
-- Use dplyr to make a dataset with just `species_id == "DM"`
-- Use our ggplot2 code above but with this new dataset.
+- Use the dataset we'd created, `just_dm`
+- Use our ggplot2 code above but with this new dataset in place of `surveys`.
 
 <!-- end challenge -->
 
@@ -149,11 +186,13 @@ ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
 
 ### Challenge
 
-Use dplyr to calculate the mean `weight` and `hindfoot_length`
-for each species. (Use `group_by()` and `summarize()`.)
-
 Make a scatterplot of mean `hindfoot_length` vs mean `weight`, where
 each point is a species.
+
+- Use the dataset we'd created, `stat_summary`
+
+- Use our ggplot code with the aesthetics
+  `x=mean_wt` and `y=mean_hfl`.
 
 <!-- end challenge -->
 
@@ -224,70 +263,17 @@ ggplot(count_by_year, aes(x=year, y=n)) +
 
 ### Challenge
 
-Make a plot of counts of `species_id` `"DM"` and `"DS"` by year.
+- Use the `year_summary` dataset to make a line plot of counts of each
+  species by year, with a different line for each species.
 
 <!-- end challenge -->
 
-## Groups
-
-Suppose, in that last challenge, we'd wanted to have black lines but
-the points colored by species. We might have done this:
-
-```{r misgrouped}
-counts_dm_ds <- surveys %>% filter(species_id %in% c("DM", "DS")) %>%
-    group_by(species_id, year) %>% tally
-ggplot(counts_dm_ds, aes(x=year, y=n)) +
-    geom_line() +
-    geom_point(aes(color=species_id))
-```
-
-The points get connected left-to-right, which is not what we want.
-
-If we make the `color=species_id` aesthetic _global_, we don't have
-this problem.
-
-```{r color_global}
-ggplot(counts_dm_ds, aes(x=year, y=n)) +
-    geom_line() +
-    geom_point() +
-    aes(color=species_id)
-```
-
-Alternatively, we can use the `group` aesthetic, which indicates that
-certain data points go together. This way the lines can be a constant
-color.
-
-```{r group_aes}
-ggplot(counts_dm_ds, aes(x=year, y=n)) +
-    geom_line(aes(group=species_id)) +
-    geom_point(aes(color=species_id))
-```
-
-We could also make the group aesthetic global
-
-```{r group_global}
-ggplot(counts_dm_ds, aes(x=year, y=n)) +
-    aes(group=species_id) +
-    geom_line() +
-    geom_point(aes(color=species_id))
-```
 
 
 ## Univariate geoms
 
 We've focused so far on scatterplots, but one can also create
 one-dimensional summaries, such as histograms or boxplots.
-
-
-### Challenge
-
-Try using `geom_histogram()` to make a histogram visualization of the
-distribution of `weight`.
-
-Hint: You want `weight` as the x-axis aesthetic. Try specifying `bins`
-in `geom_histogram()`.
-
-<!-- end challenge -->
 
 
 
@@ -306,7 +292,7 @@ measurements and of their distribution:
 ```{r boxplot-with-points}
 ggplot(surveys, aes(x = species_id, y = hindfoot_length)) +
     geom_boxplot(alpha = 0) +
-    geom_jitter(alpha = 0.3, color = "tomato")
+    geom_jitter(alpha = 0.3, color = "tomato", width=0.2, height=0)
 ```
 
 Notice how the boxplot layer is behind the jitter layer? What do you need to
@@ -322,57 +308,46 @@ make violin plots of `hindfoot_length` by `species_id`.
 <!-- end challenge -->
 
 
+### Challenge
+
+Try using `geom_histogram()` to make a histogram visualization of the
+distribution of `weight`.
+
+Hint: You want `weight` as the x-axis aesthetic. Try specifying `bins`
+in `geom_histogram()`.
+
+<!-- end challenge -->
+
+
+
 ## Faceting
 
 ggplot has a special technique called *faceting* that allows to split one plot
-into multiple plots based on a factor included in the dataset. We will use it to
+into multiple papels based on a factor included in the dataset. We will use it to
 make one plot for a time series for each species.
 
 ```{r first-facet}
-yearly_counts <- surveys %>% group_by(year, species_id) %>% tally
-ggplot(yearly_counts, aes(x = year, y = n, group = species_id, colour = species_id)) +
+ggplot(year_summary, aes(x = year, y = n, group = species_id, colour = species_id)) +
     geom_line() +
     facet_wrap(~ species_id)
 ```
 
-Now we would like to split line in each plot by sex of each individual
-measured. To do that we need to make counts in data frame grouped by sex.
 
 ### Challenge
 
-- Calculate counts grouped by `year`, `species_id`, and `sex`
+Use the `year_summary` dataset and make scatterplots of mean hindfoot
+length vs mean weight (with each point being a species), faceting by year.
 
-- Make a plot of the counts by year, faceting on `species_id`
+- Use aesthetics `x=mean_wt` and `y=mean_hfl`
 
-- Split by sex within each panel, using different colors for the two sexes.
+- Use `geom_point(aes(color=species_id))`
 
-<!--  end challenge -->
+- Use `facet_wrap(~ year)`
+
+<!-- end challenge -->
 
 
 
-Suppose I make a similar plot of average weight by species:
-
-```{r average-weight-timeseries}
-yearly_weight <- surveys %>%
-                 group_by(year, species_id, sex) %>%
-                 summarise(avg_weight = mean(weight, na.rm = TRUE))
-ggplot(yearly_weight, aes(x=year, y=avg_weight, color = species_id, group = species_id)) +
-    geom_line() +
-    facet_wrap(~ species_id)
-```
-
-Why do we see those steps in the plot?
-
-**Oops** need to group by sex
-
-```{r average-weight-timeseries-fixed}
-yearly_weight <- surveys %>%
-                 group_by(year, species_id, sex) %>%
-                 summarise(avg_weight = mean(weight, na.rm = TRUE))
-ggplot(yearly_weight, aes(x=year, y=avg_weight, color = sex, group = sex)) +
-    geom_line() +
-    facet_wrap(~ species_id)
-```
 
 ### facet_grid
 
@@ -382,30 +357,45 @@ geometry allows you to explicitly specify how you want your plots to be
 arranged via formula notation (`rows ~ columns`; a `.` can be used as
 a placeholder that indicates only one row or column).
 
+I'm first going to create a reduced data set of counts of the species
+`"DM"`, `"DO"`, and `"DS"`, by sex and by year.
+
+```{r d_counts}
+d_counts <- surveys %>%
+    filter(species_id %in% c("DM", "DO", "DS")) %>%
+    group_by(species_id, year, sex) %>%
+    tally()
+```
+
+Plot count vs year, with curves for the different species and separate
+panels for males and females, split horizontally.
+
+```{r average-weight-time-facet_sex_columns}
+## One row, facet by columns
+ggplot(d_counts, aes(x=year, y=n, color = species_id)) +
+    geom_line() +
+    facet_grid(~ sex)
+```
+
+And split vertically.
+
 ```{r average-weight-time-facet_sex_rows}
 ## One column, facet by rows
-yearly_weight %>% filter(species_id %in% c("DM", "DO", "DS")) %>%
-    ggplot(aes(x=year, y=avg_weight, color = species_id, group = species_id)) +
+ggplot(d_counts, aes(x=year, y=n, color = species_id)) +
     geom_line() +
     facet_grid(sex ~ .)
 ```
 
-```{r average-weight-time-facet_sex_columns}
-# One row, facet by column
-yearly_weight %>% filter(species_id %in% c("DM", "DO", "DS")) %>%
-    ggplot(aes(x=year, y=avg_weight, color = species_id, group = species_id)) +
-    geom_line() +
-    facet_grid( ~ sex)
-```
-
+And a separate panel for each sex and each species.
 
 ```{r average-weight-time-facet_sex_columns_species_rows}
-# separate panel for each sex and species
-yearly_weight %>% filter(species_id %in% c("DM", "DO", "DS")) %>%
-    ggplot(aes(x=year, y=avg_weight, color = species_id, group = species_id)) +
+## species in rows; sexes in columns
+ggplot(d_counts, aes(x=year, y=n, color = species_id)) +
     geom_line() +
     facet_grid(species_id ~ sex)
 ```
+
+
 
 ## Saving plots to a file
 
@@ -434,6 +424,24 @@ bigger relative to the plotting area.
 
 ```{r ggsave_scale, eval=FALSE}
 ggsave("scatter_2.png", p, height=6, width=8, scale=0.8)
+```
+
+## Themes
+
+Not everyone gray background and such in the default ggplot plots.
+
+But you can apply one of a variety of "themes" to control the overall
+appearance of plots.
+
+One that a lot of people like is `theme_bw()`. Add it to a plot, and
+the overall appearance changes.
+
+```{r theme}
+surveys %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
+    ggplot(aes(x=weight, y=hindfoot_length)) +
+    geom_point(aes(color=species_id)) +
+    scale_color_manual(values=hexcolors) +
+    theme_bw()
 ```
 
 ## Customizing plots
@@ -491,23 +499,4 @@ surveys %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
     ggplot(aes(x=weight, y=hindfoot_length)) +
     geom_point(aes(color=species_id)) +
     scale_color_manual(values=hexcolors)
-```
-
-
-## Themes
-
-Not everyone gray background and such in the default ggplot plots.
-
-But you can apply one of a variety of "themes" to control the overall
-appearance of plots.
-
-One that a lot of people like is `theme_bw()`. Add it to a plot, and
-the overall appearance changes.
-
-```{r theme}
-surveys %>% filter(species_id %in% c("DM", "DS", "DO")) %>%
-    ggplot(aes(x=weight, y=hindfoot_length)) +
-    geom_point(aes(color=species_id)) +
-    scale_color_manual(values=hexcolors) +
-    theme_bw()
 ```
