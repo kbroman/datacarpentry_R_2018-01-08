@@ -209,16 +209,8 @@ surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span cla
 <blockquote>
 <p><em>Make a data set called <code>just_dm</code> that is only the observations from the species with the id <code>&quot;DM&quot;</code> from the original <code>surveys</code> data set.</em></p>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>#&gt; 
-#&gt; Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>#&gt; The following objects are masked from &#39;package:stats&#39;:
-#&gt; 
-#&gt;     filter, lag</code></pre>
-<pre><code>#&gt; The following objects are masked from &#39;package:base&#39;:
-#&gt; 
-#&gt;     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">just_dm &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id<span class="op">==</span><span class="st">&quot;DM&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+just_dm &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(species_id<span class="op">==</span><span class="st">&quot;DM&quot;</span>)</code></pre></div>
 <blockquote>
 <p><em>Make a data set called <code>stat_summary</code> that contains the average weight and hindfoot length of each species, as well as a count of the number of observations for each species (using the <code>n()</code> function).</em></p>
 </blockquote>

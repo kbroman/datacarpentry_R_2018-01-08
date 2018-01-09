@@ -5,7 +5,7 @@ minutes: 60
 ---
 
 ```{r, echo=FALSE, purl=FALSE}
-knitr::opts_chunk$set(fig.keep='last')
+knitr::opts_chunk$set(fig.keep='last', message=FALSE)
 ```
 
 ```{r setup, echo=FALSE, purl=FALSE}
