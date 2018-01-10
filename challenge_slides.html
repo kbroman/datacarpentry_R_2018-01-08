@@ -21,16 +21,17 @@
 </div>
 <div id="challenge-2" class="slide section level1">
 <h1>Challenge 2</h1>
-<p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, where each point is a species.</p>
+<p>Make a scatterplot of mean <code>hindfoot_length</code> vs mean <code>weight</code>, where each point is a species, and where the sizes of points indicate the sample size.</p>
 <ul>
 <li><p>Use the dataset we’d created, <code>stat_summary</code></p></li>
-<li><p>Use our ggplot code with the aesthetics <code>x=mean_wt</code> and <code>y=mean_hfl</code>.</p></li>
+<li><p>Use our ggplot code with the aesthetics <code>x=mean_wt</code> and <code>y=mean_hfl</code>, plus <code>size=n</code>.</p></li>
 </ul>
 </div>
 <div id="challenge-3" class="slide section level1">
 <h1>Challenge 3</h1>
 <ul>
-<li>Use the <code>year_summary</code> dataset to make a line plot of counts of each species by year, with a different line for each species.</li>
+<li><p>Use the <code>year_summary</code> dataset to make a line plot of counts of each species by year, with a different line for each species.</p></li>
+<li><p>Use <code>aes(linetype=sex)</code> to have different line types for the two sexes.</p></li>
 </ul>
 </div>
 <div id="challenge-4" class="slide section level1">
@@ -47,7 +48,7 @@
 <p>Use the <code>year_summary</code> dataset and make scatterplots of mean hindfoot length vs mean weight (with each point being a species), faceting by year.</p>
 <ul>
 <li><p>Use aesthetics <code>x=mean_wt</code> and <code>y=mean_hfl</code></p></li>
-<li><p>Use <code>geom_point(aes(color=species_id))</code></p></li>
+<li><p>Use <code>geom_point(aes(color=species_id, shape=sex))</code></p></li>
 <li><p>Use <code>facet_wrap(~ year)</code></p></li>
 </ul>
 </div>

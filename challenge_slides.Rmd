@@ -18,12 +18,13 @@ Make a scatterplot of `hindfoot_length` vs `weight`, but only for the
 
 
 Make a scatterplot of mean `hindfoot_length` vs mean `weight`, where
-each point is a species.
+each point is a species, and where the sizes of points indicate the
+sample size.
 
 - Use the dataset we'd created, `stat_summary`
 
 - Use our ggplot code with the aesthetics
-  `x=mean_wt` and `y=mean_hfl`.
+  `x=mean_wt` and `y=mean_hfl`, plus `size=n`.
 
 
 ---
@@ -33,6 +34,9 @@ each point is a species.
 
 - Use the `year_summary` dataset to make a line plot of counts of each
   species by year, with a different line for each species.
+
+- Use `aes(linetype=sex)` to have different line types for the two
+  sexes.
 
 
 ---
@@ -66,7 +70,7 @@ length vs mean weight (with each point being a species), faceting by year.
 
 - Use aesthetics `x=mean_wt` and `y=mean_hfl`
 
-- Use `geom_point(aes(color=species_id))`
+- Use `geom_point(aes(color=species_id, shape=sex))`
 
 - Use `facet_wrap(~ year)`
 
