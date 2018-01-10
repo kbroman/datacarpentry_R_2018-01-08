@@ -53,7 +53,7 @@ y <- x * 2 #Show we have to run this again to change y.
 y #Show that y is now 150 once we do that.
 
 ##Opening and working with the data.
-surveys <- read.csv(file = "http://kbroman.org/datacarp/portal_data_joined.csv")
+survey <- read.csv("http://kbroman.org/datacarp/portal_clean.csv")
 
 head(surveys)#Showcasing functions for exploring data frames.
 tail(surveys)
@@ -70,9 +70,20 @@ summary(surveys)
 surveys[25]
 surveys[1,5] #Value in row 1, column 5.
 surveys[7,] #We can get the whole seventh row...
-surveys[5:7,] #Or the 5th thru seventh rows.
-surveys[5:7, -1] #Or that but without the first column.
+surveys[5, -1] #Or that but without the first column.
 
 surveys$sex #Columns can also be gotten using their names.
 
 surveys_last <- surveys[nrow(surveys),] #Answer to the 2nd optional challenge. This will save just the last row of surveys into a new object.
+
+##Vectors--optional section
+
+surveys$sex #A vector--no rows or columns, but more than a single value.
+
+1:10 #Creates a simple sequence of values.
+c(3, -1000, pi) #The c() function creates a more complex sequence of values you specify.
+surveys[1:10,] #Vectors can be used to index multiple rows, columns, or values out of an object.
+
+#Challenge, get data from the first four rows out of surveys but only from the 3rd, 5th, and 8th columns.
+
+surveys[1:4, c(3,5,8)] #Successfully used two vectors to extract these values. 

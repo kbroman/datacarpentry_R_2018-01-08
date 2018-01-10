@@ -1,6 +1,6 @@
 ##First thing's first--let's make sure we have our surveys object.
 
-surveys <- read.csv("surveys_cleaned.csv") #Only necessary if you restarted R or got rid of surveys somehow. Otherwise, you should have it already.
+surveys <- read.csv("portal_clean.csv") #Only necessary if you restarted R or got rid of surveys somehow. Otherwise, you should have it already.
 
 ##Next, turn on the dplyr package using the Packages tab or by typing:
 library(dplyr) #If this doesn't work, you may need to download dplyr or tidyverse using the Packages tab--ask for help!
