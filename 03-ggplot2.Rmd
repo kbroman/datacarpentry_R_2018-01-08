@@ -328,11 +328,12 @@ in `geom_histogram()`.
 
 ggplot has a special technique called *faceting* that allows to split one plot
 into multiple papels based on a factor included in the dataset. We will use it to
-make one plot for a time series for each species.
+make one plot for a time series for each species. Here I'm using color
+for the two sexes.
 
 ```{r first-facet}
-ggplot(year_summary, aes(x = year, y = n, group = species_id, color = species_id)) +
-    geom_line() +
+ggplot(year_summary, aes(x = year, y = n, group = species_id)) +
+    geom_line(aes(color=sex)) +
     facet_wrap(~ species_id)
 ```
 
