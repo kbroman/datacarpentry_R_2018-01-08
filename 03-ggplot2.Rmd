@@ -187,12 +187,13 @@ ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
 ### Challenge
 
 Make a scatterplot of mean `hindfoot_length` vs mean `weight`, where
-each point is a species.
+each point is a species, and where the sizes of points indicate the
+sample size.
 
 - Use the dataset we'd created, `stat_summary`
 
 - Use our ggplot code with the aesthetics
-  `x=mean_wt` and `y=mean_hfl`.
+  `x=mean_wt` and `y=mean_hfl`, plus `size=n`.
 
 <!-- end challenge -->
 
