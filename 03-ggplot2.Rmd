@@ -72,7 +72,7 @@ stat_summary <- surveys %>%
 
 ```{r construct_year_summary}
 year_summary <- surveys %>%
-    group_by(species_id, year) %>%
+    group_by(species_id, year, sex) %>%
     summarize(mean_wt=mean(weight),
               mean_hfl=mean(hindfoot_length),
               n=n())
