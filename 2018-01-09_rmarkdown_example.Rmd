@@ -1,0 +1,76 @@
+---
+title: "R Markdown Example"
+author: "Karl Broman"
+date: "1/9/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, 
+                      message=FALSE)
+```
+
+## Set up
+
+This document illustrates R markdown, which is super cool.
+
+First I'll load some packages.
+
+```{r load_libraries}
+# this comment will be shown
+library(dplyr)
+library(ggplot2)
+```
+
+```{r comments_on_that, echo=FALSE}
+# this is a comment that will not be shown
+```
+
+
+
+Then I'll load the data.
+
+```{r load_data}
+surveys <- read.csv("../clean_data/portal_clean.csv")
+```
+
+This dataset has `r nrow(surveys)` observations.
+
+## Create some datasets
+
+```{r create_datasets}
+# create some datasets
+# 1. only the obs with species_id=="DM"
+just_dm <- surveys %>% filter(species_id == "DM")
+# 2. average weight and hindfoot length and count of each species
+stat_summary <- surveys %>% group_by(species_id) %>% 
+    summarize(mean_wt=mean(weight),
+              mean_hfl=mean(hindfoot_length),
+              n=n())
+# 3. average wt, hfl, count by year, species, sex
+year_summary <- surveys %>% group_by(species_id, year, sex) %>% 
+    summarize(mean_wt=mean(weight),
+              mean_hfl=mean(hindfoot_length),
+              n=n())
+```
+
+Here's a scatterplot of hindfoot length vs weight for species DM.
+
+```{r plot_hfl_vs_weight_for_DM, fig.height=8}
+ggplot(just_dm, aes(x=weight, y=hindfoot_length)) +
+    geom_point()
+```
+
+## R markdown 
+
+This is _italics_ this is **bold**.
+
+- This is a bulleted list.
+- This is the second item.
+
+
+
+
+
+
+
