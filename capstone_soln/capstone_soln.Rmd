@@ -43,18 +43,7 @@ surveys %>% filter(species_id %in% c("DM", "DO", "DS")) %>%
     geom_point(aes(color=species_id)) + facet_grid(species_id ~ .)
 ```
 
-## 5. Table with counts of "DM" by plot_type in 1977
-
-```{r table_plot_type}
-counts1977 <- surveys %>% filter(species_id == "DM", year==1977) %>%
-    group_by(plot_type) %>%
-    tally() %>%
-    select(plot_type, n)
-knitr::kable(counts1977)
-```
-
-
-## 6. Plot of counts in "Rodent Exclosure" plots over time
+## 5. Plot of counts of "DM" in "Rodent Exclosure" plots over time
 
 ```{r plot_counts_by_year}
 counts <- surveys %>% filter(species_id == "DM") %>%
@@ -62,4 +51,14 @@ counts <- surveys %>% filter(species_id == "DM") %>%
     group_by(year) %>%
     tally()
 counts %>% ggplot(aes(x=year, y=n)) + geom_line()
+```
+
+## 6. Table with counts of "DM" by plot_type in 1977
+
+```{r table_plot_type}
+counts1977 <- surveys %>% filter(species_id == "DM", year==1977) %>%
+    group_by(plot_type) %>%
+    tally() %>%
+    select(plot_type, n)
+knitr::kable(counts1977)
 ```
