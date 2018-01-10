@@ -345,7 +345,7 @@ length vs mean weight (with each point being a species), faceting by year.
 
 - Use aesthetics `x=mean_wt` and `y=mean_hfl`
 
-- Use `geom_point(aes(color=species_id))`
+- Use `geom_point(aes(color=species_id, shape=sex))`
 
 - Use `facet_wrap(~ year)`
 
