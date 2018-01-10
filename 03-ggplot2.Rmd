@@ -267,6 +267,9 @@ ggplot(count_by_year, aes(x=year, y=n)) +
 - Use the `year_summary` dataset to make a line plot of counts of each
   species by year, with a different line for each species.
 
+- Use `aes(linetype=sex)` to have different line types for the two
+  sexes.
+
 <!-- end challenge -->
 
 
